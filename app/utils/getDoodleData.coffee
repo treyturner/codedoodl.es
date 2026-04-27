@@ -41,7 +41,7 @@ _getMasterManifestRemote = (cb) ->
     manifestPath = if config.DOODLE_DATA_SOURCE is 'production' then 'master_manifest.json' else 'master_manifest_DEV.json'
     manifestUrl  = config.DOODLES_BUCKET_URL + '/' + manifestPath
 
-    request manifestUrl, (err, res, body) ->
+    request { url: manifestUrl, gzip: true }, (err, res, body) ->
 
         if !err and res.statusCode is 200
             manifest = JSON.parse body
@@ -74,7 +74,7 @@ _getDoodlesRemote = (cb) ->
             do (doodle) ->
                 manifestUrl = config.DOODLES_BUCKET_URL + '/' + doodle.slug + '/manifest.json'
 
-                request manifestUrl, (err, res, body) ->
+                request { url: manifestUrl, gzip: true }, (err, res, body) ->
 
                     console.log(colors.yellow("request for #{manifestUrl} is #{res.statusCode}"))
 
