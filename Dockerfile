@@ -47,7 +47,7 @@ COPY --from=builder /root/.nvm/versions/node/v10.16.0 /usr/local
 WORKDIR /srv
 
 COPY --from=builder /build/app ./app
-RUN mv ./app/public/holding/static/fonts ./app/public/static
+RUN cp -r ./app/public/holding/static/fonts ./app/public/static/fonts
 COPY --from=builder /build/config  ./config
 COPY --from=builder /build/utils  ./utils
 COPY --from=builder /build/project/data/locales ./project/data/locales
