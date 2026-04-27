@@ -76,16 +76,15 @@ _getDoodlesRemote = (cb) ->
 
                 request { url: manifestUrl, gzip: true }, (err, res, body) ->
 
-                    console.log(colors.yellow("request for #{manifestUrl} is #{res.statusCode}"))
-
                     returnedManCount++
 
                     if !err and res.statusCode is 200
+                        console.log(colors.yellow("request for #{manifestUrl} is #{res.statusCode}"))
                         doodleManifest   = JSON.parse body
                         mergedDoodleData = _.extend {}, doodle, doodleManifest
                         allDoodles.push mergedDoodleData
                     else
-                        console.log(colors.red('No manifest.json found for doodle at  %s'), manifestUrl)
+                        console.log(colors.red('No manifest.json found for doodle at %s: %s'), manifestUrl, err or res.statusCode)
 
                     if returnedManCount is manifest.doodles.length
                         returnDoodles = _.sortBy(allDoodles, 'index').reverse()
