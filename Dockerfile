@@ -49,7 +49,6 @@ WORKDIR /srv
 COPY --from=builder /build/app ./app
 RUN cp -r ./app/public/holding/static/fonts ./app/public/static/fonts
 COPY --from=builder /build/config  ./config
-COPY --from=builder /build/utils  ./utils
 COPY --from=builder /build/project/data/locales ./project/data/locales
 COPY --from=builder /build/doodles/master_manifest.json  ./doodles/master_manifest.json
 COPY --from=builder /build/doodles/master_manifest_DEV.json ./doodles/master_manifest_DEV.json

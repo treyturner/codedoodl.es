@@ -1,7 +1,5 @@
 crypto     = require "crypto"
 bodyParser = require "body-parser"
-cloneRepo  = require "../../utils/cloneRepo"
-deployer   = require "../../utils/deployer"
 config     = require "../../config/repository"
 
 requestIsFromGithub = (req) ->
@@ -62,6 +60,9 @@ push = (req, res) ->
 	if !verifyHookRef(req) then return res.send "wrong branch, deployments only active on '#{config.REPO_DEPLOY_BRANCH}'"
 
 	return res.json "deployer disabled for now... fix it later plzzzz"
+
+	cloneRepo  = require "../../utils/cloneRepo"
+	deployer   = require "../../utils/deployer"
 
 	deployType = getDeployType(req)
 
