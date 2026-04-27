@@ -1,12 +1,12 @@
 config = module.exports
 
 config.express =
-	port : process.env.PORT or 3000
-	ip   : "127.0.0.1"
+	port : process.env.BIND_PORT or 3000
+	ip   : process.env.BIND_ADDRESS or "0.0.0.0"
 
 config.express_preview =
-	port : process.env.PORT or 3001
-	ip   : "127.0.0.1"
+	port : process.env.BIND_PORT or 3001
+	ip   : process.env.BIND_ADDRESS or "0.0.0.0"
 
 config.PRODUCTION = process.env.NODE_ENV is "production"
 
@@ -16,7 +16,7 @@ config.buckets =
 	SOURCE_S3_URL : 's3-eu-west-1.amazonaws.com/source.codedoodl.es'
 	PENDING       : 'pending.codedoodl.es'
 
-config.cloudfront = 
+config.cloudfront =
 	SOURCE : 'E252Z8ZC5VB7QS'
 	ASSETS : 'E278GI4I3S1464'
 
@@ -24,9 +24,9 @@ config.EXTERNAL_URLS =
 	form      : 'https://docs.google.com/forms/d/1K66OvKMiKqGjgmYRFUtEA43KZzBzv4KzObM1JtD4cbk/viewform'
 	extension : 'https://chrome.google.com/webstore/detail/codedoodles/hhfnbfhcojlgbojpphigjibpjkccfikh'
 
-config.BASE_URL           = if config.PRODUCTION then "http://codedoodl.es" else "http://#{config.express.ip}:#{config.express.port}"
-config.ASSETS_BUCKET_URL  = if config.PRODUCTION then "http://#{config.buckets.ASSETS}" else "http://#{config.express.ip}:#{config.express.port}"
-config.DOODLES_BUCKET_URL = "http://#{config.buckets.SOURCE}"
+config.BASE_URL           = process.env.BASE_URL or (if config.PRODUCTION then "http://codedoodl.es" else "http://#{config.express.ip}:#{config.express.port}")
+config.ASSETS_BUCKET_URL  = process.env.BASE_URL or (if config.PRODUCTION then "http://#{config.buckets.ASSETS}" else "http://#{config.express.ip}:#{config.express.port}")
+config.DOODLES_BUCKET_URL = process.env.DOODLES_URL or "http://#{config.buckets.SOURCE}"
 
 config.DOODLE_CACHE_TIMEOUT = if config.PRODUCTION then ((1000 * 60) * 5) else 0
 
