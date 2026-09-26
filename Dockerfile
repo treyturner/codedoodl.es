@@ -9,7 +9,7 @@ FROM base AS builder
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
 COPY . ./
-RUN npm run build && npm run test:build
+RUN npm run build && npm run test:server && npm run test:build
 
 FROM base AS production-dependencies
 COPY package.json package-lock.json ./
@@ -26,4 +26,4 @@ COPY --from=builder /srv/doodles/master_manifest_DEV.json ./doodles/master_manif
 COPY --from=builder /srv/package.json ./package.json
 USER node
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["node", "app/start.cjs"]

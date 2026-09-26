@@ -55,8 +55,20 @@ trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
 
-# Start assets first so the legacy startup request cannot race DNS/server setup.
+# Start the archive before the application's initial data load.
 "${compose[@]}" up -d assets
 "${compose[@]}" run --rm --no-deps runner node support/wait.mjs http://assets:8080/health
 "${compose[@]}" up -d app preview auth fallback partial
 "${compose[@]}" run --rm --no-deps runner npm test -- "$@"
+
+# Verify the actual container entrypoint receives SIGTERM and restarts ready.
+"${compose[@]}" stop --timeout 8 app > tests/artifacts/lifecycle.log 2>&1
+app_container="$("${compose[@]}" ps -a -q app)"
+exit_code="$(docker inspect --format '{{.State.ExitCode}}' "$app_container")"
+if [[ "$exit_code" != 0 ]]; then
+  echo "Application did not stop cleanly (exit $exit_code)." >&2
+  exit 1
+fi
+"${compose[@]}" start app >> tests/artifacts/lifecycle.log 2>&1
+"${compose[@]}" run --rm --no-deps runner node support/wait.mjs http://site.test:3000/health >> tests/artifacts/lifecycle.log 2>&1
+echo 'PASS: container SIGTERM exit 0 and restart readiness' | tee -a tests/artifacts/lifecycle.log

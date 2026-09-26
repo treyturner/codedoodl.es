@@ -1,27 +1,17 @@
 express  = require "express"
 compress = require "compression"
-fs       = require "fs"
+config   = require '../config/server'
+staticAssets = require './utils/staticAssets'
 app      = express()
 
-# Called by static middleware only for an existing file, before its headers are
-# sent. The archive convention keeps gzip bytes under ordinary filenames;
-# ordinary SVG/fonts and HTML error pages must not inherit that encoding.
-setStaticHeaders = (res, filename) ->
-    descriptor = fs.openSync filename, 'r'
-    try
-        signature = Buffer.alloc 2
-        fs.readSync descriptor, signature, 0, 2, 0
-        if signature[0] is 0x1f and signature[1] is 0x8b
-            res.setHeader 'Content-Encoding', 'gzip'
-    finally
-        fs.closeSync descriptor
-
+app.set 'trust proxy', config.TRUST_PROXY
 app.set "views", __dirname
 app.engine 'html', require('ejs').renderFile
 app.set 'view engine', 'html'
+app.locals.scriptJSON = require './utils/scriptJSON'
 app.use compress()
 # Login/holding assets remain public when the site password gate is enabled.
-app.use '/holding', express.static(__dirname + '/public/holding', setHeaders: setStaticHeaders)
+app.use '/holding', staticAssets(__dirname + '/public/holding')
 
 [
 	"./health/routes",
@@ -31,7 +21,12 @@ app.use '/holding', express.static(__dirname + '/public/holding', setHeaders: se
 ].forEach (routePath) ->
 	require(routePath)(app)
 
-app.use express.static(__dirname + '/public', setHeaders: setStaticHeaders)
+app.use staticAssets(__dirname + '/public')
 app.use require("./middleware").notFound
+app.use (error, req, res, next) ->
+    return next(error) if res.headersSent
+    status = if error.status >= 400 and error.status < 500 then error.status else 500
+    require('./utils/logger').error('HTTP request failed', { error: error.message }) if status is 500
+    res.status(status).type('text').send(require('http').STATUS_CODES[status] or 'Request failed')
 
 module.exports = app

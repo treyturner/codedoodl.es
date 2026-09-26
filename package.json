@@ -26,6 +26,7 @@
     "doodle:create": "node utils/createDoodle.js",
     "doodle:preview": "node utils/previewPR.js",
     "test:build": "node build/check.mjs",
+    "test:server": "node --test tests/server/*.test.cjs",
     "test": "bash tests/run.sh",
     "test:update-snapshots": "bash tests/run.sh --update-snapshots"
   },
@@ -36,25 +37,22 @@
     "html": "app/site"
   },
   "dependencies": {
-    "body-parser": "1.2.2",
     "coffeescript": "1.12.7",
-    "colors": "1.3.3",
-    "compression": "1.7.4",
-    "cookie-parser": "1.0.1",
-    "cors": "2.8.5",
-    "ejs": "2.5.5",
-    "express": "4.22.3",
-    "express-session": "1.1.0",
-    "hashids": "1.2.2",
-    "request": "2.88.0",
-    "underscore": "1.7.0",
-    "winston": "0.7.3"
+    "compression": "1.8.2",
+    "cors": "2.8.6",
+    "ejs": "6.0.1",
+    "express": "5.2.1",
+    "express-session": "1.19.0",
+    "hashids": "2.3.0",
+    "underscore": "1.13.8",
+    "winston": "3.19.0"
   },
   "devDependencies": {
     "autoprefixer": "10.6.1",
     "browser-sync": "3.0.4",
     "browserify": "17.0.1",
     "coffeeify": "3.0.1",
+    "colors": "1.3.3",
     "ent": "2.2.2",
     "figlet": "1.11.4",
     "gulp": "5.0.1",

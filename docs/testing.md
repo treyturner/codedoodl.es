@@ -1,11 +1,42 @@
 # Modernization baseline
 
-Stage 1 captured the Node 10 application as a regression reference. Stage 2 uses
-that reference to validate the [Node 24 build](build.md), with additional build
-and watch checks. The test package in `tests/` keeps its own lockfile and pinned
+Stage 1 captured the Node 10 application as a regression reference. The current
+suite validates the [Node 24 build](build.md) and [Express 5 server](server.md),
+with additional build/watch, data-loading and process-lifecycle checks. The
+Playwright package in `tests/` keeps its own lockfile and pinned
 Playwright browser image, independent of the application's dependency tree.
 
-## Stage 2 validation
+## Stage 3 validation
+
+Validated locally on Linux/amd64 on 2026-09-26 using `codedoodles:stage3`:
+**35 passed, 5 device-specific skips, no expected or unexpected failures, and
+no retries**. Chromium, Firefox, WebKit and both mobile projects retain the
+unchanged stage 1 screenshot references. The existing route/API/auth contracts,
+all 77 available shortlinks and archive inventory pass. A new transport contract
+checks gzip/identity negotiation, HEAD, conditional 304 and rejection with 406.
+
+All **23 native server tests** pass under Node 24.21.0 and Express 5.2.1, covering
+manifest failures and stalled bodies, cold fallback, empty/missing manifests,
+bounded concurrency, coalesced refresh, last-good retention, session parsing and
+cookies, EJS escaping, original Hashids IDs, and lifecycle behavior. A Hashids 2
+regression discovered by the browser suite is fixed: paths outside the shortlink
+alphabet fall through to static serving or 404 instead of throwing. Native
+coverage includes the Firefox icon request that exposed it.
+
+The Docker builder passed the native server tests and all build/watch/development
+checks. The actual runtime container exited with code 0 on SIGTERM, restarted
+and became ready. It runs as UID 1000 with nine direct runtime dependencies;
+Request, Colors, cookie-parser, build tools and AWS/S3 tooling are absent from
+that dependency tree. The development server was restarted with stage 3 and
+Shading Particles rendered WebGL frames from the local archive.
+
+See [`tests/baselines/stage3-validation.json`](../tests/baselines/stage3-validation.json)
+for the tested image identity and check record. The assets checkout is unchanged.
+CoffeeScript 1.12.7 and the original browser libraries remain deliberate later
+stages. Remote CI, publishing, deployment and real-device mobile checks were not
+run; production TLS/proxy configuration remains a release check.
+
+## Stage 2 validation (historical)
 
 Validated locally on Linux/amd64 on 2026-09-26 using `codedoodles:stage2`:
 **34 passed, 5 device-specific skips, no expected or unexpected failures, and
@@ -58,7 +89,8 @@ been exercised remotely in this stage.
 Requirements: Bash, Git, and Docker with Buildx and Compose. `npm test` is a
 convenience wrapper; the equivalent `bash tests/run.sh` needs no host Node install.
 Allow time for the first image build and browser-image pull. Docker builds also
-run `npm run test:build` under the pinned application Node version.
+run `npm run test:build` and `npm run test:server` under the pinned application
+Node version. The latter can also be run directly after `npm ci && npm run build`.
 
 The assets checkout must be clean and at
 `9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a`. The runner first looks in
@@ -93,7 +125,8 @@ Results are written to the ignored `tests/artifacts/` directory:
 - `image.json`, `application-commit.txt`, `assets-commit.txt`: tested image and
   source identities. The commit identifies the checkout; local edits are included
   when the runner builds the candidate. Use the image ID as the exact image identity.
-- Build and cleanup logs. CI uploads this directory even when tests fail.
+- Build, container lifecycle and cleanup logs. CI uploads this directory even
+  when tests fail.
 
 ## Reference and rollback
 
@@ -152,8 +185,10 @@ filenames, with MIME types and range support for videos. It does not add CORS
 or cache-control headers absent from the observed Apache asset host. Fixture
 paths provide a missing master and a reset connection for one manifest. Separate
 production app instances verify fallback, partial data, and repeated cached reads.
-`invalid-json`, `empty`, and `timeout` fixture paths are also available for the
-data-loader repairs in stage 3; robust handling of those cases is not claimed yet.
+`invalid-json`, `empty`, and `timeout` fixture paths remain available for manual
+container probes. Stage 3's native server tests use configurable local HTTP
+fixtures to exercise these failures, stalled response bodies, last-good refresh,
+coalesced requests and bounded concurrency without waiting for the production TTL.
 
 Browser tests cover the home grid and font loading, the first-visit prompt,
 client-side navigation/history, a Canvas doodle rendering changing frames,
@@ -166,12 +201,11 @@ by OITNB, so that limitation is recorded rather than mistaken for a site regress
 Mobile projects emulate devices; real-device gestures, GPU behavior, and a full
 visual review of every artwork remain later release checks.
 
-The test-only `limit-cpus.cjs` preload limits `os.cpus()` to one CPU because the
-existing cluster entrypoint uses the host CPU count. This preserves the
-real `npm start` / production cluster entrypoint while avoiding dozens of workers
-and duplicate manifest downloads on a large build host. It is mounted read-only,
-is not in the application image, and does not change the server or cache code.
-Remove this adapter when the process model is modernized.
+Stage 3 runs a single process per container and removes the old `limit-cpus.cjs`
+preload. After the browser suite, the runner stops the actual application
+container with SIGTERM, requires exit code 0, starts it again and waits for
+readiness. Native subprocess tests also cover startup failure/cancellation,
+SIGINT and an active response draining during shutdown.
 
 ## Screenshots and known defects
 

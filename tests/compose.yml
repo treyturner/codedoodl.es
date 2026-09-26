@@ -7,9 +7,6 @@ x-app: &app
     DOODLES_URL: http://assets:8080
     DOODLE_DATA_SOURCE: production
     GOOGLE_ANALYTICS_CODE: ''
-    NODE_OPTIONS: --require=/baseline/limit-cpus.cjs
-  volumes:
-    - ./fixtures/limit-cpus.cjs:/baseline/limit-cpus.cjs:ro
 
 services:
   assets:

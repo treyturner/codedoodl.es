@@ -2,9 +2,10 @@
 
 Prepared 2026-09-26 for `feat/modernize`, starting at `3db726e` (currently the same
 commit as `feat/containerize`). Stage 1 is committed as `6ac65a6`; stage 2's Node
-and build migration is implemented. See [the testing guide](testing.md) for the
+and build migration is committed as `a3c6c07`. Stage 3's server migration is
+implemented; see [the server guide](server.md). See [the testing guide](testing.md) for the
 baseline and [the build guide](build.md) for the current toolchain and deliberate
-dependency checkpoints. Stages 3–6 remain to be implemented.
+dependency checkpoints. Stages 4–6 remain to be implemented.
 
 ## Objective and scope
 

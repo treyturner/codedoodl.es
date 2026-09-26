@@ -28,7 +28,17 @@ config.BASE_URL           = process.env.BASE_URL or (if config.PRODUCTION then "
 config.ASSETS_BUCKET_URL  = process.env.BASE_URL or (if config.PRODUCTION then "http://#{config.buckets.ASSETS}" else "http://#{config.express.ip}:#{config.express.port}")
 config.DOODLES_BUCKET_URL = process.env.DOODLES_URL or "http://#{config.buckets.SOURCE}"
 
-config.DOODLE_CACHE_TIMEOUT = if config.PRODUCTION then ((1000 * 60) * 5) else 0
+positiveInteger = (name, fallback, minimum = 1) ->
+	value = if process.env[name]? then Number(process.env[name]) else fallback
+	unless Number.isSafeInteger(value) and value >= minimum
+		throw new Error "#{name} must be an integer >= #{minimum}"
+	value
+
+config.DOODLE_CACHE_TIMEOUT = positiveInteger('DOODLE_CACHE_TIMEOUT_MS', (if config.PRODUCTION then 300000 else 0), 0)
+config.DOODLE_FETCH_TIMEOUT = positiveInteger('DOODLE_FETCH_TIMEOUT_MS', 10000)
+config.DOODLE_FETCH_CONCURRENCY = positiveInteger('DOODLE_FETCH_CONCURRENCY', 8)
+config.SESSION_SECRET = process.env.SESSION_SECRET or require('crypto').randomBytes(32).toString('hex')
+config.TRUST_PROXY = if /^\d+$/.test(process.env.TRUST_PROXY or '') then Number(process.env.TRUST_PROXY) else (process.env.TRUST_PROXY or false)
 
 config.routes =
 	HOME       : ''

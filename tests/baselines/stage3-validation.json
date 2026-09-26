@@ -1,0 +1,60 @@
+{
+  "recordedAt": "2026-09-26",
+  "platform": "linux/amd64",
+  "applicationBaseCommit": "a3c6c07a9c9a85c9ab5ff6eed181e950f809e6c3",
+  "candidateSource": "Working tree with stage 3 changes; not yet committed",
+  "assetsCommit": "9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a",
+  "candidateImage": {
+    "localTag": "codedoodles:stage3",
+    "dockerImageId": "sha256:c88f9d96d57130ad8c0b92dda6c649238abcc9390fe3df04d381f027fd6911db"
+  },
+  "candidateRun": {
+    "startedAt": "2026-09-26T22:09:00.890Z",
+    "passed": 35,
+    "expectedFailures": 0,
+    "skipped": 5,
+    "unexpected": 0,
+    "flaky": 0,
+    "screenshotReferencesChanged": false
+  },
+  "serverTests": {
+    "passed": 23,
+    "failed": 0,
+    "runOnHostAndInDockerBuilder": true
+  },
+  "runtimeVersions": {
+    "node": "24.21.0",
+    "coffeescript": "1.12.7",
+    "compression": "1.8.2",
+    "cors": "2.8.6",
+    "ejs": "6.0.1",
+    "express": "5.2.1",
+    "express-session": "1.19.0",
+    "hashids": "2.3.0",
+    "underscore": "1.13.8",
+    "winston": "3.19.0"
+  },
+  "additionalChecks": [
+    "Server dependencies and native tests passed under the Express 4 checkpoint before installing Express 5",
+    "Cold startup waits for initialized data; missing, invalid, timed-out and stalled-body master responses fall back locally",
+    "Native fetch decodes gzip, bounds individual requests and coalesces startup/refresh callers",
+    "Failed refresh preserves the last successful snapshot; valid empty masters remain valid",
+    "Original Hashids IDs round-trip; ordinary root paths reach static serving or 404",
+    "Form and JSON login, tampered cookies, secure proxy cookies and disabled signed webhook verified",
+    "EJS metadata and inline-script escaping preserve configuration values",
+    "SIGTERM and SIGINT exit 0; startup failure exits 1; startup cancellation and active-response draining pass",
+    "Actual container SIGTERM exits 0 and restart becomes ready",
+    "Gzip/identity negotiation, representation-specific ETags, HEAD, 304 and 406 verified",
+    "Docker builder passed repeatable builds, integrity, error propagation, watch recovery and forwarded/local-artwork development checks",
+    "Production image runs as UID 1000 and excludes Request, Colors, cookie-parser, build and AWS/S3 tooling",
+    "Restarted development server renders Shading Particles WebGL frames from the local archive",
+    "Assets checkout is clean and original screenshot references are unchanged"
+  ],
+  "limits": [
+    "CoffeeScript 1.12.7 and the original browser vendor libraries remain stages 4 and 5",
+    "The historical password gate retains an in-process session store; process restart requires login again",
+    "Development manifests still list the known unarchived Fury Ribbons artwork",
+    "Remote CI, registry publishing, deployment and production TLS/proxy validation were not run",
+    "Mobile browsers are emulated; artwork rendering coverage is representative rather than exhaustive"
+  ]
+}

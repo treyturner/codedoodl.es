@@ -8,7 +8,9 @@ not an installable package or a supported deployment workflow.
 
 Related historical helpers remain in `utils/`: `uploadToS3`,
 `invalidateCloudfront`, `masterManifestManager`, `validateDoodleUpload`,
-`getCredentials`, `cloneRepo`, and `deployer`. The application's webhook still
+`getCredentials`, `cloneRepo`, `updateReadmeContrib`, and `deployer`. Request is
+also absent from normal installation after stage 3; those historical HTTP helpers
+are not supported local commands. The application's webhook still
 returns its existing disabled-deployer response before reaching these imports.
 Restoring this service requires a separate AWS SDK and deployment migration.
 

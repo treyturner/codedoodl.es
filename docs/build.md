@@ -1,6 +1,6 @@
 # Building and developing the site
 
-Stage 2 uses **Node 24.21.0 / npm 11.19.0**, **Gulp 5.0.1**, **Dart Sass 1.105.0**,
+The build uses **Node 24.21.0 / npm 11.19.0**, **Gulp 5.0.1**, **Dart Sass 1.105.0**,
 **Browserify 17.0.1**, and the **CoffeeScript 1.12.7** compatibility checkpoint.
 The app remains CommonJS/CoffeeScript. Its original vendored browser libraries
 and the sibling artwork archive are unchanged.
@@ -40,8 +40,8 @@ The server environment interface remains `NODE_ENV`, `BIND_ADDRESS`, `BIND_PORT`
 `BASE_URL`, `DOODLES_URL`, `DOODLE_DATA_SOURCE`, `GOOGLE_ANALYTICS_CODE`, and
 `DEV_PASSWORD`. Point `DOODLES_URL` at a correctly configured archive host.
 The container tests supply their own pinned, offline asset server. Development
-mode retains the existing data loader's local-manifest behavior; its cache and
-remote loading semantics are a stage 3 concern.
+mode retains the data loader's local-manifest selection. Stage 3 makes cache
+initialization, refresh and network failures explicit; see [server.md](server.md).
 
 ## Build inputs and outputs
 
@@ -73,23 +73,22 @@ in-place unrevision step remains. Login/holding CSS is generated explicitly so
 those templates also have a valid manifest entry.
 
 Precompressed output retains ordinary filenames, matching the archive convention.
-Static response headers inspect the actual file signature after the file exists;
-plain SVGs and missing-file HTML no longer receive a false gzip label. Holding
-assets remain available before login. The original convention of serving gzip
-files directly is retained; broader HTTP negotiation/server changes belong to
-the next stage.
+Static middleware inspects the actual file signature and negotiates gzip or
+identity responses. Plain SVGs and missing-file HTML do not receive a false gzip
+label. Holding assets remain available before login. See [server.md](server.md)
+for conditional requests, cache headers and the unchanged archive boundary.
 
 ## Container and verification
 
 ```bash
-docker build -t codedoodles:stage2 .
-CODEDOODLES_IMAGE=codedoodles:stage2 bash tests/run.sh
+docker build -t codedoodles:stage3 .
+CODEDOODLES_IMAGE=codedoodles:stage3 bash tests/run.sh
 ```
 
 The multi-stage Dockerfile pins the official Node 24 Bookworm image by digest,
 includes system CA certificates, runs `npm ci`, builds, and exercises build
-checks. A separate dependency stage runs `npm ci --omit=dev`; only its runtime
-tree and generated application files enter the final image. The container runs
+and server checks. A separate dependency stage runs `npm ci --omit=dev`; only its
+runtime tree and generated application files enter the final image. The container runs
 as the existing `node` user. Python 2, NVM, Pyenv, Node Sass, Gulp 3, and the
 Docker font-copy workaround have been removed.
 
@@ -106,17 +105,12 @@ original screenshot references; see [testing.md](testing.md).
 ## Remaining dependency checkpoints
 
 CoffeeScript 1.12.7 is intentional: the native-class migration is stage 4.
-A small CommonJS entrypoint keeps cluster forks out of CoffeeScript 1's CLI,
-which depends on entrypoint internals removed by modern Node.
-Express's planned version-4 checkpoint moves into this stage: **4.22.3** replaces
-4.5.0 because the latter reads Node's removed internal response headers and
-cannot serve responses under Node 24. Express 5 remains a stage 3 change.
-EJS, Request, session middleware, Hashids, Underscore and Winston stay at their
-baseline direct versions until stage 3. Their transitive dependencies
-are resolved into the new npm lockfile. Old Winston pulls in Node 0.8 engine
-declarations, so npm reports engine/deprecation warnings for that legacy subtree;
-Node 24 runtime compatibility is checked by the container suite. This stage is
-not the completed server dependency/security migration.
+A small CommonJS entrypoint avoids CoffeeScript 1's CLI, which depends on
+entrypoint internals removed by modern Node. Stage 2 used Express 4.22.3 as a
+compatibility checkpoint; stage 3 now uses Express 5 and current server libraries.
+Request and the old Winston dependency tree are gone. Native async helpers handle
+fetch and process lifecycle while the existing route/view modules remain
+CoffeeScript. Server versions and behavior are documented in [server.md](server.md).
 
 `npm run doodle:create` and `npm run doodle:preview -- doodles/author/name` retain
 local authoring and preview tools. Figlet and Slug have been updated, and all

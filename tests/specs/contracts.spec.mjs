@@ -153,6 +153,28 @@ test('all modern font files and the favicon are present and keep their binary si
   expect(decode(favicon).subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
 });
 
+test('static assets negotiate gzip/identity and retain HEAD and conditional-cache behavior', async () => {
+  const home = decode(await raw(`${app}/`)).toString();
+  const url = home.match(/href="(http:\/\/site\.test:3000\/css\/[^" ]+\.css)"/)[1];
+  const gzip = await raw(url);
+  const identity = await raw(url, { headers: { 'Accept-Encoding': 'identity' } });
+  expect(identity.status).toBe(200);
+  expect(identity.headers['content-encoding']).toBeUndefined();
+  expect(identity.body.equals(decode(gzip))).toBe(true);
+  expect(gzip.headers.vary).toMatch(/accept-encoding/i);
+  expect(identity.headers.vary).toMatch(/accept-encoding/i);
+  expect(identity.headers.etag).not.toBe(gzip.headers.etag);
+  expect(identity.headers['last-modified']).toBeDefined();
+  const head = await raw(url, { method: 'HEAD' });
+  expect(head.status).toBe(200);
+  expect(head.body.length).toBe(0);
+  expect(head.headers['content-length']).toBe(gzip.headers['content-length']);
+  const cached = await raw(url, { headers: { 'If-None-Match': gzip.headers.etag } });
+  expect(cached.status).toBe(304);
+  expect(cached.body.length).toBe(0);
+  expect((await raw(url, { headers: { 'Accept-Encoding': 'gzip;q=0, identity;q=0' } })).status).toBe(406);
+});
+
 test('all available archive entrypoints, manifests, and thumbnails are served locally', async () => {
   const master = await json(`${assets}/master_manifest.json`);
   expect(master.doodles).toHaveLength(78);
