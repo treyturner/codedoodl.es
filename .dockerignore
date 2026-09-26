@@ -1,0 +1,6 @@
+.git
+node_modules
+temp
+tests
+credentials.coffee
+npm-debug.log

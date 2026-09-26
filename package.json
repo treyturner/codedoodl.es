@@ -18,7 +18,9 @@
     "node": ">= 0.10.29"
   },
   "scripts": {
-    "start": "cd app && coffee main.coffee"
+    "start": "cd app && coffee main.coffee",
+    "test": "bash tests/run.sh",
+    "test:update-snapshots": "bash tests/run.sh --update-snapshots"
   },
   "folders": {
     "dest": "app/public",

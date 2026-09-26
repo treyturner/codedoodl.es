@@ -1,5 +1,12 @@
 #syntax=docker/dockerfile:1.7
-FROM debian:bullseye-slim AS builder
+FROM debian:bullseye-slim@sha256:e5b6442dd2e9684cf5e87d8338b5968f3b348636fc0be6d7850a381e3731a2bd AS builder
+
+# Preserve a rebuildable legacy baseline until the Node/OS upgrade. The live
+# Bullseye security indexes now reference packages no longer on the mirror.
+RUN printf '%s\n' \
+    'deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/20260901T000000Z bullseye main' \
+    'deb [check-valid-until=no] http://snapshot.debian.org/archive/debian-security/20260901T000000Z bullseye-security main' \
+    > /etc/apt/sources.list
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -40,7 +47,7 @@ RUN npm install \
     && ./node_modules/.bin/gulp build \
     && npm prune --production
 
-FROM debian:bullseye-slim AS runtime
+FROM debian:bullseye-slim@sha256:e5b6442dd2e9684cf5e87d8338b5968f3b348636fc0be6d7850a381e3731a2bd AS runtime
 
 COPY --from=builder /root/.nvm/versions/node/v10.16.0 /usr/local
 

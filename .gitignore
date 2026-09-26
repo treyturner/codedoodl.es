@@ -29,3 +29,6 @@ app/public/html
 app/public/static/fonts
 
 doodles/.gitignore
+
+tests/archive/
+tests/artifacts/

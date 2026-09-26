@@ -19,3 +19,8 @@ All assets are currently bundled in repo, so you don't need to compile anything,
 1. `$ gulp`
 
 Check files in `/gulp` for breakdown of gulp tasks.
+
+For the container-based modernization regression suite, run `npm test` (or
+`bash tests/run.sh`) and see [the baseline testing guide](docs/testing.md).
+The test tools have their own pinned container and lockfile; installing the
+legacy application dependencies on your host is not required.

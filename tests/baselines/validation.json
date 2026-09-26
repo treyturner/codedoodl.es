@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-09-26",
+  "platform": "linux/amd64",
+  "applicationBaseCommit": "3db726eee1bd1d5c5e4982a3c34dea6761773b30",
+  "candidateSource": "Working tree with stage 1 changes; not yet committed",
+  "assetsCommit": "9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a",
+  "referenceImage": "ghcr.io/treyturner/codedoodles@sha256:944e942f72c9fa0cce4ef8287eff3f89f2c04b1af3bb322ce884b59bcb039081",
+  "candidateImage": {
+    "localTag": "codedoodles:stage1",
+    "dockerImageId": "sha256:de2b18fae22db2fd0ec382db2a7ba5b6a59defef7411a9c280d02a576468c858"
+  },
+  "referenceRun": {
+    "startedAt": "2026-09-26T19:41:59.613Z",
+    "passed": 32,
+    "expectedFailures": 2,
+    "skipped": 5,
+    "unexpected": 0
+  },
+  "candidateRun": {
+    "startedAt": "2026-09-26T19:43:51.314Z",
+    "passed": 32,
+    "expectedFailures": 2,
+    "skipped": 5,
+    "unexpected": 0
+  },
+  "regressionControl": {
+    "localImage": "codedoodles:baseline-negative-control",
+    "change": "Removed /srv/app/public/static/fonts/Monosten-A-webfont.woff2 from the reference image",
+    "result": "Font contract rejected the image: expected HTTP 200, received 404",
+    "unexpectedFailures": 1
+  },
+  "additionalChecks": [
+    "Docker build succeeded with pinned Bullseye base and Debian snapshot",
+    "Node 10.16.0 and all 19 direct runtime dependency versions match the reference image",
+    "WebKit deep-link/info/reload/navigation test passed five consecutive repetitions after synchronizing panel state",
+    "actionlint 1.7.12 passed",
+    "Bash and JavaScript syntax checks passed",
+    "Application package-lock.json is unchanged; archive checkout is clean"
+  ],
+  "limits": [
+    "GitHub Actions execution and registry publishing were not run remotely",
+    "Mobile browsers are emulated; representative artwork rendering is checked, not every artwork on real devices"
+  ]
+}

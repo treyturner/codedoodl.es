@@ -2,17 +2,22 @@ name: Build and push codedoodles image
 
 on:
   push:
-    branches: [master, feat/containerize]
+    branches: [master, feat/containerize, feat/modernize]
     paths-ignore:
       - .github/FUNDING.yml
       - README.md
   pull_request:
-    branches: [master]
+    branches: [master, feat/containerize, feat/modernize]
     paths-ignore:
       - .github/FUNDING.yml
       - README.md
     types: [opened, reopened, synchronize]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the tested image (master only)
+        type: boolean
+        default: false
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -21,17 +26,23 @@ concurrency:
 jobs:
   build-push:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     permissions:
       contents: read
       packages: write
-      actions: write
-    env:
-      REGISTRY: ghcr.io
-      OWNER: ${{ github.repository_owner }}
-      REPO: codedoodles
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Checkout pinned doodle archive
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          repository: treyturner/codedoodl.es-doodles
+          ref: 9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a
+          path: tests/archive
+          persist-credentials: false
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd  # v4.0.0
@@ -44,17 +55,36 @@ jobs:
             type=gha,scope=${{ github.ref_name }}
             type=gha,scope=master
           cache-to: type=gha,mode=max,scope=${{ github.ref_name }}
-          tags: ghcr.io/${{ github.repository_owner }}/codedoodles:latest
+          tags: codedoodles:candidate-${{ github.sha }}
           load: true
           push: false
 
+      - name: Test the candidate container
+        env:
+          CODEDOODLES_IMAGE: codedoodles:candidate-${{ github.sha }}
+        run: bash tests/run.sh
+
+      - name: Save baseline results and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7
+        with:
+          name: baseline-${{ github.sha }}
+          path: tests/artifacts/
+          retention-days: 14
+          if-no-files-found: warn
+
       - name: Tag and push image
-        if: github.event_name != 'pull_request'
+        if: >-
+          github.ref == 'refs/heads/master' &&
+          (github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && inputs.publish))
         uses: ./.github/actions/publish
         with:
-          candidate-ref: ghcr.io/${{ github.repository_owner }}/codedoodles:latest
+          candidate-ref: codedoodles:candidate-${{ github.sha }}
           refs: |
+            ghcr.io/${{ github.repository_owner }}/codedoodles:sha-${{ github.sha }}
             ghcr.io/${{ github.repository_owner }}/codedoodles:latest
+            forgejo.treyturner.info/${{ github.repository_owner }}/codedoodles:sha-${{ github.sha }}
             forgejo.treyturner.info/${{ github.repository_owner }}/codedoodles:latest
           github-token: ${{ github.token }}
           forgejo-token: ${{ secrets.FORGEJO_REGISTRY_TOKEN }}
