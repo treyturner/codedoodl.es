@@ -1,7 +1,7 @@
 // from https://gist.github.com/jay3sh/1236634
 
 // config is coffee....
-require('coffee-script/register');
+require('coffeescript/register');
 
 var validURL = require('valid-url');
 var colors   = require('colors');

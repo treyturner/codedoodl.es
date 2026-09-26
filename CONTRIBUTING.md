@@ -6,21 +6,21 @@ See the [relevant docs section](docs/contributing.md).
 
 Clone the repo, submit a pull request!
 
-Hint - to get the site up and running locally:
+Use Node 24.21.0 and its bundled npm 11.19.0 (`nvm install && nvm use`), then:
 
-1. `$ git clone git@github.com:fluuuid/codedoodl.es.git`
-2. `$ cd codedoodl.es`
-3. `$ [sudo] npm i`
-4. `$ npm run start`
-5. Open http://127.0.0.1:3000
+1. `npm ci`
+2. `npm run dev`
+3. Open http://localhost:3002 for the application with browser reloading.
 
-All assets are currently bundled in repo, so you don't need to compile anything, but if you do want to build + watch then:
+`npm run build` creates production assets. `npm start` serves those assets on
+port 3000; `npm run watch` rebuilds them after edits without starting a server.
+Development serves artwork from the sibling `codedoodl.es-doodles` checkout.
+Use `DOODLES_ARCHIVE` for another checkout, or `DOODLES_URL` for a remote host
+that serves the archived gzip files correctly.
+See [the build guide](docs/build.md) for the source layout, environment settings,
+local doodle tools, and the boundary around retired publishing tools.
 
-1. `$ gulp`
-
-Check files in `/gulp` for breakdown of gulp tasks.
-
-For the container-based modernization regression suite, run `npm test` (or
-`bash tests/run.sh`) and see [the baseline testing guide](docs/testing.md).
-The test tools have their own pinned container and lockfile; installing the
-legacy application dependencies on your host is not required.
+Run `npm run test:build` for build/watch checks, or `npm test` (equivalently
+`bash tests/run.sh`) for the container and browser suite. The container suite
+needs Bash, Git and Docker; it does not need host application dependencies.
+See [the testing guide](docs/testing.md) for the pinned archive and diagnostics.

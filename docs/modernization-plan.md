@@ -1,10 +1,10 @@
 # Dependency modernization plan
 
 Prepared 2026-09-26 for `feat/modernize`, starting at `3db726e` (currently the same
-commit as `feat/containerize`). Stage 1's baseline and validation pipeline are
-implemented; see [the testing guide](testing.md) for commands, rollback identity,
-coverage, and recorded limitations. Application dependency upgrades in stages
-2–6 have not been applied yet.
+commit as `feat/containerize`). Stage 1 is committed as `6ac65a6`; stage 2's Node
+and build migration is implemented. See [the testing guide](testing.md) for the
+baseline and [the build guide](build.md) for the current toolchain and deliberate
+dependency checkpoints. Stages 3–6 remain to be implemented.
 
 ## Objective and scope
 
@@ -80,8 +80,8 @@ patch releases when implementing and lock the versions actually tested.
 | --- | --- | --- |
 | Node / container | 10.16.0 / Bullseye | Node 24 LTS on a supported official Debian-based Node image; pin the chosen patch and image digest. Align `.nvmrc`, `engines`, npm, CI, and Docker. |
 | Gulp | 3.9.1 | 5.0.1; explicit `series`/`parallel` task graph and explicit task imports. |
-| Sass | node-sass 4.12.0 / gulp-sass 4.0.2 | Dart Sass 1.105.0 / gulp-sass 6.0.1, using its modern API. |
-| Browser bundling | browserify 6.0.3 / watchify 3.11.1 | browserify 17.0.1 / watchify 4.0.0; retain CommonJS application bundling. |
+| Sass | node-sass 4.12.0 / gulp-sass 4.0.2 | Stage 2 uses Dart Sass 1.105.0's modern API directly; no Gulp wrapper is needed. |
+| Browser bundling | browserify 6.0.3 / watchify 3.11.1 | Stage 2 uses browserify 17.0.1 and a shared Gulp watch queue; retain CommonJS application bundling. |
 | CoffeeScript | coffee-script 1.7/1.8 | First consolidate on `coffeescript` 1.12.7 with coffeeify 3.0.1, then migrate to coffeescript 2.7.0 in its own stage. coffeeify 3 accepts both compiler versions. |
 | Express | 4.5.0 | Current Express 4 as a temporary compatibility checkpoint, then Express 5.2.1. |
 | Templates | ejs 2.5.5 | EJS 6.0.1; validate each template and Express engine integration independently. |
@@ -191,6 +191,10 @@ boots; repeated clean builds have correct manifest references and gzip bytes;
 the baseline HTTP/browser suite passes with the original UI libraries.
 
 ### 3. Modernize server dependencies and data loading
+
+The Express 4.22.3 compatibility checkpoint was brought into stage 2 because
+Express 4.5.0 uses response internals removed in Node 24. Continue to Express 5
+here after the remaining middleware and routing migrations.
 
 Upgrade server dependencies in small groups, with Express 5 last after removing
 old Express calls. Specific changes in this source include:

@@ -169,7 +169,9 @@ class AbstractView extends Backbone.View
 		re = if allowSpaces then new RegExp('{{ ([^{}]*) }}', 'g') else new RegExp('{{([^{}]*)}}', 'g')
 
 		return str.replace re, (a, b) ->
-			r = vals[b]
+			# JSON serialization preserves spaces inside locale strings. Accept
+			# both source placeholders and the old minifier's whitespace-free form.
+			r = vals[b.trim()]
 			(if typeof r is "string" or typeof r is "number" then r else a)
 
 	dispose : =>

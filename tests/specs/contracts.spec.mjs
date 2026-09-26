@@ -94,6 +94,16 @@ test('password gate, failed login, and successful session preserve access', asyn
   const client = await playwright.request.newContext({ baseURL: 'http://auth:3000' });
   try {
     expect(await (await client.get('/')).text()).toContain('coming soon');
+    const loginHtml = await (await client.get('/login')).text();
+    const stylesheet = loginHtml.match(/href="(http:\/\/auth:3000\/holding\/css\/[^" ]+\.css)"/);
+    expect(stylesheet).not.toBeNull();
+    const css = await raw(stylesheet[1]);
+    expect(css.status).toBe(200);
+    expect(css.headers['content-encoding']).toBe('gzip');
+    expect(decode(css).toString()).toContain('@font-face');
+    const font = await raw('http://auth:3000/holding/static/fonts/Monosten-A-webfont.woff2');
+    expect(font.status).toBe(200);
+    expect(decode(font).subarray(0, 4).toString()).toBe('wOF2');
     const blocked = await client.get('/about', { maxRedirects: 0 });
     expect(blocked.status()).toBe(302);
     expect(blocked.headers().location).toBe('/');
@@ -168,16 +178,16 @@ test('all available archive entrypoints, manifests, and thumbnails are served lo
   expect(missing.headers['content-encoding']).toBeUndefined();
 });
 
-test('KNOWN: uncompressed shell SVG must not be labelled gzip', async () => {
+test('uncompressed shell SVG is served with a valid encoding', async () => {
   const response = await raw(`${app}/static/img/ss/ss-icons.svg`);
   expect(response.status).toBe(200);
-  test.fail(true, 'ENCODING-SVG: app/server.coffee labels ordinary SVG bytes as gzip.');
   expect(() => decode(response)).not.toThrow();
+  expect(decode(response).toString()).toContain('<svg');
 });
 
-test('KNOWN: missing static JS must return a decodable 404 page', async () => {
+test('missing static JS returns a decodable 404 page', async () => {
   const response = await raw(`${app}/js/missing-baseline.js`);
   expect(response.status).toBe(404);
-  test.fail(true, 'ENCODING-404: extension-based gzip header survives HTML 404 rendering.');
   expect(() => decode(response)).not.toThrow();
+  expect(decode(response).toString()).toContain('pageNotFound');
 });

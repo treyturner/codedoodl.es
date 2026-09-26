@@ -1,5 +1,5 @@
 // config is coffee....
-require('coffee-script/register');
+require('coffeescript/register');
 
 var gulp                 = require('gulp');
 var gzip                 = require('gulp-gzip');

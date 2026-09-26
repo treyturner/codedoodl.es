@@ -1,10 +1,42 @@
 # Modernization baseline
 
-Stage 1 adds container-based regression checks without upgrading the application's
-Node 10 or npm dependencies. The test package in `tests/` has its own lockfile
-and a pinned Playwright browser image. The main `package-lock.json` is unchanged.
+Stage 1 captured the Node 10 application as a regression reference. Stage 2 uses
+that reference to validate the [Node 24 build](build.md), with additional build
+and watch checks. The test package in `tests/` keeps its own lockfile and pinned
+Playwright browser image, independent of the application's dependency tree.
 
-## Stage 1 validation
+## Stage 2 validation
+
+Validated locally on Linux/amd64 on 2026-09-26 using `codedoodles:stage2`:
+**34 passed, 5 device-specific skips, no expected or unexpected failures, and
+no retries**. All five browser projects passed their comparisons against the
+unchanged stage 1 screenshots. The former SVG/static-404 encoding defects are
+fixed, and login/holding CSS and fonts now have explicit coverage.
+
+The Docker build passed byte-identical clean rebuilds, stale-output removal,
+gzip/font/image integrity, JSON value preservation, manifest/EJS references,
+compilation-error propagation, and watch rebuild/recovery checks. An additional
+development check connected a real Chromium browser through BrowserSync and
+confirmed an HTML edit caused a page reload. Local doodle creation and preview
+also passed under Node 24.21.0.
+
+The candidate runs as UID 1000 with Node 24.21.0, Express 4.22.3 and CoffeeScript
+1.12.7. Its production-only dependency tree excludes Gulp, Sass, Browserify and
+the former AWS/S3 build dependencies. System CA certificates are present.
+The workflow passed actionlint. See
+[`tests/baselines/stage2-validation.json`](../tests/baselines/stage2-validation.json)
+for the exact local image identity and recorded checks. The assets checkout and
+reference screenshots remain unchanged. Remote CI, registry publishing, real
+mobile devices, and deployment have not been exercised in this stage.
+
+Development follow-up checks also cover forwarded asset URLs and reload sockets,
+plus local artwork serving (gzip HTML/JS, MIME types, media ranges and plain 404s).
+Shading Particles submitted WebGL draw calls through a forwarded port while
+external artwork requests were blocked by the test browser. These development
+changes were checked locally after the recorded container run; the user also
+confirmed the development site works with the local archive.
+
+## Stage 1 validation (historical)
 
 Validated locally on Linux/amd64 on 2026-09-26. The deployed reference image and
 the rebuilt `codedoodles:stage1` image each completed all 39 cases: **32 passed,
@@ -25,7 +57,8 @@ been exercised remotely in this stage.
 
 Requirements: Bash, Git, and Docker with Buildx and Compose. `npm test` is a
 convenience wrapper; the equivalent `bash tests/run.sh` needs no host Node install.
-Allow several minutes for the first legacy image build and browser-image pull.
+Allow time for the first image build and browser-image pull. Docker builds also
+run `npm run test:build` under the pinned application Node version.
 
 The assets checkout must be clean and at
 `9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a`. The runner first looks in
@@ -79,23 +112,25 @@ The same manifest is available from GHCR and has been pulled locally under
 ```bash
 docker pull ghcr.io/treyturner/codedoodles@sha256:944e942f72c9fa0cce4ef8287eff3f89f2c04b1af3bb322ce884b59bcb039081
 docker tag ghcr.io/treyturner/codedoodles@sha256:944e942f72c9fa0cce4ef8287eff3f89f2c04b1af3bb322ce884b59bcb039081 codedoodles:rollback-3db726e
-CODEDOODLES_IMAGE=codedoodles:rollback-3db726e bash tests/run.sh
 ```
+
+To reproduce the original baseline run, use the stage 1 suite from commit
+`6ac65a6` in a separate checkout. The current suite requires the encoding fixes
+and holding-page stylesheet added in stage 2, so it intentionally rejects those
+defects in the old image. The original screenshots remain the visual reference.
 
 Keep the old image on the deployment host until a candidate has been accepted.
 Rollback uses this immutable image reference with the existing container
-configuration and unchanged asset archive. Stage 1 does not deploy or retag the
-remote production image.
+configuration and unchanged asset archive. Local verification does not deploy or
+retag the remote production image.
 
 The old Dockerfile initially failed to rebuild because the live Bullseye
-security index referenced package downloads returning 404. The Dockerfile now
-pins the existing Bullseye base and uses the 2026-09-01 Debian package snapshot.
-Expired snapshot metadata is allowed for these fixed sources; package signatures
-are still verified. Node 10.16.0 and Python 2.7.18 remain in place for the baseline.
-Stage 2 replaces this historical build chain with a supported Node/OS combination.
-The legacy NVM/Pyenv installers and `npm install` remain until that stage;
-the baseline is a functional regression reference, not a claim of bit-for-bit
-reproducible image builds.
+security index referenced package downloads returning 404. Stage 1 pinned its
+Bullseye base and the 2026-09-01 Debian package snapshot so that historical build
+could be rebuilt. Stage 2 replaces that chain with the official Node 24 image and
+`npm ci`; Python 2, NVM and Pyenv are gone. See [build.md](build.md). The immutable
+reference is a functional regression reference, not a claim that rebuilt Docker
+images have identical metadata or OS package bytes.
 
 ## What is checked
 
@@ -131,8 +166,8 @@ by OITNB, so that limitation is recorded rather than mistaken for a site regress
 Mobile projects emulate devices; real-device gestures, GPU behavior, and a full
 visual review of every artwork remain later release checks.
 
-The test-only `limit-cpus.cjs` preload limits `os.cpus()` to one CPU because
-Node 10 ignores container CPU quotas when creating workers. This preserves the
+The test-only `limit-cpus.cjs` preload limits `os.cpus()` to one CPU because the
+existing cluster entrypoint uses the host CPU count. This preserves the
 real `npm start` / production cluster entrypoint while avoiding dozens of workers
 and duplicate manifest downloads on a large build host. It is mounted read-only,
 is not in the application image, and does not change the server or cache code.
@@ -150,26 +185,30 @@ Normal runs mount reference screenshots read-only and never update them. To
 deliberately replace a baseline locally:
 
 ```bash
-CODEDOODLES_IMAGE=codedoodles:rollback-3db726e npm run test:update-snapshots
+CODEDOODLES_IMAGE=codedoodles:rollback-3db726e npm run test:update-snapshots -- \
+  --project=chromium --project=firefox --project=webkit \
+  --project=mobile-chromium --project=mobile-webkit
 ```
 
 Review the image changes before accepting them. Do not regenerate baselines to
 make an unexplained upgrade failure pass. The wrapper rejects snapshot updates
 in CI; CI compares the checked-in images.
 
-Known defects are recorded in `tests/baselines/reference.json`:
+Defects observed in the original image are recorded in
+`tests/baselines/reference.json`:
 
 - `MISSING-FURY-RIBBONS`: the master lists 78 entries, but
   `samsy/fury-ribbons` has no archived manifest/entrypoint. The expected API has 77.
-- `ENCODING-SVG`: ordinary shell SVG bytes are incorrectly labelled gzip.
-- `ENCODING-404`: missing static JS returns HTML with an incorrect gzip header.
+- `ENCODING-SVG`: ordinary shell SVG bytes were incorrectly labelled gzip;
+  fixed in stage 2.
+- `ENCODING-404`: missing static JS returned HTML with an incorrect gzip header;
+  fixed in stage 2.
 - `MEDIA-PLAY-ABORT`: rapidly hovering a thumbnail can interrupt its pending
   video `play()` call. The exact observed cancellation is annotated; other
   browser errors and failed requests still fail tests.
 
-The two encoding checks use Playwright's expected-failure mechanism. An
-unexpected pass fails the suite, prompting removal of that exception when the
-underlying bug is fixed. Missing data cannot silently expand the exception list:
+The two encoding checks are now required to pass; stage 1's expected-failure
+markers have been removed. Missing data cannot silently expand the exception list:
 complete API comparisons and the archive inventory catch additional omissions.
 The reference also records a content limitation discovered during selection of
 offline rendering examples: Muscular Hydrostats loads sketch.js from an external

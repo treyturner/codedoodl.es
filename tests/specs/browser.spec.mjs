@@ -42,6 +42,8 @@ test('about/contribute navigation and browser history work without full reloads'
   await page.locator('.about-btn').click();
   await expect(page).toHaveURL(/\/about\/?$/);
   await expect(page.locator('#page-about')).toBeVisible();
+  await expect(page.locator('.sponsor-nexus img')).toHaveAttribute('src', 'http://site.test:3000/static/img/logos/nexus_70.png');
+  await expect(page.locator('#page-about a[href*="chrome.google.com"]')).toHaveAttribute('href', /hhfnbfhcojlgbojpphigjibpjkccfikh$/);
   await page.locator('.contribute-btn').click();
   await expect(page).toHaveURL(/\/contribute\/?$/);
   await expect(page.locator('#page-contribute')).toBeVisible();

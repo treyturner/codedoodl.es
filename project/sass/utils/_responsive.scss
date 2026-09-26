@@ -1,3 +1,6 @@
+@use "sass:list";
+@use "../globals";
+
 /*
  * ------------------
  *  Responsive Mixin
@@ -37,7 +40,7 @@
 {
     @each $b in $map
     {
-        @if nth($b, 1) == $key
+        @if list.nth($b, 1) == $key
         {
             @return true;
         }        
@@ -50,9 +53,9 @@
 {
     @each $b in $map
     {
-        @if nth($b, 1) == $key
+        @if list.nth($b, 1) == $key
         {
-            @return nth($b, $index);
+            @return list.nth($b, $index);
         }
     }
 }
@@ -67,9 +70,9 @@
     // If the key exists in the map
     @each $p in $point
     {
-        @if mapHasKey($breakpoints, $p)
+        @if mapHasKey(globals.$breakpoints, $p)
         {
-            @media #{mapGet($breakpoints, $p, 2)}
+            @media #{mapGet(globals.$breakpoints, $p, 2)}
             {
                 @content;
             }
@@ -93,11 +96,11 @@
 @mixin update-state($point)
 {
     // If the key exists in the map
-    @if mapHasKey($breakpoints, $point)
+    @if mapHasKey(globals.$breakpoints, $point)
     {
-        @media #{mapGet($breakpoints, $point, 2)}
+        @media #{mapGet(globals.$breakpoints, $point, 2)}
         {
-            content: '#{mapGet($breakpoints, $point, 1)}';
+            content: '#{mapGet(globals.$breakpoints, $point, 1)}';
         }
     }
     @else
@@ -121,8 +124,8 @@
 {
     display: none;
 
-    @each $b in $breakpoints
+    @each $b in globals.$breakpoints
     {
-        @include update-state(nth($b, 1));
+        @include update-state(list.nth($b, 1));
     }
 }

@@ -1,7 +1,7 @@
 // config is coffee....
-require('coffee-script/register');
+require('coffeescript/register');
 
-var slug   = require('slug');
+var slug   = require('slug').default;
 var colors = require('colors');
 var config = require('../config/repository');
 

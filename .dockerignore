@@ -4,3 +4,9 @@ temp
 tests
 credentials.coffee
 npm-debug.log
+app/public
+app/site/index.html
+app/site/holding.html
+app/site/login.html
+rev-manifest.json
+legacy

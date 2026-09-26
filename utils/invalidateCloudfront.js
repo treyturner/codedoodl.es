@@ -1,5 +1,5 @@
 // config is coffee....
-require('coffee-script/register');
+require('coffeescript/register');
 
 var AWS            = require('aws-sdk');
 var getCredentials = require ('./getCredentials');

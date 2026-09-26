@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // config is coffee....
-require('coffee-script/register');
+require('coffeescript/register');
 
 var fs                   = require('fs');
 var Hashids              = require('hashids');

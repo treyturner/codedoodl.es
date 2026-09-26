@@ -1,5 +1,5 @@
 // config is coffee....
-require('coffee-script/register');
+require('coffeescript/register');
 
 var request = require('request');
 var config  = require('../config/server');

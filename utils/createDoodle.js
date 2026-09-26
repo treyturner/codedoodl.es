@@ -2,7 +2,6 @@
 
 var fs              = require('fs');
 var mkdirp          = require('mkdirp');
-var slug            = require('slug');
 var figlet          = require('figlet');
 var colors          = require('colors');
 var manifestCreator = require('./manifestCreator.js');
@@ -71,7 +70,7 @@ function main() {
 
 }
 
-figlet('codedoodl.es', { font: 'digital' }, function(err, data) {
+figlet('codedoodl.es', { font: 'Digital' }, function(err, data) {
 
   if (err) {
     console.dir(err);

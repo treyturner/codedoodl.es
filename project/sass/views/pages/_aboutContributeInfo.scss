@@ -1,15 +1,19 @@
+@use "../../fonts";
+@use "../../globals";
+@use "../../utils/mixins";
+
 .page-about,
 .page-contribute,
 .subpage-info {
 	color: #fff;
-	background: $cd-black;
+	background: globals.$cd-black;
 
 	.page-content,
 	.subpage-content {
-		@include font-size(1.3);
+		@include mixins.font-size(1.3);
 		line-height: 1.5;
-		font-family: $ff-monosten-a;
-		width: $home-grid-width-3;
+		font-family: fonts.$ff-monosten-a;
+		width: globals.$home-grid-width-3;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -28,7 +32,7 @@
 					animation: link-blink 0.1s 1;
 					animation-timing-function: steps(1, end);
 					animation-fill-mode: forwards;
-					color: $cd-black;
+					color: globals.$cd-black;
 				}
 			}
 
@@ -51,11 +55,11 @@
 		}
 
 		.col-1 {
-			width: $home-grid-width-1;
+			width: globals.$home-grid-width-1;
 		}
 
 		.col-2 {
-			width: $home-grid-width-2 + $home-grid-gutter;
+			width: globals.$home-grid-width-2 + globals.$home-grid-gutter;
 			position: relative;
 
 			&:after {
@@ -95,7 +99,7 @@
 		// 	}
 		// }
 
-		@media #{$grid-two-bp-below} {
+		@media #{globals.$grid-two-bp-below} {
 			width: 100%;
 			max-height: 100%;
 			padding: 20px 65px 20px 70px;
@@ -134,7 +138,7 @@
 	.page-content {
 
 		a {
-			border-bottom: 2px solid $cd-blue;
+			border-bottom: 2px solid globals.$cd-blue;
 
 			.no-touch & {
 
@@ -162,7 +166,7 @@
 			margin-top: 6px;
 		}
 
-		@media #{$grid-two-bp-below} {
+		@media #{globals.$grid-two-bp-below} {
 			margin-top: 10px;
 		}
 	}
@@ -173,7 +177,7 @@
 	.page-content {
 
 		a {
-			border-bottom: 2px solid $cd-red;
+			border-bottom: 2px solid globals.$cd-red;
 
 			.no-touch & {
 
@@ -190,32 +194,32 @@
 @keyframes link-blink {
 	0%, 100% {
 		background: #fff;
-		color: $cd-black;
+		color: globals.$cd-black;
 	}
 	50% {
-		background: $cd-black;
+		background: globals.$cd-black;
 		color: #fff;
 	}
 }
 
 @keyframes link-blink-blue {
 	0%, 100% {
-		background: $cd-blue;
-		color: $cd-black;
+		background: globals.$cd-blue;
+		color: globals.$cd-black;
 	}
 	50% {
-		background: $cd-black;
-		color: $cd-blue;
+		background: globals.$cd-black;
+		color: globals.$cd-blue;
 	}
 }
 
 @keyframes link-blink-red {
 	0%, 100% {
-		background: $cd-red;
-		color: $cd-black;
+		background: globals.$cd-red;
+		color: globals.$cd-black;
 	}
 	50% {
-		background: $cd-black;
-		color: $cd-red;
+		background: globals.$cd-black;
+		color: globals.$cd-red;
 	}
 }
