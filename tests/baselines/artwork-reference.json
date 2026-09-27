@@ -1,0 +1,40 @@
+{
+  "recordedAt": "2026-09-27",
+  "applicationCommit": "3db726eee1bd1d5c5e4982a3c34dea6761773b30",
+  "assetsCommit": "9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a",
+  "originalImage": {
+    "localTag": "codedoodles:stage1-baseline-3db726e",
+    "dockerImageId": "sha256:0e8116859d1219afb57bf52c321750ea8bd566f00df34cce177d237de19c100c"
+  },
+  "runner": "mcr.microsoft.com/playwright:v1.62.0-noble@sha256:baed2032d533817f3dbe6425de795788430ba345e819a1201337009ba17c9d07",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "observations": 77,
+  "submittedCanvasOrWebGLDraws": 74,
+  "frameErrors": {
+    "brunoimbrizi/go-with-the-flow": [
+      "THREE is not defined"
+    ],
+    "williamapan/collapsar": [
+      "Cannot read properties of undefined (reading 'width')"
+    ],
+    "soulwire/muscular-hydrostats": [
+      "Sketch is not defined"
+    ]
+  },
+  "noObservedDraws": [
+    "brunoimbrizi/go-with-the-flow",
+    "gwenvanhee/codebrush",
+    "soulwire/muscular-hydrostats"
+  ],
+  "notes": [
+    "Private network deliberately blocks external CDNs, fonts, analytics and widgets; these failures are recorded, not treated as shell regressions.",
+    "Pointer movement/click and ArrowRight are delivered; drawing observations alone do not prove artistic correctness or every interaction.",
+    "Codebrush has no observed draw after this input sequence; manual interaction/rendering review is still required.",
+    "The original 77-case collection recorded all observations; Treee exceeded the initial 45-second screenshot budget. A focused rerun with a 90-second budget and viewport-rectangle capture passed with the same observation.",
+    "Generative Boids was rerun after limiting the visitor localStorage setup to the app origin, removing an error created by the test hook in an unavailable third-party frame.",
+    "Original-container recording runs end with SIGTERM exit 143 under the newer lifecycle test. The modernized container is separately required to exit 0."
+  ]
+}

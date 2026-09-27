@@ -59,6 +59,18 @@ Existing variables keep their meanings: `NODE_ENV`, `BIND_ADDRESS`, `BIND_PORT`,
 `DEV_PASSWORD`. Development's `DOODLES_ARCHIVE` option is described in
 [build.md](build.md).
 
+| Setting | Default | Self-hosted use |
+| --- | --- | --- |
+| `NODE_ENV` | Development outside the image; `production` in Docker | Use production for deployed instances. |
+| `BIND_ADDRESS` / `BIND_PORT` | `0.0.0.0` / `3000` | Container listener, independent of public URL. |
+| `BASE_URL` | Original codedoodl.es origin in production | Set explicitly to the app's public HTTPS origin. |
+| `DOODLES_URL` | Original source.codedoodl.es archive | Set explicitly to the separate gzip-aware archive origin. |
+| `DOODLE_DATA_SOURCE` | Unset (DEV master) | Set `production` for the published archive master. |
+| `GOOGLE_ANALYTICS_CODE` | Empty | Optional retained analytics identifier. |
+| `DEV_PASSWORD` | Disabled | Optional preview password gate, independent of `NODE_ENV`. |
+| `DOODLES_ARCHIVE` | Sibling archive when found | Development only; local same-origin artwork. |
+| `DEV_PORT` | `3002` | Development BrowserSync listener. |
+
 | Optional setting | Default | Purpose |
 | --- | --- | --- |
 | `DOODLE_CACHE_TIMEOUT_MS` | 300000 in production, 0 in development | Successful-cache TTL; nonnegative integer. |

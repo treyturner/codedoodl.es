@@ -1,0 +1,138 @@
+{
+  "recordedAt": "2026-09-27",
+  "applicationBaseCommit": "89ca6c01952e59bcdd13f90e3896f9b0ab6b4002",
+  "candidateSource": "Stage 6 working tree; left uncommitted for review",
+  "platform": "linux/amd64",
+  "assetsCommit": "9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a",
+  "candidateImage": {
+    "localTag": "codedoodles:stage6",
+    "dockerImageId": "sha256:0e1564f63484417ba9da2bc12a34200d3b331e0b8889ff91e7d9a26ba44bf547",
+    "imageConfigDigest": "sha256:efd8a9fb5574ec49955a5d471d57e15257a630076d12b70dfbf36a603125986b",
+    "nodeBase": "node:24.21.0-trixie-slim@sha256:8ec5d7557396cfe32d21c3f9c13072355ceab22b584578ca4bb28af31120cffe",
+    "command": [
+      "node",
+      "dist/app/start.cjs"
+    ]
+  },
+  "containerSuite": {
+    "passedUniqueCases": 158,
+    "skipped": 9,
+    "unresolvedFailures": 0,
+    "shell": {
+      "startTime": "2026-09-27T05:19:16.497Z",
+      "duration": 321237.795,
+      "expected": 81,
+      "skipped": 9,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "artwork": {
+      "available": 77,
+      "passed": 77,
+      "nativeDrawingObserved": 74,
+      "newFrameErrors": 0,
+      "newFailedRequests": 0,
+      "lostDrawing": 0,
+      "screenshots": 77,
+      "reference": "artwork-reference.json"
+    },
+    "screenshotReferencesChanged": false
+  },
+  "executionNotes": [
+    "Executed the complete suite as separate shell and artwork groups against the pinned archive.",
+    "The shell group tested an earlier build attestation of the same runtime. Its RootFS diff IDs, Config, architecture, OS and creation timestamp are identical to the final image; the final artwork group and final image scan use the recorded candidate ID.",
+    "The first artwork candidate group passed 33 cases; Smashing Mega Scene timed out waiting for locator screenshot stability. Replacing diagnostic capture with a viewport rectangle and allowing heavy artwork 90 seconds resolved it; the remaining group plus that rerun passed all 44 cases.",
+    "Original-image observations include 77 sketches. Treee needed a focused longer-budget screenshot rerun; a visitor setup hook was scoped to the app origin and Generative Boids was rerecorded to remove a harness-created third-party-frame error."
+  ],
+  "serverTests": {
+    "passed": 23,
+    "failed": 0
+  },
+  "localToolAndReleaseTests": {
+    "passed": 8,
+    "failed": 0
+  },
+  "buildChecks": "Passed deterministic clean builds, stale-output removal, compiler/error propagation, gzip/fonts/image bytes, watch recovery, forwarded-port dev serving and server restarts in Docker builder",
+  "lifecycle": "Candidate SIGTERM exit 0 and restart readiness passed in shell and final artwork runs",
+  "runtime": {
+    "node": "v24.21.0",
+    "uid": 1000,
+    "dependencies": {
+      "compression": "1.8.2",
+      "cors": "2.8.6",
+      "ejs": "6.0.1",
+      "express": "5.2.1",
+      "express-session": "1.19.0",
+      "hashids": "2.3.0",
+      "underscore": "1.13.8",
+      "winston": "3.19.0"
+    },
+    "absent": [
+      "coffeescript",
+      "coffeeify",
+      "browserify",
+      "gulp",
+      "sass",
+      "figlet",
+      "slug",
+      "request",
+      "aws-sdk",
+      "s3",
+      "mkdirp",
+      "colors",
+      "valid-url"
+    ],
+    "license": true
+  },
+  "audits": {
+    "runtime": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "build": {
+      "info": 0,
+      "low": 4,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 4
+    },
+    "tests": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "imageScan": {
+    "scanner": "Trivy 0.74.0",
+    "counts": {
+      "debian": {
+        "LOW": 56,
+        "HIGH": 43,
+        "MEDIUM": 53,
+        "UNKNOWN": 2
+      },
+      "node-pkg": {}
+    },
+    "unacceptedHighCritical": 0,
+    "acceptedHighPackageFindings": 43,
+    "distinctExceptedCVEs": 8,
+    "exceptionFile": "security/image-exceptions.json",
+    "exceptionsExpire": "2026-11-01"
+  },
+  "automation": "Weekly Dependabot npm/Docker/action updates; audit and image gates; unique candidate tags at both existing registries; master-only promotion preserves the validated registry digest",
+  "workflowValidation": "actionlint 1.7.12 and shell syntax passed; promotion mocked for read-only preflight, both-mirror checks, matching digest writes, invalid arguments, mismatches and feature-ref rejection",
+  "remainingReleaseGates": [
+    "Commit/review stage 6 and exercise remote CI; no push or registry publication was performed during local delivery.",
+    "Validate the immutable published candidate through the actual self-hosted TLS/proxy environment.",
+    "Review artistic correctness and real mobile Safari/Chrome gestures, orientation, GPU and media behavior; emulation is not real-device validation.",
+    "Promote the tested digest and retain the operator-confirmed previous production digest from reference.json; assets remain unchanged."
+  ]
+}

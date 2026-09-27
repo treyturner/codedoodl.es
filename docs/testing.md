@@ -8,6 +8,51 @@ process-lifecycle checks. The
 Playwright package in `tests/` keeps its own lockfile and pinned
 Playwright browser image, independent of the application's dependency tree.
 
+## Stage 6 validation (2026-09-27)
+
+Stage 5, including the preview-video and responsive-warning regressions, is
+committed as `89ca6c0`. Stage 6's local candidate is `codedoodles:stage6`; see
+[`stage6-validation.json`](../tests/baselines/stage6-validation.json) for its
+image/config identity, audit/test counts and execution qualifications.
+
+The complete container suite was exercised in separate shell and artwork groups:
+**158 unique cases pass and 9 platform-specific cases remain intentionally skipped**.
+This includes the previous 81 HTTP/browser cases and **77 artwork comparisons**.
+All five original shell screenshot references are unchanged. The candidate exits
+0 on SIGTERM and becomes ready after restart. Docker builder checks pass, along
+with 23 native server tests and eight local-tool/security/release tests.
+
+All 77 sketches were also observed in the original Node 10 image. Both images
+submitted Canvas/WebGL drawing commands for 74 sketches, with no loss of drawing,
+new frame exceptions or new failed asset requests in the candidate. Go With the
+Flow and Muscular Hydrostats depend on external scripts blocked by the private
+network; the input sequence did not establish Codebrush rendering, which
+remains a manual review item. Collapsar's existing width exception and missing Line audio are also
+recorded. These are preserved observations, not claims that every artwork is
+fully functional. Original records and collection caveats are in
+[`artwork-reference.json`](../tests/baselines/artwork-reference.json).
+
+Heavy Treee/Smashing Mega Scene screenshots initially exceeded the diagnostic
+capture budget. A 90-second artwork budget and direct viewport-rectangle capture
+avoid waiting for animated iframe layout to stabilize; the focused reruns pass.
+The local candidate gallery is at
+[`tests/artifacts/artwork/index.html`](../tests/artifacts/artwork/index.html).
+Raw reports and screenshots are ignored build artifacts, with compact validation
+and baseline records tracked in Git.
+
+Runtime and test npm audits have no findings. The build graph retains four low
+findings from one Browserify/Elliptic advisory; the browser graph test verifies
+those crypto shims are absent from the shipped bundle. The final image has no
+critical or Node package findings. Its 43 high OS package findings map to eight
+reviewed, version-scoped CVEs with no available Debian fix; exceptions expire
+2026-11-01. See [security.md](security.md) for the counts, rationale and gates.
+
+Weekly dependency checks and digest-preserving candidate promotion are prepared;
+actionlint and local release-policy tests pass. Remote CI, registry publication,
+actual host/proxy validation, real mobile Safari/Chrome review and production
+promotion remain the [release steps](release.md). No registry or production
+service was changed during this local delivery.
+
 ## Stage 5 validation
 
 Validated locally on Linux/amd64 on 2026-09-27 using `codedoodles:stage5`:
@@ -355,13 +400,38 @@ in the self-hosted environment before a future release.
 ## CI and publishing
 
 The workflow validates pushes to `master`, `feat/containerize`, and
-`feat/modernize`, plus PRs targeting those branches. It builds one candidate,
-runs the container suite, uploads diagnostics, then publishes that same image
-only when tests succeed and the ref is `master`.
+`feat/modernize`, plus PRs targeting those branches. Build, server, local-tool,
+three npm audit, runtime image scan, HTTP, browser and artwork gates run before
+candidate publication. Diagnostics are saved even on failure. Master pushes
+publish a uniquely tagged candidate; manual dispatch can publish a feature
+candidate when explicitly selected. Ordinary feature pushes and PRs do not publish.
 
-Feature branches and PRs never publish. Manual runs default to validation only;
-publishing must be selected explicitly and is still restricted to `master`.
-This also ends automatic production publishing from `feat/containerize`.
-Successful releases receive `sha-<commit>` and `latest` tags at both existing
-registries, so later rollback does not depend on remembering an overwritten tag.
-No AWS/S3/Elastic Beanstalk deployment tasks are invoked.
+A separate master-only promotion workflow verifies candidate digests at both
+registries and copies the tested manifest to `latest` after host/device validation.
+It never rebuilds. See [release.md](release.md) for the exact sequence and the
+operator-confirmed original rollback digest. No retired AWS tasks are invoked.
+
+## Full artwork observations
+
+The `artwork` Chromium project visits all 77 available sketches through the shell
+at a desktop viewport. It records frame exceptions and failed requests, observes
+native Canvas/WebGL draw calls, sends pointer/click/key input, and saves a
+screenshot and JSON observation per sketch in `tests/artifacts/artwork/`.
+`artwork/index.html` provides a local gallery with the recorded diagnostics.
+It rejects new errors/failed assets and loss of drawing against
+`baselines/artwork.json`, recorded with the original stage 1 image and the same
+pinned archive. Existing external-service/shader failures are visible in that
+record, not silently treated as successful rendering. The dedicated representative
+Canvas/WebGL tests continue to assert stronger animation/interaction behavior.
+
+Run just that project with `bash tests/run.sh --project=artwork`. Tests normally
+run it together with all shell/browser projects. `TEST_RESULTS_DIR` selects an
+alternate artifact directory for independent runs. Original observations can be
+collected locally with `ARTWORK_RECORD=1` and the original `CODEDOODLES_IMAGE`;
+this is forbidden in CI, writes only artifacts, and does not update the reviewed
+baseline automatically. Keep the source image ID and assets commit with any
+reviewed baseline change. Do not bless candidate observations as original behavior.
+
+Drawing commands and synthetic input do not establish visual/artistic correctness
+or every interaction. Review the screenshots and exercise actual mobile Safari/
+Chrome before promotion. Archive restoration remains separate from shell updates.

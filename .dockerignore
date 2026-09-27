@@ -4,6 +4,9 @@ dist
 temp
 tests/*
 !tests/server
+!tests/tools
+!tests/package.json
+!tests/package-lock.json
 credentials.coffee
 npm-debug.log
 app/public

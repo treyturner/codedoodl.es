@@ -4,6 +4,10 @@ set -euo pipefail
 repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_dir"
 source tests/assets.lock
+if [[ "${ARTWORK_RECORD:-0}" == 1 && -n "${CI:-}" ]]; then
+  echo 'Record original artwork observations locally; CI only compares them.' >&2
+  exit 1
+fi
 export BASELINE_UID="$(id -u)" BASELINE_GID="$(id -g)"
 export BASELINE_RUNNER_IMAGE="${BASELINE_RUNNER_IMAGE:-codedoodles-baseline-runner:local}"
 project="codedoodles-baseline-$(date +%s)-$$"
@@ -33,22 +37,25 @@ for argument in "$@"; do
   fi
 done
 
-mkdir -p tests/artifacts tests/baselines
+export TEST_RESULTS_DIR="${TEST_RESULTS_DIR:-$repo_dir/tests/artifacts}"
+mkdir -p "$TEST_RESULTS_DIR" tests/baselines
+TEST_RESULTS_DIR="$(cd "$TEST_RESULTS_DIR" && pwd)"
+export TEST_RESULTS_DIR
 if [[ -z "${CODEDOODLES_IMAGE:-}" ]]; then
   export CODEDOODLES_IMAGE="codedoodles:baseline-$project"
-  docker build --progress=plain -t "$CODEDOODLES_IMAGE" . 2>&1 | tee tests/artifacts/build.log
+  docker build --progress=plain -t "$CODEDOODLES_IMAGE" . 2>&1 | tee "$TEST_RESULTS_DIR"/build.log
 fi
-docker build --progress=plain -t "$BASELINE_RUNNER_IMAGE" tests 2>&1 | tee tests/artifacts/runner-build.log
-docker image inspect "$CODEDOODLES_IMAGE" --format '{{json .}}' > tests/artifacts/image.json
-git rev-parse HEAD > tests/artifacts/application-commit.txt
-git -C "$DOODLES_ARCHIVE" rev-parse HEAD > tests/artifacts/assets-commit.txt
+docker build --progress=plain -t "$BASELINE_RUNNER_IMAGE" tests 2>&1 | tee "$TEST_RESULTS_DIR"/runner-build.log
+docker image inspect "$CODEDOODLES_IMAGE" --format '{{json .}}' > "$TEST_RESULTS_DIR"/image.json
+git rev-parse HEAD > "$TEST_RESULTS_DIR"/application-commit.txt
+git -C "$DOODLES_ARCHIVE" rev-parse HEAD > "$TEST_RESULTS_DIR"/assets-commit.txt
 
 compose=(docker compose -p "$project" -f tests/compose.yml)
 cleanup() {
   result=$?
   trap - EXIT
-  "${compose[@]}" logs --no-color > tests/artifacts/containers.log 2>&1 || true
-  "${compose[@]}" down --timeout 5 --remove-orphans > tests/artifacts/cleanup.log 2>&1 || true
+  "${compose[@]}" logs --no-color > "$TEST_RESULTS_DIR"/containers.log 2>&1 || true
+  "${compose[@]}" down --timeout 5 --remove-orphans > "$TEST_RESULTS_DIR"/cleanup.log 2>&1 || true
   exit "$result"
 }
 trap cleanup EXIT
@@ -62,13 +69,13 @@ trap 'exit 143' TERM
 "${compose[@]}" run --rm --no-deps runner npm test -- "$@"
 
 # Verify the actual container entrypoint receives SIGTERM and restarts ready.
-"${compose[@]}" stop --timeout 8 app > tests/artifacts/lifecycle.log 2>&1
+"${compose[@]}" stop --timeout 8 app > "$TEST_RESULTS_DIR"/lifecycle.log 2>&1
 app_container="$("${compose[@]}" ps -a -q app)"
 exit_code="$(docker inspect --format '{{.State.ExitCode}}' "$app_container")"
 if [[ "$exit_code" != 0 ]]; then
   echo "Application did not stop cleanly (exit $exit_code)." >&2
   exit 1
 fi
-"${compose[@]}" start app >> tests/artifacts/lifecycle.log 2>&1
-"${compose[@]}" run --rm --no-deps runner node support/wait.mjs http://site.test:3000/health >> tests/artifacts/lifecycle.log 2>&1
-echo 'PASS: container SIGTERM exit 0 and restart readiness' | tee -a tests/artifacts/lifecycle.log
+"${compose[@]}" start app >> "$TEST_RESULTS_DIR"/lifecycle.log 2>&1
+"${compose[@]}" run --rm --no-deps runner node support/wait.mjs http://site.test:3000/health >> "$TEST_RESULTS_DIR"/lifecycle.log 2>&1
+echo 'PASS: container SIGTERM exit 0 and restart readiness' | tee -a "$TEST_RESULTS_DIR"/lifecycle.log

@@ -1,0 +1,57 @@
+name: Promote tested codedoodles candidate
+on:
+  workflow_dispatch:
+    inputs:
+      candidate:
+        description: Candidate tag from a successful build (candidate-COMMIT-RUN-ATTEMPT)
+        required: true
+        type: string
+      digest:
+        description: Immutable sha256 digest validated on the self-hosted instance
+        required: true
+        type: string
+      host_validated:
+        description: Confirm self-hosted checks and real mobile Safari/Chrome review passed for this digest
+        required: true
+        type: boolean
+        default: false
+concurrency:
+  group: codedoodles-production-promotion
+  cancel-in-progress: false
+jobs:
+  promote:
+    if: github.ref == 'refs/heads/master' && inputs.host_validated
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Require the candidate source to be included in master
+        env:
+          CANDIDATE: ${{ inputs.candidate }}
+        shell: bash
+        run: |
+          [[ "$CANDIDATE" =~ ^candidate-([a-f0-9]{40})-[0-9]+-[0-9]+$ ]] || exit 1
+          git merge-base --is-ancestor "${BASH_REMATCH[1]}" HEAD
+      - uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
+      - uses: docker/login-action@c144859092e8e353f3e118b0b329679a62351c3e # v4.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+      - uses: docker/login-action@c144859092e8e353f3e118b0b329679a62351c3e # v4.0.0
+        with:
+          registry: forgejo.treyturner.info
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.FORGEJO_REGISTRY_TOKEN }}
+      - name: Promote exactly the tested digest to both registries
+        env:
+          OWNER: ${{ github.repository_owner }}
+          CANDIDATE: ${{ inputs.candidate }}
+          DIGEST: ${{ inputs.digest }}
+        run: bash scripts/promote-image.sh "${OWNER,,}" "$CANDIDATE" "$DIGEST" --apply

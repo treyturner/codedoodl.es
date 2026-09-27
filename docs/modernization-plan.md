@@ -6,8 +6,8 @@ and build migration is committed as `a3c6c07`. Stage 3's server migration is
 committed as `0b014f4`; see [the server guide](server.md). Stage 4 is committed as `01c5fb0` with
 CoffeeScript 2.7.0 and a compiled runtime; see [the compiler guide](coffeescript.md). See [the testing guide](testing.md) for the
 baseline and [the build guide](build.md) for the current toolchain and deliberate
-dependency checkpoints. Stage 5 updates the browser libraries and native scrolling; see [the browser
-guide](browser.md) for the DeepModel exception. Stage 6 remains to be implemented.
+dependency checkpoints. Stage 5 is committed as `89ca6c0` and updates the browser libraries, native scrolling and responsive preview fallback; see [the browser
+guide](browser.md) for the DeepModel exception. Stage 6 implements local-tool reduction, audit/update gates and candidate promotion. See [security.md](security.md) and [release.md](release.md); actual registry publication, host validation and promotion remain release operations.
 
 ## Objective and scope
 

@@ -3,6 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './specs',
   globalSetup: './support/setup.mjs',
+  globalTeardown: './support/artwork-report.mjs',
   timeout: 45000,
   expect: { timeout: 15000, toHaveScreenshot: { maxDiffPixelRatio: 0.005 } },
   fullyParallel: false,
@@ -22,6 +23,7 @@ export default defineConfig({
     colorScheme: 'light',
   },
   projects: [
+    { name: 'artwork', testMatch: /artwork\.spec\.mjs/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
     { name: 'contracts', testMatch: /contracts\.spec\.mjs/ },
     { name: 'chromium', testMatch: /(?:browser|libraries|webgl)\.spec\.mjs/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
     { name: 'firefox', testMatch: /(?:browser|libraries)\.spec\.mjs/, use: { ...devices['Desktop Firefox'], viewport: { width: 1440, height: 900 } } },

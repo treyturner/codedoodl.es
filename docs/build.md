@@ -89,15 +89,15 @@ for conditional requests, cache headers and the unchanged archive boundary.
 ## Container and verification
 
 ```bash
-docker build -t codedoodles:stage5 .
-CODEDOODLES_IMAGE=codedoodles:stage5 bash tests/run.sh
+docker build -t codedoodles:stage6 .
+CODEDOODLES_IMAGE=codedoodles:stage6 bash tests/run.sh
 ```
 
-The multi-stage Dockerfile pins the official Node 24 Bookworm image by digest,
+The multi-stage Dockerfile pins the official Node 24 Trixie image by digest,
 includes system CA certificates, runs `npm ci`, builds, and exercises build
-and server checks. A separate dependency stage runs `npm ci --omit=dev`; only its
+and server/local-tool checks. A separate dependency stage runs `npm ci --omit=dev`; only its
 runtime dependencies and compiled application enter the final image. CoffeeScript
-and Coffeeify are absent from the runtime. The container runs
+and Coffeeify are absent from the runtime, as are npm, npx, Yarn and Corepack. The container runs
 as the existing `node` user. Python 2, NVM, Pyenv, Node Sass, Gulp 3, and the
 Docker font-copy workaround have been removed.
 
@@ -114,21 +114,28 @@ these checks under Node 24.
 The HTTP/browser suite checks the resulting production-only image against the
 original screenshot references; see [testing.md](testing.md).
 
-## Remaining dependency checkpoints
+## Local authoring and maintenance
 
-CoffeeScript is now 2.7.0 and build-only. Stage 3 uses Express 5 and current
-server libraries; Request and the old Winston dependency tree are gone.
-Stage 5 updates the shared browser libraries and native scrolling; its sole
-frozen browser dependency is documented in [browser.md](browser.md). Local
-helper/dependency reduction and release validation remain stage 6. See [server.md](server.md) and
-[coffeescript.md](coffeescript.md) for the current runtime behavior.
+`npm run doodle:create` asks for metadata, validates answers and writes a plain
+`index.html` plus `manifest.json` under `doodles/author/name`. Run it from the
+repository root. It refuses to overwrite an existing directory; incomplete input
+or write errors exit nonzero. Native filesystem/readline/URL APIs replace the
+old Mkdirp, Colors and Valid-URL helpers. Figlet and Slug remain pinned inputs.
 
-`npm run doodle:create` and `npm run doodle:preview -- doodles/author/name` retain
-local authoring and preview tools. Figlet and Slug have been updated, and all
-CoffeeScript registration paths use the renamed compiler package. Remaining
-local helper reduction is stage 6. Retired AWS tasks and their historical
-dependency declarations are preserved under [`legacy/`](../legacy/README.md),
-outside normal installation and the active Gulp task graph.
+`npm run doodle:preview -- doodles/author/name` serves one sketch, including
+precompressed archive entries, at http://127.0.0.1:3001. `BIND_ADDRESS` and
+`BIND_PORT` override the listener. Type `exit`, Ctrl+C or send SIGTERM to stop;
+source files remain intact. An explicit `0.0.0.0` bind enables LAN testing.
+
+`npm run test:tools` checks creation, overwrite protection, invalid input,
+preview transport/shutdown, security policy and digest-preserving promotion.
+`npm run audit:dependencies` writes separate runtime/build/test reports.
+See [security.md](security.md) for the remaining low Browserify advisory,
+OS package exceptions and update automation; see [release.md](release.md) for
+candidate publication and rollback. Retired AWS tools and historical dependency
+declarations remain under [`legacy/`](../legacy/README.md), outside normal
+installation and the active Gulp task graph. Archive clone/ZIP tools are retired;
+they are not silently reactivated by installing replacement packages.
 
 Sources: [Gulp binary input behavior](https://gulpjs.com/docs/en/api/src/),
 [Sass module migration](https://sass-lang.com/documentation/breaking-changes/import/),

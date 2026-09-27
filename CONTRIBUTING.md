@@ -26,3 +26,8 @@ Run `npm run test:build` for build/watch checks, or `npm test` (equivalently
 `bash tests/run.sh`) for the container and browser suite. The container suite
 needs Bash, Git and Docker; it does not need host application dependencies.
 See [the testing guide](docs/testing.md) for the pinned archive and diagnostics.
+
+Run `npm run test:server` and `npm run test:tools` for focused server/local-tool
+checks. Before release, follow [the audit policy](docs/security.md) and
+[the candidate release guide](docs/release.md). Keep dependency updates separate
+from artwork restoration and review pinned action changes independently.
