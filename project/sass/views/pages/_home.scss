@@ -6,10 +6,13 @@
 
 .page-home {
 	background: globals.$bg-offwhite;
-	overflow: hidden;
-	// position: relative;
+	overflow-x: hidden;
+	overflow-y: auto;
+	overscroll-behavior-y: contain;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, .35) transparent;
 
-	&.scroller-disabled {
+	&.grid-effects-disabled {
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 
@@ -35,7 +38,7 @@
 	padding: globals.$site-padding-desktop 0 100px;
 	width: 90%;
 
-	.scroller-disabled & {
+	.grid-effects-disabled & {
 		padding-bottom: 50px;
 	}
 
@@ -125,7 +128,7 @@
 		opacity: 1;
 	}
 
-	.no-touch .enable-grid-item-hover & {
+	.can-hover .enable-grid-item-hover & {
 
 		&:hover,
 		&.hovered {
@@ -347,7 +350,7 @@
 	position: fixed;
 	bottom: 20px;
 
-	.scroller-disabled & {
+	.grid-effects-disabled & {
 		@include mixins.font-size(1);
 
 		position: relative;

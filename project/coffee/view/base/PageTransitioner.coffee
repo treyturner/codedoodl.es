@@ -83,7 +83,8 @@ class PageTransitioner extends AbstractView
 
     resetPanes : ->
 
-        @$panes.attr 'style': ''
+        gsap.killTweensOf @$panes.add(@$labelPane)
+        gsap.set @$panes.add(@$labelPane), { clearProps: 'all' }
 
         null
 
@@ -167,7 +168,7 @@ class PageTransitioner extends AbstractView
 
     applyConfig : (config, toArea=null) ->
 
-        @$panes.css config
+        gsap.set @$panes, Object.assign({}, config)
 
         classChange = if toArea is @CD().nav.sections.DOODLES then 'addClass' else 'removeClass'
         @$el[classChange] 'show-dots'
@@ -176,7 +177,7 @@ class PageTransitioner extends AbstractView
 
     applyLabelConfig : (transformValue) ->
 
-        @$labelPane.css 'transform' : transformValue
+        gsap.set @$labelPane, { transform: transformValue }
 
         null
 
@@ -196,7 +197,7 @@ class PageTransitioner extends AbstractView
 
         @show()
 
-        commonParams = transform : 'none', ease : Expo.easeOut, force3D: true
+        commonParams = transform : 'none', ease : 'expo.out', force3D: true
 
         @$panes.each (i, el) =>
             params = _.extend {}, commonParams,
@@ -205,16 +206,16 @@ class PageTransitioner extends AbstractView
                 @applyConfig @activeConfig.end
                 cb?()
 
-            TweenLite.to $(el), @TRANSITION_TIME, params
+            gsap.to el, Object.assign({ duration: @TRANSITION_TIME }, params)
 
         labelParams = _.extend {}, commonParams, delay : 0.1
-        TweenLite.to @$labelPane, @TRANSITION_TIME, labelParams
+        gsap.to @$labelPane, Object.assign({ duration: @TRANSITION_TIME }, labelParams)
 
         null
 
     out : (cb) ->
 
-        commonParams = ease : Expo.easeOut, force3D: true, clearProps: 'all'
+        commonParams = ease : 'expo.out', force3D: true, clearProps: 'all'
 
         @$panes.each (i, el) =>
             params = _.extend {}, commonParams,            
@@ -226,10 +227,10 @@ class PageTransitioner extends AbstractView
                 @trigger @EVENT_TRANSITIONER_OUT_DONE
                 console.log "@trigger @EVENT_TRANSITIONER_OUT_DONE"
 
-            TweenLite.to $(el), @TRANSITION_TIME, params
+            gsap.to el, Object.assign({ duration: @TRANSITION_TIME }, params)
 
         labelParams = _.extend {}, commonParams, transform : @activeConfig.start.transform
-        TweenLite.to @$labelPane, @TRANSITION_TIME, labelParams
+        gsap.to @$labelPane, Object.assign({ duration: @TRANSITION_TIME }, labelParams)
 
         null
 

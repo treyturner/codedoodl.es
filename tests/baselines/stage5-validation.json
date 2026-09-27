@@ -1,0 +1,128 @@
+{
+  "recordedAt": "2026-09-27",
+  "platform": "linux/amd64",
+  "applicationBaseCommit": "01c5fb0810db32db784d42bebaf3537aa8dda3d0",
+  "candidateSource": "Working tree with stage 5 changes; not yet committed",
+  "assetsCommit": "9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a",
+  "candidateImage": {
+    "localTag": "codedoodles:stage5",
+    "dockerImageId": "sha256:c8797a5e38615006157454b12deb484ff47cf873dfea9bd93c30adfbf22b6035",
+    "command": [
+      "node",
+      "dist/app/start.cjs"
+    ]
+  },
+  "candidateRun": {
+    "startedAt": "2026-09-27T03:33:32.439Z",
+    "passed": 81,
+    "skipped": 9,
+    "unexpected": 0,
+    "flaky": 0,
+    "screenshotReferencesChanged": false
+  },
+  "browserVersions": {
+    "jquery": "4.0.0",
+    "underscore": "1.13.8",
+    "backbone": "1.6.1",
+    "gsap": "3.15.0"
+  },
+  "domCheckpoints": [
+    {
+      "jquery": "3.7.1",
+      "migrate": "3.6.0",
+      "passed": 45,
+      "skipped": 5,
+      "unexpected": 0,
+      "migrateWarnings": 0,
+      "screenshotReferencesChanged": false,
+      "imageId": "sha256:5608ea6e835ed640f4f1aa53bb4ce8a68d570ee0f49a8c0feb817241ae9ca72d"
+    },
+    {
+      "jquery": "4.0.0",
+      "migrate": "4.0.2",
+      "passed": 45,
+      "skipped": 5,
+      "unexpected": 0,
+      "migrateWarnings": 0,
+      "screenshotReferencesChanged": false,
+      "imageId": "sha256:0679f5c74766d5de4cd609f4d5ccb316833c5938c57bb012d7efcab33e13bc8e"
+    }
+  ],
+  "checkpointMethod": "Temporary images overlay compiled app/assets on the verified stage 4 runtime; final candidate is a full clean Docker build with npm ci and builder checks.",
+  "serverTests": {
+    "passed": 23,
+    "failed": 0
+  },
+  "runtime": {
+    "uid": 1000,
+    "node": "v24.21.0",
+    "dependencies": {
+      "compression": "1.8.2",
+      "cors": "2.8.6",
+      "ejs": "6.0.1",
+      "express": "5.2.1",
+      "express-session": "1.19.0",
+      "hashids": "2.3.0",
+      "underscore": "1.13.8",
+      "winston": "3.19.0"
+    },
+    "browserModules": [],
+    "license": true
+  },
+  "additionalChecks": [
+    "Original screenshot references match in Chromium, Firefox, WebKit and both mobile projects",
+    "Build fails on invalid browser vendor JavaScript; deterministic assets, license notices, gzip, fonts, compiled code and watcher/server restart checks pass",
+    "Full Ajax/Deferreds, exact browser versions, native feature detection and absence of Migrate/Modernizr/iScroll/script loader verified in all browser projects",
+    "Nested model defaults, array paths, clone isolation, previous values, parent/wildcard events and silent collection ID reindexing pass",
+    "Native grid wheel/keyboard scrolling, offset restoration, credits, resize, animated return and cancellation before the first tween frame pass",
+    "Native info overflow and resizing, actual source/share links and retained modal fixture animation/cleanup pass",
+    "Real hover previews advance in all desktop projects; rapid hover/pause reports no unhandled error",
+    "Chromium mobile CDP touch swipe scrolls the native grid",
+    "Held info-button clicks span the focus timer and moving labels; pointer capture preserves stationary presses, drag-away cancels, and closing info restores artwork focus",
+    "Container SIGTERM exits 0 and restart becomes ready",
+    "Development serves stage 5 at port 3002 with the same-origin artwork archive",
+    "Preview warning links open a decoded video in a new tab; protocol-relative same-origin archive URLs also work as native same-tab navigation",
+    "All five browser projects switch repeatedly across 749/750 pixels, retain the warning after pending callbacks, and restore fallback after history navigation",
+    "Mobile-friendly sketches retain their running iframe across the optimization threshold; other sketches retain it when resizing within the supported range"
+  ],
+  "frozenBrowserDependency": {
+    "name": "Backbone.DeepModel",
+    "baseVersion": "0.11.0",
+    "path": "project/vendor/backbone-deep-model.js",
+    "changes": [
+      "preinitialize/cidPrefix",
+      "Backbone 1.6 changeId event after attribute updates"
+    ],
+    "reason": "npm 0.11.0 ships an older distribution missing behavior in this checkout; retain local compatibility fork pending replacement of the nested-data contract.",
+    "owner": "Application shell maintainers",
+    "replacementTask": "docs/browser.md#frozen-dependency-exception-deepmodel"
+  },
+  "limits": [
+    "Frozen DeepModel fork remains explicitly documented; local helper reduction and release dependency audit remain stage 6",
+    "Orientation-modal animation uses a fixture template because that retained primitive has no live template or route",
+    "Mobile emulation/CDP are not real-device Safari/Chrome validation; complete visual review of every artwork remains a release gate",
+    "Remote CI, registry publishing, deployment and production TLS/proxy behavior were not exercised",
+    "Development still includes the known unarchived Fury Ribbons manifest"
+  ],
+  "previewRegressionValidation": {
+    "negativeControlImageId": "sha256:82285482aef4c28dea6e531126480cee5be89aa7ef3dfbc3efb2c916bb6781b2",
+    "negativeControlFailures": [
+      "Protocol-relative local preview link did not open its video",
+      "Narrowing from 750 to 749 pixels did not show the warning"
+    ],
+    "focusedRun": {
+      "startTime": "2026-09-27T03:31:27.199Z",
+      "duration": 81263.93000000001,
+      "expected": 17,
+      "skipped": 3,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "breakpointCssPixels": 750,
+    "manifestOverride": "mobile_friendly: true",
+    "developmentChecks": [
+      "Actual same-origin video popup decodes",
+      "Widening starts the Canvas sketch; narrowing unloads it and keeps the preview link intact"
+    ]
+  }
+}

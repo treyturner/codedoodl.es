@@ -25,7 +25,7 @@
 			padding-bottom: 1px;
 			border-bottom: 2px solid rgba(255, 255, 255, 0.26);
 
-			.no-touch & {
+			.can-hover & {
 
 				&:hover {
 					border-width: 0;
@@ -140,7 +140,7 @@
 		a {
 			border-bottom: 2px solid globals.$cd-blue;
 
-			.no-touch & {
+			.can-hover & {
 
 				&:hover {
 					animation: link-blink-blue 0.1s 1;
@@ -179,7 +179,7 @@
 		a {
 			border-bottom: 2px solid globals.$cd-red;
 
-			.no-touch & {
+			.can-hover & {
 
 				&:hover {
 					animation: link-blink-red 0.1s 1;

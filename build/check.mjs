@@ -68,6 +68,11 @@ try {
   const compiled = await digestTree(join(work, 'dist'));
   assert.ok(!Object.keys(compiled).some(path => path.endsWith('.coffee')), 'Runtime contains only compiled code');
   assert.ok(compiled['app/main.js'] && compiled['config/server.js']);
+  const license = await readFile(join(work, 'app/public/static/licenses/browser.txt'), 'utf8');
+  for (const name of ['jQuery', 'Underscore', 'Backbone', 'GSAP 3.15.0', 'Charles Davison']) {
+    assert.ok(license.includes(name), `Retain browser license notice: ${name}`);
+  }
+  assert.ok((await decoded('js/vendor/v.js')).includes('@license Copyright 2008-2026, GreenSock'));
   const names = await manifest();
   assert.ok(Object.keys(names).length >= 7);
   for (const [logical, revised] of Object.entries(names)) {
@@ -109,6 +114,7 @@ try {
     ['project/coffee/data/UserData.coffee', '\ninvalid = -> ('],
     ['app/health/routes.coffee', '\ninvalid = -> ('],
     ['config/server.coffee', '\ninvalid = -> ('],
+    ['project/browser/features.js', '\ninvalid = ('],
     ['project/sass/main.scss', '\n.broken { color: ;'],
     ['project/data/tracking.json', '{invalid'],
     ['project/html/index.html', '\n{{ js/nonexistent.js }}'],

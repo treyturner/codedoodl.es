@@ -162,11 +162,11 @@ class Preloader extends AbstractView
 
 	animateBgOut : (cb) ->
 
-		TweenLite.to @$bg1, 0.5, { delay : 0.2, width : "100%", ease : Expo.easeOut }
-		TweenLite.to @$bg1, 0.6, { delay : 0.7, height : "100%", ease : Expo.easeOut }
+		gsap.to @$bg1, { duration: 0.5, delay : 0.2, width : "100%", ease : 'expo.out' }
+		gsap.to @$bg1, { duration: 0.6, delay : 0.7, height : "100%", ease : 'expo.out' }
 
-		TweenLite.to @$bg2, 0.4, { delay : 0.4, width : "100%", ease : Expo.easeOut }
-		TweenLite.to @$bg2, 0.5, { delay : 0.8, height : "100%", ease : Expo.easeOut, onComplete : cb }
+		gsap.to @$bg2, { duration: 0.4, delay : 0.4, width : "100%", ease : 'expo.out' }
+		gsap.to @$bg2, { duration: 0.5, delay : 0.8, height : "100%", ease : 'expo.out', onComplete : cb }
 
 		setTimeout =>
 			CodeWordTransitioner.to '            ', @$codeWord, '', false

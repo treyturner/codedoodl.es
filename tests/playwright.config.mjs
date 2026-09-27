@@ -23,10 +23,10 @@ export default defineConfig({
   },
   projects: [
     { name: 'contracts', testMatch: /contracts\.spec\.mjs/ },
-    { name: 'chromium', testMatch: /(?:browser|webgl)\.spec\.mjs/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-    { name: 'firefox', testMatch: /browser\.spec\.mjs/, use: { ...devices['Desktop Firefox'], viewport: { width: 1440, height: 900 } } },
-    { name: 'webkit', testMatch: /browser\.spec\.mjs/, use: { ...devices['Desktop Safari'], viewport: { width: 1440, height: 900 } } },
-    { name: 'mobile-chromium', testMatch: /browser\.spec\.mjs/, use: { ...devices['Pixel 7'] } },
-    { name: 'mobile-webkit', testMatch: /browser\.spec\.mjs/, use: { ...devices['iPhone 13'] } },
+    { name: 'chromium', testMatch: /(?:browser|libraries|webgl)\.spec\.mjs/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
+    { name: 'firefox', testMatch: /(?:browser|libraries)\.spec\.mjs/, use: { ...devices['Desktop Firefox'], viewport: { width: 1440, height: 900 } } },
+    { name: 'webkit', testMatch: /(?:browser|libraries)\.spec\.mjs/, use: { ...devices['Desktop Safari'], viewport: { width: 1440, height: 900 } } },
+    { name: 'mobile-chromium', testMatch: /(?:browser|libraries)\.spec\.mjs/, use: { ...devices['Pixel 7'] } },
+    { name: 'mobile-webkit', testMatch: /(?:browser|libraries)\.spec\.mjs/, use: { ...devices['iPhone 13'] } },
   ],
 });

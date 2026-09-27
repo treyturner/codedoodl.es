@@ -2,12 +2,59 @@
 
 Stage 1 captured the Node 10 application as a regression reference. The current
 suite validates the [Node 24 build](build.md) and [Express 5 server](server.md),
-and [compiled CoffeeScript 2 runtime](coffeescript.md), with additional
-build/watch, data-loading and process-lifecycle checks. The
+[compiled CoffeeScript 2 runtime](coffeescript.md), and [browser libraries and
+native scrolling](browser.md), with additional build/watch, data-loading and
+process-lifecycle checks. The
 Playwright package in `tests/` keeps its own lockfile and pinned
 Playwright browser image, independent of the application's dependency tree.
 
-## Stage 4 validation
+## Stage 5 validation
+
+Validated locally on Linux/amd64 on 2026-09-27 using `codedoodles:stage5`:
+**81 passed, 9 device-specific skips, no failures, and no retries**. All five
+browser projects match the unchanged stage 1 screenshot references. The existing
+route, API, session, archive, Canvas/WebGL and navigation contracts still pass.
+
+The jQuery 3.7.1/Migrate 3.6.0 and jQuery 4.0.0/Migrate 4.0.2 checkpoints each
+passed **45 checks with 5 skips**, without Migrate warnings or screenshot changes.
+The final bundle removes Migrate and uses jQuery 4.0.0, Underscore 1.13.8,
+Backbone 1.6.1 and GSAP 3.15.0. The local DeepModel compatibility fork remains
+the [documented dependency exception](browser.md#frozen-dependency-exception-deepmodel).
+
+New checks cover full Ajax/Deferreds, nested model behavior, native grid and info
+scrolling, keyboard and touch input, scroll restoration and cancellation, resizing,
+credits, preview playback and rapid hover changes, GSAP transitions and retained
+modal primitives. Held info-button presses exercise delayed artwork focus and
+moving header labels; pointer capture preserves stationary clicks while dragging
+away still cancels them. Closing info restores artwork focus. The modal check uses
+a fixture template because that retained primitive has no live template or route.
+
+The mobile fallback check now clicks through to the video and requires decoded
+video dimensions. Additional regressions cover protocol-relative local archive
+links with and without a new-tab target, repeated resizing across 749/750 pixels,
+warning persistence after delayed callbacks, refresh while in fallback, history
+navigation, and unchanged running frames within one mode or for mobile-friendly
+sketches. Both new regressions fail against the previous stage 5 image, confirming
+they detect the reported routing and resize bugs. The actual development server
+also passed video click-through and widening/narrowing checks with local artwork.
+
+The full Docker build passed all **23 native server tests**, deterministic output,
+license notices, gzip/font/image checks, invalid source rejection, watch recovery,
+forwarded development URLs, local artwork delivery, and compiled-server restart
+checks. The runtime has eight direct dependencies, starts generated JavaScript as
+UID 1000, and excludes installed jQuery, Backbone, GSAP, build tools and the
+CoffeeScript compiler; browser code is served from the compiled bundles.
+Container SIGTERM exit 0 and restart readiness both passed.
+
+See [`tests/baselines/stage5-validation.json`](../tests/baselines/stage5-validation.json)
+for the exact image identities, checkpoint results and runtime record, and
+[browser.md](browser.md) for the implementation and remaining dependency exception.
+The development preview serves stage 5 with the local artwork archive. The assets
+checkout and reference screenshots are unchanged. Real-device Safari/Chrome,
+complete visual review of every artwork, production TLS/proxy validation, remote
+CI, registry publishing and deployment remain release checks.
+
+## Stage 4 validation (historical)
 
 Validated locally on Linux/amd64 on 2026-09-26 using `codedoodles:stage4`:
 **40 passed, 5 device-specific skips, no expected or unexpected failures, and

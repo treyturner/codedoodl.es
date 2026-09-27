@@ -41,15 +41,26 @@ export async function scripts() {
       .transform(coffeeify)
       .bundle((error, buffer) => error ? reject(error) : resolve(buffer.toString()));
   });
-  const result = await minify(bundle, { format: { comments: /^!/ } });
+  const result = await minify(bundle, { format: { comments: /^!|@license|Copyright/ } });
   await output(`${publicDir}/js/main.js`, result.code);
 }
 
 export async function vendor() {
-  // Object insertion order is the legacy execution order. Glob ordering is not.
-  const sources = await Promise.all(Object.values(pkg.vendor).map(name => readFile(`${pkg.folders.vendor}/${name}`, 'utf8')));
-  const result = await minify(sources.join('\n;\n'), { format: { comments: /^!/ } });
+  // Explicit distribution paths preserve browser globals and dependency order.
+  const sources = await Promise.all(Object.values(pkg.vendor).map(name => readFile(name, 'utf8')));
+  const result = await minify(sources.join('\n;\n'), { format: { comments: /^!|@license|Copyright/ } });
   await output(`${publicDir}/js/vendor/v.js`, result.code);
+  const licenses = await Promise.all([
+    ['jQuery', 'node_modules/jquery/LICENSE.txt'],
+    ['Underscore', 'node_modules/underscore/LICENSE'],
+    ['Backbone', 'node_modules/backbone/LICENSE'],
+    ['Backbone.DeepModel (local compatibility fork)', 'project/vendor/LICENSE.deep-model.txt'],
+  ].map(async ([name, path]) => `${name}\n${await readFile(path, 'utf8')}`));
+  const gsapSource = sources[Object.keys(pkg.vendor).indexOf('gsap')];
+  licenses.push(...[...gsapSource.matchAll(/\/\*[\s\S]*?\*\//g)]
+    .map(match => match[0]).filter(comment => comment.includes('@license')));
+  await output(`${publicDir}/static/licenses/browser.txt`, licenses.join('\n\n'));
+
 }
 
 export async function styles() {

@@ -11,10 +11,10 @@ class DoodlePageView extends AbstractViewPage
 	colourScheme : null
 	refreshTimer : null
 
-	infoScroller : null
 
 	MIN_PADDING_TOP    : 230
 	MIN_PADDING_BOTTOM : 85
+	MIN_DOODLE_WIDTH   : 750
 
 	initialize : ->
 
@@ -42,6 +42,12 @@ class DoodlePageView extends AbstractViewPage
 
 	setListeners : (setting) ->
 
+		if setting is 'off'
+			@contentReady = false
+			@stopFrame()
+			@CD().appView.off @CD().appView.EVENT_PRELOADER_HIDE, @showInitialContent
+			@CD().appView.transitioner.off @CD().appView.transitioner.EVENT_TRANSITIONER_OUT_DONE, @showContent
+
 		@CD().appView[setting] @CD().appView.EVENT_UPDATE_DIMENSIONS, @onResize
 
 		@CD().appView.header[setting] @CD().appView.header.EVENT_DOODLE_INFO_OPEN, @onInfoOpen
@@ -58,6 +64,7 @@ class DoodlePageView extends AbstractViewPage
 	onResize : ->
 
 		@setupInfoDims()
+		@updateDoodleMode()
 
 		null
 
@@ -66,23 +73,51 @@ class DoodlePageView extends AbstractViewPage
 		@model = @getDoodle()
 		@model.set "viewed", true
 
-		canShowDoodle = @CD().appView.dims.w >= 750 or @model.get('mobile_friendly')
+		@contentReady = false
+		@canShowDoodle = @supportsViewport()
 
 		@setupUI()
-		if canShowDoodle
-			@setupInstructions()
+		@setupInstructions()
+		@setupMobileFallback() unless @canShowDoodle
+
+		super(arguments...)
+
+		if @CD().nav.changeViewCount is 1
+			@CD().appView.once @CD().appView.EVENT_PRELOADER_HIDE, @showInitialContent
+		else
+			@CD().appView.transitioner.once @CD().appView.transitioner.EVENT_TRANSITIONER_OUT_DONE, @showContent
+
+		null
+
+	supportsViewport : ->
+
+		@CD().appView.dims.w >= @MIN_DOODLE_WIDTH or !!@model.get('mobile_friendly')
+
+	updateDoodleMode : ->
+
+		return unless @_shown and @model
+		canShowDoodle = @supportsViewport()
+		return if canShowDoodle is @canShowDoodle
+
+		@stopFrame()
+		@canShowDoodle = canShowDoodle
+		@setupInstructions()
+		if @canShowDoodle
+			@showFrame() if @contentReady
 		else
 			@setupMobileFallback()
 
-		super(arguments...)
-		callback = if canShowDoodle then 'showFrame' else 'showMobileFallback'
+		null
 
-		if @CD().nav.changeViewCount is 1
-			@CD().appView.on @CD().appView.EVENT_PRELOADER_HIDE, =>
-				@[callback] false, 2000
-		else
-			@CD().appView.transitioner.on @CD().appView.transitioner.EVENT_TRANSITIONER_OUT_DONE, @[callback]
+	showInitialContent : ->
 
+		@showContent 2000
+
+	showContent : (delay=0) ->
+
+		return unless @_shown
+		@contentReady = true
+		@showFrame delay if @canShowDoodle
 		null
 
 	hide : (cb) ->
@@ -152,23 +187,6 @@ class DoodlePageView extends AbstractViewPage
 		@$doodleInfoContent.addClass('enable-overflow').css({ top: top })
 			.find('.doodle-info-inner').css({ maxHeight: maxHeight })
 
-		$infoContentInner = @$doodleInfoContent.find('.doodle-info-inner')
-
-		if !Modernizr.touch
-
-			iScrollOpts = 
-				mouseWheel            : true
-				scrollbars            : true
-				interactiveScrollbars : true
-				fadeScrollbars        : true
-				momentum              : false
-				bounce                : false
-				preventDefault        : false
-
-			if @infoScroller
-				@infoScroller.refresh()
-			else
-				@infoScroller = new IScroll $infoContentInner[0], iScrollOpts
 
 		null
 
@@ -177,14 +195,12 @@ class DoodlePageView extends AbstractViewPage
 		@$doodleInfoContent.removeClass('enable-overflow').css({ top: '' })
 			.find('.doodle-info-inner').css({ maxHeight: '' })
 
-		@infoScroller?.destroy()
-		@infoScroller = null
 
 		null
 
 	setupMobileFallback : ->
 
-		if Modernizr.video.webm is 'probably'
+		if Features.video.webm is 'probably'
 			videoType = 'webm'
 		else
 			videoType = 'mp4'
@@ -197,36 +213,57 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	showFrame : (removeEvent=true, delay=null) ->
+	showFrame : (delay=0) ->
 
-		if removeEvent then @CD().appView.transitioner.off @CD().appView.transitioner.EVENT_TRANSITIONER_OUT_DONE, @showFrame
+		return unless @_shown and @contentReady and @canShowDoodle
 
+		@$frame.off('load.doodle').one 'load.doodle', => @showDoodle delay
 		@$frame.attr 'src', "#{@CD().DOODLES_URL}/#{@model.get('slug')}/index.html"
-		@$frame.one 'load', => @showDoodle delay
 
+		null
+
+	stopFrame : ->
+
+		clearTimeout @refreshTimer
+		clearTimeout @instructionTimer
+		@cancelFrameFocus()
+		@$frame.off('load.doodle').removeClass('show').attr('src', '')
 		null
 
 	showDoodle : (delay=false) ->
 
+		return unless @_shown and @canShowDoodle
 		@$frame.addClass('show')
-		setTimeout =>
+		clearTimeout @instructionTimer
+		@instructionTimer = setTimeout =>
 			blankInstructions = @model.get('instructions').split('').map(-> return ' ').join('')
 			CodeWordTransitioner.to blankInstructions, @$instructions, @colourScheme
 		, delay or 0
 
-		# allow frame to transition in and then focus it
-		setTimeout =>
-			@$frame.focus()
-		, 500
+		@queueFrameFocus()
 
 		null
 
-	showMobileFallback : (removeEvent=true, delay=null) ->
+	queueFrameFocus : ->
 
-		# could put something here if was that way inclined...
+		@cancelFrameFocus()
+		return unless @_shown and @canShowDoodle
+		# Let the artwork accept keyboard input after its transition, but never
+		# steal focus during a press on a shell control (WebKit loses the click).
+		window.addEventListener 'pointerdown', @cancelFrameFocus, true
+		window.addEventListener 'keydown', @cancelFrameFocus, true
+		@focusTimer = setTimeout =>
+			@cancelFrameFocus()
+			@$frame[0].focus() if @_shown and @canShowDoodle and !@CD().appView.header.DOODLE_INFO_OPEN
+		, 500
+		null
 
-		if removeEvent then @CD().appView.transitioner.off @CD().appView.transitioner.EVENT_TRANSITIONER_OUT_DONE, @showMobileFallback
+	cancelFrameFocus : ->
 
+		clearTimeout @focusTimer
+		@focusTimer = null
+		window.removeEventListener 'pointerdown', @cancelFrameFocus, true
+		window.removeEventListener 'keydown', @cancelFrameFocus, true
 		null
 
 	hideDoodle : ->
@@ -302,6 +339,7 @@ class DoodlePageView extends AbstractViewPage
 
 	onInfoOpen : ->
 
+		@cancelFrameFocus()
 		@setupInfoDims()
 
 		@$el.addClass('show-info')
@@ -312,11 +350,7 @@ class DoodlePageView extends AbstractViewPage
 
 		@$el.removeClass('show-info')
 
-		setTimeout =>
-			@infoScroller?.destroy()
-			@infoScroller = null
-			@$frame.focus()
-		, 500
+		@queueFrameFocus()
 
 		null
 
@@ -352,12 +386,13 @@ class DoodlePageView extends AbstractViewPage
 
 	onRefreshBtnClick : ->
 
+		return unless @contentReady and @canShowDoodle
 		CodeWordTransitioner.in @$instructions, @colourScheme
 		@hideDoodle()
 
 		clearTimeout @refreshTimer
 		@refreshTimer = setTimeout =>
-			@showFrame false, 2000
+			@showFrame 2000
 		, 1000
 
 		null

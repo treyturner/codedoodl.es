@@ -27,7 +27,7 @@ export function observe(page) {
   const errors = [];
   page.baselineErrors = errors;
   page.on('console', message => {
-    if (message.type() === 'error') errors.push(message.text());
+    if (message.type() === 'error' || message.text().startsWith('JQMIGRATE:') && message.type() === 'warning') errors.push(message.text());
   });
   page.on('pageerror', error => {
     // Existing hover previews do not catch the promise rejected by pause().

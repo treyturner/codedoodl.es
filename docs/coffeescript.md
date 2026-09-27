@@ -3,27 +3,27 @@
 Stage 4 uses CoffeeScript **2.7.0** for both browser and server code, with the
 same compiler shared by Coffeeify 3.0.1. There is no CoffeeScript 1 checkpoint or
 additional ES5 transpilation layer. The agreed current desktop/mobile browser
-target supports the emitted native classes. The existing Backbone, DeepModel,
-jQuery and other vendor files remain the next migration stage.
+target supports the emitted native classes. Stage 5 updates the browser
+dependencies; see [browser.md](browser.md).
 
 ## Construction and callbacks
 
-Backbone 1.1.2 invokes `initialize` from its own constructor. CoffeeScript 2
+Backbone invokes `initialize` from its own constructor. CoffeeScript 2
 normally binds a subclass's `=>` methods after `super()` returns, which is too
 late for view initialization: templates, child views and event subscriptions
 already need those methods. Binding them again afterward would also change
 callback identity and prevent `off` from removing the original subscriptions.
 
-Application views now declare ordinary instance methods and use one early
-binding step in `AbstractView._ensureElement`, before Backbone initializes the
-element and invokes any subclass `initialize`. `bindViewMethods` visits the
-application's prototype chain, binds the most-derived implementation once, and
+Application views declare ordinary instance methods and use one early
+binding step in `AbstractView.preinitialize`, before Backbone initializes the
+element and invokes any subclass `initialize`. Stage 4 used `_ensureElement`;
+stage 5 moves to the public hook provided by Backbone 1.6.1. `bindViewMethods`
+visits the application's prototype chain, binds the most-derived implementation once, and
 stops before Backbone's own methods. Subclass constructors become `initialize`
 hooks, preserving setup before template rendering and work after the parent
 initializer. Nested callback closures still use `=>` to capture the view.
 New view methods should follow this pattern rather than adding constructor-bound
-`=>` methods. `_ensureElement` is a deliberate integration point with the pinned
-Backbone version and must remain covered during stage 5.
+`=>` methods. `preinitialize` is covered by the repeated-navigation and callback tests.
 
 Models inherit normal native constructors with attributes/options forwarding;
 the old `Backbone.DeepModel.apply(this, arguments)` path is removed. Filtering

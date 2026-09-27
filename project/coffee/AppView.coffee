@@ -172,6 +172,10 @@ class AppView extends AbstractView
 
     linkManager : (e) ->
 
+        link = e.currentTarget
+        return if e.isDefaultPrevented() or e.button > 0 or e.metaKey or e.ctrlKey or e.shiftKey or e.altKey
+        return if link.hasAttribute('download') or (link.target and link.target isnt '_self')
+
         href = $(e.currentTarget).attr('href')
 
         return false unless href
@@ -182,12 +186,17 @@ class AppView extends AbstractView
 
     navigateToUrl : ( href, e = null ) ->
 
-        route   = if href.match(@CD().BASE_URL) then href.split(@CD().BASE_URL)[1] else href
-        section = if route.charAt(0) is '/' then route.split('/')[1].split('/')[0] else route.split('/')[0]
+        # Resolve protocol-relative archive URLs before deciding whether a link
+        # belongs to the application router. A leading // is not the home route.
+        try
+            url = new URL href, window.location.href
+        catch
+            return
 
-        if @CD().nav.getSection section
+        section = url.pathname.split('/')[1]
+        if url.origin is window.location.origin and @CD().nav.getSection section
             e?.preventDefault()
-            @CD().router.navigateTo route
+            @CD().router.navigateTo url.pathname + url.search + url.hash
         else 
             @handleExternalLink href
 

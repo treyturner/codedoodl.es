@@ -59,7 +59,7 @@ class AbstractViewModal extends AbstractView
 
 		@$el.css 'visibility' : 'visible'
 
-		TweenLite.fromTo @$el, @TRANSITION_TIME, { 'transform'  : @CSSTranslate(-50, -45), 'opacity' : 0 }, { 'transform': @CSSTranslate(-50, -50), 'opacity': 1, ease : Cubic.easeInOut, onComplete : @animateInDone, onCompleteParams : [cb] }
+		gsap.fromTo @$el, { 'transform'  : @CSSTranslate(-50, -45), 'opacity' : 0 }, { duration: @TRANSITION_TIME, 'transform': @CSSTranslate(-50, -50), 'opacity': 1, ease : 'power2.inOut', onComplete : @animateInDone, onCompleteParams : [cb] }
 
 		null
 
@@ -77,7 +77,7 @@ class AbstractViewModal extends AbstractView
 
 		@CD().appView.modalPlayBtn.hide()
 
-		TweenLite.to @$el, @TRANSITION_TIME, { 'transform': @CSSTranslate(-50, -55), 'opacity': 0, ease : Cubic.easeInOut, onComplete : @animateOutDone, onCompleteParams : [cb] }
+		gsap.to @$el, { duration: @TRANSITION_TIME, 'transform': @CSSTranslate(-50, -55), 'opacity': 0, ease : 'power2.inOut', onComplete : @animateOutDone, onCompleteParams : [cb] }
 
 		null
 

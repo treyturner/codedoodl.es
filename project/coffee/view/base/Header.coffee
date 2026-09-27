@@ -1,6 +1,7 @@
 AbstractView         = require '../AbstractView'
 Router               = require '../../router/Router'
 CodeWordTransitioner = require '../../utils/CodeWordTransitioner'
+retainPointerTarget  = require '../../utils/retainPointerTarget'
 
 class Header extends AbstractView
 
@@ -68,6 +69,8 @@ class Header extends AbstractView
 
 		@$el.on 'mouseenter', '[data-codeword]', @onWordEnter
 		@$el.on 'mouseleave', '[data-codeword]', @onWordLeave
+
+		@$el.on 'pointerdown', 'a', retainPointerTarget
 
 		@$infoBtn.on 'click', @onInfoBtnClick
 		@$closeBtn.on 'click', @onCloseBtnClick

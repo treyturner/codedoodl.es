@@ -172,7 +172,7 @@
             display: none;
             cursor: pointer;
 
-            .no-touch & {
+            .can-hover & {
 
                 &:hover {
                     width: 40px;
@@ -241,7 +241,7 @@
             }
         }
 
-        .no-touch & {
+        .can-hover & {
 
             &:hover {
 
@@ -406,7 +406,7 @@
             color: globals.$cd-blue;
             border-color: globals.$cd-red;
 
-            .no-touch & {
+            .can-hover & {
 
                 &:hover {
                     border-width: 0;
@@ -478,10 +478,12 @@
                     // -webkit-over-scrolling: touch;
                     // padding: $site-padding-desktop 0 0;
 
-                    overflow: hidden;
+                    overflow-y: auto;
+                    overscroll-behavior-y: contain;
+                    scrollbar-width: thin;
                     padding: 0;
 
-                    .touch & {
+                    .no-hover & {
                         overflow: auto;
                         -webkit-over-scrolling: touch;
                     }

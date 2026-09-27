@@ -8,7 +8,7 @@ class AbstractView extends Backbone.View
 	template     : null
 	templateVars : null
 
-	_ensureElement : ->
+	preinitialize : ->
 		bindViewMethods @
 		super()
 	
@@ -93,10 +93,7 @@ class AbstractView extends Backbone.View
 
 	CSSTranslate : (x, y, value='%', scale) ->
 
-		if Modernizr.csstransforms3d
-			str = "translate3d(#{x+value}, #{y+value}, 0)"
-		else
-			str = "translate(#{x+value}, #{y+value})"
+		str = "translate3d(#{x+value}, #{y+value}, 0)"
 
 		if scale then str = "#{str} scale(#{scale})"
 

@@ -22,7 +22,9 @@ class HomeGridItem extends AbstractView
 	ITEM_MIN_EASE   : 100
 	ITEM_MAX_EASE   : 400
 
-	initialize : (@model, @parentGrid) ->
+	initialize : (options) ->
+
+		@parentGrid = options.parentGrid
 
 		@templateVars = _.extend {
 			thumbSrc   : @getThumbSrc()
@@ -53,9 +55,9 @@ class HomeGridItem extends AbstractView
 
 		type = false
 
-		if Modernizr.video.webm is 'probably'
+		if Features.video.webm is 'probably'
 			type = 'webm'
-		else if Modernizr.video.h264 is 'probably'
+		else if Features.video.h264 is 'probably'
 			type = 'mp4'
 
 		type
@@ -82,7 +84,7 @@ class HomeGridItem extends AbstractView
 
 	setListeners : (setting) ->
 
-		if !Modernizr.touch
+		if Features.hover
 			@$el[setting] 'mouseover', @onMouseOver
 			@$el[setting] 'mouseout', @onMouseOut
 		# @parentGrid[setting] @parentGrid.EVENT_TICK, @onTick
@@ -116,13 +118,17 @@ class HomeGridItem extends AbstractView
 		CodeWordTransitioner.to @model.get('author.name'), @$authorName, 'blue'
 		CodeWordTransitioner.to @model.get('name'), @$doodleName, 'blue'
 
-		@$video[0].play()
+		video = @$video[0]
+		return unless video
+		video.play().catch (error) ->
+			# Leaving a card can pause its preview before play() has resolved.
+			console.warn 'Video preview unavailable:', error.message unless error.name in ['AbortError', 'NotAllowedError']
 
 		null
 
 	onMouseOut : ->
 
-		@$video[0].pause()
+		@$video[0]?.pause()
 
 		null
 

@@ -75,7 +75,7 @@
 
     <template id="page-home">
         <![CDATA[
-            <section id="page-home" class="page page-home">
+            <section id="page-home" class="page page-home" tabindex="0" aria-label="Doodles">
                 <div class="home-grid before-intro-animation enable-grid-item-hover cf" data-home-grid></div>
                 <p class="home-credits" data-credits><%= credits %></p>
             </section>

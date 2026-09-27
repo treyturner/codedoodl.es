@@ -6,6 +6,8 @@
 }
 
 [data-codetext-char] {
+	// Letter text changes during a press; keep the enclosing link/button targeted.
+	pointer-events: none;
 	display: inline-block;
 	position: relative;
 	padding-bottom: 2px;

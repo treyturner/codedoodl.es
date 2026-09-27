@@ -3,7 +3,8 @@
 The build uses **Node 24.21.0 / npm 11.19.0**, **Gulp 5.0.1**, **Dart Sass 1.105.0**,
 **Browserify 17.0.1**, and **CoffeeScript 2.7.0**.
 The app is authored in CommonJS/CoffeeScript and runs compiled JavaScript. Its
-original vendored browser libraries and the sibling artwork archive are unchanged.
+shared browser libraries use pinned npm distributions; the sibling artwork
+archive is unchanged. See [browser.md](browser.md).
 
 ## Commands
 
@@ -49,8 +50,10 @@ initialization, refresh and network failures explicit; see [server.md](server.md
 - `project/coffee` is compiled with CoffeeScript 2.7.0 through Coffeeify 3.0.1,
   bundled with Browserify and minified with Terser.
   Console/error reporting is retained.
-- `project/vendor` is concatenated in the explicit `package.json` vendor order
-  and minified with Terser. The library source files have not been upgraded.
+- Browser distribution paths in `package.json` are concatenated in explicit
+  order and minified with Terser. `project/browser` owns feature detection and
+  animation defaults; `project/vendor` retains the documented DeepModel fork.
+  License notices also ship at `/static/licenses/browser.txt`.
 - `project/sass` uses Sass modules and modern arithmetic/built-ins. Sass's modern
   API and PostCSS/Autoprefixer replace Node Sass and the CSS plugin chain.
   Browserslist targets the last two Chrome, Firefox, Edge, Safari, iOS Safari,
@@ -86,8 +89,8 @@ for conditional requests, cache headers and the unchanged archive boundary.
 ## Container and verification
 
 ```bash
-docker build -t codedoodles:stage4 .
-CODEDOODLES_IMAGE=codedoodles:stage4 bash tests/run.sh
+docker build -t codedoodles:stage5 .
+CODEDOODLES_IMAGE=codedoodles:stage5 bash tests/run.sh
 ```
 
 The multi-stage Dockerfile pins the official Node 24 Bookworm image by digest,
@@ -115,8 +118,9 @@ original screenshot references; see [testing.md](testing.md).
 
 CoffeeScript is now 2.7.0 and build-only. Stage 3 uses Express 5 and current
 server libraries; Request and the old Winston dependency tree are gone.
-The original browser libraries remain stage 5, and local helper/dependency
-reduction remains stage 6. See [server.md](server.md) and
+Stage 5 updates the shared browser libraries and native scrolling; its sole
+frozen browser dependency is documented in [browser.md](browser.md). Local
+helper/dependency reduction and release validation remain stage 6. See [server.md](server.md) and
 [coffeescript.md](coffeescript.md) for the current runtime behavior.
 
 `npm run doodle:create` and `npm run doodle:preview -- doodles/author/name` retain

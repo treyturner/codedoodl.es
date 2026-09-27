@@ -48,15 +48,15 @@ class AbstractModal extends AbstractView
 
 	animateIn : ->
 
-		TweenLite.to @$el, 0.3, { 'visibility': 'visible', 'opacity': 1, ease : Quad.easeOut }
-		TweenLite.to @$el.find('.inner'), 0.3, { delay : 0.15, 'transform': 'scale(1)', 'visibility': 'visible', 'opacity': 1, ease : Back.easeOut }
+		gsap.to @$el, { duration: 0.3, 'visibility': 'visible', 'opacity': 1, ease : 'power1.out' }
+		gsap.to @$el.find('.inner'), { duration: 0.3, delay : 0.15, 'transform': 'scale(1)', 'visibility': 'visible', 'opacity': 1, ease : 'back.out' }
 
 		null
 
 	animateOut : (callback) ->
 
-		TweenLite.to @$el, 0.3, { delay : 0.15, 'opacity': 0, ease : Quad.easeOut, onComplete: callback }
-		TweenLite.to @$el.find('.inner'), 0.3, { 'transform': 'scale(0.8)', 'opacity': 0, ease : Back.easeIn }
+		gsap.to @$el, { duration: 0.3, delay : 0.15, 'opacity': 0, ease : 'power1.out', onComplete: callback }
+		gsap.to @$el.find('.inner'), { duration: 0.3, 'transform': 'scale(0.8)', 'opacity': 0, ease : 'back.in' }
 
 		null
 

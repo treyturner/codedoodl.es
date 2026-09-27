@@ -3,10 +3,11 @@
 Prepared 2026-09-26 for `feat/modernize`, starting at `3db726e` (currently the same
 commit as `feat/containerize`). Stage 1 is committed as `6ac65a6`; stage 2's Node
 and build migration is committed as `a3c6c07`. Stage 3's server migration is
-committed as `0b014f4`; see [the server guide](server.md). Stage 4 migrates to
+committed as `0b014f4`; see [the server guide](server.md). Stage 4 is committed as `01c5fb0` with
 CoffeeScript 2.7.0 and a compiled runtime; see [the compiler guide](coffeescript.md). See [the testing guide](testing.md) for the
 baseline and [the build guide](build.md) for the current toolchain and deliberate
-dependency checkpoints. Stages 5–6 remain to be implemented.
+dependency checkpoints. Stage 5 updates the browser libraries and native scrolling; see [the browser
+guide](browser.md) for the DeepModel exception. Stage 6 remains to be implemented.
 
 ## Objective and scope
 
