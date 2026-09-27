@@ -16,7 +16,7 @@ class DoodlePageView extends AbstractViewPage
 	MIN_PADDING_TOP    : 230
 	MIN_PADDING_BOTTOM : 85
 
-	constructor : ->
+	initialize : ->
 
 		@templateVars =
 			refresh_btn_title : @CD().locale.get "doodle_refresh_btn_title"
@@ -26,7 +26,7 @@ class DoodlePageView extends AbstractViewPage
 
 		return null
 
-	init : =>
+	init : ->
 
 		@$frame        = @$el.find('[data-doodle-frame]')
 		@$infoContent  = @$el.find('[data-doodle-info]')
@@ -40,7 +40,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
 		@CD().appView[setting] @CD().appView.EVENT_UPDATE_DIMENSIONS, @onResize
 
@@ -55,13 +55,13 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	onResize : =>
+	onResize : ->
 
 		@setupInfoDims()
 
 		null
 
-	show : (cb) =>
+	show : (cb) ->
 
 		@model = @getDoodle()
 		@model.set "viewed", true
@@ -74,8 +74,7 @@ class DoodlePageView extends AbstractViewPage
 		else
 			@setupMobileFallback()
 
-		super
-
+		super(arguments...)
 		callback = if canShowDoodle then 'showFrame' else 'showMobileFallback'
 
 		if @CD().nav.changeViewCount is 1
@@ -86,15 +85,14 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	hide : (cb) =>
+	hide : (cb) ->
 
 		@CD().appView.header.hideDoodleInfo()
 
-		super
-
+		super(arguments...)
 		null
 
-	setupUI : =>
+	setupUI : ->
 
 		@$infoContent.html @getDoodleInfoContent()
 
@@ -107,7 +105,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	setupNavLinks : =>
+	setupNavLinks : ->
 
 		prevDoodle = @CD().appData.doodles.getPrevDoodle @model
 		nextDoodle = @CD().appData.doodles.getNextDoodle @model
@@ -124,7 +122,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	setupInfoDims : =>
+	setupInfoDims : ->
 
 		@$doodleInfoContent = @$el.find('[data-doodle-info-content]')
 		@$doodleInfoContent.removeClass('enable-overflow').css({ top: ''})
@@ -149,7 +147,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	_setupInfoWithOverflow : (top, maxHeight) =>
+	_setupInfoWithOverflow : (top, maxHeight) ->
 
 		@$doodleInfoContent.addClass('enable-overflow').css({ top: top })
 			.find('.doodle-info-inner').css({ maxHeight: maxHeight })
@@ -174,7 +172,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	_setupInfoWithoutOverflow : =>
+	_setupInfoWithoutOverflow : ->
 
 		@$doodleInfoContent.removeClass('enable-overflow').css({ top: '' })
 			.find('.doodle-info-inner').css({ maxHeight: '' })
@@ -184,7 +182,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	setupMobileFallback : =>
+	setupMobileFallback : ->
 
 		if Modernizr.video.webm is 'probably'
 			videoType = 'webm'
@@ -199,7 +197,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	showFrame : (removeEvent=true, delay=null) =>
+	showFrame : (removeEvent=true, delay=null) ->
 
 		if removeEvent then @CD().appView.transitioner.off @CD().appView.transitioner.EVENT_TRANSITIONER_OUT_DONE, @showFrame
 
@@ -208,7 +206,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	showDoodle : (delay=false) =>
+	showDoodle : (delay=false) ->
 
 		@$frame.addClass('show')
 		setTimeout =>
@@ -223,7 +221,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	showMobileFallback : (removeEvent=true, delay=null) =>
+	showMobileFallback : (removeEvent=true, delay=null) ->
 
 		# could put something here if was that way inclined...
 
@@ -231,13 +229,13 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	hideDoodle : =>
+	hideDoodle : ->
 
 		@$frame.removeClass('show')
 
 		null
 
-	setupInstructions : =>
+	setupInstructions : ->
 
 		$newInstructions = @getInstructions()
 		@$instructions.replaceWith $newInstructions
@@ -245,7 +243,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	getInstructions : =>
+	getInstructions : ->
 
 		$instructionsEl = $('<span />')
 		$instructionsEl
@@ -258,13 +256,13 @@ class DoodlePageView extends AbstractViewPage
 
 		$instructionsEl
 
-	getDoodle : =>
+	getDoodle : ->
 
 		doodle = @CD().appData.doodles.getDoodleBySlug @routeArgs.sub+'/'+@routeArgs.ter
 
 		doodle
 
-	getDoodleInfoContent : =>
+	getDoodleInfoContent : ->
 
 		doodleInfoVars =
 			indexHTML                   : @model.get('indexHTML')
@@ -292,7 +290,7 @@ class DoodlePageView extends AbstractViewPage
 
 		doodleInfoContent
 
-	_getInteractionContent : =>
+	_getInteractionContent : ->
 
 		interactions = []
 
@@ -302,7 +300,7 @@ class DoodlePageView extends AbstractViewPage
 
 		interactions.join(', ') or @CD().locale.get "doodle_label_interaction_none"
 
-	onInfoOpen : =>
+	onInfoOpen : ->
 
 		@setupInfoDims()
 
@@ -310,7 +308,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	onInfoClose : =>
+	onInfoClose : ->
 
 		@$el.removeClass('show-info')
 
@@ -322,7 +320,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	onShareBtnClick : (e) =>
+	onShareBtnClick : (e) ->
 
 		e.preventDefault()
 
@@ -334,7 +332,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	getShareDesc : =>
+	getShareDesc : ->
 
 		vars =
 			doodle_name   : @model.get 'name'
@@ -346,13 +344,13 @@ class DoodlePageView extends AbstractViewPage
 
 		desc.replace(/&nbsp;/g, ' ')
 
-	onInfoContentClick : (e) =>
+	onInfoContentClick : (e) ->
 
 		if e.target is @$infoContent[0] then @CD().appView.header.hideDoodleInfo()
 
 		null
 
-	onRefreshBtnClick : =>
+	onRefreshBtnClick : ->
 
 		CodeWordTransitioner.in @$instructions, @colourScheme
 		@hideDoodle()
@@ -364,7 +362,7 @@ class DoodlePageView extends AbstractViewPage
 
 		null
 
-	onRandomBtnClick : =>
+	onRandomBtnClick : ->
 
 		randomDoodle = @CD().appData.doodles.getRandomUnseen()
 		@CD().router.navigateTo @CD().nav.sections.DOODLES + '/' + randomDoodle.get('slug')

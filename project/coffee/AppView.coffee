@@ -34,20 +34,20 @@ class AppView extends AbstractView
     MOBILE       : 'mobile'
     NON_MOBILE   : 'non_mobile'
 
-    constructor : ->
+    initialize : ->
 
         @$window = $(window)
         @$body   = $('body').eq(0)
 
         super()
 
-    disableTouch: =>
+    disableTouch: ->
 
         @$window.on 'touchmove', @onTouchMove
 
         null
 
-    enableTouch: =>
+    enableTouch: ->
 
         @$window.off 'touchmove', @onTouchMove
 
@@ -59,7 +59,7 @@ class AppView extends AbstractView
 
         null
 
-    render : =>
+    render : ->
 
         @bindEvents()
 
@@ -81,7 +81,7 @@ class AppView extends AbstractView
 
         null
 
-    bindEvents : =>
+    bindEvents : ->
 
         @on 'allRendered', @onAllRendered
 
@@ -95,14 +95,14 @@ class AppView extends AbstractView
 
         null
 
-    onScroll : =>
+    onScroll : ->
 
         @lastScrollY = window.scrollY
         @requestTick()
 
         null
 
-    requestTick : =>
+    requestTick : ->
 
         if !@ticking
             requestAnimationFrame @scrollUpdate
@@ -110,7 +110,7 @@ class AppView extends AbstractView
 
         null
 
-    scrollUpdate : =>
+    scrollUpdate : ->
 
         @ticking = false
 
@@ -126,7 +126,7 @@ class AppView extends AbstractView
 
         null
 
-    onAllRendered : =>
+    onAllRendered : ->
 
         # console.log "onAllRendered : =>"
 
@@ -138,7 +138,7 @@ class AppView extends AbstractView
 
         null
 
-    begin : =>
+    begin : ->
 
         @trigger 'start'
 
@@ -146,13 +146,13 @@ class AppView extends AbstractView
 
         null
 
-    onResize : =>
+    onResize : ->
 
         @getDims()
 
         null
 
-    getDims : =>
+    getDims : ->
 
         w = window.innerWidth or document.documentElement.clientWidth or document.body.clientWidth
         h = window.innerHeight or document.documentElement.clientHeight or document.body.clientHeight
@@ -170,7 +170,7 @@ class AppView extends AbstractView
 
         null
 
-    linkManager : (e) =>
+    linkManager : (e) ->
 
         href = $(e.currentTarget).attr('href')
 
@@ -180,7 +180,7 @@ class AppView extends AbstractView
 
         null
 
-    navigateToUrl : ( href, e = null ) =>
+    navigateToUrl : ( href, e = null ) ->
 
         route   = if href.match(@CD().BASE_URL) then href.split(@CD().BASE_URL)[1] else href
         section = if route.charAt(0) is '/' then route.split('/')[1].split('/')[0] else route.split('/')[0]
@@ -193,7 +193,7 @@ class AppView extends AbstractView
 
         null
 
-    handleExternalLink : (data) =>
+    handleExternalLink : (data) ->
 
         console.log "handleExternalLink : (data) => "
 

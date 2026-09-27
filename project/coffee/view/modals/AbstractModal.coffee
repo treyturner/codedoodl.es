@@ -8,7 +8,7 @@ class AbstractModal extends AbstractView
 	name     : null
 	template : null
 
-	constructor : ->
+	initialize : ->
 
 		@$window = $(window)
 
@@ -20,47 +20,47 @@ class AbstractModal extends AbstractView
 
 		return null
 
-	hide : =>
+	hide : ->
 
 		@animateOut => @CD().appView.remove @
 
 		null
 
-	dispose : =>
+	dispose : ->
 
 		@setListeners 'off'
 		@CD().appView.modalManager.modals[@name].view = null
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
 		@$window[setting] 'keyup', @onKeyUp
 		@$('[data-close]')[setting] 'click', @closeClick
 
 		null
 
-	onKeyUp : (e) =>
+	onKeyUp : (e) ->
 
 		if e.keyCode is 27 then @hide()
 
 		null
 
-	animateIn : =>
+	animateIn : ->
 
 		TweenLite.to @$el, 0.3, { 'visibility': 'visible', 'opacity': 1, ease : Quad.easeOut }
 		TweenLite.to @$el.find('.inner'), 0.3, { delay : 0.15, 'transform': 'scale(1)', 'visibility': 'visible', 'opacity': 1, ease : Back.easeOut }
 
 		null
 
-	animateOut : (callback) =>
+	animateOut : (callback) ->
 
 		TweenLite.to @$el, 0.3, { delay : 0.15, 'opacity': 0, ease : Quad.easeOut, onComplete: callback }
 		TweenLite.to @$el.find('.inner'), 0.3, { 'transform': 'scale(0.8)', 'opacity': 0, ease : Back.easeIn }
 
 		null
 
-	closeClick: ( e ) =>
+	closeClick: ( e ) ->
 
 		e.preventDefault()
 

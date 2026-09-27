@@ -1,7 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { fixture, silent } = require('./fixture.cjs');
-const createCache = require('../../app/utils/doodleCache');
+const createCache = require('../../dist/app/utils/doodleCache');
 
 function cacheFor(t, data, overrides = {}) {
   const cache = createCache({ ...data, production: true, dataSource: 'production', logger: silent, timeout: 2000, ...overrides });

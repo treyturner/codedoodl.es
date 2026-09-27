@@ -1,0 +1,74 @@
+{
+  "recordedAt": "2026-09-26",
+  "platform": "linux/amd64",
+  "applicationBaseCommit": "0b014f458153baf5d3cbfd6086a6a1e0a1690ae5",
+  "candidateSource": "Working tree with stage 4 changes; not yet committed",
+  "assetsCommit": "9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a",
+  "candidateImage": {
+    "localTag": "codedoodles:stage4",
+    "dockerImageId": "sha256:dace24a4aa0eb02800756093be9d91274637bb5617dc53324216bd7341f73390",
+    "command": [
+      "node",
+      "dist/app/start.cjs"
+    ]
+  },
+  "candidateRun": {
+    "startedAt": "2026-09-26T22:44:09.995Z",
+    "passed": 40,
+    "expectedFailures": 0,
+    "skipped": 5,
+    "unexpected": 0,
+    "flaky": 0,
+    "screenshotReferencesChanged": false
+  },
+  "serverTests": {
+    "passed": 23,
+    "failed": 0,
+    "target": "Compiled dist modules and subprocess entrypoint"
+  },
+  "compiler": {
+    "coffeescript": "2.7.0",
+    "coffeeify": "3.0.1",
+    "checkedCoffeeScriptFiles": 65,
+    "runtimeCompilerPresent": false
+  },
+  "runtimeVersions": {
+    "node": "24.21.0",
+    "compression": "1.8.2",
+    "cors": "2.8.6",
+    "ejs": "6.0.1",
+    "express": "5.2.1",
+    "express-session": "1.19.0",
+    "hashids": "2.3.0",
+    "underscore": "1.13.8",
+    "winston": "3.19.0"
+  },
+  "additionalChecks": [
+    "All CoffeeScript files compile, including modules outside the browser entrypoint",
+    "View setup uses Backbone initialization hooks; application callbacks bind once before initialization",
+    "Native model constructors preserve attributes/options; both set forms and nested change events pass",
+    "Repeated navigation preserves view and callback identity and removes/reinstalls listeners in all five browser projects",
+    "Docker builder passes deterministic assets and compiled runtime, stale-output removal, gzip/font/image integrity and EJS manifest references",
+    "Invalid browser/server/configuration CoffeeScript, unreferenced CoffeeScript, Sass, JSON and missing assets fail the build",
+    "Watch startup waits for filesystem readiness; source edits and recovery pass",
+    "Compiled development server serves forwarded URLs/local artwork and restarts ready after a server source edit",
+    "Production image starts dist/app/start.cjs as UID 1000 with eight direct runtime dependencies and no CoffeeScript compiler, registration hook or source files",
+    "Actual container SIGTERM exits 0 and restart becomes ready",
+    "Development Neon Bubbles renders and Shading Particles submits WebGL draw calls from the local archive",
+    "Assets checkout is clean; original screenshot references and vendor libraries are unchanged"
+  ],
+  "additionalRegressionFix": {
+    "issue": "WebKit can lose an intro-button click when animated text changes between mouse-down and mouse-up",
+    "controlImage": "codedoodles:stage3",
+    "controlImageId": "sha256:c88f9d96d57130ad8c0b92dda6c649238abcc9390fe3df04d381f027fd6911db",
+    "controlResult": "Two of two diagnostic 200 ms presses emitted no click and did not dismiss the intro",
+    "fix": "Animated intro letters ignore pointer events, leaving the parent button as the stable target",
+    "candidateResult": "The first-visit contract uses a 200 ms press and passes in Chromium, Firefox and WebKit"
+  },
+  "limits": [
+    "Original browser libraries remain stage 5; local helper/dependency reduction remains stage 6",
+    "Real mobile devices and complete visual inspection of every artwork remain release checks",
+    "Remote CI, registry publishing, deployment and production TLS/proxy configuration were not exercised",
+    "Development manifests retain the known unarchived Fury Ribbons entry"
+  ]
+}

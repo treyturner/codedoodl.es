@@ -102,6 +102,11 @@
 		text-decoration: none;
 		cursor: pointer;
 
+		// Keep the click target stable while the animated letters replace text.
+		[data-codetext-char] {
+			pointer-events: none;
+		}
+
 		&:first-child {
 			margin-right: 25px;
 		}

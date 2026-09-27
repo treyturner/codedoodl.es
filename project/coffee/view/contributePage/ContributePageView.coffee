@@ -7,7 +7,7 @@ class ContributePageView extends AbstractViewPage
 
 	template : 'page-contribute'
 
-	constructor : ->
+	initialize : ->
 
 		@contributors = new ContributorsCollection
 
@@ -18,27 +18,26 @@ class ContributePageView extends AbstractViewPage
 			content_contact : @CD().locale.get "contribute_content_contact"
 			label_who       : @CD().locale.get "contribute_label_who"
 
-		super
-
+		super(arguments...)
 		return null
 
-	init : =>
+	init : ->
 
 		@getContributorsContent() if !@contributors.length
 
 		null
 
-	getContributorsContent : =>
+	getContributorsContent : ->
 
 		r = Requester.request
-            url  : API.get('contributors')
-            type : 'GET'
+			url  : API.get('contributors')
+			type : 'GET'
 
-        r.done (res) =>
-        	@contributors.reset _.shuffle res.contributors
-        	@$el.find('[data-contributors]').html @CD().locale.get("contribute_content_who") + @contributors.getAboutHTML()
+		r.done (res) =>
+			@contributors.reset _.shuffle res.contributors
+			@$el.find('[data-contributors]').html @CD().locale.get("contribute_content_who") + @contributors.getAboutHTML()
 
-        r.fail (res) => console.error "problem getting the contributors", res
+		r.fail (res) => console.error "problem getting the contributors", res
 
 		null
 

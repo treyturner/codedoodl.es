@@ -1,9 +1,9 @@
-# Server behavior after stage 3
+# Server behavior
 
 The runtime uses Express 5.2.1, EJS 6.0.1, express-session 1.19.0, compression
 1.8.2, CORS 2.8.6, Hashids 2.3.0, Underscore 1.13.8 and Winston 3.19.0 on the
-existing Node 24 toolchain. CoffeeScript 1.12.7 remains the compiler checkpoint
-until stage 4. The browser's vendored libraries and the artwork are unchanged.
+existing Node 24 toolchain. Stage 4 compiles the server with CoffeeScript 2.7.0
+and removes the compiler from production; see [coffeescript.md](coffeescript.md). The browser's vendored libraries and the artwork are unchanged.
 Request, cookie-parser and the old body-parser are no longer direct dependencies;
 Express supplies current JSON/form parsers. Colors is only a local-authoring
 development dependency. Retired helpers using Request are outside supported

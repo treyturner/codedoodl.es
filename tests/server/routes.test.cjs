@@ -1,4 +1,3 @@
-require('coffeescript/register');
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const { createServer } = require('node:http');
@@ -11,9 +10,9 @@ process.env.NODE_ENV = 'development';
 process.env.DEV_PASSWORD = 'server-test-password';
 process.env.GITHUB_SECRET = 'server-test-hook-secret';
 process.env.DOODLE_CACHE_TIMEOUT_MS = '60000';
-const config = require('../../config/server');
-const app = require('../../app/server');
-const cache = require('../../app/utils/getDoodleData');
+const config = require('../../dist/config/server');
+const app = require('../../dist/app/server');
+const cache = require('../../dist/app/utils/getDoodleData');
 let server, base;
 before(async () => {
   await cache.initialize();
@@ -24,7 +23,7 @@ before(async () => {
 after(async () => {
   cache.close();
   if (server) { const closed = new Promise(resolve => server.close(resolve)); server.closeAllConnections(); await closed; }
-  require('../../app/utils/logger').end();
+  require('../../dist/app/utils/logger').end();
 });
 
 test('Hashids 2 encodes and decodes every original ID with the original salt/alphabet', () => {
@@ -88,7 +87,7 @@ test('retired webhook validates parsed JSON and stays disabled for signed master
 });
 
 test('EJS 6 escapes metadata and inline JSON without changing configuration values', async () => {
-  const data = require('../../app/utils/getTemplateData')('HOME');
+  const data = require('../../dist/app/utils/getTemplateData')('HOME');
   const special = '</script><script>alert("x")</script> & \u2028\u2029';
   const html = await new Promise((resolve, reject) => app.render('site/index', {
     ...data, page_title: special, config: { ...data.config, GA_CODE: special },

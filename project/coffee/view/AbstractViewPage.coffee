@@ -5,7 +5,7 @@ class AbstractViewPage extends AbstractView
 	_shown     : false
 	_listening : false
 
-	show : (cb) =>
+	show : (cb) ->
 
 		return unless !@_shown
 		@_shown = true
@@ -27,7 +27,7 @@ class AbstractViewPage extends AbstractView
 
 		null
 
-	hide : (cb) =>
+	hide : (cb) ->
 
 		return unless @_shown
 		@_shown = false
@@ -45,20 +45,20 @@ class AbstractViewPage extends AbstractView
 
 		null
 
-	dispose : =>
+	dispose : ->
 
 		@callChildrenAndSelf 'setListeners', 'off'
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
 		return unless setting isnt @_listening
 		@_listening = setting
 
 		null
 
-	animateIn : =>
+	animateIn : ->
 
 		###
 		stubbed here, override in used page classes

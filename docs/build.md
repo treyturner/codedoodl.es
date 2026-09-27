@@ -1,9 +1,9 @@
 # Building and developing the site
 
 The build uses **Node 24.21.0 / npm 11.19.0**, **Gulp 5.0.1**, **Dart Sass 1.105.0**,
-**Browserify 17.0.1**, and the **CoffeeScript 1.12.7** compatibility checkpoint.
-The app remains CommonJS/CoffeeScript. Its original vendored browser libraries
-and the sibling artwork archive are unchanged.
+**Browserify 17.0.1**, and **CoffeeScript 2.7.0**.
+The app is authored in CommonJS/CoffeeScript and runs compiled JavaScript. Its
+original vendored browser libraries and the sibling artwork archive are unchanged.
 
 ## Commands
 
@@ -20,13 +20,14 @@ npm start
 
 For development, `npm run dev` builds, starts the application on port 3000, and
 proxies it through BrowserSync on http://localhost:3002. Successful rebuilds
-reload connected browsers. Asset URLs follow the browser's host and port, so
+restart the compiled server, wait for readiness and reload connected browsers.
+Asset URLs follow the browser's host and port, so
 forwarded ports and LAN access work without additional URL configuration.
 `BIND_PORT` and `DEV_PORT` override the listening ports; an explicit `BASE_URL`
 overrides the public URL. `npm run watch` only rebuilds sources and is
-useful with a separately managed server. Both watch modes use the same asset
-pipeline as production, including hashing and gzip, and recover on the next
-edit after reporting a compilation error.
+useful with a separately managed server. Both watch modes watch browser/server
+code, configuration and manifests, use the production build pipeline including
+hashing and gzip, and recover on the next edit after a compilation error.
 
 When the sibling `../codedoodl.es-doodles` checkout is present, the dev server
 serves its artwork at `/__doodles` through the same browser origin. This avoids
@@ -45,7 +46,8 @@ initialization, refresh and network failures explicit; see [server.md](server.md
 
 ## Build inputs and outputs
 
-- `project/coffee` is bundled through Coffeeify 3.0.1 and minified with Terser.
+- `project/coffee` is compiled with CoffeeScript 2.7.0 through Coffeeify 3.0.1,
+  bundled with Browserify and minified with Terser.
   Console/error reporting is retained.
 - `project/vendor` is concatenated in the explicit `package.json` vendor order
   and minified with Terser. The library source files have not been upgraded.
@@ -65,12 +67,15 @@ initialization, refresh and network failures explicit; see [server.md](server.md
   the newly written `rev-manifest.json`; missing entries fail the build.
 
 `app/public`, the three generated `app/site/{index,holding,login}.html` pages,
-and `rev-manifest.json` are generated and ignored by Git. Do not edit them.
+`rev-manifest.json` and `dist/` are generated and ignored by Git. Do not edit them.
 The build deletes its previous outputs, finishes all parallel asset tasks, then
 gzips and hashes completed JS/CSS/XML/JSON once, and finally renders HTML paths.
 Hashes are derived from output bytes; no fixed-length filename guessing or
 in-place unrevision step remains. Login/holding CSS is generated explicitly so
-those templates also have a valid manifest entry.
+those templates also have a valid manifest entry. Finally, it compiles server
+and configuration modules into `dist/`, alongside templates, assets, locales and
+local manifests. `npm start` runs `dist/app/start.cjs` without a compiler hook.
+See [coffeescript.md](coffeescript.md) for construction/callback migration details.
 
 Precompressed output retains ordinary filenames, matching the archive convention.
 Static middleware inspects the actual file signature and negotiates gzip or
@@ -81,36 +86,38 @@ for conditional requests, cache headers and the unchanged archive boundary.
 ## Container and verification
 
 ```bash
-docker build -t codedoodles:stage3 .
-CODEDOODLES_IMAGE=codedoodles:stage3 bash tests/run.sh
+docker build -t codedoodles:stage4 .
+CODEDOODLES_IMAGE=codedoodles:stage4 bash tests/run.sh
 ```
 
 The multi-stage Dockerfile pins the official Node 24 Bookworm image by digest,
 includes system CA certificates, runs `npm ci`, builds, and exercises build
 and server checks. A separate dependency stage runs `npm ci --omit=dev`; only its
-runtime tree and generated application files enter the final image. The container runs
+runtime dependencies and compiled application enter the final image. CoffeeScript
+and Coffeeify are absent from the runtime. The container runs
 as the existing `node` user. Python 2, NVM, Pyenv, Node Sass, Gulp 3, and the
 Docker font-copy workaround have been removed.
 
 `npm run test:build` uses a disposable source copy to verify byte-identical clean
 builds, stale-output removal, manifest/EJS references, gzip integrity, all font
 formats, image preservation, failure propagation, and watch rebuild/recovery
-for CoffeeScript dependencies, Sass, data and HTML. It starts the development
-server to check asset URLs and live-reload configuration behind a forwarded
-port. It also runs during Docker
-builds, so the existing CI candidate build enforces these checks under Node 24.
+for CoffeeScript dependencies, Sass, data and HTML. It also checks every
+CoffeeScript module (including unreferenced ones), deterministic compiled output
+and stale-module removal. It starts the development server to check asset URLs
+and live-reload configuration behind a forwarded
+port, and verifies server source edits compile and restart the running app.
+It also runs during Docker builds, so the existing CI candidate build enforces
+these checks under Node 24.
 The HTTP/browser suite checks the resulting production-only image against the
 original screenshot references; see [testing.md](testing.md).
 
 ## Remaining dependency checkpoints
 
-CoffeeScript 1.12.7 is intentional: the native-class migration is stage 4.
-A small CommonJS entrypoint avoids CoffeeScript 1's CLI, which depends on
-entrypoint internals removed by modern Node. Stage 2 used Express 4.22.3 as a
-compatibility checkpoint; stage 3 now uses Express 5 and current server libraries.
-Request and the old Winston dependency tree are gone. Native async helpers handle
-fetch and process lifecycle while the existing route/view modules remain
-CoffeeScript. Server versions and behavior are documented in [server.md](server.md).
+CoffeeScript is now 2.7.0 and build-only. Stage 3 uses Express 5 and current
+server libraries; Request and the old Winston dependency tree are gone.
+The original browser libraries remain stage 5, and local helper/dependency
+reduction remains stage 6. See [server.md](server.md) and
+[coffeescript.md](coffeescript.md) for the current runtime behavior.
 
 `npm run doodle:create` and `npm run doodle:preview -- doodles/author/name` retain
 local authoring and preview tools. Figlet and Slug have been updated, and all

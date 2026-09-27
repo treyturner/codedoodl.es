@@ -7,23 +7,24 @@ class ModalManager extends AbstractView
 	modals :
 		orientationModal : classRef : OrientationModal, view : null
 
-	constructor : ->
+	initialize : ->
 
 		super()
 
 		return null
 
-	init : =>
+	init : ->
 
 		null
 
-	isOpen : =>
+	isOpen : ->
 
-		( if @modals[name].view then return true ) for name, modal of @modals
+		for name, modal of @modals
+			return true if modal.view
 
 		false
 
-	hideOpenModal : =>
+	hideOpenModal : ->
 
 		( if @modals[name].view then openModal = @modals[name].view ) for name, modal of @modals
 
@@ -31,7 +32,7 @@ class ModalManager extends AbstractView
 
 		null
 
-	showModal : (name, cb=null) =>
+	showModal : (name, cb=null) ->
 
 		return if @modals[name].view
 

@@ -18,12 +18,12 @@ RUN npm ci --omit=dev --no-audit --no-fund
 FROM base AS runtime
 ENV NODE_ENV=production
 COPY --from=production-dependencies /srv/node_modules ./node_modules
-COPY --from=builder /srv/app ./app
-COPY --from=builder /srv/config ./config
-COPY --from=builder /srv/project/data/locales ./project/data/locales
-COPY --from=builder /srv/doodles/master_manifest.json ./doodles/master_manifest.json
-COPY --from=builder /srv/doodles/master_manifest_DEV.json ./doodles/master_manifest_DEV.json
+COPY --from=builder /srv/dist/app ./dist/app
+COPY --from=builder /srv/dist/config ./dist/config
+COPY --from=builder /srv/dist/project/data/locales ./dist/project/data/locales
+COPY --from=builder /srv/dist/doodles/master_manifest.json ./dist/doodles/master_manifest.json
+COPY --from=builder /srv/dist/doodles/master_manifest_DEV.json ./dist/doodles/master_manifest_DEV.json
 COPY --from=builder /srv/package.json ./package.json
 USER node
 EXPOSE 3000
-CMD ["node", "app/start.cjs"]
+CMD ["node", "dist/app/start.cjs"]

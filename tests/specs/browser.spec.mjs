@@ -25,7 +25,9 @@ test('first-visit entry screen can be dismissed', async ({ page, isMobile }) => 
   await page.goto('/');
   const enter = page.locator('[data-intro-btn="enter"]');
   await expect(enter).toBeVisible();
-  await enter.click();
+  // A real press can span text replacements during the hover animation.
+  // WebKit used to lose this click when an animated letter was the target.
+  await enter.click({ delay: 200 });
   await page.mouse.move(0, 0);
   await expect(page.locator('#preloader')).not.toHaveClass(/show-preloader/);
   await gridReady(page);
@@ -92,5 +94,55 @@ test('mobile fallback keeps unsupported doodles accessible as a preview', async 
   await expect(page.locator('[data-doodle-instructions]')).toHaveClass(/show-fallback/);
   await expect(page.locator('[data-doodle-instructions] a')).toHaveAttribute('href', /\/andrevenancio\/infinite-spaces\/thumb\.(mp4|webm)$/);
   await expect(page.locator('[data-doodle-frame]')).toHaveAttribute('src', '');
+  expect(errors).toEqual([]);
+});
+
+test('native classes preserve model construction and view callbacks across repeated navigation', async ({ page }) => {
+  const errors = observe(page);
+  await returningVisitor(page);
+  await ready(page);
+  await gridReady(page);
+  const model = await page.evaluate(() => {
+    const collection = window.CD.appData.doodles;
+    const original = collection.at(0);
+    const copy = new original.constructor(original.toJSON(), { collection });
+    let changes = 0;
+    copy.on('change:author.name', () => changes++);
+    copy.set('viewed', true);
+    copy.set('author.name', 'Compiler migration probe');
+    copy.set({ 'author.website': 'https://example.test/' }, { silent: true });
+    return { collection: copy.collection === collection, id: copy.id === original.id,
+      url: copy.get('url') === original.get('url'), index: copy.get('index_padded') === original.get('index_padded'),
+      viewed: copy.get('viewed'), website: copy.get('author.website'),
+      name: copy.get('author.name'), changes, originalUnchanged: original.get('author.name') !== copy.get('author.name') };
+  });
+  expect(model).toEqual({ collection: true, id: true, url: true, index: true,
+    viewed: true, website: 'https://example.test/',
+    name: 'Compiler migration probe', changes: 1, originalUnchanged: true });
+
+  await page.evaluate(() => {
+    const home = window.CD.appView.wrapper.views.home.view;
+    window.compilerCallback = home.onResize;
+    window.compilerView = home;
+  });
+  for (let visit = 0; visit < 2; visit++) {
+    await page.locator('.about-btn').click();
+    await expect(page.locator('#page-about')).toBeVisible();
+    expect(await page.evaluate(() => {
+      const app = window.CD.appView;
+      return (app._events[app.EVENT_UPDATE_DIMENSIONS] || []).filter(event => event.callback === window.compilerCallback).length;
+    })).toBe(0);
+    await page.goBack();
+    await gridReady(page);
+    await expect.poll(() => page.evaluate(() => {
+      const app = window.CD.appView;
+      return (app._events[app.EVENT_UPDATE_DIMENSIONS] || []).filter(event => event.callback === window.compilerCallback).length;
+    })).toBe(1);
+    expect(await page.evaluate(() => {
+      const home = window.CD.appView.wrapper.views.home.view;
+      const detached = home.CD;
+      return home === window.compilerView && home.onResize === window.compilerCallback && detached() === window.CD;
+    })).toBe(true);
+  }
   expect(errors).toEqual([]);
 });

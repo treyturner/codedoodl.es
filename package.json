@@ -19,7 +19,7 @@
     "npm": "11.19.x"
   },
   "scripts": {
-    "start": "cd app && node start.cjs",
+    "start": "node dist/app/start.cjs",
     "build": "gulp build",
     "watch": "gulp watch",
     "dev": "gulp dev",
@@ -37,7 +37,6 @@
     "html": "app/site"
   },
   "dependencies": {
-    "coffeescript": "1.12.7",
     "compression": "1.8.2",
     "cors": "2.8.6",
     "ejs": "6.0.1",
@@ -52,6 +51,7 @@
     "browser-sync": "3.0.4",
     "browserify": "17.0.1",
     "coffeeify": "3.0.1",
+    "coffeescript": "2.7.0",
     "colors": "1.3.3",
     "ent": "2.2.2",
     "figlet": "1.11.4",

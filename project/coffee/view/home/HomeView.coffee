@@ -35,7 +35,7 @@ class HomeView extends AbstractViewPage
 	$credits         : null
 	$creditCodeWords : null
 
-	constructor : ->
+	initialize : ->
 
 		@templateVars = 
 			credits : @CD().locale.get "home_credits"
@@ -61,7 +61,7 @@ class HomeView extends AbstractViewPage
 
 		return !Modernizr.touch and !@CD().IS_FIREFOX
 
-	setupCredits : =>
+	setupCredits : ->
 
 		@$credits         = @$el.find('[data-credits]')
 		@$creditCodeWords = @$credits.find('[data-codeword]')
@@ -79,7 +79,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	addGridItems : =>
+	addGridItems : ->
 
 		for doodle in @allDoodles.models
 
@@ -104,7 +104,7 @@ class HomeView extends AbstractViewPage
 
 	# 	null
 
-	init : =>
+	init : ->
 
 		@$grid = @$el.find('[data-home-grid]')
 
@@ -112,7 +112,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
 		@CD().appView[setting] @CD().appView.EVENT_UPDATE_DIMENSIONS, @onResize
 		# @CD().appView[setting] @CD().appView.EVENT_ON_SCROLL, @onScroll
@@ -131,7 +131,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	setupDims : =>
+	setupDims : ->
 
 		gridWidth = @$grid.outerWidth()
 
@@ -144,7 +144,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	setupIScroll : =>
+	setupIScroll : ->
 
 		iScrollOpts = 
 			probeType             : 3
@@ -163,13 +163,13 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	setItemsOffsetAndEase : =>
+	setItemsOffsetAndEase : ->
 
 		(item.setOffsetAndEase i, HomeView.colCount) for item, i in HomeView.gridItems
 
 		null
 
-	onResize : =>
+	onResize : ->
 
 		@setupDims()
 		@setItemsOffsetAndEase()
@@ -180,7 +180,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	onScrollStart : =>
+	onScrollStart : ->
 
 		@$grid.removeClass 'enable-grid-item-hover'
 
@@ -192,7 +192,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	onScrollEnd : =>
+	onScrollEnd : ->
 
 		@$grid.addClass 'enable-grid-item-hover'
 		HomeView.scrollDelta = 0
@@ -203,7 +203,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	onScroll : =>
+	onScroll : ->
 
 		# return false
 
@@ -228,7 +228,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	onTick : =>
+	onTick : ->
 
 		# console.log "tick..."
 		# @trigger @EVENT_TICK, HomeView.scrollDelta
@@ -246,20 +246,19 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	scrollToTop : =>
+	scrollToTop : ->
 
 		return unless @scroller
 		@scroller.scrollTo 0, 0, 700, IScroll.utils.ease.quadratic
 
 		null
 
-	show : =>
+	show : ->
 
-		super
-
+		super(arguments...)
 		null
 
-	startScroller : =>
+	startScroller : ->
 
 		return unless @canHazScroller()
 
@@ -274,7 +273,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	animateIn : =>
+	animateIn : ->
 
 		@setupDims()
 		# @positionGridItems()
@@ -288,7 +287,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	setVisibleItemsAsShown : =>
+	setVisibleItemsAsShown : ->
 
 		itemsToShow = []
 		for item, i in HomeView.gridItems
@@ -307,7 +306,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	checkItemsForVisibility : =>
+	checkItemsForVisibility : ->
 
 		for item, i in HomeView.gridItems
 
@@ -326,7 +325,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	_getItemPositionDataByIndex : (idx) =>
+	_getItemPositionDataByIndex : (idx) ->
 
 		verticalOffset = (Math.floor(idx / HomeView.colCount) * HomeView.dims.item.h) + HomeView.dims.container.pt
 		position = visibility: 1, transform: '+'
@@ -344,7 +343,7 @@ class HomeView extends AbstractViewPage
 
 		position
 
-	getRequiredDoodleCountByArea : =>
+	getRequiredDoodleCountByArea : ->
 
 		totalArea  = HomeView.dims.container.a + (HomeView.scrollDistance * HomeView.dims.container.w)
 		targetRows = (totalArea / HomeView.dims.item.a) / HomeView.colCount
@@ -377,7 +376,7 @@ class HomeView extends AbstractViewPage
 
 	# 	null
 
-	animateInInitialItems : (cb) =>
+	animateInInitialItems : (cb) ->
 
 		itemCount = @getRequiredDoodleCountByArea()
 		itemCount = Math.min itemCount, @allDoodles.length
@@ -391,7 +390,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	animateItemIn : (item, index, fullPageTransition=false, cb=null) =>
+	animateItemIn : (item, index, fullPageTransition=false, cb=null) ->
 
 		duration   = 0.4
 		fromParams = y : (if fullPageTransition then window.innerHeight else 0), opacity : 0, scale : 0.6
@@ -408,7 +407,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	showCredits : =>
+	showCredits : ->
 
 		return unless !@creditsVisible
 		@creditsVisible = true
@@ -423,7 +422,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	hideCredits : (force=false) =>
+	hideCredits : (force=false) ->
 
 		return unless @creditsVisible or force
 		@creditsVisible = false
@@ -438,7 +437,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	onCreditWordEnter : (e) =>
+	onCreditWordEnter : (e) ->
 
 		$el = $(e.currentTarget)
 
@@ -446,7 +445,7 @@ class HomeView extends AbstractViewPage
 
 		null
 
-	onCreditWordLeave : (e) =>
+	onCreditWordLeave : (e) ->
 
 		$el = $(e.currentTarget)
 

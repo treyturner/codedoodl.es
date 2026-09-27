@@ -13,11 +13,11 @@ class AuthManager extends AbstractData
 
 	constructor : ->
 
-		@userData  = @CD().appData.USER
-
 		super()
 
-		return null
+		@userData  = @CD().appData.USER
+
+		return
 
 	login : (service, cb=null) =>
 

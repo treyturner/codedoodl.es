@@ -3,6 +3,7 @@
 
 temp/
 node_modules/
+dist/
 .sass-cache/
 .sublime/
 npm-debug.log

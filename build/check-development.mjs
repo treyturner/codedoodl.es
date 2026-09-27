@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { cp, mkdir, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { createServer } from 'node:net';
 import { get } from 'node:http';
@@ -53,7 +53,7 @@ export async function checkDevelopment(root, work, gulp) {
   const host = 'forwarded.example.test:52293';
   try {
     const deadline = Date.now() + 45000;
-    while (!log.includes('express is listening on')) {
+    while (!log.includes('express is listening on') || !log.includes('Watching project sources')) {
       assert.equal(child.exitCode, null, log);
       assert.ok(Date.now() < deadline, `Development startup timed out\n${log}`);
       await delay(100);
@@ -91,10 +91,28 @@ export async function checkDevelopment(root, work, gulp) {
     assert.equal(missing.headers.get('content-encoding'), null);
     assert.equal(await missing.text(), 'Artwork file not found');
     console.log('PASS: local artwork retains gzip, MIME types, media ranges and plain 404s');
+    const route = join(work, 'app/health/routes.coffee');
+    const originalRoute = await readFile(route, 'utf8');
+    await writeFile(route, originalRoute.replace("send 'OK'", "send 'compiled-server-watch-probe'"));
+    const rebuildDeadline = Date.now() + 45000;
+    let rebuilt = false;
+    while (Date.now() < rebuildDeadline) {
+      assert.equal(child.exitCode, null, log);
+      try {
+        const response = await fetch(`http://127.0.0.1:${devPort}/health`, { signal: AbortSignal.timeout(1000) });
+        if (await response.text() === 'compiled-server-watch-probe') { rebuilt = true; break; }
+      } catch { /* The compiled server restarts after a successful rebuild. */ }
+      await delay(100);
+    }
+    assert.ok(rebuilt, `Server source edit did not reach the running app\n${log}`);
+    assert.ok(!log.includes('EADDRINUSE'), log);
+    console.log('PASS: server edits compile, restart cleanly and serve the new code through BrowserSync');
   } finally {
     if (child.exitCode === null) {
+      const deadline = setTimeout(() => child.kill('SIGKILL'), 8000);
       child.kill('SIGTERM');
       await once(child, 'exit');
+      clearTimeout(deadline);
     }
   }
 }

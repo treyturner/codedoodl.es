@@ -12,8 +12,10 @@ Use Node 24.21.0 and its bundled npm 11.19.0 (`nvm install && nvm use`), then:
 2. `npm run dev`
 3. Open http://localhost:3002 for the application with browser reloading.
 
-`npm run build` creates production assets. `npm start` serves those assets on
-port 3000; `npm run watch` rebuilds them after edits without starting a server.
+`npm run build` creates production assets and compiles the server into `dist/`.
+`npm start` runs that generated JavaScript on port 3000; `npm run watch` rebuilds
+after edits without starting a server. Development mode recompiles and restarts
+the server before reloading the browser.
 Development serves artwork from the sibling `codedoodl.es-doodles` checkout.
 Use `DOODLES_ARCHIVE` for another checkout, or `DOODLES_URL` for a remote host
 that serves the archived gzip files correctly.

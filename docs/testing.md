@@ -2,11 +2,50 @@
 
 Stage 1 captured the Node 10 application as a regression reference. The current
 suite validates the [Node 24 build](build.md) and [Express 5 server](server.md),
-with additional build/watch, data-loading and process-lifecycle checks. The
+and [compiled CoffeeScript 2 runtime](coffeescript.md), with additional
+build/watch, data-loading and process-lifecycle checks. The
 Playwright package in `tests/` keeps its own lockfile and pinned
 Playwright browser image, independent of the application's dependency tree.
 
-## Stage 3 validation
+## Stage 4 validation
+
+Validated locally on Linux/amd64 on 2026-09-26 using `codedoodles:stage4`:
+**40 passed, 5 device-specific skips, no expected or unexpected failures, and
+no retries**. All five browser projects match the unchanged stage 1 screenshot
+references. Routes, APIs, all 77 available shortlinks, sessions, archive inventory,
+Canvas/WebGL rendering, mobile fallback and navigation continue to pass.
+
+All **65 CoffeeScript files** compile with 2.7.0, including modules outside the
+browser entrypoint. All **23 native server tests** pass against the compiled
+`dist` tree. The Docker builder passed deterministic compiled/asset rebuilds,
+stale-module removal, invalid browser/server/configuration source rejection,
+watch recovery, forwarded/local-artwork checks, and a running-server recompile
+and restart after an edit. Watch readiness now waits for its initial filesystem
+scan; the development checks also wait for the proxy to be ready.
+
+New browser coverage verifies native model construction/options, both `set`
+forms, nested change events, view reuse and stable callback identities, and
+listener removal/reinstallation through repeated navigation in all five projects.
+It caught and fixed a native-class strict-mode failure in the old key/value
+`set` override. The server image has eight direct runtime dependencies, no
+CoffeeScript compiler or `.coffee` source, and starts generated JavaScript as
+UID 1000. Container SIGTERM exit 0 and restart readiness both passed.
+
+An intermittent WebKit intro failure was reproduced on the stage 3 image with
+a 200 ms mouse press: both diagnostic attempts lost the click before its handler
+ran while animated text was replaced. Intro letters now ignore pointer events,
+so the button remains the target. The normal first-visit test now includes that
+held press and passes on all three desktop browser projects, without changing
+the screenshot references or relaxing assertions.
+
+See [`tests/baselines/stage4-validation.json`](../tests/baselines/stage4-validation.json)
+for the exact tested image and check record. The dev server runs compiled code
+and still serves local artwork; Neon Bubbles and Shading Particles were also
+checked there. The archive and vendor libraries are unchanged. Browser-library
+upgrades remain stage 5; real devices, production TLS/proxy validation, remote
+CI, registry publishing and deployment remain release checks.
+
+## Stage 3 validation (historical)
 
 Validated locally on Linux/amd64 on 2026-09-26 using `codedoodles:stage3`:
 **35 passed, 5 device-specific skips, no expected or unexpected failures, and

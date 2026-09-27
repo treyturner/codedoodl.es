@@ -11,14 +11,14 @@ class ContributorModel extends AbstractModel
         "twitter" : ""
         "html"    : ""
 
-    _filterAttrs : (attrs) =>
+    _filterAttrs : (attrs) ->
 
         if attrs.name
             attrs.html = @getHtml attrs
 
         attrs
 
-    getHtml : (attrs) =>
+    getHtml : (attrs) ->
 
         html  = ""
         links = []

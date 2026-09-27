@@ -7,7 +7,7 @@ class OrientationModal extends AbstractModal
 
 	cb       : null
 
-	constructor : (@cb) ->
+	initialize : (@cb) ->
 
 		@templateVars = {@name}
 
@@ -15,11 +15,11 @@ class OrientationModal extends AbstractModal
 
 		return null
 
-	init : =>
+	init : ->
 
 		null
 
-	hide : (stillLandscape=true) =>
+	hide : (stillLandscape=true) ->
 
 		@animateOut =>
 			@CD().appView.remove @
@@ -27,16 +27,15 @@ class OrientationModal extends AbstractModal
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
-		super
-
+		super(arguments...)
 		@CD().appView[setting] 'updateDims', @onUpdateDims
 		@$el[setting] 'touchend click', @hide
 
 		null
 
-	onUpdateDims : (dims) =>
+	onUpdateDims : (dims) ->
 
 		if dims.o is 'portrait' then @hide false
 

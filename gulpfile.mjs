@@ -1,12 +1,13 @@
 import gulp from 'gulp';
 import { clean, scripts, vendor, styles, images, fonts, data, revision, html } from './build/tasks.mjs';
 import { watchSources, serve } from './build/development.mjs';
+import { checkCoffee, server } from './build/server.mjs';
 
 function compile(callback) {
   const errors = [];
   // Gulp parallel normally reports the first error before other tasks finish.
   // Drain all branches before reporting failure so a queued watch build is safe.
-  const tasks = [scripts, vendor, styles, images, fonts, data].map(task => {
+  const tasks = [checkCoffee, scripts, vendor, styles, images, fonts, data].map(task => {
     const wrapped = async () => { try { await task(); } catch (error) { errors.push(error); } };
     wrapped.displayName = task.name;
     return wrapped;
@@ -21,6 +22,7 @@ export const build = gulp.series(
   compile,
   revision,
   html,
+  server,
 );
 export const watch = gulp.series(build, () => watchSources(build));
 export const dev = gulp.series(build, () => serve(build));

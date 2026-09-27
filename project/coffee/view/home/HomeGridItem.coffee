@@ -22,7 +22,7 @@ class HomeGridItem extends AbstractView
 	ITEM_MIN_EASE   : 100
 	ITEM_MAX_EASE   : 400
 
-	constructor : (@model, @parentGrid) ->
+	initialize : (@model, @parentGrid) ->
 
 		@templateVars = _.extend {
 			thumbSrc   : @getThumbSrc()
@@ -34,15 +34,14 @@ class HomeGridItem extends AbstractView
 		# @acceleration = (_.random @ITEM_MIN_ACCEL, @ITEM_MAX_ACCEL) / 10
 		# @ease         = (_.random @ITEM_MIN_EASE, @ITEM_MAX_EASE) / 100
 
-		super
-
+		super(arguments...)
 		return null
 
-	getThumbSrc : =>
+	getThumbSrc : ->
 
 		return @CD().DOODLES_URL + '/' + @model.get('slug') + '/thumb.jpg'
 
-	getVideoSrc : =>
+	getVideoSrc : ->
 
 		if MediaQueries.getBreakpoint() is "Small" then return false
 
@@ -50,7 +49,7 @@ class HomeGridItem extends AbstractView
 
 		return @CD().DOODLES_URL + '/' + @model.get('slug') + '/thumb.' + type
 
-	getVideoType : =>
+	getVideoType : ->
 
 		type = false
 
@@ -61,11 +60,11 @@ class HomeGridItem extends AbstractView
 
 		type
 
-	getVideoCover : =>
+	getVideoCover : ->
 
 		return @CD().DOODLES_URL + '/' + @model.get('slug') + '/video-cover.jpg'
 
-	setOffsetAndEase : (idx, colCount) =>
+	setOffsetAndEase : (idx, colCount) ->
 
 		# idx = @CD().appData.doodles.indexOf @model
 		@maxOffset = (((idx % colCount) + 1) * @ITEM_MIN_OFFSET) / 10
@@ -73,7 +72,7 @@ class HomeGridItem extends AbstractView
 
 		null
 
-	init : =>
+	init : ->
 
 		@$authorName = @$el.find('[data-codeword="author_name"]')
 		@$doodleName = @$el.find('[data-codeword="name"]')
@@ -81,7 +80,7 @@ class HomeGridItem extends AbstractView
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
 		if !Modernizr.touch
 			@$el[setting] 'mouseover', @onMouseOver
@@ -90,7 +89,7 @@ class HomeGridItem extends AbstractView
 
 		null
 
-	show : (animateText=false) =>
+	show : (animateText=false) ->
 
 		@visible = true
 		@$el.addClass 'show-item'
@@ -103,14 +102,14 @@ class HomeGridItem extends AbstractView
 
 		null
 
-	hide : =>
+	hide : ->
 
 		@visible = false
 		@$el.removeClass 'show-item'
 
 		null
 
-	onMouseOver : =>
+	onMouseOver : ->
 
 		return if @parentGrid.isScrolling
 
@@ -121,13 +120,13 @@ class HomeGridItem extends AbstractView
 
 		null
 
-	onMouseOut : =>
+	onMouseOut : ->
 
 		@$video[0].pause()
 
 		null
 
-	onTick : (scrollDelta) =>
+	onTick : (scrollDelta) ->
 
 		# if !@visible then return @offset = 0
 

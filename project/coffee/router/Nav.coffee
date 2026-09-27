@@ -13,7 +13,9 @@ class Nav extends AbstractView
 
     changeViewCount : 0
 
-    constructor: ->
+    initialize : ->
+
+        super()
 
         @sections = window.config.routes
         @favicon = document.getElementById('favicon')
@@ -22,7 +24,7 @@ class Nav extends AbstractView
 
         return false
 
-    getSection : (section, strict=false) =>
+    getSection : (section, strict=false) ->
 
         if !strict and section is '' then return true
 
@@ -31,7 +33,7 @@ class Nav extends AbstractView
 
         false
 
-    changeView: (area, sub, ter, params) =>
+    changeView: (area, sub, ter, params) ->
 
         # console.log "area",area
         # console.log "sub",sub
@@ -55,7 +57,7 @@ class Nav extends AbstractView
 
         null
 
-    setPageTitle: (area, sub, ter) =>
+    setPageTitle: (area, sub, ter) ->
 
         section   = if area is '' then 'HOME' else @CD().nav.getSection area
         titleTmpl = @CD().locale.get("page_title_#{section}") or @CD().locale.get("page_title_HOME")
@@ -65,7 +67,7 @@ class Nav extends AbstractView
 
         null
 
-    setPageFavicon: =>
+    setPageFavicon: ->
 
         colour = _.shuffle(['red', 'blue', 'black'])[0]
 
@@ -75,7 +77,7 @@ class Nav extends AbstractView
 
         null
 
-    getPageTitleVars: (area, sub, ter) =>
+    getPageTitleVars: (area, sub, ter) ->
 
         vars = {}
 
@@ -89,7 +91,7 @@ class Nav extends AbstractView
 
         vars
 
-    trackPageView : =>
+    trackPageView : ->
 
         return unless window.ga and @changeViewCount > 1
 

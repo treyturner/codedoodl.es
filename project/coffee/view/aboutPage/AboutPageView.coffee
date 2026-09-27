@@ -4,7 +4,7 @@ class AboutPageView extends AbstractViewPage
 
 	template : 'page-about'
 
-	constructor : ->
+	initialize : ->
 
 		@templateVars = 
 			label_what      : @CD().locale.get "about_label_what"
@@ -14,11 +14,10 @@ class AboutPageView extends AbstractViewPage
 			label_sponsor   : @CD().locale.get "about_label_sponsor"
 			content_sponsor : @getSponsorContent()
 
-		super
-
+		super(arguments...)
 		return null
 
-	getWhatContent : =>
+	getWhatContent : ->
 
 		vars =
 			contribute_url : @CD().BASE_URL + '/' + @CD().nav.sections.CONTRIBUTE
@@ -26,7 +25,7 @@ class AboutPageView extends AbstractViewPage
 
 		return @supplantString @CD().locale.get("about_content_what"), vars, false
 
-	getSponsorContent : =>
+	getSponsorContent : ->
 
 		vars =
 			assets_url : @CD().ASSETS_URL

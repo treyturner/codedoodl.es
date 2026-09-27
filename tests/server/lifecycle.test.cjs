@@ -7,7 +7,7 @@ const { setTimeout: delay } = require('node:timers/promises');
 const { fixture } = require('./fixture.cjs');
 
 function launch(t, env, code) {
-  const child = spawn(process.execPath, code ? ['-e', code] : ['app/start.cjs'], {
+  const child = spawn(process.execPath, code ? ['-e', code] : ['dist/app/start.cjs'], {
     env: { ...process.env, NODE_ENV: 'production', BIND_ADDRESS: '127.0.0.1', BIND_PORT: '0',
       DEV_PASSWORD: '', DOODLE_DATA_SOURCE: 'production', DOODLE_FETCH_TIMEOUT_MS: '2000', ...env },
   });
@@ -68,7 +68,7 @@ test('SIGTERM during startup cancels a stalled upstream request without waiting 
 });
 
 test('shutdown lets an active HTTP response finish', async t => {
-  const modulePath = JSON.stringify(resolve('app/utils/serverLifecycle.js'));
+  const modulePath = JSON.stringify(resolve('dist/app/utils/serverLifecycle.js'));
   const process = launch(t, {}, `
     const start = require(${modulePath});
     const logger = { info: message => console.log(message), error: message => console.log(message), end() {} };

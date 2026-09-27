@@ -7,7 +7,7 @@ class AbstractViewModal extends AbstractView
 
 	TRANSITION_TIME : 0.3
 
-	show : (cb) =>
+	show : (cb) ->
 
 		return unless !@_shown
 		@_shown = true
@@ -18,7 +18,7 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	hide : (cb) =>
+	hide : (cb) ->
 
 		return unless @_shown
 		@_shown = false
@@ -27,13 +27,13 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	dispose : =>
+	dispose : ->
 
 		@callChildrenAndSelf 'setListeners', 'off'
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
 		return 'noListenerChange' unless setting isnt @_listening
 		@_listening = setting
@@ -42,20 +42,20 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	onCloseClick : (e) =>
+	onCloseClick : (e) ->
 
 		e.preventDefault()
 		@close()
 
 		null
 
-	close : =>
+	close : ->
 
 		@CD().router.navigateTo @CD().appView.wrapper.backgroundView.route
 
 		null
 
-	animateIn : (cb) =>
+	animateIn : (cb) ->
 
 		@$el.css 'visibility' : 'visible'
 
@@ -63,7 +63,7 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	animateInDone : (cb) =>
+	animateInDone : (cb) ->
 
 		@callChildrenAndSelf 'setListeners', 'on'
 
@@ -73,7 +73,7 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	animateOut : (cb) =>
+	animateOut : (cb) ->
 
 		@CD().appView.modalPlayBtn.hide()
 
@@ -81,7 +81,7 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	animateOutDone : (cb) =>
+	animateOutDone : (cb) ->
 
 		@$el.css 'visibility' : 'hidden'
 

@@ -59,12 +59,15 @@ async function until(predicate, description) {
 }
 
 try {
-  for (const path of ['package.json', 'gulpfile.mjs', 'build', 'project']) {
+  for (const path of ['package.json', 'gulpfile.mjs', 'build', 'project', 'app', 'config', 'doodles']) {
     await cp(join(root, path), join(work, path), { recursive: true });
   }
   await symlink(resolve('node_modules'), join(work, 'node_modules'), 'dir');
   await runBuild();
   const first = await digestTree(join(work, 'app/public'));
+  const compiled = await digestTree(join(work, 'dist'));
+  assert.ok(!Object.keys(compiled).some(path => path.endsWith('.coffee')), 'Runtime contains only compiled code');
+  assert.ok(compiled['app/main.js'] && compiled['config/server.js']);
   const names = await manifest();
   assert.ok(Object.keys(names).length >= 7);
   for (const [logical, revised] of Object.entries(names)) {
@@ -95,12 +98,17 @@ try {
   assert.deepEqual(await readFile(join(work, 'app/public/static/img/ss/ss-icons.svg')),
     await readFile(join(work, 'project/img/ss/ss-icons.svg')));
   await writeFile(join(work, 'app/public/js/stale-01234567.js'), 'stale output');
+  await writeFile(join(work, 'dist/app/stale.js'), 'stale output');
   await runBuild();
   assert.deepEqual(await digestTree(join(work, 'app/public')), first, 'Clean builds must be byte-identical and remove stale files');
+  assert.deepEqual(await digestTree(join(work, 'dist')), compiled, 'Compiled runtime must be repeatable and remove stale files');
   console.log('PASS: repeatable builds, manifest references, gzip, all fonts and image bytes');
 
   for (const [filename, invalid] of [
     ['project/coffee/Main.coffee', '\ninvalid = -> ('],
+    ['project/coffee/data/UserData.coffee', '\ninvalid = -> ('],
+    ['app/health/routes.coffee', '\ninvalid = -> ('],
+    ['config/server.coffee', '\ninvalid = -> ('],
     ['project/sass/main.scss', '\n.broken { color: ;'],
     ['project/data/tracking.json', '{invalid'],
     ['project/html/index.html', '\n{{ js/nonexistent.js }}'],
