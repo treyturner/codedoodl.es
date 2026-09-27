@@ -37,12 +37,17 @@ jobs:
           persist-credentials: false
 
       - name: Checkout pinned doodle archive
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
-        with:
-          repository: treyturner/codedoodl.es-doodles
-          ref: 9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a
-          path: tests/archive
-          persist-credentials: false
+        shell: bash
+        run: |
+          source tests/assets.lock
+          # The historical archive has a gitlink without .gitmodules. Checkout's
+          # credential cleanup traverses it even when submodules are disabled.
+          # Fetch the public archive without credentials or submodule traversal.
+          git init tests/archive
+          git -C tests/archive remote add origin "$ASSETS_REPOSITORY"
+          git -C tests/archive fetch --no-tags --no-recurse-submodules --depth=1 origin "$ASSETS_COMMIT"
+          git -C tests/archive -c submodule.recurse=false checkout --detach "$ASSETS_COMMIT"
+          test "$(git -C tests/archive rev-parse HEAD)" = "$ASSETS_COMMIT"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd  # v4.0.0
