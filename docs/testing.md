@@ -336,6 +336,9 @@ Browser tests cover the home grid and font loading, the first-visit prompt,
 client-side navigation/history, a Canvas doodle rendering changing frames,
 its info/shortlink/reload controls, adjacent-doodle navigation, and the mobile
 fallback. They run Chromium, Firefox, WebKit, mobile Chromium, and mobile WebKit.
+The refresh check marks the original iframe document, clicks the button, and
+requires a new document with an animating canvas. This checks the reload result
+directly after a Firefox CI run stalled waiting for a same-URL navigation event.
 The shared canvas test uses the self-contained Canvas 2D Neon Bubbles doodle;
 Box Physics separately verifies WebGL draw calls and pointer interaction in
 Chromium. Headless Firefox in this runner cannot create the WebGL context used

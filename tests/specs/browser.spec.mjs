@@ -72,11 +72,16 @@ test('doodle deep link renders a moving canvas, info, reload, and navigation', a
   await page.locator('.close-btn').click();
   await expect(page.locator('#page-doodle')).not.toHaveClass(/show-info/);
   await expect.poll(() => page.evaluate(() => document.activeElement === document.querySelector('[data-doodle-frame]'))).toBe(true);
-  await Promise.all([
-    page.waitForEvent('framenavigated', frame => frame.url().includes('/gianab/neon-bubbles/index.html')),
-    page.locator('[data-doodle-refresh]').click(),
-  ]);
-  await canvasFrame(page, 'gianab/neon-bubbles');
+  // Require a fresh document instead of a transient same-URL navigation event.
+  // The locator resolves the new root after reload; a missed click keeps the marker.
+  const doodleDocument = page.frameLocator('[data-doodle-frame]').locator('html');
+  await doodleDocument.evaluate(node => { node.baselineReloadMarker = true; });
+  await expect(doodleDocument).toHaveJSProperty('baselineReloadMarker', true);
+  await page.locator('[data-doodle-refresh]').click();
+  await expect(doodleDocument).toHaveJSProperty('baselineReloadMarker', undefined);
+  const refreshedCanvas = await canvasFrame(page, 'gianab/neon-bubbles');
+  const refreshedBefore = await refreshedCanvas.evaluate(node => node.toDataURL());
+  await expect.poll(() => refreshedCanvas.evaluate(node => node.toDataURL())).not.toBe(refreshedBefore);
   const next = page.locator('[data-doodle-nav="next"]');
   const previous = page.locator('[data-doodle-nav="prev"]');
   const navigation = await next.getAttribute('href') ? next : previous;
