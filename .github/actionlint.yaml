@@ -1,0 +1,7 @@
+# actionlint 1.7.12 predates this supported GitHub-hosted runner label.
+# Remove this exact-message allowance once its built-in label list catches up.
+# https://github.com/actions/runner-images/issues/14748
+paths:
+  .github/workflows/*.yml:
+    ignore:
+      - '^label "ubuntu-26\.04" is unknown\.'

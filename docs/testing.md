@@ -410,9 +410,12 @@ in the self-hosted environment before a future release.
 
 ## CI and publishing
 
-The workflow validates pushes to `master`, `feat/containerize`, and
-`feat/modernize`, plus PRs targeting those branches. Build, server, local-tool,
-three npm audit, runtime image scan, HTTP, browser and artwork gates run before
+The workflow validates pushes to `master`, `feat/containerize`, `feat/modernize`,
+and `ci/ubuntu-26.04`, plus PRs targeting those branches. Both validation and
+promotion workflows select `ubuntu-26.04` explicitly so the runner OS transition
+is tested before merging back into modernization. Container image pins remain
+the same. Build, server, local-tool, three npm audit, runtime image scan, HTTP,
+browser and artwork gates run before
 candidate publication. Diagnostics are saved even on failure. Master pushes
 publish a uniquely tagged candidate; manual dispatch can publish a feature
 candidate when explicitly selected. Ordinary feature pushes and PRs do not publish.
