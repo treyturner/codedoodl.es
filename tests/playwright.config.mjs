@@ -23,7 +23,18 @@ export default defineConfig({
     colorScheme: 'light',
   },
   projects: [
-    { name: 'artwork', testMatch: /artwork\.spec\.mjs/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
+    // Software WebGL on hosted runners makes input and capture slow for heavy
+    // sketches. Keep a bounded budget for the whole observation and teardown.
+    {
+      name: 'artwork', testMatch: /artwork\.spec\.mjs/, timeout: 180000,
+      expect: { timeout: 45000 },
+      use: {
+        ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 },
+        // Keep action/network/DOM traces and explicit screenshots, but avoid
+        // continuous screencast readback competing with software WebGL.
+        trace: { mode: 'retain-on-failure', screenshots: false },
+      },
+    },
     { name: 'contracts', testMatch: /contracts\.spec\.mjs/ },
     { name: 'chromium', testMatch: /(?:browser|libraries|webgl)\.spec\.mjs/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
     { name: 'firefox', testMatch: /(?:browser|libraries)\.spec\.mjs/, use: { ...devices['Desktop Firefox'], viewport: { width: 1440, height: 900 } } },

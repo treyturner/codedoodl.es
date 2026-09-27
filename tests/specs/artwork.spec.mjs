@@ -16,7 +16,6 @@ for (const doodle of doodles) {
     page.on('requestfailed', request => {
       if (!/ERR_ABORTED|cancelled|canceled/i.test(request.failure()?.errorText || '')) failedRequests.add(request.url());
     });
-    test.setTimeout(90000);
     await page.addInitScript(() => {
       if (location.origin === 'http://site.test:3000') localStorage.setItem('CD_VISITED', 'true');
     });
@@ -39,10 +38,13 @@ for (const doodle of doodles) {
     const iframe = page.locator('[data-doodle-frame]');
     await expect(iframe).toBeVisible();
     await expect(iframe).toHaveAttribute('src', `http://assets:8080/${doodle.slug}/index.html`);
-    const frame = await iframe.elementHandle().then(element => element.contentFrame());
+    const element = await iframe.elementHandle();
+    const frame = await element.contentFrame();
     await frame.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(2000);
-    const bounds = await iframe.boundingBox();
+    // Reuse the resolved iframe: repeated selector resolution can wait behind
+    // seconds-long software WebGL frames on CPU-only CI runners.
+    const bounds = await element.boundingBox();
     await page.mouse.move(bounds.x + bounds.width / 3, bounds.y + bounds.height / 3);
     await page.mouse.click(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
     await page.keyboard.press('ArrowRight');

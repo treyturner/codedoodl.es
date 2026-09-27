@@ -33,8 +33,17 @@ fully functional. Original records and collection caveats are in
 [`artwork-reference.json`](../tests/baselines/artwork-reference.json).
 
 Heavy Treee/Smashing Mega Scene screenshots initially exceeded the diagnostic
-capture budget. A 90-second artwork budget and direct viewport-rectangle capture
-avoid waiting for animated iframe layout to stabilize; the focused reruns pass.
+capture budget. Direct viewport-rectangle capture avoids waiting for animated
+iframe layout to stabilize; local reruns passed with a 90-second artwork budget.
+Hosted CI subsequently exceeded that total budget for Boobs, Smashing Mega Scene
+and Treee while processing native input, screenshots or teardown. The artwork
+project now allows 180 seconds overall and 45 seconds for readiness assertions,
+and reuses the resolved iframe handle to avoid redundant selector waits behind
+software WebGL frames. Its traces retain actions, network and DOM snapshots
+without continuous screenshot capture competing for graphics resources; explicit
+artwork screenshots and failure screenshots remain enabled. Rendering assertions,
+input, screenshots, the 1440×900 viewport and reviewed baselines are unchanged;
+automatic retries remain disabled.
 The local candidate gallery is at
 [`tests/artifacts/artwork/index.html`](../tests/artifacts/artwork/index.html).
 Raw reports and screenshots are ignored build artifacts, with compact validation
