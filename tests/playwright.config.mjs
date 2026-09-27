@@ -30,9 +30,9 @@ export default defineConfig({
       expect: { timeout: 45000 },
       use: {
         ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 },
-        // Keep action/network/DOM traces and explicit screenshots, but avoid
-        // continuous screencast readback competing with software WebGL.
-        trace: { mode: 'retain-on-failure', screenshots: false },
+        // Keep action/network traces and explicit screenshots. Automatic DOM
+        // snapshots and screencast readback stall behind software WebGL frames.
+        trace: { mode: 'retain-on-failure', screenshots: false, snapshots: false },
       },
     },
     { name: 'contracts', testMatch: /contracts\.spec\.mjs/ },

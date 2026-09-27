@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { setTimeout as delay } from 'node:timers/promises';
 import { ready } from '../support/browser.mjs';
 
 const doodles = JSON.parse(readFileSync(new URL('../fixtures/api.json', import.meta.url))).doodles;
@@ -41,14 +42,16 @@ for (const doodle of doodles) {
     const element = await iframe.elementHandle();
     const frame = await element.contentFrame();
     await frame.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(2000);
+    // Measure observation time in the runner without another browser command
+    // waiting behind a software-rendered frame.
+    await delay(2000);
     // Reuse the resolved iframe: repeated selector resolution can wait behind
     // seconds-long software WebGL frames on CPU-only CI runners.
     const bounds = await element.boundingBox();
     await page.mouse.move(bounds.x + bounds.width / 3, bounds.y + bounds.height / 3);
     await page.mouse.click(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
     await page.keyboard.press('ArrowRight');
-    await page.waitForTimeout(1000);
+    await delay(1000);
     const rendering = await frame.evaluate(() => ({
       drew: window.artworkDraws > 0,
       canvases: document.querySelectorAll('canvas').length,

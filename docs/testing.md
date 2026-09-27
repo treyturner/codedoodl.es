@@ -39,9 +39,11 @@ Hosted CI subsequently exceeded that total budget for Boobs, Smashing Mega Scene
 and Treee while processing native input, screenshots or teardown. The artwork
 project now allows 180 seconds overall and 45 seconds for readiness assertions,
 and reuses the resolved iframe handle to avoid redundant selector waits behind
-software WebGL frames. Its traces retain actions, network and DOM snapshots
-without continuous screenshot capture competing for graphics resources; explicit
-artwork screenshots and failure screenshots remain enabled. Rendering assertions,
+software WebGL frames. Observation delays run in the test runner instead of
+queuing browser commands. Artwork traces retain actions and network events,
+without automatic DOM snapshots or continuous screenshot capture competing for
+graphics resources; explicit artwork and failure screenshots remain enabled.
+Rendering assertions,
 input, screenshots, the 1440×900 viewport and reviewed baselines are unchanged;
 automatic retries remain disabled.
 The local candidate gallery is at
