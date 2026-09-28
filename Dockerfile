@@ -48,6 +48,8 @@ RUN npm install \
     && npm prune --production
 
 FROM debian:bullseye-slim@sha256:e5b6442dd2e9684cf5e87d8338b5968f3b348636fc0be6d7850a381e3731a2bd AS runtime
+ENV NODE_ENV=production \
+    DOODLE_DATA_SOURCE=production
 
 COPY --from=builder /root/.nvm/versions/node/v10.16.0 /usr/local
 

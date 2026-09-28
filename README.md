@@ -8,6 +8,23 @@ If you would like to see the archive of doodles, you can do so at [fluuuid/coded
 
 ---
 
+### Self-hosted container
+
+Set `BASE_URL` to the application's public origin and `DOODLES_URL` to the
+gzip-aware artwork archive origin. The image defaults to `NODE_ENV=production`
+and `DOODLE_DATA_SOURCE=production`, so it loads remote production manifests
+without additional mode settings. Set `DOODLE_DATA_SOURCE=development` explicitly
+to use the remote DEV master instead.
+
+The listener uses `BIND_PORT`, then `PORT`, then port 3000 (3001 for preview).
+`BIND_ADDRESS` defaults to `0.0.0.0`.
+
+After building an image, run `bash scripts/test-container.sh IMAGE` to check its
+production defaults, remote data loading, port precedence and DEV archive override
+against an isolated local fixture. CI runs these checks before publication.
+
+---
+
 ![codedoodl.es logo](http://assets.codedoodl.es/readme_logo.png?1)
 
 <code>**\\\\ A curated showcase of creative coding sketches \\\\**</code>

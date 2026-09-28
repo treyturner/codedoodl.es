@@ -1,11 +1,11 @@
 config = module.exports
 
 config.express =
-	port : process.env.BIND_PORT or 3000
+	port : process.env.BIND_PORT or process.env.PORT or 3000
 	ip   : process.env.BIND_ADDRESS or "0.0.0.0"
 
 config.express_preview =
-	port : process.env.BIND_PORT or 3001
+	port : process.env.BIND_PORT or process.env.PORT or 3001
 	ip   : process.env.BIND_ADDRESS or "0.0.0.0"
 
 config.PRODUCTION = process.env.NODE_ENV is "production"
