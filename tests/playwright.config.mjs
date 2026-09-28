@@ -26,7 +26,7 @@ export default defineConfig({
     // Software WebGL on hosted runners makes input and capture slow for heavy
     // sketches. Keep a bounded budget for the whole observation and teardown.
     {
-      name: 'artwork', testMatch: /artwork\.spec\.mjs/, timeout: 180000,
+      name: 'artwork', testMatch: /artwork(?:-probe)?\.spec\.mjs/, timeout: 180000,
       expect: { timeout: 45000 },
       use: {
         ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 },
