@@ -43,7 +43,11 @@ mobile/GPU limitations.
 The image defaults to production mode and production archive manifests. Set
 `DOODLE_DATA_SOURCE=development` to select the remote DEV master. Listener ports
 use `BIND_PORT`, then `PORT`, then the application default. CI checks these image
-defaults with `bash scripts/test-container.sh IMAGE` before publication.
+defaults with `bash scripts/test-container.sh IMAGE` before publication. The
+checks launch the real image command under a one-CPU quota and cover its single
+application process, archive requests, password assets/sessions and shutdown.
+Standalone password-page styles and the original social-preview image ship in
+the image; see [restored asset provenance](docs/restored-assets.md).
 
 ## Working on the project
 

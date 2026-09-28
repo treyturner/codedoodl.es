@@ -3,6 +3,24 @@ import { returningVisitor, ready, gridReady, canvasFrame, observe, attachDiagnos
 
 test.afterEach(attachDiagnostics);
 
+test('password pages show a styled wordmark and loaded font without application JavaScript', async ({ page }) => {
+  const errors = observe(page);
+  await page.goto('http://auth:3000/');
+  const wordmark = page.locator('.preloader__text-outer');
+  await expect(wordmark).toHaveText('codedoodl.es');
+  await expect(wordmark).toBeVisible();
+  await expect(wordmark).toHaveCSS('color', 'rgb(255, 255, 255)');
+  await expect(page.locator('#preloader')).toHaveCSS('background-color', 'rgb(235, 66, 62)');
+  await page.evaluate(() => document.fonts.ready);
+  expect(await page.evaluate(() => [...document.fonts].some(face => face.family.replace(/["']/g, '') === 'monostena' && face.status === 'loaded'))).toBe(true);
+  await expect(page.locator('script[src]')).toHaveCount(0);
+  await page.goto('http://auth:3000/login');
+  await expect(page.locator('input[name=pw]')).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  expect(await page.evaluate(() => document.fonts.check('15px monostena'))).toBe(true);
+  expect(errors).toEqual([]);
+});
+
 test('home grid, fonts, thumbnails, and stable shell screenshot', async ({ page }) => {
   const errors = observe(page);
   await returningVisitor(page);

@@ -228,14 +228,17 @@ been exercised remotely in this stage.
 
 ## Run the baseline
 
-`bash scripts/test-container.sh IMAGE` runs four isolated runtime checks with
-the built image's own environment defaults and dependencies. A loopback HTTP
-fixture serves distinct gzip-compressed production and DEV manifests; checks
-cover production defaults, `PORT`, `BIND_PORT` precedence and an explicit DEV
-archive override. The shared check runs the shipped HTTP application as one
-worker to avoid the legacy image's host-CPU-sized cluster. CI requires it before
+`bash scripts/test-container.sh IMAGE` runs five isolated checks with the built
+image's own environment defaults, dependencies and actual ENTRYPOINT/CMD. A
+loopback HTTP fixture serves distinct gzip-compressed production and DEV
+manifests. Under a one-CPU quota, checks cover a single application process and
+one archive load, production defaults, `PORT`, `BIND_PORT` precedence, a DEV
+archive override, password-page CSS/fonts/icons and sessions, the home page's
+social image and clean SIGTERM shutdown. CI requires these checks before
 publication. The broader Compose suite also inherits the image's production
 defaults, retaining an explicit DEV-source override for the preview service.
+Browser checks verify that the standalone holding page shows its white wordmark
+on red and loads its font without the application's JavaScript.
 
 Requirements: Bash, Git, and Docker with Buildx and Compose. `npm test` is a
 convenience wrapper; the equivalent `bash tests/run.sh` needs no host Node install.

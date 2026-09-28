@@ -64,13 +64,13 @@ export async function vendor() {
 }
 
 export async function styles() {
-  const compiled = await compileAsync('project/sass/main.scss', { style: 'compressed' });
-  const result = await postcss([autoprefixer()]).process(compiled.css, { from: 'project/sass/main.scss', map: false });
-  for (const warning of result.warnings()) console.warn(warning.toString());
-  await output(`${publicDir}/css/main.css`, result.css);
-  // Login/holding share fonts and preloader styles; relative URLs resolve to
-  // their own /holding/static directory.
-  await output(`${publicDir}/holding/css/main.css`, result.css);
+  for (const [source, target] of [['main', 'css'], ['holding', 'holding/css']]) {
+    const from = `project/sass/${source}.scss`;
+    const compiled = await compileAsync(from, { style: 'compressed' });
+    const result = await postcss([autoprefixer()]).process(compiled.css, { from, map: false });
+    for (const warning of result.warnings()) console.warn(warning.toString());
+    await output(`${publicDir}/${target}/main.css`, result.css);
+  }
 }
 
 export async function images() {
