@@ -46,6 +46,16 @@ graphics resources; explicit artwork and failure screenshots remain enabled.
 Rendering assertions,
 input, screenshots, the 1440×900 viewport and reviewed baselines are unchanged;
 automatic retries remain disabled.
+After the input sequence, comparisons that have not yet observed a draw now wait
+up to 45 seconds for the first Canvas/WebGL drawing command when the reviewed
+baseline requires one. Dispositions initially places its random geometry behind
+the camera and advances the camera on animation frames; it can still be blank at
+the old fixed three-second observation point. The bounded wait observes the same
+running frame, preserves the drawing/error/request assertions, and still records
+diagnostics before rejecting a canvas that stays blank. Sketches without a drawing
+baseline and original-image recording retain the fixed observation window.
+Probe regressions cover delayed drawing, a canvas that only clears, and detachment
+during the wait. Run them with `bash tests/run.sh --project=artwork --grep 'artwork probe'`.
 The local candidate gallery is at
 [`tests/artifacts/artwork/index.html`](../tests/artifacts/artwork/index.html).
 Raw reports and screenshots are ignored build artifacts, with compact validation
