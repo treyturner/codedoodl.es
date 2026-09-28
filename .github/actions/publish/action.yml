@@ -12,7 +12,7 @@ inputs:
     description: "DockerHub password or token"
     required: false
   forgejo-token:
-    description: "Forgejo registry token"
+    description: "Forgejo registry token (required when publishing to Forgejo)"
     required: false
   github-token:
     description: "GitHub token with permissions to read and write packages"
@@ -24,8 +24,18 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Require credentials for every destination before login or push
+      shell: bash -euo pipefail {0}
+      env:
+        REFS_RAW: ${{ inputs.refs }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        FORGEJO_TOKEN: ${{ inputs.forgejo-token }}
+        DOCKERHUB_USERNAME: ${{ inputs.dockerhub-username }}
+        DOCKERHUB_PASSWORD: ${{ inputs.dockerhub-password }}
+      run: bash "$GITHUB_ACTION_PATH/check-credentials.sh"
+
     - name: Login to GitHub Container Registry
-      if: ${{ contains(inputs.refs, 'ghcr.io') && inputs.github-token != '' }}
+      if: ${{ contains(inputs.refs, 'ghcr.io/') }}
       uses: docker/login-action@c144859092e8e353f3e118b0b329679a62351c3e  # v4.0.0
       with:
         registry: ghcr.io
@@ -33,7 +43,7 @@ runs:
         password: ${{ inputs.github-token }}
 
     - name: Login to Forgejo Container Registry
-      if: ${{ contains(inputs.refs, 'forgejo.treyturner.info') && inputs.forgejo-token != '' }}
+      if: ${{ contains(inputs.refs, 'forgejo.treyturner.info/') }}
       uses: docker/login-action@c144859092e8e353f3e118b0b329679a62351c3e  # v4.0.0
       with:
         registry: forgejo.treyturner.info
@@ -41,7 +51,7 @@ runs:
         password: ${{ inputs.forgejo-token }}
 
     - name: Login to DockerHub
-      if: ${{ contains(inputs.refs, 'docker.io') && inputs.dockerhub-username != '' && inputs.dockerhub-password != '' }}
+      if: ${{ contains(inputs.refs, 'docker.io/') }}
       uses: docker/login-action@c144859092e8e353f3e118b0b329679a62351c3e  # v4.0.0
       with:
         username: ${{ inputs.dockerhub-username }}

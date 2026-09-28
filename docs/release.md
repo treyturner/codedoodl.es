@@ -22,6 +22,11 @@ The workflow records and compares both registry digests in the job summary and
 so deploy using the recorded **digest**, never by relying on tag immutability.
 The build workflow no longer updates `latest` automatically.
 
+Both publication and promotion require `FORGEJO_REGISTRY_TOKEN` alongside the
+workflow's GitHub token. A preflight asserts credentials for every selected
+registry before login or any push; missing Forgejo credentials fail the run
+instead of skipping that registry or leaving a GHCR-only publication.
+
 ## Validate the exact image on the host
 
 Before changing the service, retain its current image reference and deployment
@@ -52,6 +57,11 @@ that the source commit is in master and that both registry candidate tags still
 resolve to that digest. It copies that exact manifest to each `latest` tag and
 verifies the result. It does not rebuild or pull/tag a different platform image.
 Feature branches cannot execute this promotion job.
+
+All `latest` writers share the `codedoodles-production-promotion` concurrency
+group, including legacy containerization workflows dispatched from another
+branch. Active publishers are not cancelled by a newer run. Candidate builds
+retain separate concurrency because their tags are unique per run.
 
 For a read-only preflight with registry access:
 

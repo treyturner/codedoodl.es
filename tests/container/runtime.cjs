@@ -137,6 +137,20 @@ async function run() {
       assert.strictEqual(share.status, 200, shareURL);
       assert.ok(/image\/jpeg/.test(share.headers['content-type']));
       assert.strictEqual(share.body.slice(0, 3).toString('hex'), 'ffd8ff');
+      const cssURL = (home.match(/href="([^"]*\/css\/[^" ]+\.css)"/) || [])[1];
+      const css = await request(cssURL);
+      assert.strictEqual(css.status, 200);
+      assert.strictEqual(css.headers['content-encoding'], 'gzip');
+      assert.ok(css.body.toString().includes('@font-face'), 'Main stylesheet remains decodable');
+      for (const family of ['A', 'B', 'F']) {
+        const font = await request(origin + '/static/fonts/Monosten-' + family + '-webfont.svg', { headers: { 'Accept-Encoding': 'identity' } });
+        assert.strictEqual(font.status, 200);
+        assert.strictEqual(font.headers['content-encoding'], undefined, 'Plain SVG fonts must not be labelled as gzip');
+        assert.ok(font.body.toString().includes('<svg'));
+      }
+      const missing = await request(origin + '/static/missing-font.svg', { headers: { 'Accept-Encoding': 'identity' } });
+      assert.strictEqual(missing.status, 404);
+      assert.strictEqual(missing.headers['content-encoding'], undefined, 'Missing assets must not be labelled as gzip');
     }
     child.kill('SIGTERM');
     assert.deepStrictEqual(await exited, { code: 0, signal: null }, 'Real launcher must shut down cleanly on SIGTERM');
