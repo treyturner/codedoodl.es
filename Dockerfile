@@ -36,7 +36,14 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | b
 ENV PYENV_ROOT="/root/.pyenv" \
     PATH="/root/.pyenv/shims:/root/.pyenv/bin:$PATH"
 
-RUN curl https://pyenv.run | bash \
+# Pin the pyenv source already used by the validated legacy build (2.8.6).
+RUN curl --fail --location --show-error \
+        https://codeload.github.com/pyenv/pyenv/tar.gz/513364609d0e56b919bcc44163614b04fa239621 \
+        -o /tmp/pyenv.tar.gz \
+    && echo '439f41edbea23d1ad34490e004cffa40d45f5e34247c5592ed86959a9fbc352f  /tmp/pyenv.tar.gz' | sha256sum --check --strict \
+    && mkdir -p "$PYENV_ROOT" \
+    && tar -xzf /tmp/pyenv.tar.gz --strip-components=1 -C "$PYENV_ROOT" \
+    && rm /tmp/pyenv.tar.gz \
     && pyenv install 2.7.18 \
     && pyenv global 2.7.18
 

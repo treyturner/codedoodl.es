@@ -1,0 +1,23 @@
+.git
+**/node_modules
+.sass-cache
+npm-debug.log*
+temp
+dist
+**/credentials.coffee
+**/.env
+**/.env.*
+rev-manifest.json
+# Rebuild generated files, retaining the tracked static fonts, icons and pages.
+app/public/css
+app/public/holding/css
+app/public/data
+app/public/js
+app/public/html
+app/public/static/fonts
+app/public/static/img/logos
+app/public/static/img/ss
+app/public/static/img/share_thumbnail.jpg
+app/site/index.html
+app/site/holding.html
+app/site/login.html

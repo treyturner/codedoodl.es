@@ -33,6 +33,16 @@ defaults, port precedence, DEV archive selection, a single manifest load,
 password-page assets/sessions, the social image and graceful shutdown. CI runs
 these checks before publication.
 
+The legacy build pins pyenv to commit
+`513364609d0e56b919bcc44163614b04fa239621` and verifies the source archive's
+SHA-256 before installing Python 2.7.18. Docker excludes host dependencies and
+generated output while retaining tracked static assets.
+
+Publication requires `FORGEJO_REGISTRY_TOKEN` for the Forgejo destination;
+missing credentials fail before either registry is updated. All writers of
+`latest`, including manual runs on other branches, share a concurrency group
+and do not cancel an active publisher. Feature/PR validation remains independent.
+
 ---
 
 ![codedoodl.es logo](http://assets.codedoodl.es/readme_logo.png?1)
