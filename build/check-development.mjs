@@ -42,7 +42,8 @@ export async function checkDevelopment(root, work, gulp) {
   await writeFile(join(archive, 'author/sketch/index.html'), gzipSync(sketch));
   await writeFile(join(archive, 'author/sketch/main.js'), gzipSync('window.sketchLoaded = true;'));
   await writeFile(join(archive, 'author/sketch/thumb.mp4'), '0123456789');
-  const env = { ...process.env, BIND_PORT: String(appPort), DEV_PORT: String(devPort), DOODLES_ARCHIVE: archive };
+  const env = { ...process.env, PORT: String(appPort), DEV_PORT: String(devPort), DOODLES_ARCHIVE: archive };
+  delete env.BIND_PORT;
   delete env.DOODLES_URL;
   delete env.BASE_URL;
   delete env.DEV_PASSWORD;

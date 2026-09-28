@@ -9,8 +9,8 @@ async function main() {
   if (!process.argv[2]) throw new Error('Usage: npm run doodle:preview -- doodles/author/name');
   const directory = resolve(process.argv[2]);
   if (!(await stat(join(directory, 'index.html'))).isFile()) throw new Error('The doodle must have an index.html file.');
-  const port = Number(process.env.BIND_PORT || 3001);
-  if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('BIND_PORT must be an integer from 0 to 65535.');
+  const port = Number(process.env.BIND_PORT || process.env.PORT || 3001);
+  if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('BIND_PORT or PORT must be an integer from 0 to 65535.');
   const host = process.env.BIND_ADDRESS || '127.0.0.1';
   const app = express();
   // Use the same signature-aware serving as the app, including gzip and ranges.

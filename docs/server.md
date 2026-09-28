@@ -32,6 +32,8 @@ exits cleanly. Winston writes structured JSON to the container console.
 
 Production loads the remote production master only when
 `DOODLE_DATA_SOURCE=production`; other values select the remote DEV master.
+The container sets both `NODE_ENV` and `DOODLE_DATA_SOURCE` to `production` by
+default; explicit runtime environment variables override those image defaults.
 On a failed cold-start master request (network error, HTTP error, timeout, invalid
 JSON or invalid shape), it uses the application's local DEV master and fetches
 the individual remote manifests. This retains the original fallback selection.
@@ -54,7 +56,7 @@ empty master replaces previous data with empty arrays.
 
 ## Configuration and sessions
 
-Existing variables keep their meanings: `NODE_ENV`, `BIND_ADDRESS`, `BIND_PORT`,
+Existing variables keep their meanings: `NODE_ENV`, `BIND_ADDRESS`, `BIND_PORT`, `PORT`,
 `BASE_URL`, `DOODLES_URL`, `DOODLE_DATA_SOURCE`, `GOOGLE_ANALYTICS_CODE`, and
 `DEV_PASSWORD`. Development's `DOODLES_ARCHIVE` option is described in
 [build.md](build.md).
@@ -62,10 +64,11 @@ Existing variables keep their meanings: `NODE_ENV`, `BIND_ADDRESS`, `BIND_PORT`,
 | Setting | Default | Self-hosted use |
 | --- | --- | --- |
 | `NODE_ENV` | Development outside the image; `production` in Docker | Use production for deployed instances. |
-| `BIND_ADDRESS` / `BIND_PORT` | `0.0.0.0` / `3000` | Container listener, independent of public URL. |
+| `BIND_ADDRESS` | `0.0.0.0` | Listener address, independent of public URL. |
+| `BIND_PORT` / `PORT` | First nonempty value, then `3000` (`3001` for preview) | `BIND_PORT` takes precedence over the platform-provided `PORT`. |
 | `BASE_URL` | Original codedoodl.es origin in production | Set explicitly to the app's public HTTPS origin. |
 | `DOODLES_URL` | Original source.codedoodl.es archive | Set explicitly to the separate gzip-aware archive origin. |
-| `DOODLE_DATA_SOURCE` | Unset (DEV master) | Set `production` for the published archive master. |
+| `DOODLE_DATA_SOURCE` | Unset outside the image; `production` in Docker | Set `development` explicitly for the remote DEV master. |
 | `GOOGLE_ANALYTICS_CODE` | Empty | Optional retained analytics identifier. |
 | `DEV_PASSWORD` | Disabled | Optional preview password gate, independent of `NODE_ENV`. |
 | `DOODLES_ARCHIVE` | Sibling archive when found | Development only; local same-origin artwork. |

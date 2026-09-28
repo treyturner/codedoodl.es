@@ -16,7 +16,8 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --no-audit --no-fund
 
 FROM base AS runtime
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    DOODLE_DATA_SOURCE=production
 # Production executes Node directly; package managers belong only in build stages.
 RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack /opt/yarn-* \
     && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack /usr/local/bin/yarn /usr/local/bin/yarnpkg

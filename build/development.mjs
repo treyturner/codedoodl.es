@@ -33,7 +33,7 @@ export function watchSources(build, reload = () => {}) {
 }
 
 export async function serve(build) {
-  const port = Number(process.env.BIND_PORT || 3000);
+  const port = Number(process.env.BIND_PORT || process.env.PORT || 3000);
   const proxyPort = Number(process.env.DEV_PORT || 3002);
   const target = `http://127.0.0.1:${port}`;
   const archive = developmentArchive(target);

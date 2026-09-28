@@ -2,10 +2,8 @@ x-app: &app
   image: ${CODEDOODLES_IMAGE:?Set CODEDOODLES_IMAGE}
   init: true
   environment: &environment
-    NODE_ENV: production
     BASE_URL: http://site.test:3000
     DOODLES_URL: http://assets:8080
-    DOODLE_DATA_SOURCE: production
     GOOGLE_ANALYTICS_CODE: ''
 
 services:

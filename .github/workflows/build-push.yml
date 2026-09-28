@@ -64,6 +64,9 @@ jobs:
           load: true
           push: false
 
+      - name: Check container runtime defaults and ports
+        run: bash scripts/test-container.sh codedoodles:candidate-${{ github.sha }}
+
       - name: Audit runtime, build and test dependencies
         run: |
           mkdir -p tests/artifacts/security

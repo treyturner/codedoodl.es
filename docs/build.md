@@ -24,7 +24,7 @@ proxies it through BrowserSync on http://localhost:3002. Successful rebuilds
 restart the compiled server, wait for readiness and reload connected browsers.
 Asset URLs follow the browser's host and port, so
 forwarded ports and LAN access work without additional URL configuration.
-`BIND_PORT` and `DEV_PORT` override the listening ports; an explicit `BASE_URL`
+`BIND_PORT` (falling back to `PORT`) and `DEV_PORT` override the listening ports; an explicit `BASE_URL`
 overrides the public URL. `npm run watch` only rebuilds sources and is
 useful with a separately managed server. Both watch modes watch browser/server
 code, configuration and manifests, use the production build pipeline including
@@ -38,7 +38,7 @@ forwarded port. `DOODLES_ARCHIVE` selects another checkout. An explicit
 gzip bytes, MIME types and media range support; BrowserSync does not inject code
 into it. The production container continues to use its configured asset host.
 
-The server environment interface remains `NODE_ENV`, `BIND_ADDRESS`, `BIND_PORT`,
+The server environment interface remains `NODE_ENV`, `BIND_ADDRESS`, `BIND_PORT`, `PORT`,
 `BASE_URL`, `DOODLES_URL`, `DOODLE_DATA_SOURCE`, `GOOGLE_ANALYTICS_CODE`, and
 `DEV_PASSWORD`. Point `DOODLES_URL` at a correctly configured archive host.
 The container tests supply their own pinned, offline asset server. Development
@@ -124,7 +124,7 @@ old Mkdirp, Colors and Valid-URL helpers. Figlet and Slug remain pinned inputs.
 
 `npm run doodle:preview -- doodles/author/name` serves one sketch, including
 precompressed archive entries, at http://127.0.0.1:3001. `BIND_ADDRESS` and
-`BIND_PORT` override the listener. Type `exit`, Ctrl+C or send SIGTERM to stop;
+`BIND_PORT` (falling back to `PORT`) override the listener. Type `exit`, Ctrl+C or send SIGTERM to stop;
 source files remain intact. An explicit `0.0.0.0` bind enables LAN testing.
 
 `npm run test:tools` checks creation, overwrite protection, invalid input,

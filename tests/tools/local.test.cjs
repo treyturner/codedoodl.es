@@ -58,8 +58,8 @@ test('creator retries invalid input and reports incomplete piped input without w
   await assert.rejects(readFile(join(empty, 'doodles/manifest.json')), { code: 'ENOENT' });
 });
 
-async function preview(t, cwd) {
-  const process = run('previewPR.js', cwd, undefined, [cwd], { BIND_PORT: '0', BIND_ADDRESS: '127.0.0.1' });
+async function preview(t, cwd, env = {}) {
+  const process = run('previewPR.js', cwd, undefined, [cwd], { BIND_PORT: '0', PORT: 'invalid', BIND_ADDRESS: '127.0.0.1', ...env });
   t.after(() => { if (process.child.exitCode === null) process.child.kill('SIGTERM'); });
   const deadline = Date.now() + 5000;
   while (!process.output().match(/http:\/\/127.0.0.1:\d+\//)) {
@@ -97,10 +97,11 @@ test('preview serves gzip archive entries, byte ranges and clean missing respons
   assert.deepEqual(await readFile(join(cwd, 'index.html')), bytes);
 });
 
-test('preview serves newly created plain HTML and handles SIGTERM', async t => {
+test('preview honors PORT, serves newly created plain HTML and handles SIGTERM', async t => {
   const cwd = await workspace(t);
   await writeFile(join(cwd, 'index.html'), '<title>New sketch</title>');
-  const server = await preview(t, cwd);
+  const server = await preview(t, cwd, { BIND_PORT: '', PORT: '0' });
+  assert.notEqual(new URL(server.url).port, '3001', 'PORT=0 must request an available port instead of the default');
   assert.equal(await (await fetch(server.url)).text(), '<title>New sketch</title>');
   server.child.kill('SIGTERM');
   assert.equal((await server.done).code, 0);

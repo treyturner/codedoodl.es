@@ -40,6 +40,11 @@ non-root user. Current desktop browsers and mobile Safari/Chrome are supported;
 IE support has been retired. Individual archived sketches retain their original
 mobile/GPU limitations.
 
+The image defaults to production mode and production archive manifests. Set
+`DOODLE_DATA_SOURCE=development` to select the remote DEV master. Listener ports
+use `BIND_PORT`, then `PORT`, then the application default. CI checks these image
+defaults with `bash scripts/test-container.sh IMAGE` before publication.
+
 ## Working on the project
 
 - [Setup, commands and local sketch tools](docs/build.md)
