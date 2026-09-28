@@ -1,33 +1,24 @@
 #!/usr/bin/env node
 
-cluster = require 'cluster'
-config  = require "../config/server"
-app     = require './server'
+config = require '../config/server'
+app = require './server'
+log = require('winston').loggers.get('app:server')
 
-workers = {}
-count   = require('os').cpus().length
+# One process owns the cache and sessions; the container runtime supervises it.
+server = app.listen config.express.port, config.express.ip, ->
+    log.info('express is listening on ' + config.BASE_URL)
 
-log = require("winston").loggers.get("app:server")
+server.on 'error', (error) ->
+    log.error('Unable to listen for connections', error)
+    process.exit(10)
 
-spawn = ->
-  worker = cluster.fork()
-  workers[worker.pid] = worker
-  return worker
+stopping = false
+stop = ->
+    return if stopping
+    stopping = true
+    timeout = setTimeout (-> process.exit(1)), 5000
+    timeout.unref()
+    server.close -> process.exit(0)
 
-if cluster.isMaster and process.env.NODE_ENV is 'production'
-
-	(spawn()) for i in [0...count]
-
-	cluster.on 'death', (worker) ->
-		console.log 'worker ' + worker.pid + ' died. spawning a new process...'
-		delete workers[worker.pid]
-		spawn()
-
-else
-
-	app.listen config.express.port, config.express.ip, (error) ->
-		if error
-			log.error("Unable to listen for connections", error)
-			process.exit(10)
-
-		log.info("express is listening on " + config.BASE_URL);
+process.on 'SIGTERM', stop
+process.on 'SIGINT', stop

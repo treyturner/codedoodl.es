@@ -8,6 +8,17 @@ var gzip         = require('gulp-gzip');
 var livereload   = require('gulp-livereload');
 var handleErrors = require('../util/handleErrors');
 var pkg          = require('../../package.json');
+var rename       = require('gulp-rename');
+
+gulp.task('holdingStyles', function () {
+    return gulp.src(pkg.folders.src+'/sass/holding.scss')
+        .pipe(sass())
+        .pipe(prefix("ie >= 8", "ff >= 3", "safari >= 4", "opera >= 12", "chrome >= 4"))
+        .pipe(minifyCSS())
+        .pipe(rename('main.css'))
+        .pipe(gzip({ append: false }))
+        .pipe(gulp.dest(pkg.folders.dest+'/holding/css'));
+});
 
 gulp.task('sass', ['images'], function () {
     if (global.isWatching) {

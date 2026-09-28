@@ -19,9 +19,19 @@ to use the remote DEV master instead.
 The listener uses `BIND_PORT`, then `PORT`, then port 3000 (3001 for preview).
 `BIND_ADDRESS` defaults to `0.0.0.0`.
 
-After building an image, run `bash scripts/test-container.sh IMAGE` to check its
-production defaults, remote data loading, port precedence and DEV archive override
-against an isolated local fixture. CI runs these checks before publication.
+The image launches Node directly as one application process, so CPU quotas do
+not multiply archive downloads or split password sessions across workers. Use
+the container runtime's restart policy to supervise it; SIGTERM shuts it down.
+
+Password pages have their own built stylesheet and public font/icon files.
+The original social-preview image is bundled locally; see
+[restored asset provenance](docs/restored-assets.md).
+
+After building an image, run `bash scripts/test-container.sh IMAGE`. Five isolated
+checks launch the image's real command under a one-CPU quota and verify production
+defaults, port precedence, DEV archive selection, a single manifest load,
+password-page assets/sessions, the social image and graceful shutdown. CI runs
+these checks before publication.
 
 ---
 

@@ -65,4 +65,4 @@ COPY --from=builder /build/node_modules ./node_modules
 COPY --from=builder /build/package.json ./package.json
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["node", "-r", "coffee-script/register", "app/main.coffee"]

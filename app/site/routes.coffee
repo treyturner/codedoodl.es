@@ -99,8 +99,6 @@ setup = (app) ->
 	app.get "/#{config.routes.FORM}", formRedirect
 	app.get "/#{config.routes.EXTENSION}", extensionRedirect
 
-	app.get '/holding/*', (req, res, next) => res.sendfile "public#{req.url}"
-
 	app.get '/:path(*)', checkShortLink
 	app.get '*', checkAuth
 
