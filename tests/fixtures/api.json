@@ -1,0 +1,4448 @@
+{
+  "doodles": [
+    {
+      "id": "ewq",
+      "index": 78,
+      "slug": "dmnsgn/oitnb",
+      "created": "2017-12-14T23:37:05.591Z",
+      "name": "OITNB",
+      "author": {
+        "name": "Damien Seguin",
+        "github": "dmnsgn",
+        "website": "https://dmnsgn.me",
+        "twitter": "dmnsgn"
+      },
+      "description": "Orange is the new black. Or a tunnel.",
+      "tags": [
+        "canvas",
+        "2d",
+        "storm",
+        "tunnel"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Focus on the center point.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ykg",
+      "index": 77,
+      "slug": "andrevenancio/infinite-spaces",
+      "created": "2017-11-27T23:15:49.316Z",
+      "name": "infinite spaces",
+      "author": {
+        "name": "Andr\u00e9 Ven\u00e2ncio",
+        "github": "andrevenancio",
+        "website": "https://andrevenancio.com",
+        "twitter": "andrevenancio"
+      },
+      "description": "mesh instancing with noise offset using lowww wengine",
+      "tags": [
+        "webgl2"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "move your mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "vag",
+      "index": 76,
+      "slug": "brunoimbrizi/go-with-the-flow",
+      "created": "2017-02-23T09:55:07.398Z",
+      "name": "Go With The Flow",
+      "author": {
+        "name": "Bruno Imbrizi",
+        "github": "brunoimbrizi",
+        "website": "http://brunoimbrizi.com",
+        "twitter": "brunoimbrizi"
+      },
+      "description": "Inspired by Queens of the Stone Age. <a href=\"http://brunoimbrizi.com/unbox/2017/02/go-with-the-flow/\" target=\"_blank\">More info</a>.",
+      "tags": [
+        "path following",
+        "noise",
+        "webgl",
+        "qotsa"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "go with the flow",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "zlw",
+      "index": 75,
+      "slug": "dmmn/newyear",
+      "created": "2017-01-18T14:28:30.571Z",
+      "name": "New year",
+      "author": {
+        "name": "Damien Mortini",
+        "github": "dmmn",
+        "website": "http://dmmn.io",
+        "twitter": "d_m_m_n_"
+      },
+      "description": "Fireworks to celebrate the 5 years of <a href=\"http://christmasexperiments.com/\" target=\"_blank\">Christmas Experiments</a>.",
+      "tags": [
+        "webgl",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "move your mouse / touch and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "xgp",
+      "index": 74,
+      "slug": "samsy/boobs",
+      "created": "2017-01-18T14:18:41.529Z",
+      "name": "Boobs",
+      "author": {
+        "name": "Samsy",
+        "github": "Samsy",
+        "website": "http://samsy.ninja",
+        "twitter": "Samsyyyy"
+      },
+      "description": "Noise liquid using a scale in a box ! Boobs are for fun though !",
+      "tags": [
+        "noise",
+        "boobs",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "rzz",
+      "index": 72,
+      "slug": "flexi23/candlewick",
+      "created": "2016-07-31T12:03:53.105Z",
+      "name": "Candlewick",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "firey two channel reaction-diffusion",
+      "tags": [
+        "GPGPU",
+        "fluid",
+        "simulation"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "swirl",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "qzx",
+      "index": 71,
+      "slug": "andrevenancio/blobs",
+      "created": "2016-07-21T23:24:34.776Z",
+      "name": "Blobs",
+      "author": {
+        "name": "Andr\u00e9 Ven\u00e2ncio",
+        "github": "andrevenancio",
+        "website": "https://andrevenancio.com",
+        "twitter": "andrevenancio"
+      },
+      "description": "Blobs is a doodle inspired by Jonatan Gr\u00f6nkvist work. Its a study on real time rendering and post processing techniques.",
+      "tags": [
+        "webgl",
+        "ssao",
+        "noise",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click or Touch to interact",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ler",
+      "index": 70,
+      "slug": "zadvorsky/crystals",
+      "created": "2016-07-21T23:11:50.168Z",
+      "name": "crystals",
+      "author": {
+        "name": "zadvorsky",
+        "github": "zadvorsky",
+        "website": "http://zadvorsky.com",
+        "twitter": "zadvorsky"
+      },
+      "description": "THREE.js vertex shader animation",
+      "tags": [
+        "webgl",
+        "three.js",
+        "vertex-shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Look around. Press 'P' to pause.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "kqj",
+      "index": 69,
+      "slug": "jeremboo/orchid",
+      "created": "2016-07-21T22:53:21.669Z",
+      "name": "Orchid",
+      "author": {
+        "name": "J\u00e9r\u00e9mie Boulay",
+        "github": "Jeremboo",
+        "website": "http://jeremieboulay.fr",
+        "twitter": "JeremBoo"
+      },
+      "description": "Generator of orchid mood for a mobile application realized during the project \"L'O de Sisley\" at Gobelins, l'\u00e9cole de l'image. <br/><br/>more: <a href=\"http://jeremieboulay.fr/o-de-sisley/\" target=\"_blank\">http://jeremieboulay.fr/o-de-sisley</a><br/><br/>",
+      "tags": [
+        "threejs",
+        "webgl",
+        "orchid",
+        "flower",
+        "mood"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Click to change mood, tap 'c' to close it.",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "jlo",
+      "index": 68,
+      "slug": "yiwenl/flocking",
+      "created": "2016-07-21T22:34:56.486Z",
+      "name": "Flocking",
+      "author": {
+        "name": "Yi-Wen Lin",
+        "github": "yiwenl",
+        "website": "http://blog.bongiovi.tw/",
+        "twitter": "yiwen_lin"
+      },
+      "description": "Experiment with flocking.",
+      "tags": [
+        "particles",
+        "flocking"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "Move around. Press space bar to change colour theme.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "gxw",
+      "index": 67,
+      "slug": "yiwenl/shading-particles",
+      "created": "2016-02-25T21:58:25.881Z",
+      "name": "Shading Particles",
+      "author": {
+        "name": "Yi-Wen Lin",
+        "github": "yiwenl",
+        "website": "http://blog.bongiovi.tw/",
+        "twitter": "yiwen_lin"
+      },
+      "description": "Experimenting curl noise and shadow mapping.",
+      "tags": [
+        "curl noise",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move around.",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "ozl",
+      "index": 66,
+      "slug": "edankwan/the-spirit",
+      "created": "2016-02-07T13:45:50.524Z",
+      "name": "The Spirit",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "The Spirit is a noise based WebGL experience.",
+      "tags": [
+        "gpgpu",
+        "curl noise",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "drag and drop",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "woa",
+      "index": 65,
+      "slug": "flexi23/firewater",
+      "created": "2016-02-06T13:56:22.521Z",
+      "name": "Firewater",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Expansive rgba cycling Turing-pattern fluid simulation",
+      "tags": [
+        "Fluid",
+        "Shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "pick your nose",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "ppe",
+      "index": 64,
+      "slug": "edankwan/touch",
+      "created": "2016-02-06T10:18:35.698Z",
+      "name": "TOUCH",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "It is an experiment to showcase the possibility to apply the physics with 262k particles on Leap Motion by using the signed distance field.",
+      "tags": [
+        "webgl",
+        "three.js",
+        "particles",
+        "leapmotion"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Use Leap Motion or drag and drop",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "nxm",
+      "index": 63,
+      "slug": "robin-dela/flocon",
+      "created": "2016-01-20T23:46:26.171Z",
+      "name": "Flocon",
+      "author": {
+        "name": "Robin Delaporte",
+        "github": "robin-dela",
+        "website": "http://robindelaporte.fr",
+        "twitter": "not__robin"
+      },
+      "description": "Interactive snowflake",
+      "tags": [
+        "threejs",
+        "webgl",
+        "christmas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Drag to rotate, click to explode",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "mwv",
+      "index": 62,
+      "slug": "edankwan/smashing-mega-scene",
+      "created": "2016-01-20T23:17:10.402Z",
+      "name": "Smashing Mega Scene",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "It is an experiment to recreate a 3d model with a million of particles and use GPGPU for the physics.",
+      "tags": [
+        "webgl",
+        "three.js",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Space to reset. D, E keys for look",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "evq",
+      "index": 61,
+      "slug": "samsy/curly-shades",
+      "created": "2016-01-16T14:34:40.411Z",
+      "name": "Curly Shades",
+      "author": {
+        "name": "Samsy",
+        "github": "Samsy",
+        "website": "http://samsy.ninja",
+        "twitter": "Samsyyyy"
+      },
+      "description": "Simplex derivative curl noise 4D FBO for threejs. Shadow technic thanks to EdanKwan Blog post: <br/><br/><a href=\"http://blog.edankwan.com/post/three-js-advanced-tips-shadow\" target=\"_blank\">http://blog.edankwan.com/post/three-js-advanced-tips-shadow</a>",
+      "tags": [
+        "webgl",
+        "threejs",
+        "shader",
+        "computational"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Drag, drop and zoom",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "yag",
+      "index": 60,
+      "slug": "edankwan/constraint",
+      "created": "2016-01-16T14:08:48.899Z",
+      "name": "Constraint",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "It is a simple experiment I did to use the position based constraint and curl noise movement on the velocity to create that organic look and feel.",
+      "tags": [
+        "webgl",
+        "three.js",
+        "curl-noise"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Any key to toggle color theme",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "veg",
+      "index": 59,
+      "slug": "silviopaganini/curl-noise",
+      "created": "2015-12-05T16:18:03.129Z",
+      "name": "Curl noise",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Curl noise exploration",
+      "tags": [
+        "webgl",
+        "noise",
+        "curl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move around ",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "zaw",
+      "index": 58,
+      "slug": "tholman/generative-boids",
+      "created": "2015-12-05T15:57:05.050Z",
+      "name": "Generative Boids",
+      "author": {
+        "name": "Tim Holman",
+        "github": "tholman",
+        "website": "http://tholman.com",
+        "twitter": "twholman"
+      },
+      "description": "Generative Boids is an experiment combining flocking and simple ai behaviour with stylized drawing techniques.",
+      "tags": [
+        "canvas",
+        "javascript",
+        "flocking"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to refresh/randomize the parameters",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "xep",
+      "index": 57,
+      "slug": "gwenvanhee/pulsator",
+      "created": "2015-11-28T12:27:53.419Z",
+      "name": "pulsator ",
+      "author": {
+        "name": "Gwen Vanhee",
+        "github": "gwenvanhee",
+        "website": "http://nocomputer.be",
+        "twitter": "wearenocomputer"
+      },
+      "description": "Generative experiment with maths (sin, cos, distance)",
+      "tags": [
+        "generative",
+        "oscillator",
+        "canvas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "move & click",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "awk",
+      "index": 56,
+      "slug": "zadvorsky/particle-stream",
+      "created": "2015-11-10T22:32:54.920Z",
+      "name": "particle-stream",
+      "author": {
+        "name": "zadvorsky",
+        "github": "zadvorsky",
+        "website": "http://www.zadvorsky.com",
+        "twitter": "zadvorsky"
+      },
+      "description": "THREE.js shader based animation system",
+      "tags": [
+        "three.js",
+        "shader",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move the Camera",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ryz",
+      "index": 55,
+      "slug": "tdhooper/icosahedron-snake",
+      "created": "2015-11-04T00:06:36.945Z",
+      "name": "Icosahedron Snake",
+      "author": {
+        "name": "Thomas Hooper",
+        "github": "tdhooper",
+        "website": "http://www.stainlessvision.com/",
+        "twitter": "tdhooper"
+      },
+      "description": "A black and white striped snake winds its way around a pastel blue icosahedron against a bright pink background",
+      "tags": [
+        "polyhedra",
+        "pink",
+        "psychedelic",
+        "threejs",
+        "bezierjs",
+        "graphlib"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click/touch to move camera",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "qxx",
+      "index": 54,
+      "slug": "flexi23/le-moustache",
+      "created": "2015-10-27T22:45:05.031Z",
+      "name": "Le Moustache",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Unfinished entry for js1k: L-system fern fractal that could be compressed to less than 768 characters of JavaScript.<br/><br/><a href=\"http://www.cake23.de/hereBeDragons/\" target=\"_blank\">http://www.cake23.de/hereBeDragons/</a>",
+      "tags": [
+        "L-System",
+        "Fractal"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "circle around the center",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "lpr",
+      "index": 53,
+      "slug": "silviopaganini/mirroring-forms",
+      "created": "2015-10-27T22:26:27.682Z",
+      "name": "Mirroring forms",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Morroring generative forms, <a href=\"https://www.youtube.com/watch?t=34&v=kLmLk0Vuw8c\" target=\"_blank\">inspiration</a>",
+      "tags": [
+        "generative",
+        "mirroring",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Mouse your mouse around",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "koj",
+      "index": 52,
+      "slug": "hellochar/line",
+      "created": "2015-09-30T22:35:53.064Z",
+      "name": "line",
+      "author": {
+        "name": "Xiaohan Zhang",
+        "github": "hellochar",
+        "website": "http://www.hellochar.com/",
+        "twitter": "hellocharlien"
+      },
+      "description": "Watch thousands of stars as they swirl and swell around your mouse or finger. Stretch and contort them from a perfect line into a brilliant galaxy around your pointer.<br/><br/>source: <a href=\"https://github.com/hellochar/hellochar.com\" target=\"_blank\">https://github.com/hellochar/hellochar.com</a>",
+      "tags": [
+        "interactive",
+        "webgl",
+        "threejs",
+        "mobile",
+        "gravity",
+        "attraction",
+        "particles",
+        "line",
+        "galaxy",
+        "star",
+        "shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click. drag. look.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "jyo",
+      "index": 51,
+      "slug": "silviopaganini/generative-forms",
+      "created": "2015-09-30T22:16:45.605Z",
+      "name": "Generative Forms",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Generative patterns using basic geometries, source code can be found here <a href=\"https://github.com/fluuuid/labs/tree/master/geo\" target=\"_blank\">https://github.com/fluuuid/labs/tree/master/geo</a>",
+      "tags": [
+        "generative",
+        "threejs",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "look around",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "gpw",
+      "index": 50,
+      "slug": "j0n/sea-something",
+      "created": "2015-09-30T21:44:48.160Z",
+      "name": "sea-something",
+      "author": {
+        "name": "Jon Andersson",
+        "github": "j0n",
+        "website": "http://jonandersson.se",
+        "twitter": "andersson_jon"
+      },
+      "description": "Minimalistic fluid waves. Move mouse/touch to create your own pattern, or just watch it make its waves.",
+      "tags": [
+        "minimal",
+        "sine",
+        "three.js"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move/touch if you want.",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "opl",
+      "index": 49,
+      "slug": "soulwire/plasmatic-isosurface",
+      "created": "2015-09-30T00:06:31.039Z",
+      "name": "Plasmatic Isosurface",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "A 2 dimensional plasma simulation running on the GPU, written in GLSL and CoffeeScript and rendered with WebGL.",
+      "tags": [
+        "webgl",
+        "gpu",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "...",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "wxa",
+      "index": 48,
+      "slug": "samsy/liquiform",
+      "created": "2015-09-24T23:17:27.442Z",
+      "name": "Liquiform",
+      "author": {
+        "name": "Samsy",
+        "github": "Samsy",
+        "website": "http://samsy.ninja",
+        "twitter": "Samsyyyy"
+      },
+      "description": "You can join a more feature-rich version at : <br /><a href=\"http://samsy.ninja/wire/index.html\" target=\"_blank\">http://samsy.ninja/wire/index.html</a>",
+      "tags": [
+        "glsl",
+        "noise",
+        "webgl",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Drag with left or right click, zoom",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "pxe",
+      "index": 47,
+      "slug": "nicoptere/the-rice-grain-mayhem",
+      "created": "2015-09-19T18:23:54.230Z",
+      "name": "the rice grain mayhem",
+      "author": {
+        "name": "Nicolas Barradeau",
+        "github": "nicoptere",
+        "website": "http://www.barradeau.com",
+        "twitter": "nicoptere"
+      },
+      "description": "the casual rice grain badassery.",
+      "tags": [
+        "rice",
+        "grains"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "watch'em move",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "ngm",
+      "index": 46,
+      "slug": "hellochar/dots",
+      "created": "2015-09-08T00:00:56.287Z",
+      "name": "dots",
+      "author": {
+        "name": "Xiaohan Zhang",
+        "github": "hellochar",
+        "website": "http://www.hellochar.com/",
+        "twitter": "hellocharlien"
+      },
+      "description": "Attract and deform a grid of crystals around your pointer.<br/><br/>source: <a href=\"https://github.com/hellochar/hellochar.com\" target=\"_blank\">https://github.com/hellochar/hellochar.com</a><br/><br/>",
+      "tags": [
+        "interactive",
+        "webgl",
+        "threejs",
+        "mobile",
+        "gravity",
+        "attraction",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click, drag and look",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "mpv",
+      "index": 45,
+      "slug": "montoyadiego/atombeat",
+      "created": "2015-09-04T07:39:46.196Z",
+      "name": "AtomBeat",
+      "author": {
+        "name": "Diego Montoya",
+        "github": "montoyadiego",
+        "website": "http://www.diego-montoya.com",
+        "twitter": "diego_montoya_"
+      },
+      "description": "Use left-click to place a gravity entity. Use right-click to change the sign of its gravitation constant. The space bar inverts the colors.",
+      "tags": [
+        "processing",
+        "gravity",
+        "space",
+        "time"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "left-click / right-click / space bar",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "eoq",
+      "index": 44,
+      "slug": "sirgodart/interstellar",
+      "created": "2015-08-27T20:48:57.436Z",
+      "name": "Interstellar",
+      "author": {
+        "name": "Godart Raets",
+        "github": "SirGodart",
+        "website": "http://www.gdart.be/intro.html",
+        "twitter": "SirSmoooth"
+      },
+      "description": "Inspired by Interstellar, entering the black hole.",
+      "tags": [
+        "Gravity",
+        "ThreeJs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click and drag ",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "yrg",
+      "index": 43,
+      "slug": "gianab/neon-bubbles",
+      "created": "2015-08-27T20:34:25.644Z",
+      "name": "Neon bubbles",
+      "author": {
+        "name": "Georgiana Blantin",
+        "github": "GianaB",
+        "website": "http://codepen.io/giana/",
+        "twitter": "gianablantin"
+      },
+      "description": "Random interactive particles with vanilla JavaScript on canvas.",
+      "tags": [
+        "particles",
+        "canvas",
+        "neon",
+        "glow"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to create, right click to destroy, hold and drag to attract",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "vog",
+      "index": 42,
+      "slug": "ivxvixviii/limbo",
+      "created": "2015-08-25T20:56:08.285Z",
+      "name": "Limbo",
+      "author": {
+        "name": "David Paul Rosser",
+        "github": "ivxvixviii",
+        "website": "http://ivxvixviii.io",
+        "twitter": "ivxvixviii"
+      },
+      "description": "Lee Perry-Smith is stuck in limbo.",
+      "tags": [
+        "surrealism",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "zjw",
+      "index": 41,
+      "slug": "gwenvanhee/codebrush",
+      "created": "2015-08-25T20:30:13.325Z",
+      "name": "codebrush",
+      "author": {
+        "name": "Gwen Vanhee",
+        "github": "gwenvanhee",
+        "website": "http://nocomputer.be",
+        "twitter": "wearenocomputer"
+      },
+      "description": "Generative drawing experiment based on mouse/touch input",
+      "tags": [
+        "generative",
+        "drawing",
+        "canvas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "touch & move, click to reset",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "xwp",
+      "index": 40,
+      "slug": "williamapan/collapsar",
+      "created": "2015-08-20T19:47:13.795Z",
+      "name": "Collapsar",
+      "author": {
+        "name": "William Mapan",
+        "github": "williamapan",
+        "website": "http://wllmpn.com/",
+        "twitter": "williamapan"
+      },
+      "description": "WebGL tunnel acting like a collapsar <a href=\"http://i.imgur.com/HCTZNQ9.jpg\" target=\"_blank\">http://i.imgur.com/HCTZNQ9.jpg</a><br/>- Move around to highlight the tunnel<br/>- Press to speed up !",
+      "tags": [
+        "WebGL",
+        "THREEjs",
+        "Shaders",
+        "Tunnel"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move and/or press",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ark",
+      "index": 39,
+      "slug": "jpweeks/particulate",
+      "created": "2015-08-20T18:58:08.534Z",
+      "name": "Particulate",
+      "author": {
+        "name": "Jay Weeks",
+        "github": "jpweeks",
+        "website": "http://jayweeks.com",
+        "twitter": "jpweeks"
+      },
+      "description": "Particle physics micro library.<br/><br/>Check out the <a href=\"http://particulatejs.org/examples/\">examples</a>, <a href=\"http://particulatejs.org/docs/\">docs</a>, <a href=\"http://particulatejs.org/test/\">tests</a>, or <a href=\"https://github.com/jpweeks/particulate-js\">source on github</a>.",
+      "tags": [
+        "webgl",
+        "physics",
+        "simulation"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Control camera and repulsion force with mouse cursor.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "rwz",
+      "index": 38,
+      "slug": "raurir/racing-lines",
+      "created": "2015-08-18T20:33:02.390Z",
+      "name": "Racing Lines",
+      "author": {
+        "name": "Rauri Rochford",
+        "github": "raurir",
+        "website": "http://www.esquemedia.com",
+        "twitter": "raurir"
+      },
+      "description": "A bunch of blocks shifting around and swapping positions on two planes. Move the camera (drag, swipe or arrow keys) or go into warp speed (click, enter or space)!",
+      "tags": [
+        "3D",
+        "webgl",
+        "threejs",
+        "cubes"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Drag, Click, Swipe or use Arrow Keys + Enter + Space",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "qyx",
+      "index": 37,
+      "slug": "fredericbriolet/dispositions",
+      "created": "2015-08-17T20:56:18.907Z",
+      "name": "Dispositions",
+      "author": {
+        "name": "Fred Briolet",
+        "github": "FredericBriolet",
+        "website": "http://fredericbriolet.com/",
+        "twitter": "fredbriolet"
+      },
+      "description": "3d experiment based on color shades, particle drawing with renderer.autoClear and camera movement.<br/><br/>With sound : <a href=\"http://fredericbriolet.com/dispositions\" target=\"_blank\">http://fredericbriolet.com/dispositions</a>",
+      "tags": [
+        "threejs",
+        "webgl",
+        "color"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "Click to draw/clean, arrows to move",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "lrr",
+      "index": 36,
+      "slug": "flexi23/vortex-pair-warp",
+      "created": "2015-08-12T21:39:27.491Z",
+      "name": "Vortex Pair Warp",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "vanilla js/glsl remake of the transform shader from <a href=\"http://www.cake23.de/uno.beta/LaminarFlow2/\" target=\"_blank\">http://www.cake23.de/uno.beta/LaminarFlow2/</a> in combination with <a href=\"http://webglplayground.net/share/organic-net?gallery=1&fullscreen=0&width=800&height=600&header=1\" target=\"_blank\">http://webglplayground.net/share/organic-net?gallery=1&fullscreen=0&width=800&height=600&header=1</a> and a new composite shader.<br/><br/>The Turing Pattern only consumes a single color channel. View the source, hit alt+a and ctrl+v, add to fs-advance and fs-composite",
+      "tags": [
+        "WebGL",
+        "Shader",
+        "Turing",
+        "Cellular",
+        "Automaton",
+        "Vortex",
+        "Warp"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "move the mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "kej",
+      "index": 35,
+      "slug": "rolyatmax/nodes",
+      "created": "2015-08-12T19:45:33.106Z",
+      "name": "Nodes",
+      "author": {
+        "name": "Taylor Baldwin",
+        "github": "rolyatmax",
+        "website": "https://tbaldw.in",
+        "twitter": "taylorbaldwin"
+      },
+      "description": "Nodes float about, connecting with neighbors before drifting apart. <a href=\"https://github.com/rolyatmax/floating-nodes\" target=\"_blank\">Source</a> ",
+      "tags": [
+        "nodes",
+        "edges",
+        "patterns",
+        "smoke",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move your mouse around to influence the nodes and their colors.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "jwo",
+      "index": 34,
+      "slug": "silviopaganini/fireworks",
+      "created": "2015-08-12T19:23:10.626Z",
+      "name": "Fireworks",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Generative fireworks ",
+      "tags": [
+        "generative",
+        "fireworks",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move your mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "gnw",
+      "index": 33,
+      "slug": "stopyransky/pixeloze",
+      "created": "2015-08-12T08:12:30.549Z",
+      "name": "Pixeloze",
+      "author": {
+        "name": "Karol Stopyra",
+        "github": "stopyransky",
+        "website": "http://stopyransky.com",
+        "twitter": "stopyransky"
+      },
+      "description": "Watch how pixels collide, click to create new pix, drag pix to aim, release to shoot ",
+      "tags": [
+        "p5js",
+        "particles",
+        "collision",
+        "detection",
+        "quadtree"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "click / drag mouse on pix",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "oal",
+      "index": 32,
+      "slug": "mannytan/lilypad",
+      "created": "2015-08-10T23:21:16.504Z",
+      "name": "Lilypad",
+      "author": {
+        "name": "Manny Tan",
+        "github": "mannytan",
+        "website": "http://uncontrol.com",
+        "twitter": "mannytan"
+      },
+      "description": "Lily pad is an experiment that explores paper folding inspired by the form of a lily pad floating on top of water.",
+      "tags": [
+        "webGL",
+        "three.js"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to morph shape",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "wma",
+      "index": 31,
+      "slug": "nicoptere/popcorn",
+      "created": "2015-08-10T23:20:44.650Z",
+      "name": "popcorn",
+      "author": {
+        "name": "Nicolas Barradeau",
+        "github": "nicoptere",
+        "website": "http://www.barradeau.com",
+        "twitter": "nicoptere"
+      },
+      "description": "it takes some time to emerge",
+      "tags": [
+        "IFS",
+        "fractal",
+        "canvas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to reset",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "pye",
+      "index": 30,
+      "slug": "doormat23/nebulon",
+      "created": "2015-08-10T23:19:51.151Z",
+      "name": "Nebulon",
+      "author": {
+        "name": "Mat Groves",
+        "github": "GoodBoyDigital",
+        "website": "http://www.goodboydigital.com/",
+        "twitter": "doormat23"
+      },
+      "description": "Playing around with pixi.js filters and masking.",
+      "tags": [
+        "pixi.js",
+        "webGL"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move the mouse to see through space time...",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "npm",
+      "index": 29,
+      "slug": "silviopaganini/node-garden",
+      "created": "2015-08-10T22:06:07.444Z",
+      "name": "Node garden",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Node garden test using coffee-physics from <a href=\"http://twitter.com/soulwire\" target=\"_blank\">@soulwire</a>",
+      "tags": [
+        "node garden",
+        "physics"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move around",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "mav",
+      "index": 28,
+      "slug": "inconvergent/glitter",
+      "created": "2015-08-08T11:33:36.050Z",
+      "name": "Glitter",
+      "author": {
+        "name": "Anders Hoff",
+        "github": "inconvergent",
+        "website": "http://inconvergent.net",
+        "twitter": "inconvergent"
+      },
+      "description": "Pulsating particles that you can interact with using the mouse.",
+      "tags": [
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Mouseover",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "eaq",
+      "index": 27,
+      "slug": "caostar/n-chaosphere",
+      "created": "2015-08-07T22:00:36.022Z",
+      "name": "N-Chaosphere",
+      "author": {
+        "name": "Pablo Cabana",
+        "github": "caostar",
+        "website": "http://caostar.com/thoughts/",
+        "twitter": "pablocabana"
+      },
+      "description": "It came up when I was developing that Chaos Sphere Trip. For some reason the x,y,z positions got screwed and this little beauty appeared on my screen. I got marvelled for a while, just watching it, till I realised I had finally understand a vision from an old friend.<br/><br/>A couple of years ago, a frater appeared at one of our meetings all excited about a vision he had: a chaos sphere with several arrows. He said fourteen, but \u201cthat is was how I can see it, in fact it seems to have infinite arrows\u201d, he completed. Inspired, he couldn\u2019t stop talking about what it does mean: \u201cfreedom in all dimensions, beyond our simple threedimensional comprehension\u201d.<br/><br/>With the words above, I believe I am making his vision way clearer now. At that time, it sounded like a bit too much information. He didn\u2019t had that talent to \u201ctransmit a vision\u201d, if you know what I mean. But it planted a seed in my brain. A seed that has flourished now, giving birth to the n-dimensional Chaos Sphere.<br/><br/>I\u2019ve been meditating for a while looking to this. Since its behaviour is completely created by fortuity, a \u201ccode coincidence\u201d, anything that comes from it can be interpreted in a oracular way.<br/><br/>It looks very chaotic, but as chaos itself, sometimes it just shows its hidden order, and make you believe that some \u201cwill\u201d is on top of it.",
+      "tags": [
+        "chaosphere",
+        "chaos"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "just look at it and click and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "yog",
+      "index": 26,
+      "slug": "naso/spike-path",
+      "created": "2015-08-07T00:16:29.321Z",
+      "name": "Spike Path",
+      "author": {
+        "name": "F\u00e1bio Azevedo",
+        "github": "naso",
+        "website": "http://icantcontrolmyego.net",
+        "twitter": "naso"
+      },
+      "description": "Path exploration. Random spiky body around a line that grows based on the mouse speed. <a href=\"https://github.com/naso/spike-path\" target=\"_blank\">Source</a>",
+      "tags": [
+        "EaselJS",
+        "2D",
+        "shapes",
+        "minimal",
+        "light"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move mouse / touch and drag.",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "vwg",
+      "index": 25,
+      "slug": "sterlingcrispin/a-particular-nowhere",
+      "created": "2015-08-06T23:54:45.816Z",
+      "name": "A Particular Nowhere",
+      "author": {
+        "name": "Sterling Crispin",
+        "github": "sterlingcrispin",
+        "website": "http://www.sterlingcrispin.com",
+        "twitter": "sterlingcrispin"
+      },
+      "description": "More information <a href=\"http://www.sterlingcrispin.com/aparticularnowhere.html\" target=\"_blank\">here</a>",
+      "tags": [
+        "threejs",
+        "lsystems"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Look around",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "znw",
+      "index": 24,
+      "slug": "rolyatmax/dots",
+      "created": "2015-08-05T22:46:27.279Z",
+      "name": "Dots",
+      "author": {
+        "name": "Taylor Baldwin",
+        "github": "rolyatmax",
+        "website": "https://tbaldw.in",
+        "twitter": "taylorbaldwin"
+      },
+      "description": "Inspired by the game Dots & Boxes and the wall drawings of artist Sol LeWitt.",
+      "tags": [
+        "boxes",
+        "lines",
+        "patterns"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Sit back and enjoy.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "xqp",
+      "index": 23,
+      "slug": "cabbibo/arrows",
+      "created": "2015-08-05T21:58:20.404Z",
+      "name": "Arrows",
+      "author": {
+        "name": "cabbibo",
+        "github": "cabbibo",
+        "website": "http://cabbi.bo",
+        "twitter": "cabbibo"
+      },
+      "description": "<a href=\"https://github.com/cabbibo/arrow_CD\" target=\"_blank\">Source Code</a>",
+      "tags": [
+        "WebGL",
+        "GPGPU",
+        "Instanced Mesh"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "drag to rotate, scroll to zoom",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "aok",
+      "index": 22,
+      "slug": "neilcarpenter/ascii-trail",
+      "created": "2015-08-03T22:44:26.090Z",
+      "name": "ASCII Trail",
+      "author": {
+        "name": "Neil Carpenter",
+        "github": "neilcarpenter",
+        "website": "http://neilcarpenter.com",
+        "twitter": "neilcarpenter"
+      },
+      "description": "Canvas replication of the typography animation used on the codedoodl.es site.",
+      "tags": [
+        "PIXI",
+        "2D",
+        "typography"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move mouse / touch and drag to take control. Click / tap to change theme",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "rez",
+      "index": 21,
+      "slug": "flexi23/fractal-tree",
+      "created": "2015-08-03T22:44:15.832Z",
+      "name": "Fractal Tree",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Simple progressive image-based Lindenmeyer sytem type WebGL fractal renderer.<br/><br/>The tree is composited from 3 smaller copies of the whole image plus the root line element, one iteration per animation frame.",
+      "tags": [
+        "WebGL",
+        "fractal",
+        "shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move the mouse",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "qjx",
+      "index": 20,
+      "slug": "silviopaganini/muda-museum",
+      "created": "2015-08-03T22:44:05.974Z",
+      "name": "MuDA Museum",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "<a href=\"http://muda.co/\" target=\"_blank\">MuDA</a> advertising piece built using OIMO physics and ThreeJS",
+      "tags": [
+        "OimoJS",
+        "threeJS"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to follow a letter",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "lnr",
+      "index": 19,
+      "slug": "soulwire/muscular-hydrostats",
+      "created": "2015-08-03T22:43:54.336Z",
+      "name": "Muscular Hydrostats",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "An experiment with inverse kinematics to simulate tentacles.",
+      "tags": [
+        "physics",
+        "kinematics",
+        "tentacles",
+        "hair"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to take control or just watch the creature swim",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "kjj",
+      "index": 18,
+      "slug": "silviopaganini/game-of-life",
+      "created": "2015-08-03T22:43:43.724Z",
+      "name": "Game of Life",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "GPU Game of Life using ThreeJS and StackGL",
+      "tags": [
+        "gpu",
+        "game of life",
+        "threejs",
+        "stackgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Watch!",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "jpo",
+      "index": 17,
+      "slug": "soulwire/gravitational-field",
+      "created": "2015-08-03T22:43:29.965Z",
+      "name": "Gravitational Field",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "Particles in a gravitational field, randomly inverting charge to create interesting behaviors. Uses sketch.js to manage the 2d context and power animation.",
+      "tags": [
+        "physics",
+        "gravity",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Sit back and enjoy the emergent behaviors of charges particles",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "dgw",
+      "index": 16,
+      "slug": "flexi23/edgy-the-pit-minder",
+      "created": "2015-08-03T22:43:18.359Z",
+      "name": "Edgy The Pit Minder",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Edgy is a tiny WebGL compo that was made for JS1K 2014. The theme was \"Here Be Dragons\" and there were two experimental new categories: WebGL and 2k. The entry got rejected anyway because the two categories were not supposed to be mixed up. Technically there are two shader programs: one to advance the frame in a render-to-texture feedback loop and another for final compositing and recoloring - there are actually only two out of four channels used.<br/><br/>I wrote the code very short and cryptic from the beginning so that it could be compressed to below 2048 characters within the provided shim.<br/><br/>After it got rejected i started another try which in the end even won the competition: DragonDrop uses the same GPU feedback loop principle for what i call progressive image-based fractal rendering, where only one iteration of the fractal gets calculated per frame and the image approaches its form over the time. The Lindenmeyer type in the background uses only affine transformations. The mouse following type is made of a pretty simple complex number polynomial.",
+      "tags": [
+        "WebGL",
+        "dragon",
+        "fractal",
+        "edge",
+        "shader",
+        "js1k"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "The fractal curve follows the mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bol",
+      "index": 15,
+      "slug": "grgrdvrt/bacteria",
+      "created": "2015-08-03T22:43:08.706Z",
+      "name": "bacteria",
+      "author": {
+        "name": "grgrdvrt",
+        "github": "grgrdvrt",
+        "website": "http://www.grgrdvrt.com",
+        "twitter": "grgrdvrt"
+      },
+      "description": "<a href=\"http://codepen.io/grgrdvrt/pen/bywBt\" target=\"_blank\">original version, with colors</a>",
+      "tags": [
+        "canvas",
+        "lifeform"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "-",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "dwa",
+      "index": 14,
+      "slug": "inconvergent/meander",
+      "created": "2015-08-03T22:42:57.005Z",
+      "name": "Meander",
+      "author": {
+        "name": "Anders Hoff",
+        "github": "inconvergent",
+        "website": "http://inconvergent.net",
+        "twitter": "inconvergent"
+      },
+      "description": "Randomly generated structures that wander across the screen to created organic and sand-like imagery. The structures react to mouse taps and clicks.",
+      "tags": [
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "Mouseover or click/tap",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "dpe",
+      "index": 13,
+      "slug": "soulwire/recursion-toy",
+      "created": "2015-08-03T22:42:45.997Z",
+      "name": "Recursion Toy",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "A visual exploration of recursion that creates branches, roots, veins and other organic structures.",
+      "tags": [
+        "recursion",
+        "branching",
+        "growth"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to create branches.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bnm",
+      "index": 12,
+      "slug": "flexi23/webgl-particle-projection-feedback-soup",
+      "created": "2015-08-03T22:42:23.936Z",
+      "name": "WebGL Particle Projection Feedback Soup",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "This is a multi-stage render-to-texture WebGL shader pipeline experiment, including a GPU particle system, a fluid simulation, many blur levels, one texture feedback loop for reaction-diffusion pattern synthesis, and a final composite shader for recoloring. It's written in plain Vanilla JS as single page with no dependencies - just copy and edit.<br/><br/>The fluid simulation is adapted from the <a href=\"http://www.ibiblio.org/e-notes/webgl/gpu/fluid.htm\" target=\"_blank\">original by Evgeny Demidov</a>",
+      "tags": [
+        "WebGL",
+        "particle",
+        "fluid",
+        "simulation",
+        "GPU",
+        "glsl",
+        "shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "move the mouse and stirr up the fluid sim",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bmv",
+      "index": 11,
+      "slug": "grgrdvrt/treee",
+      "created": "2015-08-03T22:42:13.665Z",
+      "name": "Treee",
+      "author": {
+        "name": "grgrdvrt",
+        "github": "grgrdvrt",
+        "website": "http://www.grgrdvrt.com",
+        "twitter": "grgrdvrt"
+      },
+      "description": "a procedural 3d tree",
+      "tags": [
+        "webgl",
+        "threejs",
+        "tree"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "drag&drop to move the camera, press r to restart the animation",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "deq",
+      "index": 10,
+      "slug": "ayamflow/knacki",
+      "created": "2015-08-03T22:41:58.837Z",
+      "name": "knacki",
+      "author": {
+        "name": "Florian Morel",
+        "github": "ayamflow",
+        "website": "http://ayamflow.fr",
+        "twitter": "ayamflow"
+      },
+      "description": "2D canvas metaballs",
+      "tags": [
+        "canvas",
+        "metaballs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "click and move",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "byg",
+      "index": 9,
+      "slug": "inconvergent/waves",
+      "created": "2015-08-03T22:41:34.867Z",
+      "name": "Waves",
+      "author": {
+        "name": "Anders Hoff",
+        "github": "inconvergent",
+        "website": "http://inconvergent.net",
+        "twitter": "inconvergent"
+      },
+      "description": "Naive wave simulation with reflective edges.",
+      "tags": [
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Mouseover",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bvg",
+      "index": 8,
+      "slug": "dmnsgn/grey-blob",
+      "created": "2015-06-25T12:00:23.314Z",
+      "name": "Grey Blob",
+      "author": {
+        "name": "Damien Seguin",
+        "github": "dmnsgn",
+        "website": "http://dmnsgn.me/",
+        "twitter": "dmnsgn"
+      },
+      "description": "A blobby shape animated using Jaume Sanchez (<a href=\"http://twitter.com/thespite\" target=\"_blank\">@thespite</a>) metaballs.",
+      "tags": [
+        "webgl",
+        "threejs",
+        "blob"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click, click, click",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "dzw",
+      "index": 7,
+      "slug": "dmmn/substrate",
+      "created": "2015-06-24T10:06:25.563Z",
+      "name": "Substrate",
+      "author": {
+        "name": "Damien Mortini",
+        "github": "dmmn",
+        "website": "http://damienmortini.me.uk",
+        "twitter": "d_m_m_n_"
+      },
+      "description": "Procedurally generated city with a pinch of ray marching (<a href=\"https://github.com/dmmn/xp-substrate\" target=\"_blank\">Github</a>).",
+      "tags": [
+        "webgl",
+        "glsl",
+        "raymarching",
+        "procedural"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "move your mouse / touch and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "bxp",
+      "index": 6,
+      "slug": "williamapan/fireclock",
+      "created": "2015-06-23T12:54:51.133Z",
+      "name": "Fire Clock",
+      "author": {
+        "name": "William Mapan",
+        "github": "williamapan",
+        "website": "http://wllmpn.com/",
+        "twitter": "williamapan"
+      },
+      "description": "Clock made of particles and some words",
+      "tags": [
+        "pixijs",
+        "particles",
+        "colors"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click on the screen to change the text",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bak",
+      "index": 5,
+      "slug": "silviopaganini/planets",
+      "created": "2015-06-21T16:10:03.448Z",
+      "name": "Planets",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Playing around with shaders and maths",
+      "tags": [
+        "webGL",
+        "post-processing"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "swipe / move to see around",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "brz",
+      "index": 4,
+      "slug": "silviopaganini/sym",
+      "created": "2015-06-21T09:42:51.524Z",
+      "name": "Sym",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Inspired by Ryoji Ikeda supersymmetry, created  WebGL piece with physics",
+      "tags": [
+        "threejs",
+        "physijs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Drag to change perspective",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bqx",
+      "index": 3,
+      "slug": "silviopaganini/tubes",
+      "created": "2015-07-23T18:30:13.115Z",
+      "name": "Generative Tubes",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Generative Tubes in ThreeJS + Perlin noise",
+      "tags": [
+        "webGL",
+        "Generative",
+        "noise",
+        "post-processing"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to generate",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "blr",
+      "index": 2,
+      "slug": "neilcarpenter/square-stream",
+      "created": "2015-06-15T17:13:30.172Z",
+      "name": "Square stream",
+      "author": {
+        "name": "Neil Carpenter",
+        "github": "neilcarpenter",
+        "website": "http://neilcarpenter.com",
+        "twitter": "neilcarpenter"
+      },
+      "description": "Infinite stream of squares, learning PIXI.js. Click and release to change colours, move your mouse for some simple attraction.",
+      "tags": [
+        "PIXI",
+        "2D",
+        "webgl",
+        "rgb-shift"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click. Hold. Release.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "bkj",
+      "index": 1,
+      "slug": "silviopaganini/box-physics",
+      "created": "2015-06-15T15:22:48.730Z",
+      "name": "Box physics",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Playing around with some WebGL particles, physics and post-processing effects.",
+      "tags": [
+        "webGL",
+        "particles",
+        "physics",
+        "post-processing"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to explode",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Damien Seguin",
+      "github": "dmnsgn",
+      "website": "https://dmnsgn.me",
+      "twitter": "dmnsgn"
+    },
+    {
+      "name": "Andr\u00e9 Ven\u00e2ncio",
+      "github": "andrevenancio",
+      "website": "https://andrevenancio.com",
+      "twitter": "andrevenancio"
+    },
+    {
+      "name": "Bruno Imbrizi",
+      "github": "brunoimbrizi",
+      "website": "http://brunoimbrizi.com",
+      "twitter": "brunoimbrizi"
+    },
+    {
+      "name": "Damien Mortini",
+      "github": "dmmn",
+      "website": "http://dmmn.io",
+      "twitter": "d_m_m_n_"
+    },
+    {
+      "name": "Samsy",
+      "github": "Samsy",
+      "website": "http://samsy.ninja",
+      "twitter": "Samsyyyy"
+    },
+    {
+      "name": "Felix Woitzel",
+      "github": "Flexi23",
+      "website": "http://www.cake23.de",
+      "twitter": "Flexi23"
+    },
+    {
+      "name": "zadvorsky",
+      "github": "zadvorsky",
+      "website": "http://zadvorsky.com",
+      "twitter": "zadvorsky"
+    },
+    {
+      "name": "J\u00e9r\u00e9mie Boulay",
+      "github": "Jeremboo",
+      "website": "http://jeremieboulay.fr",
+      "twitter": "JeremBoo"
+    },
+    {
+      "name": "Yi-Wen Lin",
+      "github": "yiwenl",
+      "website": "http://blog.bongiovi.tw/",
+      "twitter": "yiwen_lin"
+    },
+    {
+      "name": "Edan Kwan",
+      "github": "edankwan",
+      "website": "http://www.edankwan.com/",
+      "twitter": "edankwan"
+    },
+    {
+      "name": "Robin Delaporte",
+      "github": "robin-dela",
+      "website": "http://robindelaporte.fr",
+      "twitter": "not__robin"
+    },
+    {
+      "name": "Silvio Paganini",
+      "github": "silviopaganini",
+      "website": "http://s2paganini.com",
+      "twitter": "silviopaganini"
+    },
+    {
+      "name": "Tim Holman",
+      "github": "tholman",
+      "website": "http://tholman.com",
+      "twitter": "twholman"
+    },
+    {
+      "name": "Gwen Vanhee",
+      "github": "gwenvanhee",
+      "website": "http://nocomputer.be",
+      "twitter": "wearenocomputer"
+    },
+    {
+      "name": "Thomas Hooper",
+      "github": "tdhooper",
+      "website": "http://www.stainlessvision.com/",
+      "twitter": "tdhooper"
+    },
+    {
+      "name": "Xiaohan Zhang",
+      "github": "hellochar",
+      "website": "http://www.hellochar.com/",
+      "twitter": "hellocharlien"
+    },
+    {
+      "name": "Jon Andersson",
+      "github": "j0n",
+      "website": "http://jonandersson.se",
+      "twitter": "andersson_jon"
+    },
+    {
+      "name": "Justin Windle",
+      "github": "soulwire",
+      "website": "http://soulwire.co.uk",
+      "twitter": "soulwire"
+    },
+    {
+      "name": "Nicolas Barradeau",
+      "github": "nicoptere",
+      "website": "http://www.barradeau.com",
+      "twitter": "nicoptere"
+    },
+    {
+      "name": "Diego Montoya",
+      "github": "montoyadiego",
+      "website": "http://www.diego-montoya.com",
+      "twitter": "diego_montoya_"
+    },
+    {
+      "name": "Godart Raets",
+      "github": "SirGodart",
+      "website": "http://www.gdart.be/intro.html",
+      "twitter": "SirSmoooth"
+    },
+    {
+      "name": "Georgiana Blantin",
+      "github": "GianaB",
+      "website": "http://codepen.io/giana/",
+      "twitter": "gianablantin"
+    },
+    {
+      "name": "David Paul Rosser",
+      "github": "ivxvixviii",
+      "website": "http://ivxvixviii.io",
+      "twitter": "ivxvixviii"
+    },
+    {
+      "name": "William Mapan",
+      "github": "williamapan",
+      "website": "http://wllmpn.com/",
+      "twitter": "williamapan"
+    },
+    {
+      "name": "Jay Weeks",
+      "github": "jpweeks",
+      "website": "http://jayweeks.com",
+      "twitter": "jpweeks"
+    },
+    {
+      "name": "Rauri Rochford",
+      "github": "raurir",
+      "website": "http://www.esquemedia.com",
+      "twitter": "raurir"
+    },
+    {
+      "name": "Fred Briolet",
+      "github": "FredericBriolet",
+      "website": "http://fredericbriolet.com/",
+      "twitter": "fredbriolet"
+    },
+    {
+      "name": "Taylor Baldwin",
+      "github": "rolyatmax",
+      "website": "https://tbaldw.in",
+      "twitter": "taylorbaldwin"
+    },
+    {
+      "name": "Karol Stopyra",
+      "github": "stopyransky",
+      "website": "http://stopyransky.com",
+      "twitter": "stopyransky"
+    },
+    {
+      "name": "Manny Tan",
+      "github": "mannytan",
+      "website": "http://uncontrol.com",
+      "twitter": "mannytan"
+    },
+    {
+      "name": "Mat Groves",
+      "github": "GoodBoyDigital",
+      "website": "http://www.goodboydigital.com/",
+      "twitter": "doormat23"
+    },
+    {
+      "name": "Anders Hoff",
+      "github": "inconvergent",
+      "website": "http://inconvergent.net",
+      "twitter": "inconvergent"
+    },
+    {
+      "name": "Pablo Cabana",
+      "github": "caostar",
+      "website": "http://caostar.com/thoughts/",
+      "twitter": "pablocabana"
+    },
+    {
+      "name": "F\u00e1bio Azevedo",
+      "github": "naso",
+      "website": "http://icantcontrolmyego.net",
+      "twitter": "naso"
+    },
+    {
+      "name": "Sterling Crispin",
+      "github": "sterlingcrispin",
+      "website": "http://www.sterlingcrispin.com",
+      "twitter": "sterlingcrispin"
+    },
+    {
+      "name": "cabbibo",
+      "github": "cabbibo",
+      "website": "http://cabbi.bo",
+      "twitter": "cabbibo"
+    },
+    {
+      "name": "Neil Carpenter",
+      "github": "neilcarpenter",
+      "website": "http://neilcarpenter.com",
+      "twitter": "neilcarpenter"
+    },
+    {
+      "name": "grgrdvrt",
+      "github": "grgrdvrt",
+      "website": "http://www.grgrdvrt.com",
+      "twitter": "grgrdvrt"
+    },
+    {
+      "name": "Florian Morel",
+      "github": "ayamflow",
+      "website": "http://ayamflow.fr",
+      "twitter": "ayamflow"
+    }
+  ],
+  "fallbackDoodles": [
+    {
+      "id": "ewq",
+      "index": 78,
+      "slug": "dmnsgn/oitnb",
+      "created": "2017-12-14T23:36:29.797Z",
+      "name": "OITNB",
+      "author": {
+        "name": "Damien Seguin",
+        "github": "dmnsgn",
+        "website": "https://dmnsgn.me",
+        "twitter": "dmnsgn"
+      },
+      "description": "Orange is the new black. Or a tunnel.",
+      "tags": [
+        "canvas",
+        "2d",
+        "storm",
+        "tunnel"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Focus on the center point.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ykg",
+      "index": 77,
+      "slug": "andrevenancio/infinite-spaces",
+      "created": "2017-11-27T23:14:35.060Z",
+      "name": "infinite spaces",
+      "author": {
+        "name": "Andr\u00e9 Ven\u00e2ncio",
+        "github": "andrevenancio",
+        "website": "https://andrevenancio.com",
+        "twitter": "andrevenancio"
+      },
+      "description": "mesh instancing with noise offset using lowww wengine",
+      "tags": [
+        "webgl2"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "move your mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "vag",
+      "index": 76,
+      "slug": "brunoimbrizi/go-with-the-flow",
+      "created": "2017-02-23T10:45:53.317Z",
+      "name": "Go With The Flow",
+      "author": {
+        "name": "Bruno Imbrizi",
+        "github": "brunoimbrizi",
+        "website": "http://brunoimbrizi.com",
+        "twitter": "brunoimbrizi"
+      },
+      "description": "Inspired by Queens of the Stone Age. <a href=\"http://brunoimbrizi.com/unbox/2017/02/go-with-the-flow/\" target=\"_blank\">More info</a>.",
+      "tags": [
+        "path following",
+        "noise",
+        "webgl",
+        "qotsa"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "go with the flow",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "zlw",
+      "index": 75,
+      "slug": "dmmn/newyear",
+      "created": "2017-01-18T14:27:29.288Z",
+      "name": "New year",
+      "author": {
+        "name": "Damien Mortini",
+        "github": "dmmn",
+        "website": "http://dmmn.io",
+        "twitter": "d_m_m_n_"
+      },
+      "description": "Fireworks to celebrate the 5 years of <a href=\"http://christmasexperiments.com/\" target=\"_blank\">Christmas Experiments</a>.",
+      "tags": [
+        "webgl",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "move your mouse / touch and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "xgp",
+      "index": 74,
+      "slug": "samsy/boobs",
+      "created": "2017-01-18T14:13:36.826Z",
+      "name": "Boobs",
+      "author": {
+        "name": "Samsy",
+        "github": "Samsy",
+        "website": "http://samsy.ninja",
+        "twitter": "Samsyyyy"
+      },
+      "description": "Noise liquid using a scale in a box ! Boobs are for fun though !",
+      "tags": [
+        "noise",
+        "boobs",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "rzz",
+      "index": 72,
+      "slug": "flexi23/candlewick",
+      "created": "2016-07-31T12:02:47.695Z",
+      "name": "Candlewick",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "firey two channel reaction-diffusion",
+      "tags": [
+        "GPGPU",
+        "fluid",
+        "simulation"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "swirl",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "qzx",
+      "index": 71,
+      "slug": "andrevenancio/blobs",
+      "created": "2016-07-21T23:23:03.912Z",
+      "name": "Blobs",
+      "author": {
+        "name": "Andr\u00e9 Ven\u00e2ncio",
+        "github": "andrevenancio",
+        "website": "https://andrevenancio.com",
+        "twitter": "andrevenancio"
+      },
+      "description": "Blobs is a doodle inspired by Jonatan Gr\u00f6nkvist work. Its a study on real time rendering and post processing techniques.",
+      "tags": [
+        "webgl",
+        "ssao",
+        "noise",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click or Touch to interact",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ler",
+      "index": 70,
+      "slug": "zadvorsky/crystals",
+      "created": "2016-07-21T23:10:30.267Z",
+      "name": "crystals",
+      "author": {
+        "name": "zadvorsky",
+        "github": "zadvorsky",
+        "website": "http://zadvorsky.com",
+        "twitter": "zadvorsky"
+      },
+      "description": "THREE.js vertex shader animation",
+      "tags": [
+        "webgl",
+        "three.js",
+        "vertex-shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Look around. Press 'P' to pause.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "kqj",
+      "index": 69,
+      "slug": "jeremboo/orchid",
+      "created": "2016-07-21T22:51:32.181Z",
+      "name": "Orchid",
+      "author": {
+        "name": "J\u00e9r\u00e9mie Boulay",
+        "github": "Jeremboo",
+        "website": "http://jeremieboulay.fr",
+        "twitter": "JeremBoo"
+      },
+      "description": "Generator of orchid mood for a mobile application realized during the project \"L'O de Sisley\" at Gobelins, l'\u00e9cole de l'image. <br/><br/>more: <a href=\"http://jeremieboulay.fr/o-de-sisley/\" target=\"_blank\">http://jeremieboulay.fr/o-de-sisley</a><br/><br/>",
+      "tags": [
+        "threejs",
+        "webgl",
+        "orchid",
+        "flower",
+        "mood"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Click to change mood, tap 'c' to close it.",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "jlo",
+      "index": 68,
+      "slug": "yiwenl/flocking",
+      "created": "2016-07-21T22:33:21.371Z",
+      "name": "Flocking",
+      "author": {
+        "name": "Yi-Wen Lin",
+        "github": "yiwenl",
+        "website": "http://blog.bongiovi.tw/",
+        "twitter": "yiwen_lin"
+      },
+      "description": "Experiment with flocking.",
+      "tags": [
+        "particles",
+        "flocking"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "Move around. Press space bar to change colour theme.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "gxw",
+      "index": 67,
+      "slug": "yiwenl/shading-particles",
+      "created": "2016-02-25T21:57:50.648Z",
+      "name": "Shading Particles",
+      "author": {
+        "name": "Yi-Wen Lin",
+        "github": "yiwenl",
+        "website": "http://blog.bongiovi.tw/",
+        "twitter": "yiwen_lin"
+      },
+      "description": "Experimenting curl noise and shadow mapping.",
+      "tags": [
+        "curl noise",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move around.",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "ozl",
+      "index": 66,
+      "slug": "edankwan/the-spirit",
+      "created": "2016-02-07T13:45:10.963Z",
+      "name": "The Spirit",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "The Spirit is a noise based WebGL experience.",
+      "tags": [
+        "gpgpu",
+        "curl noise",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "drag and drop",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "woa",
+      "index": 65,
+      "slug": "flexi23/firewater",
+      "created": "2016-02-06T13:55:11.236Z",
+      "name": "Firewater",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Expansive rgba cycling Turing-pattern fluid simulation",
+      "tags": [
+        "Fluid",
+        "Shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "pick your nose",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "ppe",
+      "index": 64,
+      "slug": "edankwan/touch",
+      "created": "2016-02-06T10:17:14.902Z",
+      "name": "TOUCH",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "It is an experiment to showcase the possibility to apply the physics with 262k particles on Leap Motion by using the signed distance field.",
+      "tags": [
+        "webgl",
+        "three.js",
+        "particles",
+        "leapmotion"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Use Leap Motion or drag and drop",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "nxm",
+      "index": 63,
+      "slug": "robin-dela/flocon",
+      "created": "2016-01-20T23:40:39.349Z",
+      "name": "Flocon",
+      "author": {
+        "name": "Robin Delaporte",
+        "github": "robin-dela",
+        "website": "http://robindelaporte.fr",
+        "twitter": "not__robin"
+      },
+      "description": "Interactive snowflake",
+      "tags": [
+        "threejs",
+        "webgl",
+        "christmas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Drag to rotate, click to explode",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "mwv",
+      "index": 62,
+      "slug": "edankwan/smashing-mega-scene",
+      "created": "2016-01-20T23:11:22.792Z",
+      "name": "Smashing Mega Scene",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "It is an experiment to recreate a 3d model with a million of particles and use GPGPU for the physics.",
+      "tags": [
+        "webgl",
+        "three.js",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Space to reset. D, E keys for look",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "evq",
+      "index": 61,
+      "slug": "samsy/curly-shades",
+      "created": "2016-01-16T14:34:28.435Z",
+      "name": "Curly Shades",
+      "author": {
+        "name": "Samsy",
+        "github": "Samsy",
+        "website": "http://samsy.ninja",
+        "twitter": "Samsyyyy"
+      },
+      "description": "Simplex derivative curl noise 4D FBO for threejs. Shadow technic thanks to EdanKwan Blog post: <br/><br/><a href=\"http://blog.edankwan.com/post/three-js-advanced-tips-shadow\" target=\"_blank\">http://blog.edankwan.com/post/three-js-advanced-tips-shadow</a>",
+      "tags": [
+        "webgl",
+        "threejs",
+        "shader",
+        "computational"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Drag, drop and zoom",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "yag",
+      "index": 60,
+      "slug": "edankwan/constraint",
+      "created": "2016-01-16T14:05:47.242Z",
+      "name": "Constraint",
+      "author": {
+        "name": "Edan Kwan",
+        "github": "edankwan",
+        "website": "http://www.edankwan.com/",
+        "twitter": "edankwan"
+      },
+      "description": "It is a simple experiment I did to use the position based constraint and curl noise movement on the velocity to create that organic look and feel.",
+      "tags": [
+        "webgl",
+        "three.js",
+        "curl-noise"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Any key to toggle color theme",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "veg",
+      "index": 59,
+      "slug": "silviopaganini/curl-noise",
+      "created": "2015-12-05T16:17:11.824Z",
+      "name": "Curl noise",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Curl noise exploration",
+      "tags": [
+        "webgl",
+        "noise",
+        "curl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move around ",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "zaw",
+      "index": 58,
+      "slug": "tholman/generative-boids",
+      "created": "2015-12-05T15:52:31.204Z",
+      "name": "Generative Boids",
+      "author": {
+        "name": "Tim Holman",
+        "github": "tholman",
+        "website": "http://tholman.com",
+        "twitter": "twholman"
+      },
+      "description": "Generative Boids is an experiment combining flocking and simple ai behaviour with stylized drawing techniques.",
+      "tags": [
+        "canvas",
+        "javascript",
+        "flocking"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to refresh/randomize the parameters",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "xep",
+      "index": 57,
+      "slug": "gwenvanhee/pulsator",
+      "created": "2015-11-28T12:26:37.966Z",
+      "name": "pulsator ",
+      "author": {
+        "name": "Gwen Vanhee",
+        "github": "gwenvanhee",
+        "website": "http://nocomputer.be",
+        "twitter": "wearenocomputer"
+      },
+      "description": "Generative experiment with maths (sin, cos, distance)",
+      "tags": [
+        "generative",
+        "oscillator",
+        "canvas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "move & click",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "awk",
+      "index": 56,
+      "slug": "zadvorsky/particle-stream",
+      "created": "2015-11-10T22:31:46.694Z",
+      "name": "particle-stream",
+      "author": {
+        "name": "zadvorsky",
+        "github": "zadvorsky",
+        "website": "http://www.zadvorsky.com",
+        "twitter": "zadvorsky"
+      },
+      "description": "THREE.js shader based animation system",
+      "tags": [
+        "three.js",
+        "shader",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move the Camera",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ryz",
+      "index": 55,
+      "slug": "tdhooper/icosahedron-snake",
+      "created": "2015-11-04T00:05:11.643Z",
+      "name": "Icosahedron Snake",
+      "author": {
+        "name": "Thomas Hooper",
+        "github": "tdhooper",
+        "website": "http://www.stainlessvision.com/",
+        "twitter": "tdhooper"
+      },
+      "description": "A black and white striped snake winds its way around a pastel blue icosahedron against a bright pink background",
+      "tags": [
+        "polyhedra",
+        "pink",
+        "psychedelic",
+        "threejs",
+        "bezierjs",
+        "graphlib"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click/touch to move camera",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "qxx",
+      "index": 54,
+      "slug": "flexi23/le-moustache",
+      "created": "2015-10-27T22:43:37.638Z",
+      "name": "Le Moustache",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Unfinished entry for js1k: L-system fern fractal that could be compressed to less than 768 characters of JavaScript.<br/><br/><a href=\"http://www.cake23.de/hereBeDragons/\" target=\"_blank\">http://www.cake23.de/hereBeDragons/</a>",
+      "tags": [
+        "L-System",
+        "Fractal"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "circle around the center",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "lpr",
+      "index": 53,
+      "slug": "silviopaganini/mirroring-forms",
+      "created": "2015-10-27T22:25:23.201Z",
+      "name": "Mirroring forms",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Morroring generative forms, <a href=\"https://www.youtube.com/watch?t=34&v=kLmLk0Vuw8c\" target=\"_blank\">inspiration</a>",
+      "tags": [
+        "generative",
+        "mirroring",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Mouse your mouse around",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "koj",
+      "index": 52,
+      "slug": "hellochar/line",
+      "created": "2015-09-30T22:35:05.782Z",
+      "name": "line",
+      "author": {
+        "name": "Xiaohan Zhang",
+        "github": "hellochar",
+        "website": "http://www.hellochar.com/",
+        "twitter": "hellocharlien"
+      },
+      "description": "Watch thousands of stars as they swirl and swell around your mouse or finger. Stretch and contort them from a perfect line into a brilliant galaxy around your pointer.<br/><br/>source: <a href=\"https://github.com/hellochar/hellochar.com\" target=\"_blank\">https://github.com/hellochar/hellochar.com</a>",
+      "tags": [
+        "interactive",
+        "webgl",
+        "threejs",
+        "mobile",
+        "gravity",
+        "attraction",
+        "particles",
+        "line",
+        "galaxy",
+        "star",
+        "shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click. drag. look.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "jyo",
+      "index": 51,
+      "slug": "silviopaganini/generative-forms",
+      "created": "2015-09-30T22:16:12.268Z",
+      "name": "Generative Forms",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Generative patterns using basic geometries, source code can be found here <a href=\"https://github.com/fluuuid/labs/tree/master/geo\" target=\"_blank\">https://github.com/fluuuid/labs/tree/master/geo</a>",
+      "tags": [
+        "generative",
+        "threejs",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "look around",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "gpw",
+      "index": 50,
+      "slug": "j0n/sea-something",
+      "created": "2015-09-30T21:43:11.004Z",
+      "name": "sea-something",
+      "author": {
+        "name": "Jon Andersson",
+        "github": "j0n",
+        "website": "http://jonandersson.se",
+        "twitter": "andersson_jon"
+      },
+      "description": "Minimalistic fluid waves. Move mouse/touch to create your own pattern, or just watch it make its waves.",
+      "tags": [
+        "minimal",
+        "sine",
+        "three.js"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move/touch if you want.",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "opl",
+      "index": 49,
+      "slug": "soulwire/plasmatic-isosurface",
+      "created": "2015-09-29T23:56:30.519Z",
+      "name": "Plasmatic Isosurface",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "A 2 dimensional plasma simulation running on the GPU, written in GLSL and CoffeeScript and rendered with WebGL.",
+      "tags": [
+        "webgl",
+        "gpu",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "...",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "wxa",
+      "index": 48,
+      "slug": "samsy/liquiform",
+      "created": "2015-09-24T23:15:43.478Z",
+      "name": "Liquiform",
+      "author": {
+        "name": "Samsy",
+        "github": "Samsy",
+        "website": "http://samsy.ninja",
+        "twitter": "Samsyyyy"
+      },
+      "description": "You can join a more feature-rich version at : <br /><a href=\"http://samsy.ninja/wire/index.html\" target=\"_blank\">http://samsy.ninja/wire/index.html</a>",
+      "tags": [
+        "glsl",
+        "noise",
+        "webgl",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Drag with left or right click, zoom",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "pxe",
+      "index": 47,
+      "slug": "nicoptere/the-rice-grain-mayhem",
+      "created": "2015-09-19T18:22:20.257Z",
+      "name": "the rice grain mayhem",
+      "author": {
+        "name": "Nicolas Barradeau",
+        "github": "nicoptere",
+        "website": "http://www.barradeau.com",
+        "twitter": "nicoptere"
+      },
+      "description": "the casual rice grain badassery.",
+      "tags": [
+        "rice",
+        "grains"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "watch'em move",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "ngm",
+      "index": 46,
+      "slug": "hellochar/dots",
+      "created": "2015-09-07T23:59:55.228Z",
+      "name": "dots",
+      "author": {
+        "name": "Xiaohan Zhang",
+        "github": "hellochar",
+        "website": "http://www.hellochar.com/",
+        "twitter": "hellocharlien"
+      },
+      "description": "Attract and deform a grid of crystals around your pointer.<br/><br/>source: <a href=\"https://github.com/hellochar/hellochar.com\" target=\"_blank\">https://github.com/hellochar/hellochar.com</a><br/><br/>",
+      "tags": [
+        "interactive",
+        "webgl",
+        "threejs",
+        "mobile",
+        "gravity",
+        "attraction",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click, drag and look",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "mpv",
+      "index": 45,
+      "slug": "montoyadiego/atombeat",
+      "created": "2015-09-04T07:38:47.939Z",
+      "name": "AtomBeat",
+      "author": {
+        "name": "Diego Montoya",
+        "github": "montoyadiego",
+        "website": "http://www.diego-montoya.com",
+        "twitter": "diego_montoya_"
+      },
+      "description": "Use left-click to place a gravity entity. Use right-click to change the sign of its gravitation constant. The space bar inverts the colors.",
+      "tags": [
+        "processing",
+        "gravity",
+        "space",
+        "time"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "left-click / right-click / space bar",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "eoq",
+      "index": 44,
+      "slug": "sirgodart/interstellar",
+      "created": "2015-08-27T20:45:27.803Z",
+      "name": "Interstellar",
+      "author": {
+        "name": "Godart Raets",
+        "github": "SirGodart",
+        "website": "http://www.gdart.be/intro.html",
+        "twitter": "SirSmoooth"
+      },
+      "description": "Inspired by Interstellar, entering the black hole.",
+      "tags": [
+        "Gravity",
+        "ThreeJs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click and drag ",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "yrg",
+      "index": 43,
+      "slug": "gianab/neon-bubbles",
+      "created": "2015-08-27T20:28:04.309Z",
+      "name": "Neon bubbles",
+      "author": {
+        "name": "Georgiana Blantin",
+        "github": "GianaB",
+        "website": "http://codepen.io/giana/",
+        "twitter": "gianablantin"
+      },
+      "description": "Random interactive particles with vanilla JavaScript on canvas.",
+      "tags": [
+        "particles",
+        "canvas",
+        "neon",
+        "glow"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to create, right click to destroy, hold and drag to attract",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "vog",
+      "index": 42,
+      "slug": "ivxvixviii/limbo",
+      "created": "2015-08-25T20:54:14.291Z",
+      "name": "Limbo",
+      "author": {
+        "name": "David Paul Rosser",
+        "github": "ivxvixviii",
+        "website": "http://ivxvixviii.io",
+        "twitter": "ivxvixviii"
+      },
+      "description": "Lee Perry-Smith is stuck in limbo.",
+      "tags": [
+        "surrealism",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "zjw",
+      "index": 41,
+      "slug": "gwenvanhee/codebrush",
+      "created": "2015-08-25T20:28:30.185Z",
+      "name": "codebrush",
+      "author": {
+        "name": "Gwen Vanhee",
+        "github": "gwenvanhee",
+        "website": "http://nocomputer.be",
+        "twitter": "wearenocomputer"
+      },
+      "description": "Generative drawing experiment based on mouse/touch input",
+      "tags": [
+        "generative",
+        "drawing",
+        "canvas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "touch & move, click to reset",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "xwp",
+      "index": 40,
+      "slug": "williamapan/collapsar",
+      "created": "2015-08-20T19:40:30.684Z",
+      "name": "Collapsar",
+      "author": {
+        "name": "William Mapan",
+        "github": "williamapan",
+        "website": "http://wllmpn.com/",
+        "twitter": "williamapan"
+      },
+      "description": "WebGL tunnel acting like a collapsar <a href=\"http://i.imgur.com/HCTZNQ9.jpg\" target=\"_blank\">http://i.imgur.com/HCTZNQ9.jpg</a><br/>- Move around to highlight the tunnel<br/>- Press to speed up !",
+      "tags": [
+        "WebGL",
+        "THREEjs",
+        "Shaders",
+        "Tunnel"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move and/or press",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "ark",
+      "index": 39,
+      "slug": "jpweeks/particulate",
+      "created": "2015-08-20T18:50:56.568Z",
+      "name": "Particulate",
+      "author": {
+        "name": "Jay Weeks",
+        "github": "jpweeks",
+        "website": "http://jayweeks.com",
+        "twitter": "jpweeks"
+      },
+      "description": "Particle physics micro library.<br/><br/>Check out the <a href=\"http://particulatejs.org/examples/\">examples</a>, <a href=\"http://particulatejs.org/docs/\">docs</a>, <a href=\"http://particulatejs.org/test/\">tests</a>, or <a href=\"https://github.com/jpweeks/particulate-js\">source on github</a>.",
+      "tags": [
+        "webgl",
+        "physics",
+        "simulation"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Control camera and repulsion force with mouse cursor.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "rwz",
+      "index": 38,
+      "slug": "raurir/racing-lines",
+      "created": "2015-08-18T20:30:48.742Z",
+      "name": "Racing Lines",
+      "author": {
+        "name": "Rauri Rochford",
+        "github": "raurir",
+        "website": "http://www.esquemedia.com",
+        "twitter": "raurir"
+      },
+      "description": "A bunch of blocks shifting around and swapping positions on two planes. Move the camera (drag, swipe or arrow keys) or go into warp speed (click, enter or space)!",
+      "tags": [
+        "3D",
+        "webgl",
+        "threejs",
+        "cubes"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": true
+      },
+      "instructions": "Drag, Click, Swipe or use Arrow Keys + Enter + Space",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "qyx",
+      "index": 37,
+      "slug": "fredericbriolet/dispositions",
+      "created": "2015-08-17T20:53:20.414Z",
+      "name": "Dispositions",
+      "author": {
+        "name": "Fred Briolet",
+        "github": "FredericBriolet",
+        "website": "http://fredericbriolet.com/",
+        "twitter": "fredbriolet"
+      },
+      "description": "3d experiment based on color shades, particle drawing with renderer.autoClear and camera movement.<br/><br/>With sound : <a href=\"http://fredericbriolet.com/dispositions\" target=\"_blank\">http://fredericbriolet.com/dispositions</a>",
+      "tags": [
+        "threejs",
+        "webgl",
+        "color"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "Click to draw/clean, arrows to move",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "lrr",
+      "index": 36,
+      "slug": "flexi23/vortex-pair-warp",
+      "created": "2015-08-12T21:37:00.259Z",
+      "name": "Vortex Pair Warp",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "vanilla js/glsl remake of the transform shader from <a href=\"http://www.cake23.de/uno.beta/LaminarFlow2/\" target=\"_blank\">http://www.cake23.de/uno.beta/LaminarFlow2/</a> in combination with <a href=\"http://webglplayground.net/share/organic-net?gallery=1&fullscreen=0&width=800&height=600&header=1\" target=\"_blank\">http://webglplayground.net/share/organic-net?gallery=1&fullscreen=0&width=800&height=600&header=1</a> and a new composite shader.<br/><br/>The Turing Pattern only consumes a single color channel. View the source, hit alt+a and ctrl+v, add to fs-advance and fs-composite",
+      "tags": [
+        "WebGL",
+        "Shader",
+        "Turing",
+        "Cellular",
+        "Automaton",
+        "Vortex",
+        "Warp"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "move the mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "kej",
+      "index": 35,
+      "slug": "rolyatmax/nodes",
+      "created": "2015-08-12T19:44:21.751Z",
+      "name": "Nodes",
+      "author": {
+        "name": "Taylor Baldwin",
+        "github": "rolyatmax",
+        "website": "https://tbaldw.in",
+        "twitter": "taylorbaldwin"
+      },
+      "description": "Nodes float about, connecting with neighbors before drifting apart. <a href=\"https://github.com/rolyatmax/floating-nodes\" target=\"_blank\">Source</a> ",
+      "tags": [
+        "nodes",
+        "edges",
+        "patterns",
+        "smoke",
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move your mouse around to influence the nodes and their colors.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "jwo",
+      "index": 34,
+      "slug": "silviopaganini/fireworks",
+      "created": "2015-08-12T19:23:03.264Z",
+      "name": "Fireworks",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Generative fireworks ",
+      "tags": [
+        "generative",
+        "fireworks",
+        "threejs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move your mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "gnw",
+      "index": 33,
+      "slug": "stopyransky/pixeloze",
+      "created": "2015-08-12T08:12:30.549Z",
+      "name": "Pixeloze",
+      "author": {
+        "name": "Karol Stopyra",
+        "github": "stopyransky",
+        "website": "http://stopyransky.com",
+        "twitter": "stopyransky"
+      },
+      "description": "Watch how pixels collide, click to create new pix, drag pix to aim, release to shoot ",
+      "tags": [
+        "p5js",
+        "particles",
+        "collision",
+        "detection",
+        "quadtree"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "click / drag mouse on pix",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "oal",
+      "index": 32,
+      "slug": "doormat23/nebulon",
+      "created": "2015-08-10T23:11:40.135Z",
+      "name": "Nebulon",
+      "author": {
+        "name": "Mat Groves",
+        "github": "GoodBoyDigital",
+        "website": "http://www.goodboydigital.com/",
+        "twitter": "doormat23"
+      },
+      "description": "Playing around with pixi.js filters and masking.",
+      "tags": [
+        "pixi.js",
+        "webGL"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move the mouse to see through space time...",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "wma",
+      "index": 31,
+      "slug": "mannytan/lilypad",
+      "created": "2015-08-10T22:55:22.282Z",
+      "name": "Lilypad",
+      "author": {
+        "name": "Manny Tan",
+        "github": "mannytan",
+        "website": "http://uncontrol.com",
+        "twitter": "mannytan"
+      },
+      "description": "Lily pad is an experiment that explores paper folding inspired by the form of a lily pad floating on top of water.",
+      "tags": [
+        "webGL",
+        "three.js"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to morph shape",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "pye",
+      "index": 30,
+      "slug": "nicoptere/popcorn",
+      "created": "2015-08-10T22:05:56.978Z",
+      "name": "popcorn",
+      "author": {
+        "name": "Nicolas Barradeau",
+        "github": "nicoptere",
+        "website": "http://www.barradeau.com",
+        "twitter": "nicoptere"
+      },
+      "description": "it takes some time to emerge",
+      "tags": [
+        "IFS",
+        "fractal",
+        "canvas"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to reset",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "npm",
+      "index": 29,
+      "slug": "silviopaganini/node-garden",
+      "created": "2015-08-10T21:45:24.923Z",
+      "name": "Node garden",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Node garden test using coffee-physics from <a href=\"http://twitter.com/soulwire\" target=\"_blank\">@soulwire</a>",
+      "tags": [
+        "node garden",
+        "physics"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move around",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "mav",
+      "index": 28,
+      "slug": "inconvergent/glitter",
+      "created": "2015-08-08T11:31:35.536Z",
+      "name": "Glitter",
+      "author": {
+        "name": "Anders Hoff",
+        "github": "inconvergent",
+        "website": "http://inconvergent.net",
+        "twitter": "inconvergent"
+      },
+      "description": "Pulsating particles that you can interact with using the mouse.",
+      "tags": [
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Mouseover",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "eaq",
+      "index": 27,
+      "slug": "caostar/n-chaosphere",
+      "created": "2015-08-07T21:58:09.174Z",
+      "name": "N-Chaosphere",
+      "author": {
+        "name": "Pablo Cabana",
+        "github": "caostar",
+        "website": "http://caostar.com/thoughts/",
+        "twitter": "pablocabana"
+      },
+      "description": "It came up when I was developing that Chaos Sphere Trip. For some reason the x,y,z positions got screwed and this little beauty appeared on my screen. I got marvelled for a while, just watching it, till I realised I had finally understand a vision from an old friend.<br/><br/>A couple of years ago, a frater appeared at one of our meetings all excited about a vision he had: a chaos sphere with several arrows. He said fourteen, but \u201cthat is was how I can see it, in fact it seems to have infinite arrows\u201d, he completed. Inspired, he couldn\u2019t stop talking about what it does mean: \u201cfreedom in all dimensions, beyond our simple threedimensional comprehension\u201d.<br/><br/>With the words above, I believe I am making his vision way clearer now. At that time, it sounded like a bit too much information. He didn\u2019t had that talent to \u201ctransmit a vision\u201d, if you know what I mean. But it planted a seed in my brain. A seed that has flourished now, giving birth to the n-dimensional Chaos Sphere.<br/><br/>I\u2019ve been meditating for a while looking to this. Since its behaviour is completely created by fortuity, a \u201ccode coincidence\u201d, anything that comes from it can be interpreted in a oracular way.<br/><br/>It looks very chaotic, but as chaos itself, sometimes it just shows its hidden order, and make you believe that some \u201cwill\u201d is on top of it.",
+      "tags": [
+        "chaosphere",
+        "chaos"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "just look at it and click and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "yog",
+      "index": 26,
+      "slug": "naso/spike-path",
+      "created": "2015-08-06T23:59:15.256Z",
+      "name": "Spike Path",
+      "author": {
+        "name": "F\u00e1bio Azevedo",
+        "github": "naso",
+        "website": "http://icantcontrolmyego.net",
+        "twitter": "naso"
+      },
+      "description": "Path exploration. Random spiky body around a line that grows based on the mouse speed. <a href=\"https://github.com/naso/spike-path\" target=\"_blank\">Source</a>",
+      "tags": [
+        "EaselJS",
+        "2D",
+        "shapes",
+        "minimal",
+        "light"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move mouse / touch and drag.",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "vwg",
+      "index": 25,
+      "slug": "sterlingcrispin/a-particular-nowhere",
+      "created": "2015-08-06T23:35:18.122Z",
+      "name": "A Particular Nowhere",
+      "author": {
+        "name": "Sterling Crispin",
+        "github": "sterlingcrispin",
+        "website": "http://www.sterlingcrispin.com",
+        "twitter": "sterlingcrispin"
+      },
+      "description": "More information <a href=\"http://www.sterlingcrispin.com/aparticularnowhere.html\" target=\"_blank\">here</a>",
+      "tags": [
+        "threejs",
+        "lsystems"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Look around",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "znw",
+      "index": 24,
+      "slug": "rolyatmax/dots",
+      "created": "2015-08-05T22:35:42.299Z",
+      "name": "Dots",
+      "author": {
+        "name": "Taylor Baldwin",
+        "github": "rolyatmax",
+        "website": "https://tbaldw.in",
+        "twitter": "taylorbaldwin"
+      },
+      "description": "Inspired by the game Dots & Boxes and the wall drawings of artist Sol LeWitt.",
+      "tags": [
+        "boxes",
+        "lines",
+        "patterns"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Sit back and enjoy.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "xqp",
+      "index": 23,
+      "slug": "cabbibo/arrows",
+      "created": "2015-08-05T21:48:21.167Z",
+      "name": "Arrows",
+      "author": {
+        "name": "cabbibo",
+        "github": "cabbibo",
+        "website": "http://cabbi.bo",
+        "twitter": "cabbibo"
+      },
+      "description": "<a href=\"https://github.com/cabbibo/arrow_CD\" target=\"_blank\">Source Code</a>",
+      "tags": [
+        "WebGL",
+        "GPGPU",
+        "Instanced Mesh"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "drag to rotate, scroll to zoom",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "aok",
+      "index": 22,
+      "slug": "neilcarpenter/ascii-trail",
+      "created": "2015-08-02T10:59:15.503Z",
+      "name": "ASCII Trail",
+      "author": {
+        "name": "Neil Carpenter",
+        "github": "neilcarpenter",
+        "website": "http://neilcarpenter.com",
+        "twitter": "neilcarpenter"
+      },
+      "description": "Canvas replication of the typography animation used on the codedoodl.es site.",
+      "tags": [
+        "PIXI",
+        "2D",
+        "typography"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Move mouse / touch and drag to take control. Click / tap to change theme",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "rez",
+      "index": 21,
+      "slug": "flexi23/fractal-tree",
+      "created": "2015-07-29T21:17:45.939Z",
+      "name": "Fractal Tree",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Simple progressive image-based Lindenmeyer sytem type WebGL fractal renderer.<br/><br/>The tree is composited from 3 smaller copies of the whole image plus the root line element, one iteration per animation frame.",
+      "tags": [
+        "WebGL",
+        "fractal",
+        "shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Move the mouse",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "qjx",
+      "index": 20,
+      "slug": "silviopaganini/muda-museum",
+      "created": "2015-07-29T21:09:50.127Z",
+      "name": "MuDA Museum",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "<a href=\"http://muda.co/\" target=\"_blank\">MuDA</a> advertising piece built using OIMO physics and ThreeJS",
+      "tags": [
+        "OimoJS",
+        "threeJS"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to follow a letter",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "lnr",
+      "index": 19,
+      "slug": "silviopaganini/game-of-life",
+      "created": "2015-07-28T13:15:14.481Z",
+      "name": "Game of Life",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "GPU Game of Life using ThreeJS and StackGL",
+      "tags": [
+        "gpu",
+        "game of life",
+        "threejs",
+        "stackgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Watch!",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "kjj",
+      "index": 18,
+      "slug": "soulwire/muscular-hydrostats",
+      "created": "2015-07-27T19:38:58.593Z",
+      "name": "Muscular Hydrostats",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "An experiment with inverse kinematics to simulate tentacles.",
+      "tags": [
+        "physics",
+        "kinematics",
+        "tentacles",
+        "hair"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to take control or just watch the creature swim",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "jpo",
+      "index": 17,
+      "slug": "soulwire/gravitational-field",
+      "created": "2015-07-27T19:23:19.037Z",
+      "name": "Gravitational Field",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "Particles in a gravitational field, randomly inverting charge to create interesting behaviors. Uses sketch.js to manage the 2d context and power animation.",
+      "tags": [
+        "physics",
+        "gravity",
+        "particles"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Sit back and enjoy the emergent behaviors of charges particles",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "dgw",
+      "index": 16,
+      "slug": "soulwire/recursion-toy",
+      "created": "2015-07-27T19:10:25.400Z",
+      "name": "Recursion Toy",
+      "author": {
+        "name": "Justin Windle",
+        "github": "soulwire",
+        "website": "http://soulwire.co.uk",
+        "twitter": "soulwire"
+      },
+      "description": "A visual exploration of recursion that creates branches, roots, veins and other organic structures.",
+      "tags": [
+        "recursion",
+        "branching",
+        "growth"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click to create branches.",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bol",
+      "index": 15,
+      "slug": "flexi23/edgy-the-pit-minder",
+      "created": "2015-07-25T00:41:03.198Z",
+      "name": "Edgy The Pit Minder",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "Edgy is a tiny WebGL compo that was made for JS1K 2014. The theme was \"Here Be Dragons\" and there were two experimental new categories: WebGL and 2k. The entry got rejected anyway because the two categories were not supposed to be mixed up. Technically there are two shader programs: one to advance the frame in a render-to-texture feedback loop and another for final compositing and recoloring - there are actually only two out of four channels used.<br/><br/>I wrote the code very short and cryptic from the beginning so that it could be compressed to below 2048 characters within the provided shim.<br/><br/>After it got rejected i started another try which in the end even won the competition: DragonDrop uses the same GPU feedback loop principle for what i call progressive image-based fractal rendering, where only one iteration of the fractal gets calculated per frame and the image approaches its form over the time. The Lindenmeyer type in the background uses only affine transformations. The mouse following type is made of a pretty simple complex number polynomial.",
+      "tags": [
+        "WebGL",
+        "dragon",
+        "fractal",
+        "edge",
+        "shader",
+        "js1k"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "The fractal curve follows the mouse",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "dwa",
+      "index": 14,
+      "slug": "grgrdvrt/bacteria",
+      "created": "2015-07-25T00:30:40.454Z",
+      "name": "bacteria",
+      "author": {
+        "name": "grgrdvrt",
+        "github": "grgrdvrt",
+        "website": "http://www.grgrdvrt.com",
+        "twitter": "grgrdvrt"
+      },
+      "description": "<a href=\"http://codepen.io/grgrdvrt/pen/bywBt\" target=\"_blank\">original version, with colors</a>",
+      "tags": [
+        "canvas",
+        "lifeform"
+      ],
+      "interaction": {
+        "mouse": false,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "-",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "dpe",
+      "index": 13,
+      "slug": "inconvergent/meander",
+      "created": "2015-07-25T00:08:00.289Z",
+      "name": "Meander",
+      "author": {
+        "name": "Anders Hoff",
+        "github": "inconvergent",
+        "website": "http://inconvergent.net",
+        "twitter": "inconvergent"
+      },
+      "description": "Randomly generated structures that wander across the screen to created organic and sand-like imagery. The structures react to mouse taps and clicks.",
+      "tags": [
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "Mouseover or click/tap",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "bnm",
+      "index": 12,
+      "slug": "flexi23/webgl-particle-projection-feedback-soup",
+      "created": "2015-07-24T23:53:15.076Z",
+      "name": "WebGL Particle Projection Feedback Soup",
+      "author": {
+        "name": "Felix Woitzel",
+        "github": "Flexi23",
+        "website": "http://www.cake23.de",
+        "twitter": "Flexi23"
+      },
+      "description": "This is a multi-stage render-to-texture WebGL shader pipeline experiment, including a GPU particle system, a fluid simulation, many blur levels, one texture feedback loop for reaction-diffusion pattern synthesis, and a final composite shader for recoloring. It's written in plain Vanilla JS as single page with no dependencies - just copy and edit.<br/><br/>The fluid simulation is adapted from the <a href=\"http://www.ibiblio.org/e-notes/webgl/gpu/fluid.htm\" target=\"_blank\">original by Evgeny Demidov</a>",
+      "tags": [
+        "WebGL",
+        "particle",
+        "fluid",
+        "simulation",
+        "GPU",
+        "glsl",
+        "shader"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "move the mouse and stirr up the fluid sim",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bmv",
+      "index": 11,
+      "slug": "grgrdvrt/treee",
+      "created": "2015-07-24T23:36:26.933Z",
+      "name": "Treee",
+      "author": {
+        "name": "grgrdvrt",
+        "github": "grgrdvrt",
+        "website": "http://www.grgrdvrt.com",
+        "twitter": "grgrdvrt"
+      },
+      "description": "a procedural 3d tree",
+      "tags": [
+        "webgl",
+        "threejs",
+        "tree"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": true,
+        "touch": false
+      },
+      "instructions": "drag&drop to move the camera, press r to restart the animation",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "deq",
+      "index": 10,
+      "slug": "ayamflow/knacki",
+      "created": "2015-07-24T19:34:50.500Z",
+      "name": "knacki",
+      "author": {
+        "name": "Florian Morel",
+        "github": "ayamflow",
+        "website": "http://ayamflow.fr",
+        "twitter": "ayamflow"
+      },
+      "description": "2D canvas metaballs",
+      "tags": [
+        "canvas",
+        "metaballs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "click and move",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "byg",
+      "index": 9,
+      "slug": "inconvergent/waves",
+      "created": "2015-07-24T19:21:32.759Z",
+      "name": "Waves",
+      "author": {
+        "name": "Anders Hoff",
+        "github": "inconvergent",
+        "website": "http://inconvergent.net",
+        "twitter": "inconvergent"
+      },
+      "description": "Naive wave simulation with reflective edges.",
+      "tags": [
+        "webgl"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Mouseover",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bvg",
+      "index": 8,
+      "slug": "dmnsgn/grey-blob",
+      "created": "2015-06-25T12:00:23.314Z",
+      "name": "Grey Blob",
+      "author": {
+        "name": "Damien Seguin",
+        "github": "dmnsgn",
+        "website": "http://dmnsgn.me/",
+        "twitter": "dmnsgn"
+      },
+      "description": "A blobby shape animated using Jaume Sanchez (<a href=\"http://twitter.com/thespite\" target=\"_blank\">@thespite</a>) metaballs.",
+      "tags": [
+        "webgl",
+        "threejs",
+        "blob"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click, click, click",
+      "colour_scheme": "light",
+      "mobile_friendly": true
+    },
+    {
+      "id": "dzw",
+      "index": 7,
+      "slug": "dmmn/substrate",
+      "created": "2015-06-24T10:06:25.563Z",
+      "name": "Substrate",
+      "author": {
+        "name": "Damien Mortini",
+        "github": "dmmn",
+        "website": "http://damienmortini.me.uk",
+        "twitter": "d_m_m_n_"
+      },
+      "description": "Procedurally generated city with a pinch of ray marching (<a href=\"https://github.com/dmmn/xp-substrate\" target=\"_blank\">Github</a>).",
+      "tags": [
+        "webgl",
+        "glsl",
+        "raymarching",
+        "procedural"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "move your mouse / touch and drag",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "bxp",
+      "index": 6,
+      "slug": "williamapan/fireclock",
+      "created": "2015-06-23T12:54:51.133Z",
+      "name": "Fire Clock",
+      "author": {
+        "name": "William Mapan",
+        "github": "williamapan",
+        "website": "http://wllmpn.com/",
+        "twitter": "williamapan"
+      },
+      "description": "Clock made of particles and some words",
+      "tags": [
+        "pixijs",
+        "particles",
+        "colors"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Click on the screen to change the text",
+      "colour_scheme": "light",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bak",
+      "index": 5,
+      "slug": "silviopaganini/planets",
+      "created": "2015-06-21T16:10:03.448Z",
+      "name": "Planets",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Playing around with shaders and maths",
+      "tags": [
+        "webGL",
+        "post-processing"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "swipe / move to see around",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "brz",
+      "index": 4,
+      "slug": "silviopaganini/sym",
+      "created": "2015-06-21T09:42:51.524Z",
+      "name": "Sym",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Inspired by Ryoji Ikeda supersymmetry, created  WebGL piece with physics",
+      "tags": [
+        "threejs",
+        "physijs"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "Drag to change perspective",
+      "colour_scheme": "dark",
+      "mobile_friendly": false
+    },
+    {
+      "id": "bqx",
+      "index": 3,
+      "slug": "silviopaganini/tubes",
+      "created": "2015-07-23T18:26:41.722Z",
+      "name": "Generative Tubes",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Generative Tubes in ThreeJS + Perlin noise",
+      "tags": [
+        "webGL",
+        "Generative",
+        "noise",
+        "post-processing"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to generate",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "blr",
+      "index": 2,
+      "slug": "neilcarpenter/square-stream",
+      "created": "2015-07-09T21:46:26.513Z",
+      "name": "Square stream",
+      "author": {
+        "name": "Neil Carpenter",
+        "github": "neilcarpenter",
+        "website": "http://neilcarpenter.com",
+        "twitter": "neilcarpenter"
+      },
+      "description": "Infinite stream of squares, learning PIXI.js. Click and release to change colours, move your mouse for some simple attraction.",
+      "tags": [
+        "PIXI",
+        "2D",
+        "webgl",
+        "rgb-shift"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": false
+      },
+      "instructions": "Click. Hold. Release.",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    },
+    {
+      "id": "bkj",
+      "index": 1,
+      "slug": "silviopaganini/box-physics",
+      "created": "2015-06-15T15:22:48.730Z",
+      "name": "Box physics",
+      "author": {
+        "name": "Silvio Paganini",
+        "github": "silviopaganini",
+        "website": "http://s2paganini.com",
+        "twitter": "silviopaganini"
+      },
+      "description": "Playing around with some WebGL particles, physics and post-processing effects.",
+      "tags": [
+        "webGL",
+        "particles",
+        "physics",
+        "post-processing"
+      ],
+      "interaction": {
+        "mouse": true,
+        "keyboard": false,
+        "touch": true
+      },
+      "instructions": "click to explode",
+      "colour_scheme": "dark",
+      "mobile_friendly": true
+    }
+  ]
+}

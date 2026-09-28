@@ -38,13 +38,7 @@ class DoodleModel extends AbstractModel
             "author_name" : ""
         "viewed" : false
 
-    constructor : ->
-
-        super
-
-        return null
-
-    _filterAttrs : (attrs) =>
+    _filterAttrs : (attrs) ->
 
         if attrs.slug
             attrs.url = window.config.hostname + '/' + window.config.routes.DOODLES + '/' + attrs.slug
@@ -63,7 +57,7 @@ class DoodleModel extends AbstractModel
 
         attrs
 
-    getIndexHTML : (index) =>
+    getIndexHTML : (index) ->
 
         html = ""
 

@@ -1,0 +1,173 @@
+[
+  {
+    "id": "CVE-2026-76642",
+    "type": "debian",
+    "packages": [
+      "bsdutils",
+      "libblkid1",
+      "liblastlog2-2",
+      "libmount1",
+      "libsmartcols1",
+      "libuuid1",
+      "login",
+      "mount",
+      "util-linux"
+    ],
+    "versions": [
+      "1:2.41.5-0+deb13u1",
+      "2.41.5-0+deb13u1",
+      "1:4.16.0-2+really2.41.5-0+deb13u1"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Local privileged mount post-hooks; app runs as node and never invokes mount or filesystem administration. No fstab user mounts are configured.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+    "severity": "HIGH"
+  },
+  {
+    "id": "CVE-2026-78408",
+    "type": "debian",
+    "packages": [
+      "bsdutils",
+      "libblkid1",
+      "liblastlog2-2",
+      "libmount1",
+      "libsmartcols1",
+      "libuuid1",
+      "login",
+      "mount",
+      "util-linux"
+    ],
+    "versions": [
+      "1:2.41.5-0+deb13u1",
+      "2.41.5-0+deb13u1",
+      "1:4.16.0-2+really2.41.5-0+deb13u1"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Requires a privileged operator invoking nsenter --join-cgroup against an attacker target; no such operation exists in the application.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+    "severity": "HIGH"
+  },
+  {
+    "id": "CVE-2026-78409",
+    "type": "debian",
+    "packages": [
+      "bsdutils",
+      "libblkid1",
+      "liblastlog2-2",
+      "libmount1",
+      "libsmartcols1",
+      "libuuid1",
+      "login",
+      "mount",
+      "util-linux"
+    ],
+    "versions": [
+      "1:2.41.5-0+deb13u1",
+      "2.41.5-0+deb13u1",
+      "1:4.16.0-2+really2.41.5-0+deb13u1"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Local privileged X-mount.subdir operation with an fstab-authorized mount; application has no mount operations or fstab user mounts.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+    "severity": "HIGH"
+  },
+  {
+    "id": "CVE-2026-78410",
+    "type": "debian",
+    "packages": [
+      "bsdutils",
+      "libblkid1",
+      "liblastlog2-2",
+      "libmount1",
+      "libsmartcols1",
+      "libuuid1",
+      "login",
+      "mount",
+      "util-linux"
+    ],
+    "versions": [
+      "1:2.41.5-0+deb13u1",
+      "2.41.5-0+deb13u1",
+      "1:4.16.0-2+really2.41.5-0+deb13u1"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Local SUID mount path race involving an fstab-authorized bind mount; no app mount operations or fstab user mounts.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+    "severity": "HIGH"
+  },
+  {
+    "id": "CVE-2026-54369",
+    "type": "debian",
+    "packages": [
+      "libacl1"
+    ],
+    "versions": [
+      "2.3.2-2+b1"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Requires privileged pathname ACL operations on attacker-controlled paths; Node app neither uses libacl nor spawns ACL utilities.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+    "severity": "HIGH"
+  },
+  {
+    "id": "CVE-2026-16742",
+    "type": "debian",
+    "packages": [
+      "libsystemd0",
+      "libudev1"
+    ],
+    "versions": [
+      "257.13-1~deb13u1"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Vulnerable component is systemd-homed; only systemd shared libraries are installed, no homed daemon or homed-managed users.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2026-16742",
+    "severity": "HIGH"
+  },
+  {
+    "id": "CVE-2025-69720",
+    "type": "debian",
+    "packages": [
+      "libtinfo6",
+      "ncurses-base",
+      "ncurses-bin"
+    ],
+    "versions": [
+      "6.5+20250216-2"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Affected infocmp CLI parses terminal descriptions; app never invokes infocmp or accepts terminal databases.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+    "severity": "HIGH"
+  },
+  {
+    "id": "CVE-2026-9538",
+    "type": "debian",
+    "packages": [
+      "perl-base"
+    ],
+    "versions": [
+      "5.40.1-6+deb13u1"
+    ],
+    "owner": "codedoodles container maintainers",
+    "expires": "2026-11-01",
+    "reason": "Archive::Tar Perl parser is not used by the Node application; no upload/archive extraction or Perl execution is active.",
+    "review": "Rebuild when Debian ships a fix; reassess on base version or runtime privilege/utility changes. Fixed versions and expired exceptions fail CI.",
+    "source": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+    "severity": "HIGH"
+  }
+]

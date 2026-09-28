@@ -18,7 +18,7 @@ class Wrapper extends AbstractView
 
 	pageSwitchDfd : null
 
-	constructor : ->
+	initialize : ->
 
 		@views =
 			home       : classRef : HomeView,           route : @CD().nav.sections.HOME,       view : null, type : @VIEW_TYPE_PAGE
@@ -36,16 +36,16 @@ class Wrapper extends AbstractView
 
 		return null
 
-	createClasses : =>
+	createClasses : ->
 
 		(@views[name].view = new @views[name].classRef) for name, data of @views
 
 		null
 
-	addClasses : =>
+	addClasses : ->
 
-		 for name, data of @views
-		 	if data.type is @VIEW_TYPE_PAGE then @addChild data.view
+		for name, data of @views
+			if data.type is @VIEW_TYPE_PAGE then @addChild data.view
 
 		null
 
@@ -58,7 +58,7 @@ class Wrapper extends AbstractView
 
 	# 	view
 
-	getViewByRoute : (route) =>
+	getViewByRoute : (route) ->
 
 		for name, data of @views
 			return @views[name] if route is @views[name].route
@@ -67,13 +67,13 @@ class Wrapper extends AbstractView
 
 		null
 
-	init : =>
+	init : ->
 
 		@CD().appView.on 'start', @start
 
 		null
 
-	start : =>
+	start : ->
 
 		@CD().appView.off 'start', @start
 
@@ -82,7 +82,7 @@ class Wrapper extends AbstractView
 
 		null
 
-	bindEvents : =>
+	bindEvents : ->
 
 		@CD().nav.on Nav.EVENT_CHANGE_VIEW, @changeView
 		@CD().nav.on Nav.EVENT_CHANGE_SUB_VIEW, @changeSubView
@@ -91,13 +91,13 @@ class Wrapper extends AbstractView
 
 		null
 
-	updateDims : =>
+	updateDims : ->
 
 		@$el.css 'min-height', @CD().appView.dims.h
 
 		null
 
-	changeView : (previous, current) =>
+	changeView : (previous, current) ->
 
 		if @pageSwitchDfd and @pageSwitchDfd.state() isnt 'resolved'
 			do (previous, current) => @pageSwitchDfd.done => @changeView previous, current
@@ -115,13 +115,13 @@ class Wrapper extends AbstractView
 
 		null
 
-	changeSubView : (current) =>
+	changeSubView : (current) ->
 
 		@currentView.view.trigger Nav.EVENT_CHANGE_SUB_VIEW, current.sub
 
 		null
 
-	transitionViews : (from, to, changeViewArgs) =>
+	transitionViews : (from, to, changeViewArgs) ->
 
 		@pageSwitchDfd = $.Deferred()
 

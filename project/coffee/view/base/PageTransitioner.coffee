@@ -45,7 +45,7 @@ class PageTransitioner extends AbstractView
     TRANSITION_TIME : 0.5
     EVENT_TRANSITIONER_OUT_DONE : 'EVENT_TRANSITIONER_OUT_DONE'
 
-    constructor: ->
+    initialize : ->
 
         @templateVars = 
             pageLabels :
@@ -58,7 +58,7 @@ class PageTransitioner extends AbstractView
 
         return null
 
-    init : =>
+    init : ->
 
         @$panes     = @$el.find('[data-pane]')
         @$labelPane = @$el.find('[data-label-pane]')
@@ -66,7 +66,7 @@ class PageTransitioner extends AbstractView
 
         null
 
-    prepare : (fromArea, toArea) =>
+    prepare : (fromArea, toArea) ->
 
         @resetPanes()
 
@@ -81,13 +81,14 @@ class PageTransitioner extends AbstractView
 
         null
 
-    resetPanes : =>
+    resetPanes : ->
 
-        @$panes.attr 'style': ''
+        gsap.killTweensOf @$panes.add(@$labelPane)
+        gsap.set @$panes.add(@$labelPane), { clearProps: 'all' }
 
         null
 
-    getAreaLabel : (area, direction='to') =>
+    getAreaLabel : (area, direction='to') ->
 
         section = @CD().nav.getSection area, true
 
@@ -98,7 +99,7 @@ class PageTransitioner extends AbstractView
 
         label
 
-    getDoodleLabel : (direction) =>
+    getDoodleLabel : (direction) ->
 
         section = if direction is 'to' then 'current' else 'previous'
         doodle = @CD().appData.doodles.getDoodleByNavSection section
@@ -110,25 +111,25 @@ class PageTransitioner extends AbstractView
 
         label
 
-    applyLabel : (toLabel) =>
+    applyLabel : (toLabel) ->
 
         @$label.html @templateVars.pageLabelPrefix + ' ' + toLabel + '...'
 
         null
 
-    getPalette : (area) =>
+    getPalette : (area) ->
 
         section = @CD().nav.getSection area, true
 
         @palettes[section] or @palettes.HOME
 
-    applyPalette : (palette) =>
+    applyPalette : (palette) ->
 
         @$panes.each (i) => @$panes.eq(i).css 'background-color' : palette[i]
 
         null
 
-    getConfig : (fromArea, toArea) =>
+    getConfig : (fromArea, toArea) ->
 
         if !HomeView.visitedThisSession and toArea is @CD().nav.sections.HOME
             config = @configPresets.bottomToTop
@@ -147,7 +148,7 @@ class PageTransitioner extends AbstractView
 
         config
 
-    _getDoodleToDoodleConfig : (prevSlug, nextSlug) =>
+    _getDoodleToDoodleConfig : (prevSlug, nextSlug) ->
 
         previousDoodle = @CD().appData.doodles.getDoodleByNavSection 'previous'
         previousDoodleIdx = @CD().appData.doodles.indexOf previousDoodle
@@ -159,44 +160,44 @@ class PageTransitioner extends AbstractView
 
         _config
 
-    _getRandomConfig : =>
+    _getRandomConfig : ->
 
         _config = _.shuffle(@configPresets)[0]
 
         _config
 
-    applyConfig : (config, toArea=null) =>
+    applyConfig : (config, toArea=null) ->
 
-        @$panes.css config
+        gsap.set @$panes, Object.assign({}, config)
 
         classChange = if toArea is @CD().nav.sections.DOODLES then 'addClass' else 'removeClass'
         @$el[classChange] 'show-dots'
 
         null
 
-    applyLabelConfig : (transformValue) =>
+    applyLabelConfig : (transformValue) ->
 
-        @$labelPane.css 'transform' : transformValue
+        gsap.set @$labelPane, { transform: transformValue }
 
         null
 
-    show : =>
+    show : ->
 
         @$el.addClass 'show'
 
         null
 
-    hide : =>
+    hide : ->
 
         @$el.removeClass 'show'
 
         null
 
-    in : (cb) =>
+    in : (cb) ->
 
         @show()
 
-        commonParams = transform : 'none', ease : Expo.easeOut, force3D: true
+        commonParams = transform : 'none', ease : 'expo.out', force3D: true
 
         @$panes.each (i, el) =>
             params = _.extend {}, commonParams,
@@ -205,16 +206,16 @@ class PageTransitioner extends AbstractView
                 @applyConfig @activeConfig.end
                 cb?()
 
-            TweenLite.to $(el), @TRANSITION_TIME, params
+            gsap.to el, Object.assign({ duration: @TRANSITION_TIME }, params)
 
         labelParams = _.extend {}, commonParams, delay : 0.1
-        TweenLite.to @$labelPane, @TRANSITION_TIME, labelParams
+        gsap.to @$labelPane, Object.assign({ duration: @TRANSITION_TIME }, labelParams)
 
         null
 
-    out : (cb) =>
+    out : (cb) ->
 
-        commonParams = ease : Expo.easeOut, force3D: true, clearProps: 'all'
+        commonParams = ease : 'expo.out', force3D: true, clearProps: 'all'
 
         @$panes.each (i, el) =>
             params = _.extend {}, commonParams,            
@@ -226,10 +227,10 @@ class PageTransitioner extends AbstractView
                 @trigger @EVENT_TRANSITIONER_OUT_DONE
                 console.log "@trigger @EVENT_TRANSITIONER_OUT_DONE"
 
-            TweenLite.to $(el), @TRANSITION_TIME, params
+            gsap.to el, Object.assign({ duration: @TRANSITION_TIME }, params)
 
         labelParams = _.extend {}, commonParams, transform : @activeConfig.start.transform
-        TweenLite.to @$labelPane, @TRANSITION_TIME, labelParams
+        gsap.to @$labelPane, Object.assign({ duration: @TRANSITION_TIME }, labelParams)
 
         null
 

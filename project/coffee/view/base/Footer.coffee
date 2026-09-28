@@ -4,7 +4,7 @@ class Footer extends AbstractView
 
     template : 'site-footer'
 
-    constructor: ->
+    initialize : ->
 
         @templateVars = {}
 

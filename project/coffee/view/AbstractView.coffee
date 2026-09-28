@@ -1,3 +1,5 @@
+bindViewMethods = require '../utils/bindViewMethods'
+
 class AbstractView extends Backbone.View
 
 	el           : null
@@ -5,6 +7,10 @@ class AbstractView extends Backbone.View
 	children     : null
 	template     : null
 	templateVars : null
+
+	preinitialize : ->
+		bindViewMethods @
+		super()
 	
 	initialize : ->
 		
@@ -23,19 +29,19 @@ class AbstractView extends Backbone.View
 
 		null
 
-	init : =>
+	init : ->
 
 		null
 
-	update : =>
+	update : ->
 
 		null
 
-	render : =>
+	render : ->
 
 		null
 
-	addChild : (child, prepend = false) =>
+	addChild : (child, prepend = false) ->
 
 		@children.push child if child.el
 		target = if @addToSelector then @$el.find(@addToSelector).eq(0) else @$el
@@ -49,7 +55,7 @@ class AbstractView extends Backbone.View
 
 		@
 
-	replace : (dom, child) =>
+	replace : (dom, child) ->
 
 		@children.push child if child.el
 		c = if child.el then child.$el else child
@@ -57,7 +63,7 @@ class AbstractView extends Backbone.View
 
 		null
 
-	remove : (child) =>
+	remove : (child) ->
 
 		unless child?
 			return
@@ -72,31 +78,28 @@ class AbstractView extends Backbone.View
 
 		null
 
-	onResize : (event) =>
+	onResize : (event) ->
 
 		(if child.onResize then child.onResize()) for child in @children
 
 		null
 
-	mouseEnabled : ( enabled ) =>
+	mouseEnabled : ( enabled ) ->
 
 		@$el.css
 			"pointer-events": if enabled then "auto" else "none"
 
 		null
 
-	CSSTranslate : (x, y, value='%', scale) =>
+	CSSTranslate : (x, y, value='%', scale) ->
 
-		if Modernizr.csstransforms3d
-			str = "translate3d(#{x+value}, #{y+value}, 0)"
-		else
-			str = "translate(#{x+value}, #{y+value})"
+		str = "translate3d(#{x+value}, #{y+value}, 0)"
 
 		if scale then str = "#{str} scale(#{scale})"
 
 		str
 
-	unMuteAll : =>
+	unMuteAll : ->
 
 		for child in @children
 
@@ -108,7 +111,7 @@ class AbstractView extends Backbone.View
 
 		null
 
-	muteAll : =>
+	muteAll : ->
 
 		for child in @children
 
@@ -120,13 +123,13 @@ class AbstractView extends Backbone.View
 
 		null
 
-	removeAllChildren: =>
+	removeAllChildren: ->
 
 		@remove child for child in @children
 
 		null
 
-	triggerChildren : (msg, children=@children) =>
+	triggerChildren : (msg, children=@children) ->
 
 		for child, i in children
 
@@ -138,7 +141,7 @@ class AbstractView extends Backbone.View
 
 		null
 
-	callChildren : (method, params, children=@children) =>
+	callChildren : (method, params, children=@children) ->
 
 		for child, i in children
 
@@ -150,7 +153,7 @@ class AbstractView extends Backbone.View
 
 		null
 
-	callChildrenAndSelf : (method, params, children=@children) =>
+	callChildrenAndSelf : (method, params, children=@children) ->
 
 		@[method]? params
 
@@ -169,10 +172,12 @@ class AbstractView extends Backbone.View
 		re = if allowSpaces then new RegExp('{{ ([^{}]*) }}', 'g') else new RegExp('{{([^{}]*)}}', 'g')
 
 		return str.replace re, (a, b) ->
-			r = vals[b]
+			# JSON serialization preserves spaces inside locale strings. Accept
+			# both source placeholders and the old minifier's whitespace-free form.
+			r = vals[b.trim()]
 			(if typeof r is "string" or typeof r is "number" then r else a)
 
-	dispose : =>
+	dispose : ->
 
 		###
 		override on per view basis - unbind event handlers etc
@@ -180,7 +185,7 @@ class AbstractView extends Backbone.View
 
 		null
 
-	CD : =>
+	CD : ->
 
 		return window.CD
 

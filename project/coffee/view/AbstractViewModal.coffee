@@ -7,7 +7,7 @@ class AbstractViewModal extends AbstractView
 
 	TRANSITION_TIME : 0.3
 
-	show : (cb) =>
+	show : (cb) ->
 
 		return unless !@_shown
 		@_shown = true
@@ -18,7 +18,7 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	hide : (cb) =>
+	hide : (cb) ->
 
 		return unless @_shown
 		@_shown = false
@@ -27,13 +27,13 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	dispose : =>
+	dispose : ->
 
 		@callChildrenAndSelf 'setListeners', 'off'
 
 		null
 
-	setListeners : (setting) =>
+	setListeners : (setting) ->
 
 		return 'noListenerChange' unless setting isnt @_listening
 		@_listening = setting
@@ -42,28 +42,28 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	onCloseClick : (e) =>
+	onCloseClick : (e) ->
 
 		e.preventDefault()
 		@close()
 
 		null
 
-	close : =>
+	close : ->
 
 		@CD().router.navigateTo @CD().appView.wrapper.backgroundView.route
 
 		null
 
-	animateIn : (cb) =>
+	animateIn : (cb) ->
 
 		@$el.css 'visibility' : 'visible'
 
-		TweenLite.fromTo @$el, @TRANSITION_TIME, { 'transform'  : @CSSTranslate(-50, -45), 'opacity' : 0 }, { 'transform': @CSSTranslate(-50, -50), 'opacity': 1, ease : Cubic.easeInOut, onComplete : @animateInDone, onCompleteParams : [cb] }
+		gsap.fromTo @$el, { 'transform'  : @CSSTranslate(-50, -45), 'opacity' : 0 }, { duration: @TRANSITION_TIME, 'transform': @CSSTranslate(-50, -50), 'opacity': 1, ease : 'power2.inOut', onComplete : @animateInDone, onCompleteParams : [cb] }
 
 		null
 
-	animateInDone : (cb) =>
+	animateInDone : (cb) ->
 
 		@callChildrenAndSelf 'setListeners', 'on'
 
@@ -73,15 +73,15 @@ class AbstractViewModal extends AbstractView
 
 		null
 
-	animateOut : (cb) =>
+	animateOut : (cb) ->
 
 		@CD().appView.modalPlayBtn.hide()
 
-		TweenLite.to @$el, @TRANSITION_TIME, { 'transform': @CSSTranslate(-50, -55), 'opacity': 0, ease : Cubic.easeInOut, onComplete : @animateOutDone, onCompleteParams : [cb] }
+		gsap.to @$el, { duration: @TRANSITION_TIME, 'transform': @CSSTranslate(-50, -55), 'opacity': 0, ease : 'power2.inOut', onComplete : @animateOutDone, onCompleteParams : [cb] }
 
 		null
 
-	animateOutDone : (cb) =>
+	animateOutDone : (cb) ->
 
 		@$el.css 'visibility' : 'hidden'
 

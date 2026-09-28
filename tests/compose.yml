@@ -1,0 +1,61 @@
+x-app: &app
+  image: ${CODEDOODLES_IMAGE:?Set CODEDOODLES_IMAGE}
+  init: true
+  environment: &environment
+    BASE_URL: http://site.test:3000
+    DOODLES_URL: http://assets:8080
+    GOOGLE_ANALYTICS_CODE: ''
+
+services:
+  assets:
+    image: ${BASELINE_RUNNER_IMAGE:?Set BASELINE_RUNNER_IMAGE}
+    init: true
+    command: [node, fixtures/asset-server.mjs]
+    volumes:
+      - ${DOODLES_ARCHIVE:?Set DOODLES_ARCHIVE}:/archive:ro
+  app:
+    <<: *app
+    networks:
+      default:
+        aliases: [site.test]
+  preview:
+    <<: *app
+    environment:
+      <<: *environment
+      BASE_URL: http://preview:3000
+      DOODLE_DATA_SOURCE: development
+  auth:
+    <<: *app
+    environment:
+      <<: *environment
+      BASE_URL: http://auth:3000
+      DEV_PASSWORD: baseline-password
+  fallback:
+    <<: *app
+    environment:
+      <<: *environment
+      BASE_URL: http://fallback:3000
+      DOODLES_URL: http://assets:8080/fixtures/master-404
+  partial:
+    <<: *app
+    environment:
+      <<: *environment
+      BASE_URL: http://partial:3000
+      DOODLES_URL: http://assets:8080/fixtures/connection-reset
+  runner:
+    image: ${BASELINE_RUNNER_IMAGE:?Set BASELINE_RUNNER_IMAGE}
+    init: true
+    user: ${BASELINE_UID:-1000}:${BASELINE_GID:-1000}
+    shm_size: 1gb
+    environment:
+      CI: 'true'
+      ARTWORK_RECORD: ${ARTWORK_RECORD:-0}
+    volumes:
+      - ${TEST_RESULTS_DIR:-./artifacts}:/results
+      - ./baselines:/tests/baselines:${BASELINE_SNAPSHOT_MODE:-ro}
+      - ${DOODLES_ARCHIVE:?Set DOODLES_ARCHIVE}:/archive:ro
+
+networks:
+  default:
+    # Tests and artwork cannot accidentally rely on the public deployment/CDNs.
+    internal: true

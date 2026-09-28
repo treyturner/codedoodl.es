@@ -1,13 +1,7 @@
-// from https://gist.github.com/jay3sh/1236634
+const { createInterface } = require('node:readline');
+const { styleText } = require('node:util');
 
-// config is coffee....
-require('coffee-script/register');
-
-var validURL = require('valid-url');
-var colors   = require('colors');
-var config   = require('../config/doodles');
-
-var questions = [
+const questions = [
   { id: 'name', text: 'Doodle name', answerType: 'str', required: true },
   { id: 'author.name', text: 'Author name', answerType: 'str', required: true },
   { id: 'author.github', text: 'Author github username', answerType: 'github', required: true },
@@ -23,116 +17,56 @@ var questions = [
   { id: 'mobile_friendly', text: 'Doodle mobile friendly? (y/n)', answerType: 'bool', required: true }
 ];
 
-var currentQuestion, currentQuestionIdx = 0, answers = {};
- 
-function create(callback) {
-
-  function ask(question) {
-   
-    process.stdin.resume();
-    process.stdout.write('\033[90m'+question.text+': \033[0m');
-   
-    process.stdin.once('data', function(data) {
-      data = data.toString().trim();
-      process_val(question, data);
-    });
-
+function validateAnswer(question, answer) {
+  if (question.required && !answer) return 'Please provide a value.';
+  if (!answer && !question.required) return;
+  switch (question.answerType) {
+    case 'url': {
+      try {
+        const url = new URL(answer);
+        if (!['http:', 'https:'].includes(url.protocol) || !url.hostname || /\s/.test(answer)) throw new Error();
+      } catch { return 'Please provide an absolute HTTP or HTTPS URL.'; }
+      break;
+    }
+    case 'bool':
+      if (!/^[yn]$/i.test(answer)) return 'Please answer y or n.';
+      break;
+    case 'github':
+      if (!/^(?!-)[a-z0-9-]{1,38}$/i.test(answer)) return 'Use a GitHub username: 1–38 letters, numbers or dashes, without a leading dash.';
+      break;
+    case 'strInstructions':
+      if (answer.length > 35) return 'Instructions must be at most 35 characters.';
+      break;
+    case 'colour_scheme':
+      if (!['light', 'dark'].includes(answer)) return 'Please answer light or dark.';
+      break;
   }
-
-  function process_val(question, val) {
-
-    if (validate_answer(question, val)) {
-      set_manifest_prop(question, val);
-    } else {
-      return ask(currentQuestion);
-    }
-
-    if(currentQuestionIdx<questions.length-1) {
-      currentQuestion = questions[++currentQuestionIdx];
-      ask(currentQuestion);
-    } else {
-      // set_manifest_timestamp();
-      callback(answers);
-      process.stdin.pause();
-    }
-
-  }
-
-  function validate_answer(question, answer) {
-
-    var ret = false;
-    var ghRe = new RegExp('^[a-z0-9-]{1,38}$', 'i');
-
-    if (question.required && !answer) {
-
-      console.log(colors.red('Please provide a value for %s'), question.text);
-
-    } else if (question.answerType === 'url' && !validURL.isWebUri(answer)) {
-
-      console.log(colors.red('Please provide a valid URL for %s'), question.text);
-
-    } else if (question.answerType === 'bool' && (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'n')) {
-
-      console.log(colors.red('Please give answer "y" or "n" for %s'), question.text);
-
-    } else if (question.answerType === 'github' && (!ghRe.test(answer) || answer.charAt(0) === '-')) {
-
-      console.log(colors.red('Please provide a valid github username (alphanumeric or dashes, cannot start with dash, <39 chars) for %s'), question.text);
-
-    } else if (question.answerType === 'strInstructions' && answer.length > 35) {
-
-      console.log(colors.red('Please ensure text is not longer than 35 character  %s'), question.text);
-
-    } else if (question.answerType === 'colour_scheme' && (answer !== 'light' && answer !== 'dark')) {
-
-      console.log(colors.red('Please a general colour scheme for your doodle - is it generally dark or light?  %s'), question.text);
-
-    } else {
-
-      ret = true;
-
-    }
-
-    return ret;
-
-  }
-
-  function set_manifest_prop(question, val) {
-
-    var propParts = question.id.split('.');
-
-    if (question.answerType === 'tags') {
-      val = val
-        .toLowerCase()
-        .replace(/(^,)|(,$)/g, "")
-        .split(',')
-        .map(function(str){
-          return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '').replace(/\s+/g, '-');
-        });
-    }
-
-    if (question.answerType === 'bool') {
-      val = val.toLowerCase() === 'y';
-    }
-
-    if (propParts.length > 1) {
-      if (typeof(answers[propParts[0]]) !== 'object') answers[propParts[0]] = {};
-      answers[propParts[0]][propParts[1]] = val;
-    } else {
-      answers[question.id] = val;
-    }
-
-  }
-
-  function set_manifest_timestamp() {
-
-    answers.created = new Date().toString();
-
-  }
- 
-  currentQuestion = questions[0];
-  ask(currentQuestion);
-
 }
 
-module.exports = { create : create };
+async function create({ input = process.stdin, output = process.stdout } = {}) {
+  const reader = createInterface({ input, crlfDelay: Infinity });
+  const lines = reader[Symbol.asyncIterator]();
+  const answers = {};
+  try {
+    for (const question of questions) {
+      let value;
+      while (true) {
+        output.write(styleText('gray', `${question.text}: `, { stream: output }));
+        const line = await lines.next();
+        if (line.done) throw new Error('Input ended before the manifest was complete; no doodle was created.');
+        value = line.value.trim();
+        const error = validateAnswer(question, value);
+        if (!error) break;
+        output.write(`${error}\n`);
+      }
+      if (question.answerType === 'tags') value = value.toLowerCase().split(',').map(tag => tag.trim().replace(/\s+/g, '-')).filter(Boolean);
+      if (question.answerType === 'bool') value = value.toLowerCase() === 'y';
+      const [parent, child] = question.id.split('.');
+      if (child) (answers[parent] ||= {})[child] = value;
+      else answers[parent] = value;
+    }
+    return answers;
+  } finally { reader.close(); }
+}
+
+module.exports = { create };

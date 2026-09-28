@@ -261,9 +261,11 @@
         // Override constructor
         // Support having nested defaults by using _.deepExtend instead of _.extend
         constructor: function(attributes, options) {
+            // Local compatibility with Backbone 1.6: early initialization and ID events.
+            this.preinitialize.apply(this, arguments);
             var defaults;
             var attrs = attributes || {};
-            this.cid = _.uniqueId('c');
+            this.cid = _.uniqueId(this.cidPrefix);
             this.attributes = {};
             if (options && options.collection) this.collection = options.collection;
             if (options && options.parse) attrs = this.parse(attrs, options) || {};
@@ -321,9 +323,6 @@
             }
             current = this.attributes, prev = this._previousAttributes;
 
-            // Check for changes of `id`.
-            if (this.idAttribute in attrs) this.id = attrs[this.idAttribute];
-
             //<custom code>
             attrs = objToPaths(attrs);
             //</custom code>
@@ -341,6 +340,13 @@
               }
               unset ? deleteNested(current, attr) : setNested(current, attr, val);
               //</custom code>
+            }
+
+            // Backbone 1.6 collections reindex on changeId, including silent sets.
+            if (this.idAttribute in attrs) {
+                var previousId = this.id;
+                this.id = this.get(this.idAttribute);
+                if (this.id !== previousId) this.trigger('changeId', this, previousId, options);
             }
 
             // Trigger all relevant attribute changes.

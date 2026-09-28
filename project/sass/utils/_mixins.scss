@@ -1,3 +1,5 @@
+@use "sass:color";
+@use "sass:list";
 /* -------------------------------------------------------------
   Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
   By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
@@ -37,6 +39,8 @@
 ------------------------------------------------------------- */
 
 /* REM font sizing from http://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/ */
+@use "sass:math";
+
 @mixin font-size($sizeValue : 1.6)
 {
     font-size: ($sizeValue * 10) + px;
@@ -44,16 +48,16 @@
 }
 
 @function strip-unit($num) {
-    @return $num / ($num * 0 + 1);
+    @return math.div($num, $num * 0 + 1);
 }
 
 @mixin rem-fallback($property, $values...) {
-    $max: length($values);
+    $max: list.length($values);
     $pxValues: '';
     $remValues: '';
 
     @for $i from 1 through $max {
-        $value: strip-unit(nth($values, $i));
+        $value: strip-unit(list.nth($values, $i));
         $pxValues: #{$pxValues + $value*16}px;
 
         @if $i < $max {
@@ -62,7 +66,7 @@
     }
 
     @for $i from 1 through $max {
-        $value: strip-unit(nth($values, $i));
+        $value: strip-unit(list.nth($values, $i));
         $remValues: #{$remValues + $value}rem;
 
         @if $i < $max {
@@ -77,8 +81,8 @@
 // assumes parent container width set
 @mixin rwd-ss($pxWidth, $pxHeight, $pxWidthTotal, $pxHeightTotal, $pxBgPosX, $pxBgPosY) {
 
-    $elScale : ($pxHeight / $pxWidth)*100;
-    $ssScale : ($pxWidthTotal / $pxWidth)*100;
+    $elScale : math.div($pxHeight, $pxWidth)*100;
+    $ssScale : math.div($pxWidthTotal, $pxWidth)*100;
 
     $widthDiff  : $pxWidth - $pxWidthTotal;
     $heightDiff : $pxHeight - $pxHeightTotal;
@@ -87,11 +91,11 @@
     $percPosY : 0;
 
     @if $pxBgPosX != 0 {
-        $percPosX : ($pxBgPosX / $widthDiff)*100;
+        $percPosX : math.div($pxBgPosX, $widthDiff)*100;
     }
 
     @if $pxBgPosY != 0 {
-        $percPosY : ($pxBgPosY / $heightDiff)*100;
+        $percPosY : math.div($pxBgPosY, $heightDiff)*100;
     }
 
     width: 100%;
@@ -402,7 +406,7 @@
 
 
 @mixin rowMachine($numPerRow, $margin) {
-  width: ((100% - (($numPerRow - 1) * $margin)) / $numPerRow);
+  width: math.div(100% - (($numPerRow - 1) * $margin), $numPerRow);
   &:nth-child(n) {
     // margin-bottom: $margin;
     margin-right: $margin;
@@ -449,7 +453,7 @@
 /**
  * Mixin scrollbar
  */
-@mixin scrollbar($size, $primary, $secondary: lighten($primary, 25%)) {
+@mixin scrollbar($size, $primary, $secondary: color.adjust($primary, $lightness: 25%)) {
     ::-webkit-scrollbar {
         width:  $size;
         height: $size;

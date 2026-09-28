@@ -2,36 +2,36 @@
  * VARIABLES
  */
 
-@import 'globals';
+@use 'globals';
 
 /*
  * HELPERS / MIXINS / LIBS / RESETS
  */
 
-@import 'utils/easing';
-@import 'utils/mixins';
-@import 'utils/normalise';
-@import 'utils/helpers';
-@import 'utils/retina';
-@import 'utils/responsive';
-@import 'utils/reset';
+@use 'utils/easing';
+@use 'utils/mixins';
+@use 'utils/normalise';
+@use 'utils/helpers';
+@use 'utils/retina';
+@use 'utils/responsive';
+@use 'utils/reset';
 
 /*
  * CUSTOM UTILS
  */
-@import 'utils/codeWordTransitioner';
+@use 'utils/codeWordTransitioner';
 
 /*
  * ICONS
  */
 
-@import 'icons';
+@use 'icons';
 
 /*
  * FONTS
  */
 
-@import 'fonts';
+@use 'fonts';
 
 /*
  * VENDORS
@@ -41,24 +41,24 @@
  * CORE
  */
 
-@import 'core/core';
+@use 'core/core';
 
 /*
  * VIEWS
  */
 
 // components
-@import 'views/components/preloader';
-@import 'views/components/header';
-@import 'views/components/footer';
-@import 'views/components/pageTransitioner';
-@import 'views/components/arrows';
+@use 'views/components/preloader';
+@use 'views/components/header';
+@use 'views/components/footer';
+@use 'views/components/pageTransitioner';
+@use 'views/components/arrows';
 
 // pages
-@import 'views/pages/base';
-@import 'views/pages/aboutContributeInfo';
-@import 'views/pages/home';
-@import 'views/pages/doodle';
-@import 'views/pages/about';
-@import 'views/pages/contribute';
-@import 'views/pages/fourOhFour';
+@use 'views/pages/base';
+@use 'views/pages/aboutContributeInfo';
+@use 'views/pages/home';
+@use 'views/pages/doodle';
+@use 'views/pages/about';
+@use 'views/pages/contribute';
+@use 'views/pages/fourOhFour';

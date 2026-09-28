@@ -6,16 +6,28 @@ See the [relevant docs section](docs/contributing.md).
 
 Clone the repo, submit a pull request!
 
-Hint - to get the site up and running locally:
+Use Node 24.21.0 and its bundled npm 11.19.0 (`nvm install && nvm use`), then:
 
-1. `$ git clone git@github.com:fluuuid/codedoodl.es.git`
-2. `$ cd codedoodl.es`
-3. `$ [sudo] npm i`
-4. `$ npm run start`
-5. Open http://127.0.0.1:3000
+1. `npm ci`
+2. `npm run dev`
+3. Open http://localhost:3002 for the application with browser reloading.
 
-All assets are currently bundled in repo, so you don't need to compile anything, but if you do want to build + watch then:
+`npm run build` creates production assets and compiles the server into `dist/`.
+`npm start` runs that generated JavaScript on port 3000; `npm run watch` rebuilds
+after edits without starting a server. Development mode recompiles and restarts
+the server before reloading the browser.
+Development serves artwork from the sibling `codedoodl.es-doodles` checkout.
+Use `DOODLES_ARCHIVE` for another checkout, or `DOODLES_URL` for a remote host
+that serves the archived gzip files correctly.
+See [the build guide](docs/build.md) for the source layout, environment settings,
+local doodle tools, and the boundary around retired publishing tools.
 
-1. `$ gulp`
+Run `npm run test:build` for build/watch checks, or `npm test` (equivalently
+`bash tests/run.sh`) for the container and browser suite. The container suite
+needs Bash, Git and Docker; it does not need host application dependencies.
+See [the testing guide](docs/testing.md) for the pinned archive and diagnostics.
 
-Check files in `/gulp` for breakdown of gulp tasks.
+Run `npm run test:server` and `npm run test:tools` for focused server/local-tool
+checks. Before release, follow [the audit policy](docs/security.md) and
+[the candidate release guide](docs/release.md). Keep dependency updates separate
+from artwork restoration and review pinned action changes independently.

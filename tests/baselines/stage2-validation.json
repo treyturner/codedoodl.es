@@ -1,0 +1,50 @@
+{
+  "recordedAt": "2026-09-26",
+  "platform": "linux/amd64",
+  "applicationBaseCommit": "6ac65a61a6553a5d4c850dd74e76867bea465b41",
+  "candidateSource": "Working tree with stage 2 changes; not yet committed",
+  "assetsCommit": "9f42ed5c072a3f5b01e14d7b9859cf883edd9a2a",
+  "candidateImage": {
+    "localTag": "codedoodles:stage2",
+    "dockerImageId": "sha256:c45004bcc3aa8fe6155d538a75abd73b78b911d748379fe5d3329111ec6388e1"
+  },
+  "candidateRun": {
+    "startedAt": "2026-09-26T21:10:06.163Z",
+    "passed": 34,
+    "expectedFailures": 0,
+    "skipped": 5,
+    "unexpected": 0,
+    "flaky": 0,
+    "screenshotReferencesChanged": false
+  },
+  "toolchain": {
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "gulp": "5.0.1",
+    "sass": "1.105.0",
+    "browserify": "17.0.1",
+    "coffeeify": "3.0.1",
+    "coffeescript": "1.12.7",
+    "express": "4.22.3"
+  },
+  "additionalChecks": [
+    "Docker builder and production dependency stages use npm ci under the pinned Node 24 image",
+    "Clean builds produce byte-identical public assets and remove stale outputs",
+    "Revisioned assets contain one gzip stream; JSON values, font and image bytes are preserved",
+    "All generated pages resolve manifest references while retaining EJS syntax",
+    "Invalid CoffeeScript, Sass, JSON and missing HTML asset references fail the build",
+    "Watch rebuilds CoffeeScript dependencies, Sass, data and HTML, and recovers after a compilation error",
+    "BrowserSync serves the Node 24 app and reloads a connected Chromium browser after an HTML edit",
+    "Local authoring generates a valid manifest and HTML; the preview tool serves them under Node 24",
+    "Production image runs as UID 1000, has system CA certificates, and excludes build and AWS/S3 tooling",
+    "actionlint 1.7.12 passed",
+    "Assets checkout is clean; screenshot references are unchanged"
+  ],
+  "fixedBaselineDefects": ["ENCODING-SVG", "ENCODING-404"],
+  "limits": [
+    "Express 4 was upgraded early because Express 4.5.0 cannot serve responses under Node 24; Express 5 and other server upgrades remain stage 3",
+    "Old Winston dependencies still emit legacy engine and deprecation warnings",
+    "GitHub Actions, registry publishing and deployment were not run remotely",
+    "Mobile browsers are emulated; representative artwork rendering is checked, not every artwork on real devices"
+  ]
+}

@@ -21,7 +21,7 @@ class AppData extends AbstractData
 
         @getStartData()
 
-        return null
+        return
 
     ###
     get app bootstrap data - embed in HTML or API endpoint

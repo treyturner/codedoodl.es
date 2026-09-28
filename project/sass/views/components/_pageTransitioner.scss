@@ -1,3 +1,7 @@
+@use "../../fonts";
+@use "../../utils/mixins";
+@use "../../utils/responsive";
+
 #page-transitioner {
 	position: fixed;
 	top: 0;
@@ -54,11 +58,11 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		color: #fff;
-		@include font-size(1.2);
-		font-family: $ff-monosten-a;
+		@include mixins.font-size(1.2);
+		font-family: fonts.$ff-monosten-a;
 		text-align: center;
 
-        @include respond-to(medium) {
+        @include responsive.respond-to(medium) {
             max-width: 70%;
         }
 	}

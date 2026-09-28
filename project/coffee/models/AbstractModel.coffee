@@ -1,22 +1,25 @@
 class AbstractModel extends Backbone.DeepModel
 
-	constructor : (attrs, option) ->
+	set : (key, value, options) ->
 
-		attrs = @_filterAttrs attrs
-
-		return Backbone.DeepModel.apply @, arguments
-
-	set : (attrs, options) ->
-
-		options or (options = {})
+		return @ unless key?
+		# Backbone accepts both an attribute map and a key/value pair. Native
+		# class methods are strict: a value such as true cannot act as options.
+		if typeof key is 'object'
+			attrs = key
+			options = value or {}
+		else
+			attrs = {}
+			attrs[key] = value
+			options or (options = {})
 
 		attrs = @_filterAttrs attrs
 
 		options.data = JSON.stringify attrs
 
-		return Backbone.DeepModel.prototype.set.call @, attrs, options
+		return super(attrs, options)
 
-	_filterAttrs : (attrs) =>
+	_filterAttrs : (attrs) ->
 
 		attrs
 

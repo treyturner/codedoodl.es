@@ -1,17 +1,15 @@
 crypto     = require "crypto"
-bodyParser = require "body-parser"
-cloneRepo  = require "../../utils/cloneRepo"
-deployer   = require "../../utils/deployer"
+express    = require "express"
 config     = require "../../config/repository"
 
 requestIsFromGithub = (req) ->
 
 	secret = process.env.GITHUB_SECRET or ''
 
-	hash   = crypto.createHmac('sha1', secret).update(JSON.stringify(req.body)).digest('hex')
+	hash   = crypto.createHmac('sha1', secret).update(JSON.stringify(req.body or {})).digest('hex')
 	hubSig = (req.headers['x-hub-signature'] or '').replace('sha1=', '')
 
-	hash is hubSig
+	Buffer.byteLength(hash) is Buffer.byteLength(hubSig) and crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(hubSig))
 
 verifyHookSource = (req) ->
 
@@ -24,7 +22,7 @@ verifyHookSource = (req) ->
 
 verifyHookRef = (req) ->
 
-	if req.body.ref.split('refs/heads/')[1] is config.REPO_DEPLOY_BRANCH
+	if typeof req.body?.ref is 'string' and req.body.ref.split('refs/heads/')[1] is config.REPO_DEPLOY_BRANCH
 		authorised = true
 	else
 		authorised = false
@@ -63,6 +61,9 @@ push = (req, res) ->
 
 	return res.json "deployer disabled for now... fix it later plzzzz"
 
+	cloneRepo  = require "../../utils/cloneRepo"
+	deployer   = require "../../utils/deployer"
+
 	deployType = getDeployType(req)
 
 	if !deployType then return res.json "no app or data changes to push..."
@@ -73,8 +74,6 @@ push = (req, res) ->
 
 setup = (app) ->
 
-	app.use bodyParser()
-
-	app.post '/hooks/push', push
+	app.post '/hooks/push', express.json(), express.urlencoded({ extended: false }), push
 
 module.exports = setup

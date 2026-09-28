@@ -4,13 +4,12 @@ class FourOhFourPageView extends AbstractViewPage
 
 	template : 'page-four-oh-four'
 
-	constructor : ->
+	initialize : ->
 
 		@templateVars =
 			text : @CD().locale.get "four_oh_four_page_text"
 
-		super
-
+		super(arguments...)
 		return null
 
 module.exports = FourOhFourPageView

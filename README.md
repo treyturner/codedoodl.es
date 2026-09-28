@@ -1,46 +1,67 @@
----
+# codedoodl.es
 
-### NO LONGER LIVE
+A curated showcase of creative coding sketches, preserved for self-hosting.
+The original service closed in 2020. This fork modernizes its application and
+container while retaining the original artwork, visual design, URLs and credits.
+The original Chrome extension and submission service are historical integrations.
 
-Unfortunately due to hosting and maintenance costs we've had to close codedoodl.es
+## Local development
 
-If you would like to see the archive of doodles, you can do so at [fluuuid/codedoodl.es-doodles](http://github.com/fluuuid/codedoodl.es-doodles) which has instructions on how to run the site with the doodle archive too.
+Use **Node 24.21.0 / npm 11.19.0** and clone the
+[artwork archive](https://github.com/treyturner/codedoodl.es-doodles) beside this
+repository as `../codedoodl.es-doodles`:
 
----
+```bash
+nvm install
+nvm use
+npm ci
+npm run dev
+```
 
-![codedoodl.es logo](http://assets.codedoodl.es/readme_logo.png?1)
+Open http://localhost:3002. BrowserSync reloads browser and server changes, and
+the app serves the sibling archive through the same origin. `DOODLES_ARCHIVE`
+selects another local checkout; `DOODLES_URL` selects a remote archive host.
+See [building and development](docs/build.md).
 
-<code>**\\\\ A curated showcase of creative coding sketches \\\\**</code>
+## Container
 
-**[site](http://codedoodl.es) \\ [chrome extension](https://chrome.google.com/webstore/detail/codedoodles/hhfnbfhcojlgbojpphigjibpjkccfikh) \\ [twitter](http://twitter.com/codedoodl_es)**
+```bash
+docker build -t codedoodles:local .
+docker run --rm -p 3000:3000 \
+  -e BASE_URL=https://doodles.example.com \
+  -e DOODLES_URL=https://artwork.example.com \
+  -e DOODLE_DATA_SOURCE=production codedoodles:local
+```
 
-___
+Replace the example URLs with your public app and archive origins. Configure the
+archive host to serve gzip bytes under their original filenames with the correct
+MIME type and Content-Encoding. The runtime runs compiled JavaScript as a
+non-root user. Current desktop browsers and mobile Safari/Chrome are supported;
+IE support has been retired. Individual archived sketches retain their original
+mobile/GPU limitations.
 
-### What is this?
+The image defaults to production mode and production archive manifests. Set
+`DOODLE_DATA_SOURCE=development` to select the remote DEV master. Listener ports
+use `BIND_PORT`, then `PORT`, then the application default. CI checks these image
+defaults with `bash scripts/test-container.sh IMAGE` before publication. The
+checks launch the real image command under a one-CPU quota and cover its single
+application process, archive requests, password assets/sessions and shutdown.
+Standalone password-page styles and the original social-preview image ship in
+the image; see [restored asset provenance](docs/restored-assets.md).
 
-codedoodl.es is community-based collection of code experiments created with web technologies. The aim of these doodles is to exhibit interactive, engaging visual web experiments which only require a short attention span.
+## Working on the project
 
-This means no loading bars, no GUI, no 5MB 3D models or media files, no page of instructional text, just plain and simple doodles with code.
+- [Setup, commands and local sketch tools](docs/build.md)
+- [Server configuration and environment variables](docs/server.md)
+- [Browser behavior and retained dependency exception](docs/browser.md)
+- [Container/browser/artwork tests](docs/testing.md): `npm test`
+- [Dependency audits and update policy](docs/security.md): `npm run audit:dependencies`
+- [Candidate publication, promotion and rollback](docs/release.md)
+- [Contribution guide](CONTRIBUTING.md) and [original artwork criteria](docs/criteria.md)
 
-The site at [codedoodl.es](http://codedoodl.es) houses all of the doodles in one place, and installing the [chrome extension](https://chrome.google.com/webstore/detail/codedoodles/hhfnbfhcojlgbojpphigjibpjkccfikh) will show a new doodle every time you open a new tab.
-
-### How to contribute
-
-The sketches on codedoodl.es are 100% community-sourced. The submission / review / approval process is handled entirely in the open on GitHub - fork this repo, create a doodle, submit pull request, the reviewers will then feedback / approve and merge in to the repo.
-
-**[See this guide for comprehensive details on the contribution process.](docs/contributing.md)**
-
-### Doodle criteria
-
-The purpose of codedoodl.es is a little different to the other code-showcasing sites out there - we want to quick-to-load, quick-to-enjoy experiments, which are united through a consistent user interface. In order to maintain consistency with regards to user expectations, visual UI, and doodle performance, we have laid out some basic entry criteria for each doodle.
-
-**[See this guide for full specification of doodle criteria.](docs/criteria.md)**
-
-### Roadmap
-
-This is very much a first iteration, we wanted to get something basic released as soon as possible, and are hoping that there will be sufficient interest / engagement from the creative coding community to warrant the future development of more intricate features and functionality, some ideas include:
-
-**[See full roadmap here.](docs/roadmap.md)**
+Local sketch creation and preview are supported. The original AWS/S3 publishing,
+email and review automation is preserved in [legacy documentation](legacy/README.md)
+and excluded from the default dependency graph. The disabled webhook remains disabled.
 
 ### Thanks
 

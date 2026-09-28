@@ -1,5 +1,5 @@
 // config is coffee....
-require('coffee-script/register');
+require('coffeescript/register');
 
 module.exports = function getCredentials() {
     var creds = {};

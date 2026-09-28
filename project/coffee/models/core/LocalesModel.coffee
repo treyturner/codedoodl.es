@@ -9,7 +9,9 @@ class LocalesModel extends Backbone.Model
         return @get('language')
 
     getString : (id) =>
-        ((return e if(a is id)) for a, e of v['strings']) for k, v of @get('strings')
+        for k, v of @get('strings')
+            for a, e of v.strings
+                return e if a is id
         console.warn "Locales -> not found string: #{id}"
         null
 

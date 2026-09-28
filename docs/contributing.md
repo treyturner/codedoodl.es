@@ -1,8 +1,8 @@
-# Contributing doodles
+# Creating doodles locally
 
-The sketches on codedoodl.es are 100% community-sourced. The submission / review / approval process is handled entirely in the open on GitHub.
-
-You can either [**fork the repo yourself and manually add your doodle**](#submitting-via-github) source code before submitting a pull request, or [**alternatively... you can just fill out a form**](#submitting-via-form), and we'll do the legwork in getting the pull request / code prepared for you :)
+The original contribution/review service closed in 2020. These file conventions
+and local tools remain useful for self-hosted artwork; they do not submit to an
+active review queue. Discuss archive additions with the fork maintainer.
 
 ## Submitting via GitHub
 
@@ -23,8 +23,8 @@ These are the minimum number of files required for each doodle, these will be us
 **Route 1 - using `createDoodle.js` util script**
 
 1. Fork repo and clone local version
-2. `cd` in to local repo and run `$ [sudo] npm i`
-3. Run `$ node utils/createDoodle.js`
+2. `cd` in to local repo and run `npm ci (with Node 24.21.0 / npm 11.19.0)`
+3. Run `npm run doodle:create`
 4. Answer the questions within the interactive CLI - this creates a new directory within `/doodles/<author_github_username>/<doodle_name>`, and populates a `manifest.json` file for you
 5. Paste in your doodle `index.html` and accompanying asset files / directories
 6. Push to github
@@ -39,8 +39,14 @@ These are the minimum number of files required for each doodle, these will be us
 5. Push to github
 6. Submit pull request!
 
-## Submitting via form
+## Preview
 
-Fill out [this form](https://docs.google.com/forms/d/1K66OvKMiKqGjgmYRFUtEA43KZzBzv4KzObM1JtD4cbk/viewform) with a link to live version of your doodle / the source code, and some meta data around you / the doodle.
+Run `npm run doodle:preview -- doodles/author/name` and open
+http://127.0.0.1:3001. It supports both newly created plain files and the archive's
+gzip convention. See [build.md](build.md) for bind/port options. Existing
+sketch directories are never overwritten by the creator.
 
-Once submitted we'll upload to the development site and send you a link to check everything looks OK before pushing to the live site.
+## Historical submission form
+
+The retained `/form` redirect is an original URL compatibility contract, not an
+active submission service. Automated email, review and AWS publication are retired.

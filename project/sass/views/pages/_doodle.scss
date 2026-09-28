@@ -1,49 +1,55 @@
+@use "../../fonts";
+@use "../../globals";
+@use "../../utils/easing";
+@use "../../utils/mixins";
+@use "../../utils/responsive";
+
 .page-doodle {
     overflow: hidden;
 
     &[data-color-scheme="light"] {
-        background: $bg-offwhite;
+        background: globals.$bg-offwhite;
 
         .doodle-frame {
-            background: $bg-offwhite;
+            background: globals.$bg-offwhite;
         }
 
         .preloader-dots {
 
             .dot {
-                background: $cd-black;
+                background: globals.$cd-black;
             }
         }
 
         .doodle-instructions,
         .doodle-instructions a {
-            color: $cd-black;
+            color: globals.$cd-black;
         }
 
         .nav-arrow .nav-arrow__inner,
         .nav-arrow:after,
         .nav-arrow:before {
-            background: $cd-black;
+            background: globals.$cd-black;
         }
 
         .doodle-control {
 
             &:after,
             &:before {
-                background: $cd-black;
+                background: globals.$cd-black;
             }
 
             svg {
-                fill: $cd-black
+                fill: globals.$cd-black
             }
         }
     }
 
     &[data-color-scheme="dark"] {
-        background: $cd-black;
+        background: globals.$cd-black;
 
         .doodle-frame {
-            background: $cd-black;
+            background: globals.$cd-black;
         }
 
         .preloader-dots {
@@ -86,7 +92,7 @@
         z-index: 1;
         visibility: hidden;
         opacity: 0;
-        transition: all .3s $easeInOutExpo;
+        transition: all .3s easing.$easeInOutExpo;
 
         &.show {
             visibility: visible;
@@ -97,7 +103,7 @@
     .preloader-dots {
         z-index: 0;
 
-        @include respond-to(small) {
+        @include responsive.respond-to(small) {
             top: 55%;
         }
     }
@@ -112,15 +118,15 @@
         top: 47%;
         left: 50%;
         transform: translate(-50%, -50%);
-        @include font-size(1.2);
-        font-family: $ff-monosten-a;
+        @include mixins.font-size(1.2);
+        font-family: fonts.$ff-monosten-a;
         text-align: center;
 
         [data-codetext-char] {
             border-bottom: none !important;
         }
 
-        @include respond-to(medium) {
+        @include responsive.respond-to(medium) {
             max-width: 70%;
         }
 
@@ -139,7 +145,7 @@
                 width: 200px;
                 height: 200px;
                 border-radius: 50%;
-                background: $cd-red;
+                background: globals.$cd-red;
                 z-index: -1;
             }
         }
@@ -147,7 +153,7 @@
         a {
             text-decoration: none;
             padding-bottom: 1px;
-            border-bottom: 2px solid $cd-blue;
+            border-bottom: 2px solid globals.$cd-blue;
         }
     }
 
@@ -156,7 +162,7 @@
         .arrow,
         .arrow:after,
         .arrow:before {
-            transition: all .3s $easeInOutExpo;
+            transition: all .3s easing.$easeInOutExpo;
         }
 
         .arrow {
@@ -166,7 +172,7 @@
             display: none;
             cursor: pointer;
 
-            .no-touch & {
+            .can-hover & {
 
                 &:hover {
                     width: 40px;
@@ -183,12 +189,12 @@
             }
 
             &.arrow-left {
-                left: $site-padding-desktop;
+                left: globals.$site-padding-desktop;
                 transform: rotate(180deg);
             }
 
             &.arrow-right {
-                right: $site-padding-desktop;
+                right: globals.$site-padding-desktop;
             }
         }
     }
@@ -200,13 +206,13 @@
         height: 34px;
         z-index: 2;
         cursor: pointer;
-        transition: all .3s $easeInOutExpo;
+        transition: all .3s easing.$easeInOutExpo;
 
         &:after,
         &:before {
             content: '';
             position: absolute;
-            transition: all .3s $easeInOutExpo;
+            transition: all .3s easing.$easeInOutExpo;
             height: 2px;
             width: 0;
         }
@@ -235,7 +241,7 @@
             }
         }
 
-        .no-touch & {
+        .can-hover & {
 
             &:hover {
 
@@ -256,7 +262,7 @@
     .interaction-indicators {
         display: inline-block;
         position: fixed;
-        bottom: $site-padding-desktop;
+        bottom: globals.$site-padding-desktop;
         left: 50%;
         transform: translate(-50%, 0);
         z-index: 3;
@@ -273,7 +279,7 @@
                 width: 40px;
                 height: 2px;
                 transform: rotate(45deg);
-                background: $cd-blue;
+                background: globals.$cd-blue;
             }
 
             &[disabled] {
@@ -284,7 +290,7 @@
             }
 
             svg {
-                fill: $cd-red;
+                fill: globals.$cd-red;
             }
 
             &:last-child {
@@ -378,15 +384,15 @@
         height: 100%;
         transform: translate(100%, 0);
         transform: translate3d(100%, 0, 0);
-        transition: all .5s $easeInOutExpo;
+        transition: all .5s easing.$easeInOutExpo;
     }
 
     .subpage-info {
-        background: $bg-offwhite;
-        color: $cd-blue;
+        background: globals.$bg-offwhite;
+        color: globals.$cd-blue;
         z-index: 2;
 
-        @include respond-to(small) {
+        @include responsive.respond-to(small) {
             padding: 220px 65px 20px 70px;
             overflow: auto;
             -webkit-overflow-scrolling: touch;
@@ -397,27 +403,27 @@
         }
 
         a {
-            color: $cd-blue;
-            border-color: $cd-red;
+            color: globals.$cd-blue;
+            border-color: globals.$cd-red;
 
-            .no-touch & {
+            .can-hover & {
 
                 &:hover {
                     border-width: 0;
                     animation: info-link-blink 0.1s 1;
                     animation-timing-function: steps(1, end);
                     animation-fill-mode: forwards;
-                    color: $bg-offwhite;
+                    color: globals.$bg-offwhite;
                 }
             }
         }
 
         .col-2 {
-            font-family: $ff-monosten-f;
+            font-family: fonts.$ff-monosten-f;
         }
 
         .subpage-content {
-            padding: $site-padding-desktop 0;
+            padding: globals.$site-padding-desktop 0;
             position: relative;
             top: 55%;
 
@@ -428,7 +434,7 @@
                 left: 0;
                 width: 100%;
                 height: 2px;
-                background: $cd-blue;
+                background: globals.$cd-blue;
                 z-index: 2;
             }
 
@@ -450,7 +456,7 @@
                 }
 
                 &:after {
-                    border-top: 2px solid $cd-blue;
+                    border-top: 2px solid globals.$cd-blue;
                     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f1f1f3+0,f1f1f3+100&1+0,0.85+50,0+100 */
                     background: -webkit-linear-gradient(top, rgba(241,241,243,1) 0%,rgba(241,241,243,0.85) 50%,rgba(241,241,243,0) 100%); /* Chrome10+,Safari5.1+ */
                     background: -o-linear-gradient(top, rgba(241,241,243,1) 0%,rgba(241,241,243,0.85) 50%,rgba(241,241,243,0) 100%); /* Opera 11.10+ */
@@ -459,7 +465,7 @@
                 }
 
                 &:before {
-                    border-bottom: 2px solid $cd-blue;
+                    border-bottom: 2px solid globals.$cd-blue;
                     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f1f1f3+0,f1f1f3+100&0+0,0.85+50,1+100 */
                     background: -webkit-linear-gradient(top, rgba(241,241,243,0) 0%,rgba(241,241,243,0.85) 50%,rgba(241,241,243,1) 100%); /* Chrome10+,Safari5.1+ */
                     background: -o-linear-gradient(top, rgba(241,241,243,0) 0%,rgba(241,241,243,0.85) 50%,rgba(241,241,243,1) 100%); /* Opera 11.10+ */
@@ -472,16 +478,18 @@
                     // -webkit-over-scrolling: touch;
                     // padding: $site-padding-desktop 0 0;
 
-                    overflow: hidden;
+                    overflow-y: auto;
+                    overscroll-behavior-y: contain;
+                    scrollbar-width: thin;
                     padding: 0;
 
-                    .touch & {
+                    .no-hover & {
                         overflow: auto;
                         -webkit-over-scrolling: touch;
                     }
 
                     .doodle-info-scroller {
-                        padding: $site-padding-desktop 0;
+                        padding: globals.$site-padding-desktop 0;
                     }
 
                     .row:last-child {
@@ -490,7 +498,7 @@
                 }
             }
 
-            @include respond-to(small) {
+            @include responsive.respond-to(small) {
                 top: auto;
                 transform: translate(-50%, 0);
                 overflow: visible;
@@ -500,31 +508,31 @@
     }
 
     .subpage-info-pane {
-        background: $cd-red;
+        background: globals.$cd-red;
         z-index: 1;
         transition-delay: 0.03s;
     }
 
     .doodle-preview {
         position: absolute;
-        top: -#{($home-grid-item-width*0.95)};
+        top: -#{(globals.$home-grid-item-width*0.95)};
         z-index: 0;
         transform: translate(150px, 0);
         transform: translate3d(150px, 0, 0);
-        transition: all 0.7s $easeInOutQuad;
+        transition: all 0.7s easing.$easeInOutQuad;
     }
 
     .doodle-preview-thumb-holder {
         position: absolute;
-        width: $home-grid-item-width;
-        height: $home-grid-item-width;
-        top: $home-grid-item-width/2;
-        left: $home-grid-item-width/2;
+        width: globals.$home-grid-item-width;
+        height: globals.$home-grid-item-width;
+        top: globals.$home-grid-item-width*0.5;
+        left: globals.$home-grid-item-width*0.5;
         display: block;
-        background: $cd-red;
+        background: globals.$cd-red;
         transform: rotate(45deg) translate(-50%, -50%);
         transform-origin: 0 0;
-        transition: all .5s $easeInOutQuad;
+        transition: all .5s easing.$easeInOutQuad;
         border-radius: 50%;
         overflow: hidden;
     }
@@ -535,18 +543,18 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: $home-grid-item-width*1.5;
-        height: $home-grid-item-width*1.5;
+        width: globals.$home-grid-item-width*1.5;
+        height: globals.$home-grid-item-width*1.5;
         transform: rotate(-45deg) translate(-50%, -50%);
         transform-origin: 0 0;
-        transition: all .5s $easeInOutQuad;
+        transition: all .5s easing.$easeInOutQuad;
         opacity: 0;
         visibility: hidden;
     }
 
     .doodle-preview-thumb-cover {
         z-index: 1;
-        background: $cd-blue;
+        background: globals.$cd-blue;
     }
 
     .doodle-preview-thumb {
@@ -562,28 +570,28 @@
     .doodle-preview-line {
         position: absolute;
         z-index: 1;
-        top: $home-grid-item-width*0.88;
+        top: globals.$home-grid-item-width*0.88;
         height: 2px;
-        background: $cd-blue;
+        background: globals.$cd-blue;
         width: 0;
-        transition: all 0.5s $easeOutExpo;
+        transition: all 0.5s easing.$easeOutExpo;
     }
 
     .doodle-preview-number {
         position: absolute;
         top: -15px;
         left: 0;
-        @include font-size(7);
+        @include mixins.font-size(7);
         line-height: 1;
         z-index: 3;
-        color: $cd-blue;
+        color: globals.$cd-blue;
 
         .index-char-nonzero {
-            font-family: $ff-monosten-a;
+            font-family: fonts.$ff-monosten-a;
         }
 
         .index-char-zero {
-            font-family: $ff-monosten-b;
+            font-family: fonts.$ff-monosten-b;
         }
     }
 
@@ -599,7 +607,7 @@
         .doodle-preview-thumb,
         .doodle-preview-line {
             transition-delay: 0.7s;
-            transition-timing-function: $easeInOutExpo;
+            transition-timing-function: easing.$easeInOutExpo;
         }
 
         .doodle-preview-thumb-holder {
@@ -618,18 +626,18 @@
         }
 
         .doodle-preview-line {
-            width: $home-grid-item-width;
+            width: globals.$home-grid-item-width;
         }
     }
 }
 
 @keyframes info-link-blink {
     0%, 100% {
-        background: $cd-red;
-        color: $bg-offwhite;
+        background: globals.$cd-red;
+        color: globals.$bg-offwhite;
     }
     50% {
-        background: $bg-offwhite;
-        color: $cd-red;
+        background: globals.$bg-offwhite;
+        color: globals.$cd-red;
     }
 }

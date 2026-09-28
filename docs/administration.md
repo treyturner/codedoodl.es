@@ -1,5 +1,10 @@
 # Doodle / site / extension(s) administration
 
+These are historical instructions for the retired hosted service. The AWS and
+Elastic Beanstalk tasks are now preserved in [`legacy/`](../legacy/README.md)
+and are not part of the supported build. Use the current
+[build guide](build.md) and container publishing workflow for this fork.
+
 This section is a run-through on how to publish new doodles, and how to deploy new versions of the site / extension(s), note you'll need to be given separate AWS credentials for these tasks.
 
 ## Adding a new doodle

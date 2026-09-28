@@ -13,14 +13,14 @@ class UserData extends AbstractData
 
 	constructor : ->
 
+		super()
+
 		@status   = new UserStatusModel
 		@info     = new UserInfoModel
 
-		super()
-
 		@bindEvents()
 
-		return null
+		return
 
 	bindEvents : =>
 

@@ -1,5 +1,7 @@
+@use "../../globals";
+
 .page-four-oh-four {
-	background: $cd-blue;
+	background: globals.$cd-blue;
 
 	.not-found-message {
 		color: #fff;
@@ -7,7 +9,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		border-bottom: 2px solid $cd-red;
+		border-bottom: 2px solid globals.$cd-red;
 		padding-bottom: 5px;
 	}
 }

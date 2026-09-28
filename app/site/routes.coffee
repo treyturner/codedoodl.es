@@ -1,10 +1,10 @@
 _               = require 'underscore'
-bodyParser      = require 'body-parser'
-cookieParser    = require 'cookie-parser'
+express         = require 'express'
 session         = require 'express-session'
 Hashids         = require 'hashids'
 getTemplateData = require '../utils/getTemplateData'
 config          = require '../../config/server'
+hashids         = new Hashids config.shortlinks.SALT, 3, config.shortlinks.ALPHABET
 
 ###
 views
@@ -31,19 +31,16 @@ doodles = (req, res) ->
 	if doodle
 		res.render "site/index", getTemplateData('DOODLES', req)
 	else
-		res.status(404).redirect "/404"
+		res.redirect 302, "/404"
 
 checkShortLink = (req, res, next) ->
-	segments = req.params.path.split('/')
-
-	if segments.length is 1
-		allDoodles = require('../utils/getDoodleData').getDoodles()
-		hashids    = new Hashids config.shortlinks.SALT, 3, config.shortlinks.ALPHABET
-		index      = hashids.decode(segments[0])[0]
-		doodle     = _.findWhere allDoodles, index : index
-
-		if doodle
-			return res.redirect 301, "/#{config.routes.DOODLES}/#{doodle.slug}"
+	# Filenames and ordinary paths must reach static serving or the 404 handler.
+	return next() unless hashids.isValidId(req.params.shortlink)
+	allDoodles = require('../utils/getDoodleData').getDoodles()
+	index      = hashids.decode(req.params.shortlink)[0]
+	doodle     = _.findWhere allDoodles, index : index
+	if doodle
+		return res.redirect 301, "/#{config.routes.DOODLES}/#{doodle.slug}"
 
 	next()
 
@@ -74,34 +71,37 @@ login = (req, res) ->
 		getTemplateData('LOGIN')
 	res.render "site/login", vars
 
-loginPost = (req, res) ->
-	if req.body.pw is config.PASSWORD
-		req.session.logged_in = true
-		res.redirect '/'
+loginPost = (req, res, next) ->
+	if config.PASSWORD and req.body?.pw is config.PASSWORD
+		req.session.regenerate (error) ->
+			return next(error) if error
+			req.session.logged_in = true
+			req.session.save (error) ->
+				if error then next(error) else res.redirect('/')
 	else
 		res.redirect '/login?wrong_pw'
 
 setup = (app) ->
-	app.use bodyParser()
-
 	if config.PASSWORD
-		app.use cookieParser()
-		app.use session({ secret: 'what up' })
+		app.use session
+			secret: config.SESSION_SECRET
+			resave: false
+			saveUninitialized: false
+			cookie: { httpOnly: true, sameSite: 'lax', secure: 'auto' }
 
 	app.get "/#{config.routes.LOGIN}", login
-	app.post "/#{config.routes.LOGIN}", loginPost
+	app.post "/#{config.routes.LOGIN}", express.urlencoded({ extended: false }), express.json(), loginPost
 
 	app.get "/#{config.routes.HOME}", home
 	app.get "/#{config.routes.ABOUT}", checkAuth, about
 	app.get "/#{config.routes.CONTRIBUTE}", checkAuth, contribute
-	app.get "/#{config.routes.DOODLES}/:authorName?/:doodleName?", checkAuth, doodles
+	app.get ["/#{config.routes.DOODLES}", "/#{config.routes.DOODLES}/:authorName", "/#{config.routes.DOODLES}/:authorName/:doodleName"], checkAuth, doodles
 
 	app.get "/#{config.routes.FORM}", formRedirect
 	app.get "/#{config.routes.EXTENSION}", extensionRedirect
 
-	app.get '/holding/*', (req, res, next) => res.sendfile "public#{req.url}"
-
-	app.get '/:path(*)', checkShortLink
-	app.get '*', checkAuth
+	app.get '/:shortlink', checkShortLink
+	app.use (req, res, next) ->
+		if req.method in ['GET', 'HEAD'] then checkAuth(req, res, next) else next()
 
 module.exports = setup

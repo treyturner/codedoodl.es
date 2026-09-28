@@ -1,6 +1,7 @@
 AbstractView         = require '../AbstractView'
 Router               = require '../../router/Router'
 CodeWordTransitioner = require '../../utils/CodeWordTransitioner'
+retainPointerTarget  = require '../../utils/retainPointerTarget'
 
 class Header extends AbstractView
 
@@ -13,7 +14,7 @@ class Header extends AbstractView
 	EVENT_DOODLE_INFO_CLOSE  : 'EVENT_DOODLE_INFO_CLOSE'
 	EVENT_HOME_SCROLL_TO_TOP : 'EVENT_HOME_SCROLL_TO_TOP'
 
-	constructor : ->
+	initialize : ->
 
 		@templateVars =
 			home    : 
@@ -36,7 +37,7 @@ class Header extends AbstractView
 
 		return null
 
-	init : =>
+	init : ->
 
 		@$logo              = @$el.find('.logo__link')
 		@$navLinkAbout      = @$el.find('.about-btn')
@@ -46,7 +47,7 @@ class Header extends AbstractView
 
 		null
 
-	setCodeWordInitialStates : =>
+	setCodeWordInitialStates : ->
 
 		state = @getSectionColour()
 
@@ -61,13 +62,15 @@ class Header extends AbstractView
 
 		null
 
-	bindEvents : =>
+	bindEvents : ->
 
 		@CD().appView.on @CD().appView.EVENT_PRELOADER_HIDE, @animateTextIn
 		@CD().router.on Router.EVENT_HASH_CHANGED, @onHashChange
 
 		@$el.on 'mouseenter', '[data-codeword]', @onWordEnter
 		@$el.on 'mouseleave', '[data-codeword]', @onWordLeave
+
+		@$el.on 'pointerdown', 'a', retainPointerTarget
 
 		@$infoBtn.on 'click', @onInfoBtnClick
 		@$closeBtn.on 'click', @onCloseBtnClick
@@ -78,7 +81,7 @@ class Header extends AbstractView
 
 		null
 
-	onHashChange : (where) =>
+	onHashChange : (where) ->
 
 		if @FIRST_HASHCHANGE
 			@FIRST_HASHCHANGE = false
@@ -88,7 +91,7 @@ class Header extends AbstractView
 
 		null
 
-	onAreaChange : (section) =>
+	onAreaChange : (section) ->
 
 		@activeSection = section
 		
@@ -123,7 +126,7 @@ class Header extends AbstractView
 
 		null
 
-	getSectionColour : (section, wordSection=null) =>
+	getSectionColour : (section, wordSection=null) ->
 
 		section = section or @CD().nav.current.area or 'home'
 
@@ -142,21 +145,21 @@ class Header extends AbstractView
 
 		colour
 
-	_getDoodleColourScheme : =>
+	_getDoodleColourScheme : ->
 
 		doodle = @CD().appData.doodles.getDoodleByNavSection 'current'
 		colour = if doodle and doodle.get('colour_scheme') is 'light' then 'black' else 'white'
 
 		colour
 
-	animateTextIn : =>
+	animateTextIn : ->
 
 		@setCodeWordInitialStates()
 		@onAreaChange @CD().nav.current.area
 
 		null
 
-	onWordEnter : (e) =>
+	onWordEnter : (e) ->
 
 		$el = $(e.currentTarget)
 		wordSection = $el.attr('data-word-section')
@@ -165,7 +168,7 @@ class Header extends AbstractView
 
 		null
 
-	onWordLeave : (e) =>
+	onWordLeave : (e) ->
 
 		$el = $(e.currentTarget)
 		wordSection = $el.attr('data-word-section')
@@ -174,14 +177,14 @@ class Header extends AbstractView
 
 		null
 
-	onLogoClick : =>
+	onLogoClick : ->
 
 		if @CD().nav.current.area is @CD().nav.sections.HOME
 			@trigger @EVENT_HOME_SCROLL_TO_TOP
 
 		null
 
-	onInfoBtnClick : (e) =>
+	onInfoBtnClick : (e) ->
 
 		e.preventDefault()
 
@@ -194,7 +197,7 @@ class Header extends AbstractView
 
 		null
 
-	onCloseBtnClick : (e) =>
+	onCloseBtnClick : (e) ->
 
 		if @DOODLE_INFO_OPEN
 			e.preventDefault()
@@ -203,13 +206,13 @@ class Header extends AbstractView
 
 		null
 
-	onKeyup : (e) =>
+	onKeyup : (e) ->
 
 		if e.keyCode is 27 and @CD().nav.current.area is @CD().nav.sections.DOODLES then @hideDoodleInfo()
 
 		null
 
-	showDoodleInfo : =>
+	showDoodleInfo : ->
 
 		return unless !@DOODLE_INFO_OPEN
 
@@ -219,7 +222,7 @@ class Header extends AbstractView
 
 		null
 
-	hideDoodleInfo : =>
+	hideDoodleInfo : ->
 
 		return unless @DOODLE_INFO_OPEN
 

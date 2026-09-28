@@ -22,7 +22,7 @@ class Templates
             $value = $(value)
             temp.push new TemplateModel
                 id   : $value.attr('id').toString()
-                text : $.trim $value.text()
+                text : $value.text().trim()
 
         @templates = new TemplatesCollection temp
 
@@ -35,6 +35,6 @@ class Templates
         t = @templates.where id : id
         t = t[0].get 'text'
         
-        return $.trim t
+        return t.trim()
 
 module.exports = Templates

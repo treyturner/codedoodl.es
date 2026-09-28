@@ -1,6 +1,10 @@
+@use "../../fonts";
+@use "../../globals";
+@use "../../utils/mixins";
+
 
 #site-header {
-    font-family: $ff-monosten-a;
+    font-family: fonts.$ff-monosten-a;
 
     .logo,
     .site-nav,
@@ -12,23 +16,23 @@
     .logo__link,
     .site-nav__link,
     .close-btn {
-        @include font-size(1.5);
+        @include mixins.font-size(1.5);
         cursor: pointer;
         display: inline-block;
         text-decoration: none;
         letter-spacing: 0.6px;
-        color: $bg-offwhite;
+        color: globals.$bg-offwhite;
     }
 
     .logo {
         top: 50%;
-        left: $site-padding-desktop;
+        left: globals.$site-padding-desktop;
         transform: translate(-50%, -50%) rotate(90deg);
     }
 
     .site-nav {
         top: 50%;
-        right: $site-padding-desktop;
+        right: globals.$site-padding-desktop;
         transform: translate(50%, -50%) rotate(90deg);
     }
 
@@ -41,8 +45,8 @@
     }
 
     .close-btn {
-        top: $site-padding-desktop;
-        right: $site-padding-desktop;
+        top: globals.$site-padding-desktop;
+        right: globals.$site-padding-desktop;
         transform: translate(50%, 50%) rotate(90deg);
     }
 

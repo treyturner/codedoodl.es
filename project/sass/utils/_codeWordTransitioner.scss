@@ -1,9 +1,13 @@
+@use "../globals";
+
 
 [data-codeword] {
 	position: relative;
 }
 
 [data-codetext-char] {
+	// Letter text changes during a press; keep the enclosing link/button targeted.
+	pointer-events: none;
 	display: inline-block;
 	position: relative;
 	padding-bottom: 2px;
@@ -21,35 +25,35 @@
     }
 
     &[data-codetext-char-state="offwhite"] {
-        color: $bg-offwhite;
-        border-bottom: 2px solid $bg-offwhite;
+        color: globals.$bg-offwhite;
+        border-bottom: 2px solid globals.$bg-offwhite;
     }
 
     &[data-codetext-char-state="red"] {
-        color: $cd-red;
-        border-bottom: 2px solid $cd-red;
+        color: globals.$cd-red;
+        border-bottom: 2px solid globals.$cd-red;
     }
 
     &[data-codetext-char-state="blue"] {
-        color: $cd-blue;
-        border-bottom: 2px solid $cd-blue;
+        color: globals.$cd-blue;
+        border-bottom: 2px solid globals.$cd-blue;
     }
 
     &[data-codetext-char-state="black"] {
-        color: $cd-black;
-        border-bottom: 2px solid $cd-black;
+        color: globals.$cd-black;
+        border-bottom: 2px solid globals.$cd-black;
     }
 
     &[data-codetext-char-state="black-white-bg"] {
-        color: $cd-black;
+        color: globals.$cd-black;
         background: #fff;
         border-bottom: 2px solid #fff;
     }
 
     &[data-codetext-char-state="offwhite-red-bg"] {
-        color: $bg-offwhite;
-        background: $cd-red;
-        border-bottom: 2px solid $cd-red;
+        color: globals.$bg-offwhite;
+        background: globals.$cd-red;
+        border-bottom: 2px solid globals.$cd-red;
     }
 
     &[data-codetext-char-state="white-active"] {
@@ -94,7 +98,7 @@
     }
 
     &[data-codetext-char-state="red-active"] {
-        color: $cd-red;
+        color: globals.$cd-red;
         border-color: transparent;
 
         &:after {
@@ -108,7 +112,7 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: contain;
-            background-image: url("data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" x=\"0px\" y=\"0px\" viewBox=\"0.6 0 6.9 6.2\" xml:space=\"preserve\"><polygon fill=\"#{$cd-red}\" points=\"4,0.1 4,0.1 0.6,3.5 0.6,6.1 4,2.8 2.6,1.5 4,0.1 4,0.1 2.6,1.5 4,2.8 7.5,6.1 7.5,6.1 7.5,3.5 \"/></svg>");
+            background-image: url("data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" x=\"0px\" y=\"0px\" viewBox=\"0.6 0 6.9 6.2\" xml:space=\"preserve\"><polygon fill=\"#{globals.$cd-red}\" points=\"4,0.1 4,0.1 0.6,3.5 0.6,6.1 4,2.8 2.6,1.5 4,0.1 4,0.1 2.6,1.5 4,2.8 7.5,6.1 7.5,6.1 7.5,3.5 \"/></svg>");
         }
     }
 }

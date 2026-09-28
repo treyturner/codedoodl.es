@@ -1,7 +1,13 @@
+@use "../../fonts";
+@use "../../globals";
+@use "../../utils/easing";
+@use "../../utils/mixins";
+@use "../../utils/responsive";
+
 
 #preloader {
 	color: transparent;
-	background: $cd-red;
+	background: globals.$cd-red;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -9,7 +15,7 @@
 	height: 100%;
 	z-index: 50;
 	overflow: hidden;
-	transition: all .3s $easeInOutQuad;
+	transition: all .3s easing.$easeInOutQuad;
 	transform: translate(-50%, -50%);
 	transform: translate3d(-50%, -50%, 0);
 	opacity: 0;
@@ -23,9 +29,9 @@
 	.preloader__text-outer,
 	.preloader-intro-caption,
 	.preloader-intro-btns .intro-btn {
-		@include font-size(1.5);
+		@include mixins.font-size(1.5);
 		letter-spacing: 0.6px;
-		font-family: $ff-monosten-a;
+		font-family: fonts.$ff-monosten-a;
 	}
 
 	.preloader__text-outer {
@@ -46,12 +52,12 @@
 		transform: translate3d(-50%, -50%, 0);
 
 		&.preloader__bg-1 {
-			background: $cd-blue;
+			background: globals.$cd-blue;
 			z-index: 0;
 		}
 
 		&.preloader__bg-2 {
-			background: $bg-offwhite;
+			background: globals.$bg-offwhite;
 			z-index: 1;
 		}
 	}
@@ -96,6 +102,11 @@
 		text-decoration: none;
 		cursor: pointer;
 
+		// Keep the click target stable while the animated letters replace text.
+		[data-codetext-char] {
+			pointer-events: none;
+		}
+
 		&:first-child {
 			margin-right: 25px;
 		}
@@ -105,7 +116,7 @@
 		}
 	}
 
-	@include respond-to(small) {
+	@include responsive.respond-to(small) {
 
 		.intro-btn {
 			display: block;

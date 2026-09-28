@@ -1,0 +1,125 @@
+name: Validate and publish codedoodles candidate
+
+on:
+  push:
+    branches: [master, feat/containerize, feat/modernize, ci/ubuntu-26.04]
+    paths-ignore:
+      - .github/FUNDING.yml
+      - README.md
+  pull_request:
+    branches: [master, feat/containerize, feat/modernize, ci/ubuntu-26.04]
+    paths-ignore:
+      - .github/FUNDING.yml
+      - README.md
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish a tested candidate to both registries (never changes latest)
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-push:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 50
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Checkout pinned doodle archive
+        shell: bash
+        run: |
+          source tests/assets.lock
+          # The historical archive has a gitlink without .gitmodules. Checkout's
+          # credential cleanup traverses it even when submodules are disabled.
+          # Fetch the public archive without credentials or submodule traversal.
+          git init tests/archive
+          git -C tests/archive remote add origin "$ASSETS_REPOSITORY"
+          git -C tests/archive fetch --no-tags --no-recurse-submodules --depth=1 origin "$ASSETS_COMMIT"
+          git -C tests/archive -c submodule.recurse=false checkout --detach "$ASSETS_COMMIT"
+          test "$(git -C tests/archive rev-parse HEAD)" = "$ASSETS_COMMIT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd  # v4.0.0
+
+      - name: Check publication credential validation
+        run: bash tests/publish/check-credentials.sh
+
+      - name: Build image
+        uses: docker/build-push-action@eb6512707bea5740b2608f2a43ece7bc543cb75b  # v7.0.0
+        with:
+          context: .
+          cache-from: |
+            type=gha,scope=${{ github.ref_name }}
+            type=gha,scope=master
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}
+          tags: codedoodles:candidate-${{ github.sha }}
+          load: true
+          push: false
+
+      - name: Check container runtime defaults and ports
+        run: bash scripts/test-container.sh codedoodles:candidate-${{ github.sha }}
+
+      - name: Audit runtime, build and test dependencies
+        run: |
+          mkdir -p tests/artifacts/security
+          docker build --target builder -t codedoodles:checks .
+          docker run --rm -v "$PWD/tests/artifacts/security:/results" codedoodles:checks npm run audit:dependencies -- /results
+
+      - name: Scan the final runtime image
+        run: bash scripts/scan-image.sh codedoodles:candidate-${{ github.sha }}
+
+      - name: Test the candidate container
+        env:
+          CODEDOODLES_IMAGE: codedoodles:candidate-${{ github.sha }}
+        run: bash tests/run.sh
+
+      - name: Tag and push tested candidate
+        if: >-
+          (github.ref == 'refs/heads/master' && github.event_name == 'push') ||
+          (github.event_name == 'workflow_dispatch' && inputs.publish)
+        uses: ./.github/actions/publish
+        with:
+          candidate-ref: codedoodles:candidate-${{ github.sha }}
+          refs: |
+            ghcr.io/${{ github.repository_owner }}/codedoodles:candidate-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+            forgejo.treyturner.info/${{ github.repository_owner }}/codedoodles:candidate-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          github-token: ${{ github.token }}
+          forgejo-token: ${{ secrets.FORGEJO_REGISTRY_TOKEN }}
+
+      - name: Record immutable candidate references
+        if: >-
+          (github.ref == 'refs/heads/master' && github.event_name == 'push') ||
+          (github.event_name == 'workflow_dispatch' && inputs.publish)
+        env:
+          OWNER: ${{ github.repository_owner }}
+          CANDIDATE: candidate-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+        shell: bash
+        run: |
+          : > tests/artifacts/candidate-digests.txt
+          for registry in ghcr.io forgejo.treyturner.info; do
+            repository="$registry/${OWNER,,}/codedoodles"
+            digest="$(docker buildx imagetools inspect "$repository:$CANDIDATE" --format '{{json .Manifest}}' | jq -er '.digest')"
+            echo "$repository@$digest" | tee -a tests/artifacts/candidate-digests.txt
+          done
+          diff <(head -1 tests/artifacts/candidate-digests.txt | cut -d@ -f2) <(tail -1 tests/artifacts/candidate-digests.txt | cut -d@ -f2)
+          cat tests/artifacts/candidate-digests.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Save validation results and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: validation-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tests/artifacts/
+          retention-days: 30
+          if-no-files-found: warn

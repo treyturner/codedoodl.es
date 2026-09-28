@@ -6,7 +6,7 @@ class Preloader extends AbstractView
 	
 	cb : null
 
-	constructor : ->
+	initialize : ->
 
 		@setElement $('#preloader')
 
@@ -14,7 +14,7 @@ class Preloader extends AbstractView
 
 		return null
 
-	init : =>
+	init : ->
 
 		@$codeWord = @$el.find('[data-codeword]')
 		@$bg1      = @$el.find('[data-bg="1"]')
@@ -22,7 +22,7 @@ class Preloader extends AbstractView
 
 		null
 
-	initIntroMessage : =>
+	initIntroMessage : ->
 
 		tmpl = _.template  @CD().templates.get "preloader-intro"
 		vars =
@@ -42,7 +42,7 @@ class Preloader extends AbstractView
 
 		null
 
-	setIntroListeners : (setting) =>
+	setIntroListeners : (setting) ->
 
 		@$el[setting] 'mouseenter', '[data-intro-btn]', @onWordEnter
 		@$el[setting] 'mouseleave', '[data-intro-btn]', @onWordLeave
@@ -51,7 +51,7 @@ class Preloader extends AbstractView
 
 		null
 
-	onWordEnter : (e) =>
+	onWordEnter : (e) ->
 
 		$el = $(e.currentTarget)
 
@@ -59,7 +59,7 @@ class Preloader extends AbstractView
 
 		null
 
-	onWordLeave : (e) =>
+	onWordLeave : (e) ->
 
 		$el = $(e.currentTarget)
 
@@ -67,7 +67,7 @@ class Preloader extends AbstractView
 
 		null
 
-	onEnterBtnClick : =>
+	onEnterBtnClick : ->
 
 		@setIntroListeners 'off'
 
@@ -88,7 +88,7 @@ class Preloader extends AbstractView
 
 		null
 
-	playIntroAnimation : (@cb) =>
+	playIntroAnimation : (@cb) ->
 
 		console.log "show : (@cb) =>"
 
@@ -111,7 +111,7 @@ class Preloader extends AbstractView
 
 		null
 
-	_playIntroAnimationFirstVisit : =>
+	_playIntroAnimationFirstVisit : ->
 
 		window.localStorage.setItem 'CD_VISITED', true
 
@@ -140,7 +140,7 @@ class Preloader extends AbstractView
 
 		null
 
-	_playIntroAnimationReturning : =>
+	_playIntroAnimationReturning : ->
 
 		setTimeout =>
 			CodeWordTransitioner.scramble @$codeWord, 'white', false, => @animateBgOut @onHideComplete
@@ -148,25 +148,25 @@ class Preloader extends AbstractView
 
 		null
 
-	onShowComplete : =>
+	onShowComplete : ->
 
 		@cb?()
 
 		null
 
-	onHideComplete : =>
+	onHideComplete : ->
 
 		@cb?()
 
 		null
 
-	animateBgOut : (cb) =>
+	animateBgOut : (cb) ->
 
-		TweenLite.to @$bg1, 0.5, { delay : 0.2, width : "100%", ease : Expo.easeOut }
-		TweenLite.to @$bg1, 0.6, { delay : 0.7, height : "100%", ease : Expo.easeOut }
+		gsap.to @$bg1, { duration: 0.5, delay : 0.2, width : "100%", ease : 'expo.out' }
+		gsap.to @$bg1, { duration: 0.6, delay : 0.7, height : "100%", ease : 'expo.out' }
 
-		TweenLite.to @$bg2, 0.4, { delay : 0.4, width : "100%", ease : Expo.easeOut }
-		TweenLite.to @$bg2, 0.5, { delay : 0.8, height : "100%", ease : Expo.easeOut, onComplete : cb }
+		gsap.to @$bg2, { duration: 0.4, delay : 0.4, width : "100%", ease : 'expo.out' }
+		gsap.to @$bg2, { duration: 0.5, delay : 0.8, height : "100%", ease : 'expo.out', onComplete : cb }
 
 		setTimeout =>
 			CodeWordTransitioner.to '            ', @$codeWord, '', false

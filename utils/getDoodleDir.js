@@ -1,43 +1,9 @@
-// config is coffee....
-require('coffee-script/register');
+const { join } = require('node:path');
+const slug = require('slug').default;
 
-var slug   = require('slug');
-var colors = require('colors');
-var config = require('../config/repository');
+const getAuthorDir = name => slug(name.trim().replace(/\s+/g, '-').toLowerCase());
+const getDoodleDir = getAuthorDir;
+const getSlug = manifest => `${getAuthorDir(manifest.author.github)}/${getDoodleDir(manifest.name)}`;
+const getFullPath = manifest => join('doodles', getSlug(manifest));
 
-var getFullPath = function(manifest) {
-
-	authorDir = getAuthorDir(manifest.author.github);
-    doodleDir = getDoodleDir(manifest.name);
-
-    return config.REPO_DOODLE_DIR+'/'+authorDir+'/'+doodleDir
-
-}
-
-var getSlug = function(manifest) {
-
-	authorDir = getAuthorDir(manifest.author.github);
-    doodleDir = getDoodleDir(manifest.name);
-
-    return authorDir+'/'+doodleDir
-
-}
-
-var getAuthorDir = function(name) {
-
-	return slug(name.replace(/\s+/g, '-').toLowerCase());
-	
-}
-
-var getDoodleDir = function(name) {
-
-	return slug(name.replace(/\s+/g, '-').toLowerCase());
-	
-}
-
-module.exports = {
-	getFullPath  : getFullPath,
-	getSlug      : getSlug,
-	getAuthorDir : getAuthorDir,
-	getDoodleDir : getDoodleDir
-};
+module.exports = { getFullPath, getSlug, getAuthorDir, getDoodleDir };
