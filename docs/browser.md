@@ -123,6 +123,11 @@ mobile fallback test only checked the generated href; it now opens the video.
 
 ### Coverage boundaries
 
+The original extension-promotion splash is retained but disabled by
+`SHOW_EXTENSION_INTRO = false` in `Preloader.coffee`. First visits use the normal
+loading animation and enter the grid automatically. Extension links use the
+fork's GitHub releases page, including the About page and `/extension` shortcut.
+
 The standard container suite compares the original screenshots and exercises
 real navigation, Canvas/WebGL frames, first-visit entry, mobile fallback and
 model lifecycle. Additional browser contracts cover exact library versions,

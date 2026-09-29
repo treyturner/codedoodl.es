@@ -10,7 +10,8 @@ export async function ready(page, path = '/') {
   await page.evaluate(() => document.fonts.ready);
 }
 export async function gridReady(page) {
-  await expect(page.locator('[data-grid-item]')).toHaveCount(77);
+  await expect(page.locator('[data-grid-item]')).toHaveCount(76);
+  await expect(page.locator('[data-grid-item] a[href*="/samsy/boobs"]')).toHaveCount(0);
   await expect(page.locator('[data-home-grid]')).toHaveClass(/after-intro-animation/);
 }
 export async function canvasFrame(page, slug) {

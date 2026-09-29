@@ -5,6 +5,9 @@ temp
 tests/*
 !tests/server
 !tests/tools
+!tests/fixtures
+tests/fixtures/*
+!tests/fixtures/api.json
 !tests/package.json
 !tests/package-lock.json
 **/credentials.coffee

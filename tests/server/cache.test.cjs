@@ -85,6 +85,26 @@ test('valid empty masters initialize and refresh without hanging or fetching ind
   assert.deepEqual(data.state.requests, ['/master_manifest.json', '/master_manifest.json']);
 });
 
+test('unpublished artwork in an older upstream master is never fetched or returned', async t => {
+  const data = await fixture(t);
+  const unpublished = [
+    { id: 'ank', index: 73, slug: 'samsy/fury-ribbons' },
+    { id: 'xgp', index: 74, slug: 'samsy/boobs' },
+  ];
+  data.state.master.doodles.push(...unpublished);
+  for (const entry of unpublished) {
+    data.state.manifests[entry.slug] = { name: 'Unpublished', author: { name: 'Artist', github: 'samsy' }, tags: [] };
+  }
+  const cache = cacheFor(t, data);
+  await cache.initialize();
+  assert.equal(cache.getDoodles().length, 5);
+  data.state.master.doodles = unpublished;
+  await cache.refresh();
+  assert.deepEqual(cache.getDoodles(), []);
+  assert.deepEqual(cache.getContributors(), []);
+  assert.ok(!data.state.requests.some(path => /samsy\/(?:boobs|fury-ribbons)/.test(path)));
+});
+
 test('complete individual-manifest outage rejects initialization and can recover', async t => {
   const data = await fixture(t);
   data.state.missing = new Set(Object.keys(data.state.manifests));

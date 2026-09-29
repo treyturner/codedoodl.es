@@ -6,6 +6,8 @@ const { once } = require('node:events');
 const { runInNewContext } = require('node:vm');
 const { readFileSync } = require('node:fs');
 const Hashids = require('hashids');
+const originalCatalogue = JSON.parse(readFileSync('tests/fixtures/api.json'));
+const published = doodles => doodles.filter(doodle => doodle.slug !== 'samsy/boobs');
 process.env.NODE_ENV = 'development';
 process.env.DEV_PASSWORD = 'server-test-password';
 process.env.GITHUB_SECRET = 'server-test-hook-secret';
@@ -31,6 +33,39 @@ test('Hashids 2 encodes and decodes every original ID with the original salt/alp
   for (const entry of JSON.parse(readFileSync('doodles/master_manifest_DEV.json')).doodles) {
     assert.equal(hashids.encode(entry.index), entry.id);
     assert.deepEqual(hashids.decode(entry.id), [entry.index]);
+  }
+});
+
+test('active catalogues omit unpublished artwork while preserving surviving identities', () => {
+  const identities = doodles => doodles.map(({ id, index, slug }) => ({ id, index, slug }))
+    .sort((a, b) => a.index - b.index);
+  // The original DEV master has a different early ordering from production.
+  for (const [file, doodles] of [
+    ['master_manifest.json', originalCatalogue.doodles],
+    ['master_manifest_DEV.json', originalCatalogue.fallbackDoodles],
+  ]) {
+    const expected = identities(published(doodles));
+    assert.equal(expected.length, 76);
+    assert.ok(!expected.some(doodle => [73, 74].includes(doodle.index)));
+    assert.deepEqual(identities(JSON.parse(readFileSync(`doodles/${file}`)).doodles), expected, file);
+  }
+  assert.deepEqual(identities(cache.getDoodles()), identities(published(originalCatalogue.fallbackDoodles)), 'Development catalogue');
+});
+
+test('retired artwork URLs are unavailable and surviving development shortlinks keep their destinations', async () => {
+  const login = await fetch(base + '/login', { method: 'POST', redirect: 'manual',
+    headers: { 'Content-Type': 'application/json' }, body: '{"pw":"server-test-password"}' });
+  const headers = { Cookie: login.headers.get('set-cookie').split(';')[0] };
+  for (const [slug, id] of [['samsy/fury-ribbons', 'ank'], ['samsy/boobs', 'xgp']]) {
+    const retired = await fetch(`${base}/_/${slug}`, { headers, redirect: 'manual' });
+    assert.equal(retired.status, 302);
+    assert.equal(retired.headers.get('location'), '/404');
+    assert.equal((await fetch(`${base}/${id}`, { headers, redirect: 'manual' })).status, 404);
+  }
+  for (const doodle of published(originalCatalogue.fallbackDoodles)) {
+    const response = await fetch(`${base}/${doodle.id}`, { headers, redirect: 'manual' });
+    assert.equal(response.status, 301, doodle.id);
+    assert.equal(response.headers.get('location'), `/_/${doodle.slug}`, doodle.id);
   }
 });
 
@@ -68,7 +103,7 @@ test('root paths outside the shortlink alphabet reach static serving and the 404
   const login = await fetch(base + '/login', { method: 'POST', redirect: 'manual',
     headers: { 'Content-Type': 'application/json' }, body: '{"pw":"server-test-password"}' });
   const headers = { Cookie: login.headers.get('set-cookie').split(';')[0] };
-  for (const path of ['/no-such-baseline-route', '/unknown', '/missing.png']) {
+  for (const path of ['/no-such-baseline-route', '/unknown', '/missing.png', '/form']) {
     assert.equal((await fetch(base + path, { headers })).status, 404, path);
   }
   const icon = await fetch(base + '/apple-touch-icon-144x144-precomposed.png', { headers });

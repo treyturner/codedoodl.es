@@ -78,7 +78,8 @@ lifecycle contracts still apply; see [testing.md](testing.md) for results.
 Validation also reproduced a pre-existing WebKit entry-screen issue on the
 stage 3 image: replacing animated letter text between mouse-down and mouse-up
 could lose the click entirely. Intro letters now ignore pointer events, keeping
-the parent button as the click target. The first-visit test uses a 200 ms press
-to cover this interaction without changing the screen's appearance or animation.
+the parent button as the click target. That interaction was covered with a
+200 ms press. The splash is now retained but disabled; the first-visit test
+checks automatic entry to the grid without extension-promotion buttons.
 
 Language reference: [CoffeeScript 2 breaking changes](https://coffeescript.org/#breaking-changes).

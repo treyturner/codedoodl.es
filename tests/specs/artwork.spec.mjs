@@ -4,10 +4,11 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { ready } from '../support/browser.mjs';
 import { observeArtworkRendering, trackArtworkDrawing } from '../support/artwork.mjs';
 
-const doodles = JSON.parse(readFileSync(new URL('../fixtures/api.json', import.meta.url))).doodles;
+const archivedDoodles = JSON.parse(readFileSync(new URL('../fixtures/api.json', import.meta.url))).doodles;
 const baselinePath = new URL('../baselines/artwork.json', import.meta.url);
 const baseline = existsSync(baselinePath) ? JSON.parse(readFileSync(baselinePath)) : {};
 const record = process.env.ARTWORK_RECORD === '1';
+const doodles = record ? archivedDoodles : archivedDoodles.filter(doodle => doodle.slug !== 'samsy/boobs');
 
 for (const doodle of doodles) {
   test(`archive: ${doodle.slug}`, async ({ page }, info) => {

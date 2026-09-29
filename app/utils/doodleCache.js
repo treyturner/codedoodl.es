@@ -2,6 +2,9 @@ const { readFile } = require('node:fs/promises');
 const { join } = require('node:path');
 const _ = require('underscore');
 
+// Keep unpublished artwork out even when an upstream archive still lists it.
+const unpublishedSlugs = new Set(['samsy/fury-ribbons', 'samsy/boobs']);
+
 function validateMaster(value) {
   if (!value || !Array.isArray(value.doodles)) throw new Error('Invalid master manifest: expected doodles array');
   const slugs = new Set();
@@ -12,7 +15,7 @@ function validateMaster(value) {
     }
     slugs.add(entry.slug);
   }
-  return value;
+  return { ...value, doodles: value.doodles.filter(entry => !unpublishedSlugs.has(entry.slug)) };
 }
 
 function validateDoodle(value) {
