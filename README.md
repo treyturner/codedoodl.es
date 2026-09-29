@@ -40,6 +40,12 @@ non-root user. Current desktop browsers and mobile Safari/Chrome are supported;
 IE support has been retired. Individual archived sketches retain their original
 mobile/GPU limitations.
 
+Sketch numbers and short URLs retain their original identities. Fury Ribbons
+(#073) is omitted because its artwork was missing from the archive. Boobs (#074)
+is unpublished by editorial choice. These numbering gaps are intentional;
+renumbering later sketches would change shortlink routing. The API also excludes
+these slugs when an older upstream master still lists them.
+
 The image defaults to production mode and production archive manifests. Set
 `DOODLE_DATA_SOURCE=development` to select the remote DEV master. Listener ports
 use `BIND_PORT`, then `PORT`, then the application default. CI checks these image

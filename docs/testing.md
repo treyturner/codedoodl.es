@@ -1,5 +1,20 @@
 # Modernization baseline
 
+The current published catalogue has **76 sketches**. Fury Ribbons (#073) is
+unavailable; Boobs (#074) is unpublished by editorial choice. Historical API and
+artwork observations below remain unchanged. Current expectations filter out
+unpublished artwork, and the home screenshots reflect the deliberately changed
+grid. The server rejects both slugs even when an older remote master includes
+them; tests check their retired routes and all surviving shortlinks. The archive
+inventory continues to inspect the original pinned archive, including preserved
+source for unpublished artwork.
+
+Publication-policy validation: the candidate image passed 26 server tests,
+8 local-tool tests, and build/watch checks. HTTP and browser checks passed
+66 cases across desktop and mobile profiles, with 3 expected device-specific
+skips. The three changed desktop home screenshots were visually reviewed;
+mobile references were unchanged. Container shutdown and restart also passed.
+
 Stage 1 captured the Node 10 application as a regression reference. The current
 suite validates the [Node 24 build](build.md) and [Express 5 server](server.md),
 [compiled CoffeeScript 2 runtime](coffeescript.md), and [browser libraries and
@@ -354,7 +369,8 @@ container probes. Stage 3's native server tests use configurable local HTTP
 fixtures to exercise these failures, stalled response bodies, last-good refresh,
 coalesced requests and bounded concurrency without waiting for the production TTL.
 
-Browser tests cover the home grid and font loading, the first-visit prompt,
+Browser tests cover the home grid and font loading, automatic first-visit entry
+without the disabled extension-promotion splash,
 client-side navigation/history, a Canvas doodle rendering changing frames,
 its info/shortlink/reload controls, adjacent-doodle navigation, and the mobile
 fallback. They run Chromium, Firefox, WebKit, mobile Chromium, and mobile WebKit.
@@ -376,8 +392,10 @@ SIGINT and an active response draining during shutdown.
 
 ## Screenshots and known defects
 
-`tests/baselines/<browser>/home.png` contains reviewed shell screenshots produced
-from the immutable reference image. Browser versions, fonts, locale, timezone,
+`tests/baselines/<browser>/home.png` began with reviewed shell screenshots from
+the immutable reference image. The current set has been updated for the deliberate
+removal of Boobs from the grid; the original images remain in Git history.
+Browser versions, fonts, locale, timezone,
 and viewport are fixed in the test runner. Small rasterization differences are
 tolerated, while layout and font regressions fail. Animated doodles are checked
 for rendering rather than compared to a single random animation frame.
@@ -386,7 +404,7 @@ Normal runs mount reference screenshots read-only and never update them. To
 deliberately replace a baseline locally:
 
 ```bash
-CODEDOODLES_IMAGE=codedoodles:rollback-3db726e npm run test:update-snapshots -- \
+CODEDOODLES_IMAGE=codedoodles:local npm run test:update-snapshots -- --grep 'home grid' \
   --project=chromium --project=firefox --project=webkit \
   --project=mobile-chromium --project=mobile-webkit
 ```
@@ -400,6 +418,10 @@ Defects observed in the original image are recorded in
 
 - `MISSING-FURY-RIBBONS`: the master lists 78 entries, but
   `samsy/fury-ribbons` has no archived manifest/entrypoint. The expected API has 77.
+  The active application and archive masters now omit that entry, retaining all
+  surviving numbers and shortlinks. The pinned original archive still records
+  the omission above; server tests separately check the current local catalogues,
+  retirement of `/ank`, and every surviving development shortlink.
 - `ENCODING-SVG`: ordinary shell SVG bytes were incorrectly labelled gzip;
   fixed in stage 2.
 - `ENCODING-404`: missing static JS returned HTML with an incorrect gzip header;

@@ -47,9 +47,6 @@ checkShortLink = (req, res, next) ->
 ###
 vanity URLS for redirection
 ###
-formRedirect = (req, res) ->
-	return res.redirect 301, config.EXTERNAL_URLS.form
-
 extensionRedirect = (req, res) ->
 	return res.redirect 301, config.EXTERNAL_URLS.extension
 
@@ -97,7 +94,6 @@ setup = (app) ->
 	app.get "/#{config.routes.CONTRIBUTE}", checkAuth, contribute
 	app.get ["/#{config.routes.DOODLES}", "/#{config.routes.DOODLES}/:authorName", "/#{config.routes.DOODLES}/:authorName/:doodleName"], checkAuth, doodles
 
-	app.get "/#{config.routes.FORM}", formRedirect
 	app.get "/#{config.routes.EXTENSION}", extensionRedirect
 
 	app.get '/:shortlink', checkShortLink

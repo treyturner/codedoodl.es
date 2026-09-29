@@ -48,5 +48,7 @@ sketch directories are never overwritten by the creator.
 
 ## Historical submission form
 
-The retained `/form` redirect is an original URL compatibility contract, not an
-active submission service. Automated email, review and AWS publication are retired.
+The original project accepted a Google Form or GitHub pull request, followed by
+maintainer review and publication using the historical AWS tools. This fork has
+no active form submission service. The `/form` redirect and its Google Form URL
+have been removed; `/form` now returns 404.

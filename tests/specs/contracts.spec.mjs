@@ -4,7 +4,14 @@ import { gunzipSync } from 'node:zlib';
 import { Script } from 'node:vm';
 import { raw, decode, json } from '../support/http.mjs';
 
-const expected = JSON.parse(readFileSync(new URL('../fixtures/api.json', import.meta.url)));
+const original = JSON.parse(readFileSync(new URL('../fixtures/api.json', import.meta.url)));
+const published = doodles => doodles.filter(doodle => doodle.slug !== 'samsy/boobs');
+const expected = { ...original, doodles: published(original.doodles), fallbackDoodles: published(original.fallbackDoodles) };
+// Contributor order follows the first remaining sketch by each author.
+expected.contributors = expected.doodles.reduce((authors, doodle) => {
+  if (!authors.some(author => author.github === doodle.author.github)) authors.push(doodle.author);
+  return authors;
+}, []);
 const app = 'http://site.test:3000';
 const assets = 'http://assets:8080';
 
@@ -33,7 +40,7 @@ test('health, pages, metadata, and not-found routes preserve their contracts', a
   }
 });
 
-test('redirects and all 77 existing shortlinks retain their destinations', async () => {
+test('redirects and all 76 published shortlinks retain their destinations', async () => {
   for (const path of ['/_', '/_/dmnsgn']) {
     const response = await raw(app + path);
     expect(response.status).toBe(301);
@@ -44,13 +51,17 @@ test('redirects and all 77 existing shortlinks retain their destinations', async
     expect(response.status, doodle.id).toBe(301);
     expect(response.headers.location, doodle.id).toBe(`/_/${doodle.slug}`);
   }
-  for (const [path, destination] of [
-    ['/form', 'https://docs.google.com/forms/d/1K66OvKMiKqGjgmYRFUtEA43KZzBzv4KzObM1JtD4cbk/viewform'],
-    ['/extension', 'https://chrome.google.com/webstore/detail/codedoodles/hhfnbfhcojlgbojpphigjibpjkccfikh'],
-  ]) {
-    const response = await raw(app + path);
-    expect(response.status).toBe(301);
-    expect(response.headers.location).toBe(destination);
+  const extension = await raw(`${app}/extension`);
+  expect(extension.status).toBe(301);
+  expect(extension.headers.location).toBe('https://github.com/treyturner/codedoodl.es-chrome-extension/releases');
+  const form = await raw(`${app}/form`);
+  expect(form.status).toBe(404);
+  expect(form.headers.location).toBeUndefined();
+  for (const [slug, id] of [['samsy/boobs', 'xgp'], ['samsy/fury-ribbons', 'ank']]) {
+    const retired = await raw(`${app}/_/${slug}`);
+    expect(retired.status).toBe(302);
+    expect(retired.headers.location).toBe('/404');
+    expect((await raw(`${app}/${id}`)).status).toBe(404);
   }
   const unknown = await raw(`${app}/_/nobody/absent`);
   expect(unknown.headers.location).toBe('/404');
@@ -178,7 +189,7 @@ test('static assets negotiate gzip/identity and retain HEAD and conditional-cach
 test('all available archive entrypoints, manifests, and thumbnails are served locally', async () => {
   const master = await json(`${assets}/master_manifest.json`);
   expect(master.doodles).toHaveLength(78);
-  for (const doodle of expected.doodles) {
+  for (const doodle of original.doodles) {
     const manifest = await raw(`${assets}/${doodle.slug}/manifest.json`);
     expect(manifest.status, doodle.slug).toBe(200);
     expect(manifest.headers['content-encoding']).toBe('gzip');

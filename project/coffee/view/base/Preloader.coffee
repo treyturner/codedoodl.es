@@ -2,6 +2,9 @@ AbstractView         = require '../AbstractView'
 CodeWordTransitioner = require '../../utils/CodeWordTransitioner'
 MediaQueries         = require '../../utils/MediaQueries'
 
+# Keep the original first-visit splash dormant without promoting the extension.
+SHOW_EXTENSION_INTRO = false
+
 class Preloader extends AbstractView
 	
 	cb : null
@@ -102,7 +105,7 @@ class Preloader extends AbstractView
 				.end()
 			.addClass('show-preloader')
 
-		if (!window.localStorage or !window.localStorage.getItem 'CD_VISITED') and (@CD().nav.current.area is @CD().nav.sections.HOME) and MediaQueries.getBreakpoint() isnt 'Small'
+		if SHOW_EXTENSION_INTRO and (!window.localStorage or !window.localStorage.getItem 'CD_VISITED') and (@CD().nav.current.area is @CD().nav.sections.HOME) and MediaQueries.getBreakpoint() isnt 'Small'
 			callback = @_playIntroAnimationFirstVisit
 		else
 			callback = @_playIntroAnimationReturning

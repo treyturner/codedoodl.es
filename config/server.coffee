@@ -21,8 +21,7 @@ config.cloudfront =
 	ASSETS : 'E278GI4I3S1464'
 
 config.EXTERNAL_URLS =
-	form      : 'https://docs.google.com/forms/d/1K66OvKMiKqGjgmYRFUtEA43KZzBzv4KzObM1JtD4cbk/viewform'
-	extension : 'https://chrome.google.com/webstore/detail/codedoodles/hhfnbfhcojlgbojpphigjibpjkccfikh'
+	extension : 'https://github.com/treyturner/codedoodl.es-chrome-extension/releases'
 
 config.BASE_URL           = process.env.BASE_URL or (if config.PRODUCTION then "http://codedoodl.es" else "http://#{config.express.ip}:#{config.express.port}")
 config.ASSETS_BUCKET_URL  = process.env.BASE_URL or (if config.PRODUCTION then "http://#{config.buckets.ASSETS}" else "http://#{config.express.ip}:#{config.express.port}")
@@ -46,7 +45,6 @@ config.routes =
 	CONTRIBUTE : 'contribute'
 	DOODLES    : '_'
 	LOGIN      : 'login'
-	FORM       : 'form'
 	EXTENSION  : 'extension'
 	HEALTH     : 'health'
 

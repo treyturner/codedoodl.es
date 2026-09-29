@@ -37,19 +37,12 @@ test('home grid, fonts, thumbnails, and stable shell screenshot', async ({ page 
   expect(errors).toEqual([]);
 });
 
-test('first-visit entry screen can be dismissed', async ({ page, isMobile }) => {
-  test.skip(isMobile, 'The first-visit prompt is intentionally desktop-only.');
+test('first visit opens the grid without the extension promotion splash', async ({ page }) => {
   const errors = observe(page);
-  await page.goto('/');
-  const enter = page.locator('[data-intro-btn="enter"]');
-  await expect(enter).toBeVisible();
-  // A real press can span text replacements during the hover animation.
-  // WebKit used to lose this click when an animated letter was the target.
-  await enter.click({ delay: 200 });
-  await page.mouse.move(0, 0);
-  await expect(page.locator('#preloader')).not.toHaveClass(/show-preloader/);
+  await ready(page);
   await gridReady(page);
-  expect(await page.evaluate(() => localStorage.getItem('CD_VISITED'))).toBe('true');
+  await expect(page.locator('[data-intro-btn]')).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem('CD_VISITED'))).toBeNull();
   expect(errors).toEqual([]);
 });
 
@@ -63,7 +56,7 @@ test('about/contribute navigation and browser history work without full reloads'
   await expect(page).toHaveURL(/\/about\/?$/);
   await expect(page.locator('#page-about')).toBeVisible();
   await expect(page.locator('.sponsor-nexus img')).toHaveAttribute('src', 'http://site.test:3000/static/img/logos/nexus_70.png');
-  await expect(page.locator('#page-about a[href*="chrome.google.com"]')).toHaveAttribute('href', /hhfnbfhcojlgbojpphigjibpjkccfikh$/);
+  await expect(page.locator('#page-about a[href="https://github.com/treyturner/codedoodl.es-chrome-extension/releases"]')).toHaveText('chrome extension');
   await page.locator('.contribute-btn').click();
   await expect(page).toHaveURL(/\/contribute\/?$/);
   await expect(page.locator('#page-contribute')).toBeVisible();
