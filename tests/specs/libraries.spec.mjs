@@ -65,6 +65,9 @@ test('native grid scrolling restores offsets, reveals credits, and returns to th
   await home.evaluate(el => el.scrollTo(0, el.scrollHeight));
   await expect.poll(() => page.evaluate(() => CD.appView.wrapper.views.home.view.creditsVisible)).toBe(true);
   await expect(home.locator('[data-credits]')).toBeInViewport();
+  await expect(home.locator('[data-credits]')).toHaveText('made by fluuuid, sponsored by nexus interactive arts');
+  await expect(home.locator('[data-credits] a')).toHaveCount(1);
+  await expect(home.locator('[data-credits] a')).toHaveAttribute('href', 'http://fluuu.id');
   await expect(home.locator('[data-grid-item]').last()).toBeInViewport();
   await page.locator('[data-logo]').click();
   await expect.poll(() => home.evaluate(el => el.scrollTop)).toBe(0);
