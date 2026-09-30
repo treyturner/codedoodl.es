@@ -56,6 +56,8 @@ test('about/contribute navigation and browser history work without full reloads'
   await expect(page).toHaveURL(/\/about\/?$/);
   await expect(page.locator('#page-about')).toBeVisible();
   await expect(page.locator('.sponsor-nexus img')).toHaveAttribute('src', 'http://site.test:3000/static/img/logos/nexus_70.png');
+  await expect(page.locator('.sponsor-nexus')).toHaveText('Nexus Interactive Arts');
+  await expect(page.locator('#page-about a[href*="nexus"]')).toHaveCount(0);
   await expect(page.locator('#page-about a[href="https://github.com/treyturner/codedoodl.es-chrome-extension/releases"]')).toHaveText('chrome extension');
   await page.locator('.contribute-btn').click();
   await expect(page).toHaveURL(/\/contribute\/?$/);
