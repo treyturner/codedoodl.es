@@ -59,6 +59,8 @@ jobs:
         uses: docker/build-push-action@eb6512707bea5740b2608f2a43ece7bc543cb75b  # v7.0.0
         with:
           context: .
+          # apt repository changes do not invalidate Docker's RUN cache.
+          no-cache-filters: base
           cache-from: |
             type=gha,scope=${{ github.ref_name }}
             type=gha,scope=master
