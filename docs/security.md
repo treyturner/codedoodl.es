@@ -22,6 +22,28 @@ directly. This removes nine bundled npm dependency findings (four high) without
 altering the application graph. Package managers remain in build stages. Debian's
 package database is retained so scanners can continue to inspect the image.
 
+## OpenSSL security refresh (2026-09-30)
+
+The cached base stage still contained OpenSSL `3.5.7-1~deb13u2` when Debian
+published `3.5.7-1~deb13u3` to fix
+[CVE-2026-75804](https://security-tracker.debian.org/tracker/CVE-2026-75804) and
+[CVE-2026-84782](https://security-tracker.debian.org/tracker/CVE-2026-84782).
+The image gate correctly rejected the six findings across `openssl`,
+`libssl3t64`, and `openssl-provider-legacy`.
+
+The base stage explicitly installs the current Debian versions of these three
+packages alongside the CA certificates. CI uses `no-cache-filters: base` so a
+cached package-install layer cannot hide new repository fixes. Node's version
+and base-image digest remain pinned; the Debian package layer follows the
+configured Trixie repositories. Each resulting image must pass the existing
+scan and runtime tests before publication. No new vulnerability exceptions are
+added for these fixes.
+
+For the same refresh during a local candidate build, use
+`docker build --no-cache-filter base -t codedoodles:local .`.
+Ordinary cached local builds can retain older packages. Promote the tested
+candidate digest; rebuilding later can pick up different Debian packages.
+
 ## Run the gates
 
 ```bash
